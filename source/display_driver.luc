@@ -1,0 +1,175 @@
+/*
+modified from template
+Driver for individually addressable RGB LED matrix board that uses HUB75 style pinout
+Note that this module is meant for 2/N scan rate only, where N is the number of rows
+e.g:    for 32 by 64, scan rate of 1:16 required
+        for 16 by 32, scan rate of 1:8 required
+Will not work for 16 by 32, 1:4 scan rate (p10 variant)
+*/
+module display_driver #(
+    // default: 32 by 64 LED matrix, writing is separated into top-16 rows and bottom 16-rows
+    // both halves row i are written together for all rows 0 to 15 in a rapid loop 
+    ADDRESS_SIZE = 5 : ADDRESS_SIZE > 0, // width of the address field (ABCD signals for matrix_led) 
+    MATRIX_WIDTH = 64 : MATRIX_WIDTH > 0 // number of LEDs per row in the matrix
+) (
+    input clk,  // clock
+    input rst,  // reset
+    input data[2], // encoded pixel data from bram
+    
+    // outputs to a simple RAM 
+    output addr[ADDRESS_SIZE+$clog2(MATRIX_WIDTH)+2], // sequential memory address, accounting for buffer above and below
+    output reading, // BRAM read override
+    
+    // output to matrix 
+    output toppixel[3],
+    output botpixel[3],
+    output latch, 
+    output blank, // also known as OE
+    output sclk_out,
+    output address[ADDRESS_SIZE] //row address current write to LED matrix
+    
+) {
+    
+    const DIV = 6 //slowdown speed of the CLK, suitable for 100MHz clock
+    
+    sig pixeldata[3]
+    
+    .clk(clk){
+        .rst(rst){
+            // state details
+            // b01 && sclk == all0s && shifted_bit_counter < MATRIX_WIDTH: loading data to 64 shift registers, off shifter clock
+            // b01 && sclk == half_value: on shifter clock 
+            // b01 && sclk == all1s && shifted_bit_counter == c{1,MATRIX_WIDTHx{b0}}: latching, reset shifted_bit_counter, advance address, off shifter clock, go to b10
+            // b10 && sclk == all1s: blank OFF, go to b01
+            dff state[2] //to remember whether loading or displaying 
+            
+            dff sclk_counter[DIV] // clock to load shift register, whenever sclk_counter == DIVx{b1} that's the cycle of shift reg clk
+            // dff led_bit_counter[$clog2(MATRIX_WIDTH)+1] // counter to keep track which LED in a row is currently loaded 
+            // dff current_address[ADDRESS_SIZE] // pointer of the current row address of the matrix, used when LATCH is 1 OR BLANK = 0
+            dff pixel_idx[ADDRESS_SIZE+$clog2(MATRIX_WIDTH)] // sequential indexing of top half of pixels
+            
+            // dff debug_dff[16]U 
+            
+            // dffs to store data out
+            dff rgb_data_0[3] // r0g0b0
+            dff rgb_data_1[3] // r1g1b1
+            dff sclk // clk signal to shift register
+            dff latch_blank[2] // [0] MSB is latch value, [1] LSB is blank value
+            
+        }
+        
+    }
+    
+    
+    always {
+        
+        // output to address external simple ram 
+        addr = 64
+        
+        // dff default connections
+        rgb_data_0.d = rgb_data_0.q
+        rgb_data_1.d = rgb_data_1.q
+        sclk.d = sclk.q
+        latch_blank.d = latch_blank.q 
+        pixeldata = b000
+        reading = 0
+
+        pixel_idx.d = pixel_idx.q
+        state.d = state.q
+        
+        toppixel = rgb_data_0.q
+        botpixel = rgb_data_1.q
+        
+        blank = latch_blank.q[0] // LSB
+        latch = latch_blank.q[1] // MSB
+        sclk_out = sclk.q
+        address = pixel_idx.q[ADDRESS_SIZE+$clog2(MATRIX_WIDTH)-1:$clog2(MATRIX_WIDTH)] // row number, 0-indexed
+        
+        
+        // internal counter to keep track what value we should give to shift register's clock sclk
+        sclk_counter.d = sclk_counter.q + 1 // increase shift register clock 
+        
+        // pixel mux
+        case(data) {
+            b00: pixeldata = b000
+            b01: pixeldata = b100
+            b10: pixeldata = b001
+            b11: pixeldata = b111
+        }
+        
+        if (state.q == b00){ // START state
+            latch_blank.d = b01 // latch off, blank on, begin 
+            // current_address.d = ADDRESS_SIZEx{b1} // start from address 1111 
+            pixel_idx.d = (ADDRESS_SIZE+$clog2(MATRIX_WIDTH))x{b1} // start from last address
+            
+            state.d = b01
+
+        }
+        
+        
+        // loading data when sclk is all 0 
+        // if (sclk_counter.q == DIVx{b0} && state.q == b01 && led_bit_counter.q <= MATRIX_WIDTH)
+        if (sclk_counter.q == 0 && state.q == b01 && pixel_idx.q[$clog2(MATRIX_WIDTH)-1:0] <= MATRIX_WIDTH){
+            
+            // off clock when changing data 
+            sclk.d = 0
+            
+            // give address for next column
+            addr = $resize(pixel_idx.q,ADDRESS_SIZE+$clog2(MATRIX_WIDTH)+2) + MATRIX_WIDTH // BRAM address for first pixel, accounting for top row buffer
+            
+            // send read override for BRAM
+            reading = 1
+
+        }
+        
+
+        else if (sclk_counter.q == 1 && state.q == b01 && pixel_idx.q[$clog2(MATRIX_WIDTH)-1:0] <= MATRIX_WIDTH){
+            
+            // off clock when changing data 
+            sclk.d = 0
+            
+            // give address for next column
+            addr = $resize(pixel_idx.q,ADDRESS_SIZE+$clog2(MATRIX_WIDTH)+2) +c{b1,(ADDRESS_SIZE+1)x{b0}} // BRAM address for second pixel, accounting for top row buffer
+            
+            // send read override for BRAM
+            reading = 1
+            
+            // load data into first pixel cache
+            rgb_data_0.d = pixeldata
+            
+            // shift the index to go to next LED in the row 
+            pixel_idx.d = pixel_idx.q + 1
+            
+        }
+
+
+        else if (sclk_counter.q == 2 && state.q == b01 && pixel_idx.q[$clog2(MATRIX_WIDTH)-1:0] <= MATRIX_WIDTH){
+            rgb_data_1.d = pixeldata
+        }
+
+        
+        // change rising clock for shift registers in matrix to load input data in the second half of sclk_counter cycle
+        else if (sclk_counter.q == (DIV-1)x{b1} && state.q == b01){
+            sclk.d = 1
+        }
+        
+        // if we have loaded all LEDs in the row, latch for 1 sclk_counter cycle 
+        else if(sclk_counter.q == (DIV)x{b1} && state.q == b01 && pixel_idx.q[$clog2(MATRIX_WIDTH)-1:0] == c{b1, $clog2(MATRIX_WIDTH)x{b0}}){
+            // change state 
+            state.d = b10
+            
+            latch_blank.d = b11 // latch on, blank on
+            
+            sclk.d = 0 // off latch clock 
+            
+        }
+    
+        // in the next sclk_counter cycle, when sclk contains all 1, then DISPLAY
+        else if(sclk_counter.q == (DIV)x{b1} && state.q == b10){
+            latch_blank.d = b00 //latch off, blank off
+            
+            // change state to load again
+            state.d = b01
+        }
+    }
+}
