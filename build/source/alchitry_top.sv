@@ -18,7 +18,7 @@ module alchitry_top (
         output reg matlat,
         output reg [1:0] matgnd
     );
-    localparam _MP_SIZE_1052746505 = 6'h20;
+    localparam _MP_SIZE_1994524655 = 6'h20;
     logic [31:0] M_amod_a;
     logic [31:0] M_amod_b;
     logic [5:0] M_amod_alufn;
@@ -29,7 +29,7 @@ module alchitry_top (
     logic M_amod_illop;
     
     alu #(
-        .SIZE(_MP_SIZE_1052746505)
+        .SIZE(_MP_SIZE_1994524655)
     ) amod (
         .a(M_amod_a),
         .b(M_amod_b),
@@ -44,8 +44,8 @@ module alchitry_top (
     
     logic rst;
     logic [1:0] D_pixeldrive_d, D_pixeldrive_q = 0;
-    localparam _MP_ADDRESS_SIZE_937802618 = 3'h5;
-    localparam _MP_MATRIX_WIDTH_937802618 = 7'h40;
+    localparam _MP_ADDRESS_SIZE_620416596 = 3'h5;
+    localparam _MP_MATRIX_WIDTH_620416596 = 7'h40;
     logic [1:0] M_display_data;
     logic [12:0] M_display_addr;
     logic M_display_reading;
@@ -57,8 +57,8 @@ module alchitry_top (
     logic [4:0] M_display_address;
     
     display_driver #(
-        .ADDRESS_SIZE(_MP_ADDRESS_SIZE_937802618),
-        .MATRIX_WIDTH(_MP_MATRIX_WIDTH_937802618)
+        .ADDRESS_SIZE(_MP_ADDRESS_SIZE_620416596),
+        .MATRIX_WIDTH(_MP_MATRIX_WIDTH_620416596)
     ) display (
         .clk(clk),
         .rst(rst),
@@ -74,12 +74,12 @@ module alchitry_top (
     );
     
     
-    localparam _MP_STAGES_1326755888 = 3'h4;
+    localparam _MP_STAGES_1677765216 = 3'h4;
     logic M_reset_cond_in;
     logic M_reset_cond_out;
     
     reset_conditioner #(
-        .STAGES(_MP_STAGES_1326755888)
+        .STAGES(_MP_STAGES_1677765216)
     ) reset_cond (
         .clk(clk),
         .in(M_reset_cond_in),
@@ -98,14 +98,14 @@ module alchitry_top (
         M_amod_a = 32'h0;
         M_amod_b = 32'h0;
         M_amod_alufn = 6'h0;
-        M_display_data = 1'h0;
-        mataddr = 1'h0;
-        mattop = 1'h0;
-        matbot = 1'h0;
-        matclk = 1'h0;
-        matoe = 1'h0;
-        matlat = 1'h0;
-        matgnd = 1'h0;
+        M_display_data = 1'h1;
+        mataddr = 1'h1;
+        mattop = 1'h1;
+        matbot = 1'h1;
+        matclk = 1'h1;
+        matoe = 1'h1;
+        matlat = 1'h1;
+        matgnd = 1'h1;
     end
     
     
