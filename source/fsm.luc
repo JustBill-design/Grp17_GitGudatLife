@@ -31,6 +31,7 @@ module fsm #(
     output bwa[13],          // write address
     output bwe,                          // write enable
     output bwd[2],                   // write data
+<<<<<<< Updated upstream
     
     output ra1[32],
     output ra2[32],
@@ -41,8 +42,8 @@ module fsm #(
     output bsel[4],
     output wdsel[4],
     
-    output out
-    
+=======
+>>>>>>> Stashed changes
     
 ) {
     enum States {
@@ -105,11 +106,15 @@ module fsm #(
     always {
         states.d = states.q
         out = 0
+<<<<<<< Updated upstream
         brsel = b10
+=======
+>>>>>>> Stashed changes
         bra = 0
         bwa = 0
         bwe = 0
         bwd = 0
+<<<<<<< Updated upstream
         ra1 = 0
         ra2 = 0
         wa = 0 
@@ -1073,5 +1078,7 @@ module fsm #(
             }
 
         }   
+=======
+>>>>>>> Stashed changes
     }
 }

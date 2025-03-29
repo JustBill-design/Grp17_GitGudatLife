@@ -13,6 +13,7 @@ module alchitry_top (
     output matoe,           // OE
     output matlat           // latch
 ) {
+    alu amod
     sig rst                 // reset signal
     .clk(clk) {
         .rst(rst) {
@@ -42,6 +43,9 @@ module alchitry_top (
         //if (display.reading | slow_clk.q[27]){
         //    pixeldata.d = pixeldata.q^b11
         //} 
+        amod.a = 32b0
+        amod.b = 32b0
+        amod.alufn = 6b0
         
         display.data = b11
         mataddr = display.address

@@ -1,5 +1,5 @@
 namespace eval ::optrace {
-  variable script "C:/Users/yourmum/Downloads/blank/build/vivado/blank.runs/impl_1/alchitry_top.tcl"
+  variable script "C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/impl_1/alchitry_top.tcl"
   variable category "vivado_impl"
 }
 
@@ -112,16 +112,16 @@ OPTRACE "create in-memory project" START { }
   set_param project.singleFileAddWarning.threshold 0
 OPTRACE "create in-memory project" END { }
 OPTRACE "set parameters" START { }
-  set_property webtalk.parent_dir C:/Users/yourmum/Downloads/blank/build/vivado/blank.cache/wt [current_project]
-  set_property parent.project_path C:/Users/yourmum/Downloads/blank/build/vivado/blank.xpr [current_project]
-  set_property ip_output_repo C:/Users/yourmum/Downloads/blank/build/vivado/blank.cache/ip [current_project]
+  set_property webtalk.parent_dir C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.cache/wt [current_project]
+  set_property parent.project_path C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.xpr [current_project]
+  set_property ip_output_repo C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
-  add_files -quiet C:/Users/yourmum/Downloads/blank/build/vivado/blank.runs/synth_1/alchitry_top.dcp
+  add_files -quiet C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/synth_1/alchitry_top.dcp
 OPTRACE "read constraints: implementation" START { }
-  read_xdc C:/Users/yourmum/Downloads/blank/build/constraint/alchitry.xdc
-  read_xdc C:/Users/yourmum/Downloads/blank/build/constraint/au_props.xdc
+  read_xdc C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/alchitry.xdc
+  read_xdc C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/au_props.xdc
 OPTRACE "read constraints: implementation" END { }
 OPTRACE "read constraints: implementation_pre" START { }
 OPTRACE "read constraints: implementation_pre" END { }

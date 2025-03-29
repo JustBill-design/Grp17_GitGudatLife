@@ -1,0 +1,35 @@
+module alu_adder #(
+    SIZE = 32 : SIZE > 1
+)(
+    input a[SIZE],
+    input b[SIZE],
+    input alufn_signal[6],
+    output out[SIZE],
+    output z,
+    output v,
+    output n
+) {
+    alu_adder_rca rca(#SIZE(SIZE))
+    sig msb
+    
+    always {
+        out = 0
+        z = 0
+        v = 0
+        
+        if (alufn_signal[0] == 1) {
+            rca.b = ~b
+            msb = ~b[SIZE-1]
+        } else {
+            rca.b = b
+            msb = b[SIZE-1]
+        }
+        rca.a = a
+        rca.cin = alufn_signal[0]
+        
+        out = rca.s
+        z = ~| rca.s
+        v = (a[SIZE-1] & msb & ~rca.s[SIZE-1]) | (~a[SIZE-1] & ~msb & rca.s[SIZE-1])
+        n = rca.s[SIZE-1]
+    }
+}

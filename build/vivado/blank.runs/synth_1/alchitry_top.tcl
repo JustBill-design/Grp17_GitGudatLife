@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "C:/Users/yourmum/Downloads/blank/build/vivado/blank.runs/synth_1/alchitry_top.tcl"
+  variable script "C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/synth_1/alchitry_top.tcl"
   variable category "vivado_synth"
 }
 
@@ -62,17 +62,30 @@ create_project -in_memory -part xc7a35tftg256-1
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir C:/Users/yourmum/Downloads/blank/build/vivado/blank.cache/wt [current_project]
-set_property parent.project_path C:/Users/yourmum/Downloads/blank/build/vivado/blank.xpr [current_project]
+set_property webtalk.parent_dir C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.cache/wt [current_project]
+set_property parent.project_path C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib -sv {
-  C:/Users/yourmum/Downloads/blank/build/vivado/blank.srcs/sources_1/imports/source/display_driver.sv
-  C:/Users/yourmum/Downloads/blank/build/vivado/blank.srcs/sources_1/imports/source/reset_conditioner.sv
-  C:/Users/yourmum/Downloads/blank/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu_adder.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu_adder_rca.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu_adder_rca_fa.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu_boolean.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu_compare.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu_divider.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu_multiplier.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu_shifter.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu_shifter_left.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu_shifter_mux2.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu_shifter_right.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu_shifter_right_ari.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/display_driver.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/reset_conditioner.sv
+  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -83,11 +96,11 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc C:/Users/yourmum/Downloads/blank/build/constraint/alchitry.xdc
-set_property used_in_implementation false [get_files C:/Users/yourmum/Downloads/blank/build/constraint/alchitry.xdc]
+read_xdc C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/alchitry.xdc
+set_property used_in_implementation false [get_files C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/alchitry.xdc]
 
-read_xdc C:/Users/yourmum/Downloads/blank/build/constraint/au_props.xdc
-set_property used_in_implementation false [get_files C:/Users/yourmum/Downloads/blank/build/constraint/au_props.xdc]
+read_xdc C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/au_props.xdc
+set_property used_in_implementation false [get_files C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/au_props.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
