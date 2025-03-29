@@ -31,7 +31,6 @@ module display_driver #(
 ) {
     
     const DIV = 12 //slowdown speed of the CLK, suitable for 100MHz clock
-    
     sig pixeldata[3]
     
     .clk(clk){
@@ -71,7 +70,6 @@ module display_driver #(
         rgb_data_1.d = rgb_data_1.q
         sclk.d = sclk.q
         latch_blank.d = latch_blank.q 
-        pixeldata = b000
         reading = 0
 
         pixel_idx.d = pixel_idx.q
@@ -95,6 +93,7 @@ module display_driver #(
             b01: pixeldata = b100
             b10: pixeldata = b001
             b11: pixeldata = b111
+            default: pixeldata = b010
         }
         
         if (state.q == b00){ // START state
@@ -109,7 +108,7 @@ module display_driver #(
         
         // loading data when sclk is all 0 
         // if (sclk_counter.q == DIVx{b0} && state.q == b01 && led_bit_counter.q <= MATRIX_WIDTH)
-        if (sclk_counter.q == 0 && state.q == b01 && pixel_idx.q[$clog2(MATRIX_WIDTH)-1:0] <= MATRIX_WIDTH){
+        if (sclk_counter.q == 0 && state.q == b01){
             
             // off clock when changing data 
             sclk.d = 0
@@ -123,7 +122,7 @@ module display_driver #(
         }
         
 
-        else if (sclk_counter.q == 1 && state.q == b01 && pixel_idx.q[$clog2(MATRIX_WIDTH)-1:0] <= MATRIX_WIDTH){
+        else if (sclk_counter.q == 1 && state.q == b01) {
             
             // off clock when changing data 
             sclk.d = 0
@@ -143,14 +142,18 @@ module display_driver #(
         }
 
 
-        else if (sclk_counter.q == 2 && state.q == b01 && pixel_idx.q[$clog2(MATRIX_WIDTH)-1:0] <= MATRIX_WIDTH){
+        else if (sclk_counter.q == 2 && state.q == b01) {
+        
+            // off clock when changing data
             sclk.d = 0
+            
+            // load data into second pixel cache
             rgb_data_1.d = pixeldata
         }
 
         
         // change rising clock for shift registers in matrix to load input data in the second half of sclk_counter cycle
-        else if (sclk_counter.q == (DIV-1)x{b1} && state.q == b01){
+        else if (sclk_counter.q == (DIV-1)x{b1} && state.q == b01) {
             sclk.d = 1
         }
         

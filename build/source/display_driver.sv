@@ -43,7 +43,6 @@ module display_driver #(
         D_rgb_data_1_d = D_rgb_data_1_q;
         D_sclk_d = D_sclk_q;
         D_latch_blank_d = D_latch_blank_q;
-        pixeldata = 3'h0;
         reading = 1'h0;
         D_pixel_idx_d = D_pixel_idx_q;
         D_state_d = D_state_q;
@@ -68,25 +67,28 @@ module display_driver #(
             2'h3: begin
                 pixeldata = 3'h7;
             end
+            default: begin
+                pixeldata = 3'h2;
+            end
         endcase
         if (D_state_q == 2'h0) begin
             D_latch_blank_d = 2'h1;
             D_pixel_idx_d = {(ADDRESS_SIZE + $clog2(MATRIX_WIDTH)){1'h1}};
             D_state_d = 2'h1;
         end
-        if (D_sclk_counter_q == 1'h0 && D_state_q == 2'h1 && D_pixel_idx_q[$clog2(MATRIX_WIDTH) - 1'h1:1'h0] <= MATRIX_WIDTH) begin
+        if (D_sclk_counter_q == 1'h0 && D_state_q == 2'h1) begin
             D_sclk_d = 1'h0;
             addr = (ADDRESS_SIZE + $clog2(MATRIX_WIDTH) + 2'h2)'(D_pixel_idx_q) + MATRIX_WIDTH;
             reading = 1'h1;
         end else begin
-            if (D_sclk_counter_q == 1'h1 && D_state_q == 2'h1 && D_pixel_idx_q[$clog2(MATRIX_WIDTH) - 1'h1:1'h0] <= MATRIX_WIDTH) begin
+            if (D_sclk_counter_q == 1'h1 && D_state_q == 2'h1) begin
                 D_sclk_d = 1'h0;
                 addr = (ADDRESS_SIZE + $clog2(MATRIX_WIDTH) + 2'h2)'(D_pixel_idx_q) + {1'h1, {(ADDRESS_SIZE + 1'h1){1'h0}}};
                 reading = 1'h1;
                 D_rgb_data_0_d = pixeldata;
                 D_pixel_idx_d = D_pixel_idx_q + 1'h1;
             end else begin
-                if (D_sclk_counter_q == 2'h2 && D_state_q == 2'h1 && D_pixel_idx_q[$clog2(MATRIX_WIDTH) - 1'h1:1'h0] <= MATRIX_WIDTH) begin
+                if (D_sclk_counter_q == 2'h2 && D_state_q == 2'h1) begin
                     D_sclk_d = 1'h0;
                     D_rgb_data_1_d = pixeldata;
                 end else begin
