@@ -144,6 +144,7 @@ module display_driver #(
 
 
         else if (sclk_counter.q == 2 && state.q == b01 && pixel_idx.q[$clog2(MATRIX_WIDTH)-1:0] <= MATRIX_WIDTH){
+            sclk.d = 0
             rgb_data_1.d = pixeldata
         }
 

@@ -50,13 +50,22 @@ module alchitry_top (
         amod.b = 32b0
         amod.alufn = 6b0
         
-        display.data = pixeldrive.q
-        mataddr = display.address
-        mattop = display.toppixel
-        matbot = display.botpixel
-        matclk = display.sclk_out
-        matoe = display.blank
-        matlat = display.latch
-        matgnd = b00
+        // display.data = pixeldrive.q
+        // mataddr = display.address
+        // mattop = display.toppixel
+        // matbot = display.botpixel
+        // matclk = display.sclk_out
+        // matoe = display.blank
+        // matlat = display.latch
+        // matgnd = b00
+
+        display.data = 0
+        mataddr = 0
+        mattop = 0
+        matbot = 0
+        matclk = 0
+        matoe = 0
+        matlat = 0
+        matgnd = 0
     }
 }

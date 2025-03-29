@@ -156,12 +156,6 @@
                     "type": "DiskFile",
                     "path": "constraint/alchitry.acf"
                 }
-            },
-            {
-                "file": {
-                    "type": "Component",
-                    "path": "Constraints/io_v1_pulldown.acf"
-                }
             }
         ],
         "ipCores": []

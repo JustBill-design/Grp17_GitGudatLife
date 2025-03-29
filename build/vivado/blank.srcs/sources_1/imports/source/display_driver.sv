@@ -87,6 +87,7 @@ module display_driver #(
                 D_pixel_idx_d = D_pixel_idx_q + 1'h1;
             end else begin
                 if (D_sclk_counter_q == 2'h2 && D_state_q == 2'h1 && D_pixel_idx_q[$clog2(MATRIX_WIDTH) - 1'h1:1'h0] <= MATRIX_WIDTH) begin
+                    D_sclk_d = 1'h0;
                     D_rgb_data_1_d = pixeldata;
                 end else begin
                     if (D_sclk_counter_q == 5'h1f && D_state_q == 2'h1) begin
