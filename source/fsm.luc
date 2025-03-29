@@ -22,16 +22,17 @@ module fsm #(
     input brd,
     input ddr,
     
-    input rd1,
-    input rd2,
-    input aluout,
+    input rd1[32],
+    input rd2[32],
+    input aluout[32],
+
+    input game_clk,
 
     output brsel[2],                        // selector override
     output bra[13],          // read address
     output bwa[13],          // write address
     output bwe,                          // write enable
     output bwd[2],                   // write data
-<<<<<<< Updated upstream
     
     output ra1[32],
     output ra2[32],
@@ -41,9 +42,24 @@ module fsm #(
     output asel,
     output bsel[4],
     output wdsel[4],
+
+    output srst1,
+    output srst2,
+    output srst3,
+
+    output swe1,
+    output swd1[2],
+    output sre1,
+
+    output swe2,
+    output swd2,
+    output sre2,
+
+    output swe3,
+    output swd3,
+    output sre3, 
+    output out
     
-=======
->>>>>>> Stashed changes
     
 ) {
     enum States {
@@ -54,13 +70,13 @@ module fsm #(
         A_LEFT_DIR_IDLE, A_LEFT_COUNTP1, A_LEFT_SET_PIXEL_A, A_LEFT_COUNTM1, A_LEFT_SET_PIXEL_0, A_LEFT_CHECK_PIXEL, A_LEFT_RESET_PIXEL, A_LEFT_MOVE_CURSOR, A_LEFT_STORE_PIXEL, A_LEFT_CURSOR_COLOUR, 
         A_RIGHT_DIR_IDLE, A_RIGHT_COUNTP1, A_RIGHT_SET_PIXEL_A, A_RIGHT_COUNTM1, A_RIGHT_SET_PIXEL_0, A_RIGHT_CHECK_PIXEL, A_RIGHT_RESET_PIXEL, A_RIGHT_MOVE_CURSOR, A_RIGHT_STORE_PIXEL, A_RIGHT_CURSOR_COLOUR, 
         
-        B_INPUT_IDLE, B_SET_PIXEL_A, B_SET_PIXEL_0, 
+        B_INPUT_IDLE, B_SET_PIXEL_B, B_SET_PIXEL_0, 
         
-        B_UP_DIR_IDLE, B_UP_COUNTP1, B_UP_SET_PIXEL_A, B_UP_COUNTM1, B_UP_SET_PIXEL_0, B_UP_CHECK_PIXEL, B_UP_RESET_PIXEL, B_UP_MOVE_CURSOR, B_UP_STORE_PIXEL, B_UP_CURSOR_COLOUR, 
-        B_DOWN_DIR_IDLE, B_DOWN_COUNTP1, B_DOWN_SET_PIXEL_A, B_DOWN_COUNTM1, B_DOWN_SET_PIXEL_0, B_DOWN_CHECK_PIXEL, B_DOWN_RESET_PIXEL, B_DOWN_MOVE_CURSOR, B_DOWN_STORE_PIXEL, B_DOWN_CURSOR_COLOUR, 
-        B_LEFT_DIR_IDLE, B_LEFT_COUNTP1, B_LEFT_SET_PIXEL_A, B_LEFT_COUNTM1, B_LEFT_SET_PIXEL_0, B_LEFT_CHECK_PIXEL, B_LEFT_RESET_PIXEL, B_LEFT_MOVE_CURSOR, B_LEFT_STORE_PIXEL, B_LEFT_CURSOR_COLOUR, 
-        B_RIGHT_DIR_IDLE, B_RIGHT_COUNTP1, B_RIGHT_SET_PIXEL_A, B_RIGHT_COUNTM1, B_RIGHT_SET_PIXEL_0, B_RIGHT_CHECK_PIXEL, B_RIGHTT_RESET_PIXEL, B_RIGHT_MOVE_CURSOR, B_RIGHT_STORE_PIXEL, B_RIGHT_CURSOR_COLOUR,        
-        GAME_IDLE, DECREASE_TIMER, END_GAME, 
+        B_UP_DIR_IDLE, B_UP_COUNTP1, B_UP_SET_PIXEL_B, B_UP_COUNTM1, B_UP_SET_PIXEL_0, B_UP_CHECK_PIXEL, B_UP_RESET_PIXEL, B_UP_MOVE_CURSOR, B_UP_STORE_PIXEL, B_UP_CURSOR_COLOUR, 
+        B_DOWN_DIR_IDLE, B_DOWN_COUNTP1, B_DOWN_SET_PIXEL_B, B_DOWN_COUNTM1, B_DOWN_SET_PIXEL_0, B_DOWN_CHECK_PIXEL, B_DOWN_RESET_PIXEL, B_DOWN_MOVE_CURSOR, B_DOWN_STORE_PIXEL, B_DOWN_CURSOR_COLOUR, 
+        B_LEFT_DIR_IDLE, B_LEFT_COUNTP1, B_LEFT_SET_PIXEL_B, B_LEFT_COUNTM1, B_LEFT_SET_PIXEL_0, B_LEFT_CHECK_PIXEL, B_LEFT_RESET_PIXEL, B_LEFT_MOVE_CURSOR, B_LEFT_STORE_PIXEL, B_LEFT_CURSOR_COLOUR, 
+        B_RIGHT_DIR_IDLE, B_RIGHT_COUNTP1, B_RIGHT_SET_PIXEL_B, B_RIGHT_COUNTM1, B_RIGHT_SET_PIXEL_0, B_RIGHT_CHECK_PIXEL, B_RIGHT_RESET_PIXEL, B_RIGHT_MOVE_CURSOR, B_RIGHT_STORE_PIXEL, B_RIGHT_CURSOR_COLOUR,        
+        GAME_IDLE, TIMER_M1, END_GAME, 
         
         GAME_IDLE_READ_CURR_PIXEL_VALUE, 
         
@@ -102,19 +118,16 @@ module fsm #(
     }
     
     dff states[$width(States)](#INIT(States.IDLE), .clk(clk))
+    dff decrease_timer(.clk(clk))
     
     always {
         states.d = states.q
         out = 0
-<<<<<<< Updated upstream
         brsel = b10
-=======
->>>>>>> Stashed changes
         bra = 0
         bwa = 0
         bwe = 0
         bwd = 0
-<<<<<<< Updated upstream
         ra1 = 0
         ra2 = 0
         wa = 0 
@@ -123,6 +136,13 @@ module fsm #(
         asel = 0
         bsel = 0
         wdsel = 0
+        srst1 = 0
+        srst2 = 0
+        srst3 = 0
+        decrease_timer.d = 0
+        if (game_clk){
+            decrease_timer.d = 1
+        }
 
         
         case (states.q){
@@ -150,7 +170,7 @@ module fsm #(
                 asel = b0
                 bsel = b1000
                 ra1 = b100
-                case(aluout){
+                case(aluout[0]){
                     1:
                         states.d = States.ZERO_BRAM
                     0:
@@ -175,16 +195,16 @@ module fsm #(
                 wa = b100
                 states.d = States.SET_SELECTOR_PIXEL_STATE
             
-            SET_SELECTOR_PIXEL_STATE:
-                bwa = 0x860
+            States.SET_SELECTOR_PIXEL_STATE:
+                bwa = h860
                 bwe = b1
-                bwd = 0xB
+                bwd = hB
                 brsel = b00
                 states.d = States.A_INPUT_IDLE
             // Player A Turn
             States.A_INPUT_IDLE:
                 asel = b0
-                ra1 = 0x5
+                ra1 = h5
                 if (move_up_button){
                     states.d = States.A_UP_DIR_IDLE
                 }
@@ -206,15 +226,16 @@ module fsm #(
                     if (rd2[0]){
                         states.d = States.A_SET_PIXEL_0
                     }
+                }
                 else if (next_player_button){
                     states.d = States.B_INPUT_IDLE
                 }
-                }
+                
 
-            States.A_UP_DIR_IDLE{
+            States.A_UP_DIR_IDLE:
                 alufn = b011010
                 asel = b0
-                ra1 = 0x5
+                ra1 = h5
                 if (select_button){
                     if(~rd1[0]){
                         states.d = States.A_UP_COUNTP1
@@ -228,70 +249,70 @@ module fsm #(
                 else if (move_up_button){
                     states.d = States.A_UP_CHECK_PIXEL
                 }
-            }
-            States.A_UP_COUNTP1{
+            
+            States.A_UP_COUNTP1:
                 alufn = b000000
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h2
                 wdsel = b0000
-                wa = 0x2
+                wa = h2
                 states.d = States.A_UP_SET_PIXEL_A
-            }
-            States.A_UP_SET_PIXEL_A{
+            
+            States.A_UP_SET_PIXEL_A:
                 we = b1 
                 wdsel = b0010
-                wa = 0x5
+                wa = h5
                 states.d = States.A_UP_CHECK_PIXEL
-            }
-            States.A_UP_COUNTM1{
+            
+            States.A_UP_COUNTM1:
                 alufn = b00001
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h2
                 wdsel = b0000
-                wa = 0x2
+                wa = h2
                 states.d = States.A_UP_SET_PIXEL_0
-            }
-            States.A_UP_SET_PIXEL_0{
+            
+            States.A_UP_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
-                wa = 0x5
+                wa = h5
                 states.d = States.A_UP_CHECK_PIXEL
-            }
-            States.A_UP_CHECK_PIXEL{
+
+            States.A_UP_CHECK_PIXEL:
                 alufn = b110101
                 asel = b0
                 bsel = b0110
-                ra1 = 0x4
-                if(~aluout){
+                ra1 = h4
+                if(~aluout[0]){
                     states.d = States.A_UP_RESET_PIXEL
                 }
-                if(aluout){
+                if(aluout[0]){
                     states.d = States.A_UP_DIR_IDLE
                 }
-            }
-            States.A_UP_RESET_PIXEL{
+
+            States.A_UP_RESET_PIXEL:
                 asel = b0
                 bsel = b0000
-                ra1 = 0x4
-                ra2 = 0x5
+                ra1 = h4
+                ra2 = h5
                 bwa = rd1
                 bwd = rd2
                 brsel = b00
                 states.d = States.A_UP_MOVE_CURSOR
-            }
-            States.A_UP_MOVE_CURSOR{
+            
+            States.A_UP_MOVE_CURSOR:
                 alufn = b00001
                 asel = b0
                 bsel = b0100
                 we = b1
-                ra1 = 0x4
+                ra1 = h4
                 wdsel = b0000
-                wa = 0x4
-                bra = 0x4
+                wa = h4
+                bra = h4
                 brsel = b01
                 if (ddr){
                     states.d = States.A_UP_MOVE_CURSOR
@@ -299,28 +320,28 @@ module fsm #(
                 else if(~ddr){
                     states.d = States.A_UP_STORE_PIXEL
                 }
-            }
-            States.A_UP_STORE_PIXEL{
+            
+            States.A_UP_STORE_PIXEL:
                 we = b1
                 wdsel = b0100
-                wa = 0x5
+                wa = h5
                 states.d = States.A_UP_CURSOR_COLOUR
-            }
-            States.A_UP_CURSOR_COLOUR{
+            
+            States.A_UP_CURSOR_COLOUR:
                 asel = b0
-                ra1 = 0x4
+                ra1 = h4
                 bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
                 states.d = States.A_UP_DIR_IDLE
-            }
+            
             
             //DOWN BUTTON PRESSED
-            States.A_DOWN_DIR_IDLE{
+            States.A_DOWN_DIR_IDLE:
                 alufn = b011010
                 asel = b0
-                ra1 = 0x5
+                ra1 = h5
                 if (select_button){
                     if(~rd1[0]){
                         states.d = States.A_DOWN_COUNTP1
@@ -334,70 +355,70 @@ module fsm #(
                 else if (move_up_button){
                     states.d = States.A_DOWN_CHECK_PIXEL
                 }
-            }
-            States.A_DOWN_COUNTP1{
+            
+            States.A_DOWN_COUNTP1:
                 alufn = b000000
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h2
                 wdsel = b0000
-                wa = 0x2
+                wa = h2
                 states.d = States.A_DOWN_SET_PIXEL_A
-            }
-            States.A_DOWN_SET_PIXEL_A{
+            
+            States.A_DOWN_SET_PIXEL_A:
                 we = b1 
                 wdsel = b0010
-                wa = 0x5
+                wa = h5
                 states.d = States.A_DOWN_CHECK_PIXEL
-            }
-            States.A_DOWN_COUNTM1{
+            
+            States.A_DOWN_COUNTM1:
                 alufn = b00001
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h2
                 wdsel = b0000
-                wa = 0x2
+                wa = h2
                 states.d = States.A_DOWN_SET_PIXEL_0
-            }
-            States.A_DOWN_SET_PIXEL_0{
+            
+            States.A_DOWN_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
-                wa = 0x5
+                wa = h5
                 states.d = States.A_DOWN_CHECK_PIXEL
-            }
-            States.A_DOWN_CHECK_PIXEL{
+            
+            States.A_DOWN_CHECK_PIXEL:
                 alufn = b110101
                 asel = b0
                 bsel = b0111
-                ra1 = 0x4
-                if(~aluout){
+                ra1 = h4
+                if(~aluout[0]){
                     states.d = States.A_DOWN_RESET_PIXEL
                 }
-                if(aluout){
+                if(aluout[0]){
                     states.d = States.A_DOWN_DIR_IDLE
                 }
-            }
-            States.A_DOWN_RESET_PIXEL{
+            
+            States.A_DOWN_RESET_PIXEL:
                 asel = b0
                 bsel = b0000
-                ra1 = 0x4
-                ra2 = 0x5
+                ra1 = h4
+                ra2 = h5
                 bwa = rd1
                 bwd = rd2
                 brsel = b00
                 states.d = States.A_DOWN_MOVE_CURSOR
-            }
-            States.A_DOWN_MOVE_CURSOR{
+            
+            States.A_DOWN_MOVE_CURSOR:
                 alufn = b000000
                 asel = b0
                 bsel = b0100
                 we = b1
-                ra1 = 0x4
+                ra1 = h4
                 wdsel = b0000
-                wa = 0x4
-                bra = 0x4
+                wa = h4
+                bra = h4
                 brsel = b01
                 if (ddr){
                     states.d = States.A_DOWN_MOVE_CURSOR
@@ -405,27 +426,27 @@ module fsm #(
                 else if(~ddr){
                     states.d = States.A_DOWN_STORE_PIXEL
                 }
-            }
-            States.A_DOWN_STORE_PIXEL{
+            
+            States.A_DOWN_STORE_PIXEL:
                 we = b1
                 wdsel = b0100
-                wa = 0x5
+                wa = h5
                 states.d = States.A_DOWN_CURSOR_COLOUR
-            }
-            States.A_DOWN_CURSOR_COLOUR{
+            
+            States.A_DOWN_CURSOR_COLOUR:
                 asel = b0
-                ra1 = 0x4
+                ra1 = h4
                 bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
                 states.d = States.A_DOWN_DIR_IDLE
-            }
+            
             //Left button is pressed
-            States.A_LEFT_DIR_IDLE{
+            States.A_LEFT_DIR_IDLE:
                 alufn = b011010
                 asel = b0
-                ra1 = 0x5
+                ra1 = h5
                 if (select_button){
                     if(~rd1[0]){
                         states.d = States.A_LEFT_COUNTP1
@@ -439,68 +460,68 @@ module fsm #(
                 else if (move_up_button){
                     states.d = States.A_LEFT_CHECK_PIXEL
                 }
-            }
-            States.A_LEFT_COUNTP1{
+            
+            States.A_LEFT_COUNTP1:
                 alufn = b000000
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h2
                 wdsel = b0000
-                wa = 0x2
+                wa = h2
                 states.d = States.A_LEFT_SET_PIXEL_A
-            }
-            States.A_LEFT_SET_PIXEL_A{
+            
+            States.A_LEFT_SET_PIXEL_A:
                 we = b1 
                 wdsel = b0010
-                wa = 0x5
+                wa = h5
                 states.d = States.A_LEFT_CHECK_PIXEL
-            }
-            States.A_LEFT_COUNTM1{
+            
+            States.A_LEFT_COUNTM1:
                 alufn = b00001
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h2
                 wdsel = b0000
-                wa = 0x2
+                wa = h2
                 states.d = States.A_LEFT_SET_PIXEL_0
-            }
-            States.A_LEFT_SET_PIXEL_0{
+            
+            States.A_LEFT_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
-                wa = 0x5
+                wa = h5
                 states.d = States.A_LEFT_CHECK_PIXEL
-            }
-            States.A_LEFT_CHECK_PIXEL{
+            
+            States.A_LEFT_CHECK_PIXEL:
                 asel = b0
-                ra1 = 0x4
-                if(~|ra1[5:0]){
+                ra1 = h4
+                if(~|rd1[5:0]){
                     states.d = States.A_LEFT_RESET_PIXEL
                 }
                 else {
                     states.d = States.A_LEFT_DIR_IDLE
                 }
-            }
-            States.A_LEFT_RESET_PIXEL{
+            
+            States.A_LEFT_RESET_PIXEL:
                 asel = b0
                 bsel = b0000
-                ra1 = 0x4
-                ra2 = 0x5
+                ra1 = h4
+                ra2 = h5
                 bwa = rd1
                 bwd = rd2
                 brsel = b00
                 states.d = States.A_LEFT_MOVE_CURSOR
-            }
-            States.A_LEFT_MOVE_CURSOR{
+            
+            States.A_LEFT_MOVE_CURSOR:
                 alufn = b00001
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x4
+                ra1 = h4
                 wdsel = b0000
-                wa = 0x4
-                bra = 0x4
+                wa = h4
+                bra = h4
                 brsel = b01
                 if (ddr){
                     states.d = States.A_LEFT_MOVE_CURSOR
@@ -508,27 +529,27 @@ module fsm #(
                 else if(~ddr){
                     states.d = States.A_LEFT_STORE_PIXEL
                 }
-            }
-            States.A_LEFT_STORE_PIXEL{
+            
+            States.A_LEFT_STORE_PIXEL:
                 we = b1
                 wdsel = b0100
-                wa = 0x5
+                wa = h5
                 states.d = States.A_LEFT_CURSOR_COLOUR
-            }
-            States.A_LEFT_CURSOR_COLOUR{
+            
+            States.A_LEFT_CURSOR_COLOUR:
                 asel = b0
-                ra1 = 0x4
+                ra1 = h4
                 bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
                 states.d = States.A_LEFT_DIR_IDLE
-            }
+            
             // Right button is pressed
-            States.A_RIGHT_DIR_IDLE{
+            States.A_RIGHT_DIR_IDLE:
                 alufn = b011010
                 asel = b0
-                ra1 = 0x5
+                ra1 = h5
                 if (select_button){
                     if(~rd1[0]){
                         states.d = States.A_RIGHT_COUNTP1
@@ -542,69 +563,69 @@ module fsm #(
                 else if (move_up_button){
                     states.d = States.A_RIGHT_CHECK_PIXEL
                 }
-            }
-            States.A_RIGHT_COUNTP1{
+            
+            States.A_RIGHT_COUNTP1:
                 alufn = b000000
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h2
                 wdsel = b0000
-                wa = 0x2
+                wa = h2
                 states.d = States.A_RIGHT_SET_PIXEL_A
-            }
-            States.A_RIGHT_SET_PIXEL_A{
+            
+            States.A_RIGHT_SET_PIXEL_A:
                 we = b1 
                 wdsel = b0010
-                wa = 0x5
+                wa = h5
                 states.d = States.A_RIGHT_CHECK_PIXEL
-            }
-            States.A_RIGHT_COUNTM1{
+            
+            States.A_RIGHT_COUNTM1:
                 alufn = b00001
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h2
                 wdsel = b0000
-                wa = 0x2
+                wa = h2
                 states.d = States.A_RIGHT_SET_PIXEL_0
-            }
-            States.A_RIGHT_SET_PIXEL_0{
+            
+            States.A_RIGHT_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
-                wa = 0x5
+                wa = h5
                 states.d = States.A_RIGHT_CHECK_PIXEL
-            }
-            States.A_RIGHT_CHECK_PIXEL{
+            
+            States.A_RIGHT_CHECK_PIXEL:
                 asel = b0
-                ra1 = 0x4
+                ra1 = h4
                 
-                if(&ra1[5:0]){
+                if(&rd1[5:0]){
                     states.d = States.A_RIGHT_RESET_PIXEL
                 }
                 else {
                     states.d = States.A_RIGHT_DIR_IDLE
                 }
-            }
-            States.A_RIGHT_RESET_PIXEL{
+            
+            States.A_RIGHT_RESET_PIXEL:
                 asel = b0
                 bsel = b0000
-                ra1 = 0x4
-                ra2 = 0x5
+                ra1 = h4
+                ra2 = h5
                 bwa = rd1
                 bwd = rd2
                 brsel = b00
                 states.d = States.A_RIGHT_MOVE_CURSOR
-            }
-            States.A_RIGHT_MOVE_CURSOR{
+            
+            States.A_RIGHT_MOVE_CURSOR:
                 alufn = b00001
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x4
+                ra1 = h4
                 wdsel = b0000
-                wa = 0x4
-                bra = 0x4
+                wa = h4
+                bra = h4
                 brsel = b01
                 if (ddr){
                     states.d = States.A_RIGHT_MOVE_CURSOR
@@ -612,27 +633,27 @@ module fsm #(
                 else if(~ddr){
                     states.d = States.A_RIGHT_STORE_PIXEL
                 }
-            }
-            States.A_RIGHT_STORE_PIXEL{
+            
+            States.A_RIGHT_STORE_PIXEL:
                 we = b1
                 wdsel = b0100
-                wa = 0x5
+                wa = h5
                 states.d = States.A_RIGHT_CURSOR_COLOUR
-            }
-            States.A_RIGHT_CURSOR_COLOUR{
+            
+            States.A_RIGHT_CURSOR_COLOUR:
                 asel = b0
-                ra1 = 0x4
+                ra1 = h4
                 bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
                 states.d = States.A_RIGHT_DIR_IDLE
-            }
+            
 
             //Player B is placing
             States.B_INPUT_IDLE:
                 asel = b0
-                ra1 = 0x5
+                ra1 = h5
                 if (move_up_button){
                     states.d = States.B_UP_DIR_IDLE
                 }
@@ -647,22 +668,23 @@ module fsm #(
                 }
                 else if (select_button){
                     if (~rd2[0]){
-                        states.d = States.B_SET_PIXEL_A
+                        states.d = States.B_SET_PIXEL_B
                     }
                 }
                 else if (deselect_button){
                     if (rd2[0]){
                         states.d = States.B_SET_PIXEL_0
                     }
+                }
                 else if (next_player_button){
-                    states.d = States.B_INPUT_IDLE
+                    states.d = States.GAME_IDLE
                 }
-                }
+                
 
-            States.B_UP_DIR_IDLE{
+            States.B_UP_DIR_IDLE:
                 alufn = b011010
                 asel = b0
-                ra1 = 0x5
+                ra1 = h5
                 if (select_button){
                     if(~rd1[0]){
                         states.d = States.B_UP_COUNTP1
@@ -676,70 +698,70 @@ module fsm #(
                 else if (move_up_button){
                     states.d = States.B_UP_CHECK_PIXEL
                 }
-            }
-            States.B_UP_COUNTP1{
+            
+            States.B_UP_COUNTP1:
                 alufn = b000000
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h3
                 wdsel = b0000
-                wa = 0x2
-                states.d = States.B_UP_SET_PIXEL_A
-            }
-            States.B_UP_SET_PIXEL_A{
+                wa = h3
+                states.d = States.B_UP_SET_PIXEL_B
+            
+            States.B_UP_SET_PIXEL_B:
                 we = b1 
                 wdsel = b0010
-                wa = 0x5
+                wa = h5
                 states.d = States.B_UP_CHECK_PIXEL
-            }
-            States.B_UP_COUNTM1{
+            
+            States.B_UP_COUNTM1:
                 alufn = b00001
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h3
                 wdsel = b0000
-                wa = 0x2
+                wa = h3
                 states.d = States.B_UP_SET_PIXEL_0
-            }
-            States.B_UP_SET_PIXEL_0{
+             
+            States.B_UP_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
-                wa = 0x5
+                wa = h5
                 states.d = States.B_UP_CHECK_PIXEL
-            }
-            States.B_UP_CHECK_PIXEL{
+            
+            States.B_UP_CHECK_PIXEL:
                 alufn = b110101
                 asel = b0
                 bsel = b0110
-                ra1 = 0x4
-                if(~aluout){
+                ra1 = h4
+                if(~aluout[0]){
                     states.d = States.B_UP_RESET_PIXEL
                 }
-                if(aluout){
+                if(aluout[0]){
                     states.d = States.B_UP_DIR_IDLE
                 }
-            }
-            States.B_UP_RESET_PIXEL{
+            
+            States.B_UP_RESET_PIXEL:
                 asel = b0
                 bsel = b0000
-                ra1 = 0x4
-                ra2 = 0x5
+                ra1 = h4
+                ra2 = h5
                 bwa = rd1
                 bwd = rd2
                 brsel = b00
                 states.d = States.B_UP_MOVE_CURSOR
-            }
-            States.B_UP_MOVE_CURSOR{
+            
+            States.B_UP_MOVE_CURSOR:
                 alufn = b00001
                 asel = b0
                 bsel = b0100
                 we = b1
-                ra1 = 0x4
+                ra1 = h4
                 wdsel = b0000
-                wa = 0x4
-                bra = 0x4
+                wa = h4
+                bra = h4
                 brsel = b01
                 if (ddr){
                     states.d = States.B_UP_MOVE_CURSOR
@@ -747,28 +769,28 @@ module fsm #(
                 else if(~ddr){
                     states.d = States.B_UP_STORE_PIXEL
                 }
-            }
-            States.B_UP_STORE_PIXEL{
+            
+            States.B_UP_STORE_PIXEL:
                 we = b1
                 wdsel = b0100
-                wa = 0x5
+                wa = h5
                 states.d = States.B_UP_CURSOR_COLOUR
-            }
-            States.B_UP_CURSOR_COLOUR{
+            
+            States.B_UP_CURSOR_COLOUR:
                 asel = b0
-                ra1 = 0x4
+                ra1 = h4
                 bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
                 states.d = States.B_UP_DIR_IDLE
-            }
+            
             
             //DOWN BUTTON PRESSED
-            States.B_DOWN_DIR_IDLE{
+            States.B_DOWN_DIR_IDLE:
                 alufn = b011010
                 asel = b0
-                ra1 = 0x5
+                ra1 = h5
                 if (select_button){
                     if(~rd1[0]){
                         states.d = States.B_DOWN_COUNTP1
@@ -782,70 +804,70 @@ module fsm #(
                 else if (move_up_button){
                     states.d = States.B_DOWN_CHECK_PIXEL
                 }
-            }
-            States.B_DOWN_COUNTP1{
+            
+            States.B_DOWN_COUNTP1:
                 alufn = b000000
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h3
                 wdsel = b0000
-                wa = 0x2
-                states.d = States.B_DOWN_SET_PIXEL_A
-            }
-            States.B_DOWN_SET_PIXEL_A{
+                wa = h3
+                states.d = States.B_DOWN_SET_PIXEL_B
+            
+            States.B_DOWN_SET_PIXEL_B:
                 we = b1 
                 wdsel = b0010
-                wa = 0x5
+                wa = h5
                 states.d = States.B_DOWN_CHECK_PIXEL
-            }
-            States.B_DOWN_COUNTM1{
+            
+            States.B_DOWN_COUNTM1:
                 alufn = b00001
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h3
                 wdsel = b0000
-                wa = 0x2
+                wa = h3
                 states.d = States.B_DOWN_SET_PIXEL_0
-            }
-            States.B_DOWN_SET_PIXEL_0{
+            
+            States.B_DOWN_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
-                wa = 0x5
+                wa = h5
                 states.d = States.B_DOWN_CHECK_PIXEL
-            }
-            States.B_DOWN_CHECK_PIXEL{
+            
+            States.B_DOWN_CHECK_PIXEL:
                 alufn = b110101
                 asel = b0
                 bsel = b0111
-                ra1 = 0x4
-                if(~aluout){
+                ra1 = h4
+                if(~aluout[0]){
                     states.d = States.B_DOWN_RESET_PIXEL
                 }
-                if(aluout){
+                if(aluout[0]){
                     states.d = States.B_DOWN_DIR_IDLE
                 }
-            }
-            States.B_DOWN_RESET_PIXEL{
+            
+            States.B_DOWN_RESET_PIXEL:
                 asel = b0
                 bsel = b0000
-                ra1 = 0x4
-                ra2 = 0x5
+                ra1 = h4
+                ra2 = h5
                 bwa = rd1
                 bwd = rd2
                 brsel = b00
                 states.d = States.B_DOWN_MOVE_CURSOR
-            }
-            States.B_DOWN_MOVE_CURSOR{
+            
+            States.B_DOWN_MOVE_CURSOR:
                 alufn = b000000
                 asel = b0
                 bsel = b0100
                 we = b1
-                ra1 = 0x4
+                ra1 = h4
                 wdsel = b0000
-                wa = 0x4
-                bra = 0x4
+                wa = h4
+                bra = h4
                 brsel = b01
                 if (ddr){
                     states.d = States.B_DOWN_MOVE_CURSOR
@@ -853,27 +875,27 @@ module fsm #(
                 else if(~ddr){
                     states.d = States.B_DOWN_STORE_PIXEL
                 }
-            }
-            States.B_DOWN_STORE_PIXEL{
+            
+            States.B_DOWN_STORE_PIXEL:
                 we = b1
                 wdsel = b0100
-                wa = 0x5
+                wa = h5
                 states.d = States.B_DOWN_CURSOR_COLOUR
-            }
-            States.B_DOWN_CURSOR_COLOUR{
+            
+            States.B_DOWN_CURSOR_COLOUR:
                 asel = b0
-                ra1 = 0x4
+                ra1 = h4
                 bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
                 states.d = States.B_DOWN_DIR_IDLE
-            }
+            
             //Left button is pressed
-            States.B_LEFT_DIR_IDLE{
+            States.B_LEFT_DIR_IDLE:
                 alufn = b011010
                 asel = b0
-                ra1 = 0x5
+                ra1 = h5
                 if (select_button){
                     if(~rd1[0]){
                         states.d = States.B_LEFT_COUNTP1
@@ -887,68 +909,68 @@ module fsm #(
                 else if (move_up_button){
                     states.d = States.B_LEFT_CHECK_PIXEL
                 }
-            }
-            States.B_LEFT_COUNTP1{
+            
+            States.B_LEFT_COUNTP1:
                 alufn = b000000
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h3
                 wdsel = b0000
-                wa = 0x2
-                states.d = States.B_LEFT_SET_PIXEL_A
-            }
-            States.B_LEFT_SET_PIXEL_A{
+                wa = h3
+                states.d = States.B_LEFT_SET_PIXEL_B
+            
+            States.B_LEFT_SET_PIXEL_B:
                 we = b1 
                 wdsel = b0010
-                wa = 0x5
+                wa = h5
                 states.d = States.B_LEFT_CHECK_PIXEL
-            }
-            States.B_LEFT_COUNTM1{
+            
+            States.B_LEFT_COUNTM1:
                 alufn = b00001
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h3
                 wdsel = b0000
-                wa = 0x2
+                wa = h3
                 states.d = States.B_LEFT_SET_PIXEL_0
-            }
-            States.B_LEFT_SET_PIXEL_0{
+            
+            States.B_LEFT_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
-                wa = 0x5
+                wa = h5
                 states.d = States.B_LEFT_CHECK_PIXEL
-            }
-            States.B_LEFT_CHECK_PIXEL{
+            
+            States.B_LEFT_CHECK_PIXEL:
                 asel = b0
-                ra1 = 0x4
-                if(~|ra1[5:0]){
+                ra1 = h4
+                if(~|rd1[5:0]){
                     states.d = States.B_LEFT_RESET_PIXEL
                 }
                 else {
                     states.d = States.B_LEFT_DIR_IDLE
                 }
-            }
-            States.B_LEFT_RESET_PIXEL{
+            
+            States.B_LEFT_RESET_PIXEL:
                 asel = b0
                 bsel = b0000
-                ra1 = 0x4
-                ra2 = 0x5
+                ra1 = h4
+                ra2 = h5
                 bwa = rd1
                 bwd = rd2
                 brsel = b00
                 states.d = States.B_LEFT_MOVE_CURSOR
-            }
-            States.B_LEFT_MOVE_CURSOR{
+            
+            States.B_LEFT_MOVE_CURSOR:
                 alufn = b00001
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x4
+                ra1 = h4
                 wdsel = b0000
-                wa = 0x4
-                bra = 0x4
+                wa = h4
+                bra = h4
                 brsel = b01
                 if (ddr){
                     states.d = States.B_LEFT_MOVE_CURSOR
@@ -956,27 +978,27 @@ module fsm #(
                 else if(~ddr){
                     states.d = States.B_LEFT_STORE_PIXEL
                 }
-            }
-            States.B_LEFT_STORE_PIXEL{
+            
+            States.B_LEFT_STORE_PIXEL:
                 we = b1
                 wdsel = b0100
-                wa = 0x5
+                wa = h5
                 states.d = States.B_LEFT_CURSOR_COLOUR
-            }
-            States.B_LEFT_CURSOR_COLOUR{
+            
+            States.B_LEFT_CURSOR_COLOUR:
                 asel = b0
-                ra1 = 0x4
+                ra1 = h4
                 bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
                 states.d = States.B_LEFT_DIR_IDLE
-            }
+            
             // Right button is pressed
-            States.B_RIGHT_DIR_IDLE{
+            States.B_RIGHT_DIR_IDLE:
                 alufn = b011010
                 asel = b0
-                ra1 = 0x5
+                ra1 = h5
                 if (select_button){
                     if(~rd1[0]){
                         states.d = States.B_RIGHT_COUNTP1
@@ -990,69 +1012,69 @@ module fsm #(
                 else if (move_up_button){
                     states.d = States.B_RIGHT_CHECK_PIXEL
                 }
-            }
-            States.B_RIGHT_COUNTP1{
+            
+            States.B_RIGHT_COUNTP1:
                 alufn = b000000
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h3
                 wdsel = b0000
-                wa = 0x2
-                states.d = States.B_RIGHT_SET_PIXEL_A
-            }
-            States.B_RIGHT_SET_PIXEL_A{
+                wa = h3
+                states.d = States.B_RIGHT_SET_PIXEL_B
+            
+            States.B_RIGHT_SET_PIXEL_B:
                 we = b1 
                 wdsel = b0010
-                wa = 0x5
+                wa = h5
                 states.d = States.B_RIGHT_CHECK_PIXEL
-            }
-            States.B_RIGHT_COUNTM1{
+            
+            States.B_RIGHT_COUNTM1:
                 alufn = b00001
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x2
+                ra1 = h3
                 wdsel = b0000
-                wa = 0x2
+                wa = h3
                 states.d = States.B_RIGHT_SET_PIXEL_0
-            }
-            States.B_RIGHT_SET_PIXEL_0{
+            
+            States.B_RIGHT_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
-                wa = 0x5
+                wa = h5
                 states.d = States.B_RIGHT_CHECK_PIXEL
-            }
-            States.B_RIGHT_CHECK_PIXEL{
+            
+            States.B_RIGHT_CHECK_PIXEL:
                 asel = b0
-                ra1 = 0x4
+                ra1 = h4
                 
-                if(&ra1[5:0]){
+                if(&rd1[5:0]){
                     states.d = States.B_RIGHT_RESET_PIXEL
                 }
                 else {
                     states.d = States.B_RIGHT_DIR_IDLE
                 }
-            }
-            States.B_RIGHT_RESET_PIXEL{
+            
+            States.B_RIGHT_RESET_PIXEL:
                 asel = b0
                 bsel = b0000
-                ra1 = 0x4
-                ra2 = 0x5
+                ra1 = h4
+                ra2 = h5
                 bwa = rd1
                 bwd = rd2
                 brsel = b00
                 states.d = States.B_RIGHT_MOVE_CURSOR
-            }
-            States.B_RIGHT_MOVE_CURSOR{
+            
+            States.B_RIGHT_MOVE_CURSOR:
                 alufn = b00001
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = 0x4
+                ra1 = h4
                 wdsel = b0000
-                wa = 0x4
-                bra = 0x4
+                wa = h4
+                bra = h4
                 brsel = b01
                 if (ddr){
                     states.d = States.B_RIGHT_MOVE_CURSOR
@@ -1060,25 +1082,110 @@ module fsm #(
                 else if(~ddr){
                     states.d = States.B_RIGHT_STORE_PIXEL
                 }
-            }
-            States.B_RIGHT_STORE_PIXEL{
+            
+            States.B_RIGHT_STORE_PIXEL:
                 we = b1
                 wdsel = b0100
-                wa = 0x5
+                wa = h5
                 states.d = States.B_RIGHT_CURSOR_COLOUR
-            }
-            States.B_RIGHT_CURSOR_COLOUR{
+            
+            States.B_RIGHT_CURSOR_COLOUR:
                 asel = b0
-                ra1 = 0x4
+                ra1 = h4
                 bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
                 states.d = States.B_RIGHT_DIR_IDLE
-            }
+            // Game Idle Stage
+            States.GAME_IDLE:
+                if(decrease_timer.q){
+                    states.d = States.TIMER_M1
+                }
+                else if(~timer){
+                    states.d = States.END_GAME
+                }
+                else if(~pac){
+                    states.d = States.END_GAME
+                }
+                else if(~pbc){
+                    states.d = States.END_GAME
+                }
+                states.d = States.GAME_IDLE_READ_CURR_PIXEL_VALUE
+            
+            States.GAME_IDLE_READ_CURR_PIXEL_VALUE:
+                ra1 = h4
+                if(&rd1[5:0]){
+                    states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
+                }
+                else if (~|rd1[5:0]){
+                    states.d = States.RESET_SR_POINTERS
+                }
+                else{
+                    states.d = States.READ_BRAM
+                }
+            // Reading BRAM and loading SR
+            // First in the row
+            States.RESET_SR_POINTERS:
+                srst1 = 1
+                srst2 = 1
+                srst3 = 1
+                states.d = States.SR_00_ALL_SR
 
+            States.SR_00_ALL_SR:
+                alufn = b000001
+                asel = b0
+                bsel = b0100 
+                bra = aluout
+                bwe = b0
+                swd1 = b00
+                swe1 = b1
+                sre1 = b0
+                swd2 = b00
+                swe2 = b1
+                sre2 = b0
+                swd3 = b00
+                swe3 = b1
+                sre3 = b0
+                if (ddr){
+                    states.d = States.SR_00_ALL_SR
+                }
+                else if (~ddr){
+                    states.d = States.SR_LOAD_TOP_MID
+                }
+            
+            States.SR_LOAD_TOP_MID:
+                alufn = b000001
+                asel  = b0
+                bsel = b0101 
+                ra1 = h4
+                bra = aluout
+                bwe = b0
+                swd1 = brd
+                swe1 = b1
+                sre1 = b0
+                if (ddr){
+                    states.d = States.SR_LOAD_TOP_MID
+                }
+                else if (~ddr){
+                    states.d = States.SR_LOAD_MID_MID
+                }
+            States.SR_LOAD_MID_MID:
+                alufn = b000000
+                asel  = b0
+                bsel = b0001
+                ra1 = h4
+                bra = aluout
+                bwe = b0
+                swd2 = brd
+                swe2 = b1
+                sre2 = b0
+                if (ddr){
+                    states.d = States.SR_LOAD_MID_MID
+                }
+                else if (~ddr){
+                    states.d = States.SR_LOAD_MID_RIGHT
+                }
         }   
-=======
->>>>>>> Stashed changes
     }
 }
