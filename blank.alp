@@ -64,6 +64,12 @@
                     "type": "DiskFile",
                     "path": "source/display_driver.luc"
                 }
+            },
+            {
+                "file": {
+                    "type": "DiskFile",
+                    "path": "source/fsm.luc"
+                }
             }
         ],
         "constraintFiles": [

@@ -1,0 +1,35 @@
+module fsm #(
+) (
+    input clk,  // clock
+    input rst,  // reset
+    
+    input next_player_button,
+    input reset_button,
+    
+    input move_up_button,
+    input move_down_button,
+    input move_left_button,
+    input move_right_button,
+    
+    input play_button,
+    
+    input deselect_button,
+    input select_button,
+
+    input pac,
+    input pbc,
+    input timer,
+    
+    output brsel[2],                        // selector override
+    output bra[13],          // read address
+    output bwa[13],          // write address
+    output bwe,                          // write enable
+    output bwd[2],                   // write data
+    output out,
+    
+    
+) {
+    always {
+        out = 0
+    }
+}
