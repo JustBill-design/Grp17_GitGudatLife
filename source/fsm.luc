@@ -24,6 +24,7 @@ module fsm #(
     
     input rd1,
     input rd2,
+    input aluout,
 
     output brsel[2],                        // selector override
     output bra[13],          // read address
@@ -117,6 +118,7 @@ module fsm #(
         asel = 0
         bsel = 0
         wdsel = 0
+
         
         case (states.q){
             States.SET_PIXEL_ADDRESS_TO_0:
@@ -143,7 +145,7 @@ module fsm #(
                 asel = b0
                 bsel = b1000
                 ra1 = b100
-                case(alu.out){
+                case(aluout){
                     1:
                         states.d = States.ZERO_BRAM
                     0:
@@ -174,7 +176,7 @@ module fsm #(
                 bwd = 0xB
                 brsel = b00
                 states.d = States.A_INPUT_IDLE
-
+            // Player A Turn
             States.A_INPUT_IDLE:
                 asel = b0
                 ra1 = 0x5
@@ -199,6 +201,9 @@ module fsm #(
                     if (rd2[0]){
                         states.d = States.A_SET_PIXEL_0
                     }
+                else if (next_player_button){
+                    states.d = States.B_INPUT_IDLE
+                }
                 }
 
             States.A_UP_DIR_IDLE{
@@ -256,10 +261,10 @@ module fsm #(
                 asel = b0
                 bsel = b0110
                 ra1 = 0x4
-                if(~alu.out){
+                if(~aluout){
                     states.d = States.A_UP_RESET_PIXEL
                 }
-                if(alu.out){
+                if(aluout){
                     states.d = States.A_UP_DIR_IDLE
                 }
             }
@@ -362,10 +367,10 @@ module fsm #(
                 asel = b0
                 bsel = b0111
                 ra1 = 0x4
-                if(~alu.out){
+                if(~aluout){
                     states.d = States.A_DOWN_RESET_PIXEL
                 }
-                if(alu.out){
+                if(aluout){
                     states.d = States.A_DOWN_DIR_IDLE
                 }
             }
@@ -465,10 +470,10 @@ module fsm #(
             States.A_LEFT_CHECK_PIXEL{
                 asel = b0
                 ra1 = 0x4
-                if(~alu.out){
+                if(~|ra1[5:0]){
                     states.d = States.A_LEFT_RESET_PIXEL
                 }
-                if(alu.out){
+                else {
                     states.d = States.A_LEFT_DIR_IDLE
                 }
             }
@@ -514,6 +519,559 @@ module fsm #(
                 brsel = b00
                 states.d = States.A_LEFT_DIR_IDLE
             }
+            // Right button is pressed
+            States.A_RIGHT_DIR_IDLE{
+                alufn = b011010
+                asel = b0
+                ra1 = 0x5
+                if (select_button){
+                    if(~rd1[0]){
+                        states.d = States.A_RIGHT_COUNTP1
+                    }
+                }
+                else if (deselect_button){
+                    if (rd1[0]){
+                        states.d = States.A_RIGHT_COUNTM1
+                    }
+                }
+                else if (move_up_button){
+                    states.d = States.A_RIGHT_CHECK_PIXEL
+                }
+            }
+            States.A_RIGHT_COUNTP1{
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = 0x2
+                wdsel = b0000
+                wa = 0x2
+                states.d = States.A_RIGHT_SET_PIXEL_A
+            }
+            States.A_RIGHT_SET_PIXEL_A{
+                we = b1 
+                wdsel = b0010
+                wa = 0x5
+                states.d = States.A_RIGHT_CHECK_PIXEL
+            }
+            States.A_RIGHT_COUNTM1{
+                alufn = b00001
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = 0x2
+                wdsel = b0000
+                wa = 0x2
+                states.d = States.A_RIGHT_SET_PIXEL_0
+            }
+            States.A_RIGHT_SET_PIXEL_0{
+                we = b1
+                wdsel = b0001
+                wa = 0x5
+                states.d = States.A_RIGHT_CHECK_PIXEL
+            }
+            States.A_RIGHT_CHECK_PIXEL{
+                asel = b0
+                ra1 = 0x4
+                
+                if(&ra1[5:0]){
+                    states.d = States.A_RIGHT_RESET_PIXEL
+                }
+                else {
+                    states.d = States.A_RIGHT_DIR_IDLE
+                }
+            }
+            States.A_RIGHT_RESET_PIXEL{
+                asel = b0
+                bsel = b0000
+                ra1 = 0x4
+                ra2 = 0x5
+                bwa = rd1
+                bwd = rd2
+                brsel = b00
+                states.d = States.A_RIGHT_MOVE_CURSOR
+            }
+            States.A_RIGHT_MOVE_CURSOR{
+                alufn = b00001
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = 0x4
+                wdsel = b0000
+                wa = 0x4
+                bra = 0x4
+                brsel = b01
+                if (ddr){
+                    states.d = States.A_RIGHT_MOVE_CURSOR
+                }
+                else if(~ddr){
+                    states.d = States.A_RIGHT_STORE_PIXEL
+                }
+            }
+            States.A_RIGHT_STORE_PIXEL{
+                we = b1
+                wdsel = b0100
+                wa = 0x5
+                states.d = States.A_RIGHT_CURSOR_COLOUR
+            }
+            States.A_RIGHT_CURSOR_COLOUR{
+                asel = b0
+                ra1 = 0x4
+                bwa = rd1
+                bwe = b1
+                bwd = b11
+                brsel = b00
+                states.d = States.A_RIGHT_DIR_IDLE
+            }
+
+            //Player B is placing
+            States.B_INPUT_IDLE:
+                asel = b0
+                ra1 = 0x5
+                if (move_up_button){
+                    states.d = States.B_UP_DIR_IDLE
+                }
+                else if (move_down_button){
+                    states.d = States.B_DOWN_DIR_IDLE
+                }
+                else if (move_left_button){
+                    states.d = States.B_LEFT_DIR_IDLE
+                }
+                else if (move_right_button){
+                    states.d = States.B_RIGHT_DIR_IDLE
+                }
+                else if (select_button){
+                    if (~rd2[0]){
+                        states.d = States.B_SET_PIXEL_A
+                    }
+                }
+                else if (deselect_button){
+                    if (rd2[0]){
+                        states.d = States.B_SET_PIXEL_0
+                    }
+                else if (next_player_button){
+                    states.d = States.B_INPUT_IDLE
+                }
+                }
+
+            States.B_UP_DIR_IDLE{
+                alufn = b011010
+                asel = b0
+                ra1 = 0x5
+                if (select_button){
+                    if(~rd1[0]){
+                        states.d = States.B_UP_COUNTP1
+                    }
+                }
+                else if (deselect_button){
+                    if (rd1[0]){
+                        states.d = States.B_UP_COUNTM1
+                    }
+                }
+                else if (move_up_button){
+                    states.d = States.B_UP_CHECK_PIXEL
+                }
+            }
+            States.B_UP_COUNTP1{
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = 0x2
+                wdsel = b0000
+                wa = 0x2
+                states.d = States.B_UP_SET_PIXEL_A
+            }
+            States.B_UP_SET_PIXEL_A{
+                we = b1 
+                wdsel = b0010
+                wa = 0x5
+                states.d = States.B_UP_CHECK_PIXEL
+            }
+            States.B_UP_COUNTM1{
+                alufn = b00001
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = 0x2
+                wdsel = b0000
+                wa = 0x2
+                states.d = States.B_UP_SET_PIXEL_0
+            }
+            States.B_UP_SET_PIXEL_0{
+                we = b1
+                wdsel = b0001
+                wa = 0x5
+                states.d = States.B_UP_CHECK_PIXEL
+            }
+            States.B_UP_CHECK_PIXEL{
+                alufn = b110101
+                asel = b0
+                bsel = b0110
+                ra1 = 0x4
+                if(~aluout){
+                    states.d = States.B_UP_RESET_PIXEL
+                }
+                if(aluout){
+                    states.d = States.B_UP_DIR_IDLE
+                }
+            }
+            States.B_UP_RESET_PIXEL{
+                asel = b0
+                bsel = b0000
+                ra1 = 0x4
+                ra2 = 0x5
+                bwa = rd1
+                bwd = rd2
+                brsel = b00
+                states.d = States.B_UP_MOVE_CURSOR
+            }
+            States.B_UP_MOVE_CURSOR{
+                alufn = b00001
+                asel = b0
+                bsel = b0100
+                we = b1
+                ra1 = 0x4
+                wdsel = b0000
+                wa = 0x4
+                bra = 0x4
+                brsel = b01
+                if (ddr){
+                    states.d = States.B_UP_MOVE_CURSOR
+                }
+                else if(~ddr){
+                    states.d = States.B_UP_STORE_PIXEL
+                }
+            }
+            States.B_UP_STORE_PIXEL{
+                we = b1
+                wdsel = b0100
+                wa = 0x5
+                states.d = States.B_UP_CURSOR_COLOUR
+            }
+            States.B_UP_CURSOR_COLOUR{
+                asel = b0
+                ra1 = 0x4
+                bwa = rd1
+                bwe = b1
+                bwd = b11
+                brsel = b00
+                states.d = States.B_UP_DIR_IDLE
+            }
+            
+            //DOWN BUTTON PRESSED
+            States.B_DOWN_DIR_IDLE{
+                alufn = b011010
+                asel = b0
+                ra1 = 0x5
+                if (select_button){
+                    if(~rd1[0]){
+                        states.d = States.B_DOWN_COUNTP1
+                    }
+                }
+                else if (deselect_button){
+                    if (rd1[0]){
+                        states.d = States.B_DOWN_COUNTM1
+                    }
+                }
+                else if (move_up_button){
+                    states.d = States.B_DOWN_CHECK_PIXEL
+                }
+            }
+            States.B_DOWN_COUNTP1{
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = 0x2
+                wdsel = b0000
+                wa = 0x2
+                states.d = States.B_DOWN_SET_PIXEL_A
+            }
+            States.B_DOWN_SET_PIXEL_A{
+                we = b1 
+                wdsel = b0010
+                wa = 0x5
+                states.d = States.B_DOWN_CHECK_PIXEL
+            }
+            States.B_DOWN_COUNTM1{
+                alufn = b00001
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = 0x2
+                wdsel = b0000
+                wa = 0x2
+                states.d = States.B_DOWN_SET_PIXEL_0
+            }
+            States.B_DOWN_SET_PIXEL_0{
+                we = b1
+                wdsel = b0001
+                wa = 0x5
+                states.d = States.B_DOWN_CHECK_PIXEL
+            }
+            States.B_DOWN_CHECK_PIXEL{
+                alufn = b110101
+                asel = b0
+                bsel = b0111
+                ra1 = 0x4
+                if(~aluout){
+                    states.d = States.B_DOWN_RESET_PIXEL
+                }
+                if(aluout){
+                    states.d = States.B_DOWN_DIR_IDLE
+                }
+            }
+            States.B_DOWN_RESET_PIXEL{
+                asel = b0
+                bsel = b0000
+                ra1 = 0x4
+                ra2 = 0x5
+                bwa = rd1
+                bwd = rd2
+                brsel = b00
+                states.d = States.B_DOWN_MOVE_CURSOR
+            }
+            States.B_DOWN_MOVE_CURSOR{
+                alufn = b000000
+                asel = b0
+                bsel = b0100
+                we = b1
+                ra1 = 0x4
+                wdsel = b0000
+                wa = 0x4
+                bra = 0x4
+                brsel = b01
+                if (ddr){
+                    states.d = States.B_DOWN_MOVE_CURSOR
+                }
+                else if(~ddr){
+                    states.d = States.B_DOWN_STORE_PIXEL
+                }
+            }
+            States.B_DOWN_STORE_PIXEL{
+                we = b1
+                wdsel = b0100
+                wa = 0x5
+                states.d = States.B_DOWN_CURSOR_COLOUR
+            }
+            States.B_DOWN_CURSOR_COLOUR{
+                asel = b0
+                ra1 = 0x4
+                bwa = rd1
+                bwe = b1
+                bwd = b11
+                brsel = b00
+                states.d = States.B_DOWN_DIR_IDLE
+            }
+            //Left button is pressed
+            States.B_LEFT_DIR_IDLE{
+                alufn = b011010
+                asel = b0
+                ra1 = 0x5
+                if (select_button){
+                    if(~rd1[0]){
+                        states.d = States.B_LEFT_COUNTP1
+                    }
+                }
+                else if (deselect_button){
+                    if (rd1[0]){
+                        states.d = States.B_LEFT_COUNTM1
+                    }
+                }
+                else if (move_up_button){
+                    states.d = States.B_LEFT_CHECK_PIXEL
+                }
+            }
+            States.B_LEFT_COUNTP1{
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = 0x2
+                wdsel = b0000
+                wa = 0x2
+                states.d = States.B_LEFT_SET_PIXEL_A
+            }
+            States.B_LEFT_SET_PIXEL_A{
+                we = b1 
+                wdsel = b0010
+                wa = 0x5
+                states.d = States.B_LEFT_CHECK_PIXEL
+            }
+            States.B_LEFT_COUNTM1{
+                alufn = b00001
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = 0x2
+                wdsel = b0000
+                wa = 0x2
+                states.d = States.B_LEFT_SET_PIXEL_0
+            }
+            States.B_LEFT_SET_PIXEL_0{
+                we = b1
+                wdsel = b0001
+                wa = 0x5
+                states.d = States.B_LEFT_CHECK_PIXEL
+            }
+            States.B_LEFT_CHECK_PIXEL{
+                asel = b0
+                ra1 = 0x4
+                if(~|ra1[5:0]){
+                    states.d = States.B_LEFT_RESET_PIXEL
+                }
+                else {
+                    states.d = States.B_LEFT_DIR_IDLE
+                }
+            }
+            States.B_LEFT_RESET_PIXEL{
+                asel = b0
+                bsel = b0000
+                ra1 = 0x4
+                ra2 = 0x5
+                bwa = rd1
+                bwd = rd2
+                brsel = b00
+                states.d = States.B_LEFT_MOVE_CURSOR
+            }
+            States.B_LEFT_MOVE_CURSOR{
+                alufn = b00001
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = 0x4
+                wdsel = b0000
+                wa = 0x4
+                bra = 0x4
+                brsel = b01
+                if (ddr){
+                    states.d = States.B_LEFT_MOVE_CURSOR
+                }
+                else if(~ddr){
+                    states.d = States.B_LEFT_STORE_PIXEL
+                }
+            }
+            States.B_LEFT_STORE_PIXEL{
+                we = b1
+                wdsel = b0100
+                wa = 0x5
+                states.d = States.B_LEFT_CURSOR_COLOUR
+            }
+            States.B_LEFT_CURSOR_COLOUR{
+                asel = b0
+                ra1 = 0x4
+                bwa = rd1
+                bwe = b1
+                bwd = b11
+                brsel = b00
+                states.d = States.B_LEFT_DIR_IDLE
+            }
+            // Right button is pressed
+            States.B_RIGHT_DIR_IDLE{
+                alufn = b011010
+                asel = b0
+                ra1 = 0x5
+                if (select_button){
+                    if(~rd1[0]){
+                        states.d = States.B_RIGHT_COUNTP1
+                    }
+                }
+                else if (deselect_button){
+                    if (rd1[0]){
+                        states.d = States.B_RIGHT_COUNTM1
+                    }
+                }
+                else if (move_up_button){
+                    states.d = States.B_RIGHT_CHECK_PIXEL
+                }
+            }
+            States.B_RIGHT_COUNTP1{
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = 0x2
+                wdsel = b0000
+                wa = 0x2
+                states.d = States.B_RIGHT_SET_PIXEL_A
+            }
+            States.B_RIGHT_SET_PIXEL_A{
+                we = b1 
+                wdsel = b0010
+                wa = 0x5
+                states.d = States.B_RIGHT_CHECK_PIXEL
+            }
+            States.B_RIGHT_COUNTM1{
+                alufn = b00001
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = 0x2
+                wdsel = b0000
+                wa = 0x2
+                states.d = States.B_RIGHT_SET_PIXEL_0
+            }
+            States.B_RIGHT_SET_PIXEL_0{
+                we = b1
+                wdsel = b0001
+                wa = 0x5
+                states.d = States.B_RIGHT_CHECK_PIXEL
+            }
+            States.B_RIGHT_CHECK_PIXEL{
+                asel = b0
+                ra1 = 0x4
+                
+                if(&ra1[5:0]){
+                    states.d = States.B_RIGHT_RESET_PIXEL
+                }
+                else {
+                    states.d = States.B_RIGHT_DIR_IDLE
+                }
+            }
+            States.B_RIGHT_RESET_PIXEL{
+                asel = b0
+                bsel = b0000
+                ra1 = 0x4
+                ra2 = 0x5
+                bwa = rd1
+                bwd = rd2
+                brsel = b00
+                states.d = States.B_RIGHT_MOVE_CURSOR
+            }
+            States.B_RIGHT_MOVE_CURSOR{
+                alufn = b00001
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = 0x4
+                wdsel = b0000
+                wa = 0x4
+                bra = 0x4
+                brsel = b01
+                if (ddr){
+                    states.d = States.B_RIGHT_MOVE_CURSOR
+                }
+                else if(~ddr){
+                    states.d = States.B_RIGHT_STORE_PIXEL
+                }
+            }
+            States.B_RIGHT_STORE_PIXEL{
+                we = b1
+                wdsel = b0100
+                wa = 0x5
+                states.d = States.B_RIGHT_CURSOR_COLOUR
+            }
+            States.B_RIGHT_CURSOR_COLOUR{
+                asel = b0
+                ra1 = 0x4
+                bwa = rd1
+                bwe = b1
+                bwd = b11
+                brsel = b00
+                states.d = States.B_RIGHT_DIR_IDLE
+            }
+
         }   
     }
 }
