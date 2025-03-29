@@ -20,10 +20,10 @@ module display_driver #(
         output reg sclk_out,
         output reg [(ADDRESS_SIZE)-1:0] address
     );
-    localparam DIV = 3'h6;
+    localparam DIV = 4'hc;
     logic [2:0] pixeldata;
     logic [1:0] D_state_d, D_state_q = 0;
-    logic [5:0] D_sclk_counter_d, D_sclk_counter_q = 0;
+    logic [11:0] D_sclk_counter_d, D_sclk_counter_q = 0;
     logic [(ADDRESS_SIZE + $clog2(MATRIX_WIDTH))-1:0] D_pixel_idx_d, D_pixel_idx_q = 0;
     logic [2:0] D_rgb_data_0_d, D_rgb_data_0_q = 0;
     logic [2:0] D_rgb_data_1_d, D_rgb_data_1_q = 0;
@@ -90,15 +90,15 @@ module display_driver #(
                     D_sclk_d = 1'h0;
                     D_rgb_data_1_d = pixeldata;
                 end else begin
-                    if (D_sclk_counter_q == 5'h1f && D_state_q == 2'h1) begin
+                    if (D_sclk_counter_q == 11'h7ff && D_state_q == 2'h1) begin
                         D_sclk_d = 1'h1;
                     end else begin
-                        if (D_sclk_counter_q == 6'h3f && D_state_q == 2'h1 && D_pixel_idx_q[$clog2(MATRIX_WIDTH) - 1'h1:1'h0] == {1'h1, {$clog2(MATRIX_WIDTH){1'h0}}}) begin
+                        if (D_sclk_counter_q == 12'hfff && D_state_q == 2'h1 && D_pixel_idx_q[$clog2(MATRIX_WIDTH) - 1'h1:1'h0] == {1'h1, {$clog2(MATRIX_WIDTH){1'h0}}}) begin
                             D_state_d = 2'h2;
                             D_latch_blank_d = 2'h3;
                             D_sclk_d = 1'h0;
                         end else begin
-                            if (D_sclk_counter_q == 6'h3f && D_state_q == 2'h2) begin
+                            if (D_sclk_counter_q == 12'hfff && D_state_q == 2'h2) begin
                                 D_latch_blank_d = 2'h0;
                                 D_state_d = 2'h1;
                             end

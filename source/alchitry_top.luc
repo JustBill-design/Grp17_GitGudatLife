@@ -52,8 +52,8 @@ module alchitry_top (
         
         display.data = pixeldrive.q
         mataddr = display.address
-        mattop = display.toppixel
-        matbot = display.botpixel
+        mattop = b111
+        matbot = b111
         matclk = display.sclk_out
         matoe = display.blank
         matlat = display.latch

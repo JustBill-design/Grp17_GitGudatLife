@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Sat Mar 29 22:37:01 2025
+| Date         : Sat Mar 29 22:48:56 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_methodology -file alchitry_top_methodology_drc_routed.rpt -pb alchitry_top_methodology_drc_routed.pb -rpx alchitry_top_methodology_drc_routed.rpx
 | Design       : alchitry_top
@@ -23,11 +23,11 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 14
+             Checks found: 8
 +-----------+----------+-------------------------------+--------+
 | Rule      | Severity | Description                   | Checks |
 +-----------+----------+-------------------------------+--------+
-| TIMING-18 | Warning  | Missing input or output delay | 14     |
+| TIMING-18 | Warning  | Missing input or output delay | 8      |
 +-----------+----------+-------------------------------+--------+
 
 2. REPORT DETAILS
@@ -64,42 +64,12 @@ Related violations: <none>
 
 TIMING-18#7 Warning
 Missing input or output delay  
-An output delay is missing on matbot[0] relative to the rising and/or falling clock edge(s) of clk_0.
+An output delay is missing on matclk relative to the rising and/or falling clock edge(s) of clk_0.
 Related violations: <none>
 
 TIMING-18#8 Warning
 Missing input or output delay  
-An output delay is missing on matbot[1] relative to the rising and/or falling clock edge(s) of clk_0.
-Related violations: <none>
-
-TIMING-18#9 Warning
-Missing input or output delay  
-An output delay is missing on matbot[2] relative to the rising and/or falling clock edge(s) of clk_0.
-Related violations: <none>
-
-TIMING-18#10 Warning
-Missing input or output delay  
-An output delay is missing on matclk relative to the rising and/or falling clock edge(s) of clk_0.
-Related violations: <none>
-
-TIMING-18#11 Warning
-Missing input or output delay  
 An output delay is missing on matoe relative to the rising and/or falling clock edge(s) of clk_0.
-Related violations: <none>
-
-TIMING-18#12 Warning
-Missing input or output delay  
-An output delay is missing on mattop[0] relative to the rising and/or falling clock edge(s) of clk_0.
-Related violations: <none>
-
-TIMING-18#13 Warning
-Missing input or output delay  
-An output delay is missing on mattop[1] relative to the rising and/or falling clock edge(s) of clk_0.
-Related violations: <none>
-
-TIMING-18#14 Warning
-Missing input or output delay  
-An output delay is missing on mattop[2] relative to the rising and/or falling clock edge(s) of clk_0.
 Related violations: <none>
 
 
