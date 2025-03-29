@@ -20,6 +20,7 @@ module alchitry_top (
         .rst(rst) {
     //        dff slow_clk[32]
     //        dff pixeldata[2]
+            dff pixeldrive[2]
             display_driver display
         }
     }
@@ -38,6 +39,7 @@ module alchitry_top (
 
         usb_tx = usb_rx         // echo the serial data
         
+        pixeldrive.d = b11
         //pixeldata.d = b10
         //slow_clk.d = slow_clk.q + 1
 
@@ -48,7 +50,7 @@ module alchitry_top (
         amod.b = 32b0
         amod.alufn = 6b0
         
-        display.data = b11
+        display.data = pixeldrive.q
         mataddr = display.address
         mattop = display.toppixel
         matbot = display.botpixel
