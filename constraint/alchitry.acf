@@ -16,7 +16,6 @@ STANDARD(LVCMOS33) {
     pin usb_tx USB_TX
 
 
-    PULL(DOWN) {
         // ABCDE
         pin mataddr[0] C12
         pin mataddr[1] C39
@@ -42,5 +41,4 @@ STANDARD(LVCMOS33) {
         //Ground
         pin matgnd[0] C30
         pin matgnd[1] C48
-    }
 }
