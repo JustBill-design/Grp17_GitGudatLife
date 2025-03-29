@@ -9,28 +9,28 @@ module alu_multiplier (
         input wire [31:0] b,
         output reg [31:0] mul
     );
-    logic [31:0] R_32a489c8_i;
-    logic [31:0] RR_32a489c8_i;
-    logic [31:0] R_0024a2d9_i;
-    logic [31:0] RR_0024a2d9_i;
-    logic [31:0] R_3fc4f2b3_j;
-    logic [31:0] RR_3fc4f2b3_j;
+    logic [31:0] R_6fc67c9f_i;
+    logic [31:0] RR_6fc67c9f_i;
+    logic [31:0] R_2b8e3efb_i;
+    logic [31:0] RR_2b8e3efb_i;
+    logic [31:0] R_30b9283f_j;
+    logic [31:0] RR_30b9283f_j;
     logic [495:0] M_fa_a;
     logic [495:0] M_fa_b;
     logic [495:0] M_fa_cin;
     logic [495:0] M_fa_s;
     logic [495:0] M_fa_cout;
     
-    genvar idx_0_314651945;
+    genvar idx_0_1776119856;
     
     generate
-        for (idx_0_314651945 = 0; idx_0_314651945 < 496; idx_0_314651945 = idx_0_314651945 + 1) begin: forLoop_idx_0_314651945
+        for (idx_0_1776119856 = 0; idx_0_1776119856 < 496; idx_0_1776119856 = idx_0_1776119856 + 1) begin: forLoop_idx_0_1776119856
             alu_adder_rca_fa fa (
-                .a(M_fa_a[idx_0_314651945]),
-                .b(M_fa_b[idx_0_314651945]),
-                .cin(M_fa_cin[idx_0_314651945]),
-                .s(M_fa_s[idx_0_314651945]),
-                .cout(M_fa_cout[idx_0_314651945])
+                .a(M_fa_a[idx_0_1776119856]),
+                .b(M_fa_b[idx_0_1776119856]),
+                .cin(M_fa_cin[idx_0_1776119856]),
+                .s(M_fa_s[idx_0_1776119856]),
+                .cout(M_fa_cout[idx_0_1776119856])
             );
         end
     endgenerate
@@ -40,34 +40,34 @@ module alu_multiplier (
     logic [8:0] previous_row_fa_index;
     always @* begin
         mul[1'h0] = b[1'h0] & a[1'h0];
-        for (RR_32a489c8_i = 0; RR_32a489c8_i < 5'h1f; RR_32a489c8_i = RR_32a489c8_i + 1) begin
-      R_32a489c8_i = (0) + RR_32a489c8_i * (1);
-            M_fa_a[R_32a489c8_i] = a[R_32a489c8_i] & b[1'h1];
-            M_fa_b[R_32a489c8_i] = a[R_32a489c8_i + 1'h1] & b[1'h0];
-            if (R_32a489c8_i == 1'h0) begin
-                M_fa_cin[R_32a489c8_i] = 1'h0;
+        for (RR_6fc67c9f_i = 0; RR_6fc67c9f_i < 5'h1f; RR_6fc67c9f_i = RR_6fc67c9f_i + 1) begin
+      R_6fc67c9f_i = (0) + RR_6fc67c9f_i * (1);
+            M_fa_a[R_6fc67c9f_i] = a[R_6fc67c9f_i] & b[1'h1];
+            M_fa_b[R_6fc67c9f_i] = a[R_6fc67c9f_i + 1'h1] & b[1'h0];
+            if (R_6fc67c9f_i == 1'h0) begin
+                M_fa_cin[R_6fc67c9f_i] = 1'h0;
             end else begin
-                M_fa_cin[R_32a489c8_i] = M_fa_cout[R_32a489c8_i - 1'h1];
+                M_fa_cin[R_6fc67c9f_i] = M_fa_cout[R_6fc67c9f_i - 1'h1];
             end
         end
         previous_row_fa_index = 1'h0;
         current_row_fa_index = 5'h1f;
         mul[1'h1] = M_fa_s[previous_row_fa_index];
-        for (RR_0024a2d9_i = 0; RR_0024a2d9_i < 5'h1d; RR_0024a2d9_i = RR_0024a2d9_i + 1) begin
-      R_0024a2d9_i = (2'h2) + RR_0024a2d9_i * (1);
-            for (RR_3fc4f2b3_j = 0; RR_3fc4f2b3_j < 6'h20 - R_0024a2d9_i; RR_3fc4f2b3_j = RR_3fc4f2b3_j + 1) begin
-        R_3fc4f2b3_j = (0) + RR_3fc4f2b3_j * (1);
-                M_fa_a[current_row_fa_index + R_3fc4f2b3_j] = a[R_3fc4f2b3_j] & b[R_0024a2d9_i];
-                M_fa_b[current_row_fa_index + R_3fc4f2b3_j] = M_fa_s[previous_row_fa_index + 1'h1 + R_3fc4f2b3_j];
-                if (R_3fc4f2b3_j == 1'h0) begin
-                    M_fa_cin[current_row_fa_index + R_3fc4f2b3_j] = 1'h0;
+        for (RR_2b8e3efb_i = 0; RR_2b8e3efb_i < 5'h1d; RR_2b8e3efb_i = RR_2b8e3efb_i + 1) begin
+      R_2b8e3efb_i = (2'h2) + RR_2b8e3efb_i * (1);
+            for (RR_30b9283f_j = 0; RR_30b9283f_j < 6'h20 - R_2b8e3efb_i; RR_30b9283f_j = RR_30b9283f_j + 1) begin
+        R_30b9283f_j = (0) + RR_30b9283f_j * (1);
+                M_fa_a[current_row_fa_index + R_30b9283f_j] = a[R_30b9283f_j] & b[R_2b8e3efb_i];
+                M_fa_b[current_row_fa_index + R_30b9283f_j] = M_fa_s[previous_row_fa_index + 1'h1 + R_30b9283f_j];
+                if (R_30b9283f_j == 1'h0) begin
+                    M_fa_cin[current_row_fa_index + R_30b9283f_j] = 1'h0;
                 end else begin
-                    M_fa_cin[current_row_fa_index + R_3fc4f2b3_j] = M_fa_cout[current_row_fa_index + R_3fc4f2b3_j - 1'h1];
+                    M_fa_cin[current_row_fa_index + R_30b9283f_j] = M_fa_cout[current_row_fa_index + R_30b9283f_j - 1'h1];
                 end
             end
             previous_row_fa_index = current_row_fa_index;
-            current_row_fa_index = current_row_fa_index + 6'h20 - R_0024a2d9_i;
-            mul[R_0024a2d9_i] = M_fa_s[previous_row_fa_index];
+            current_row_fa_index = current_row_fa_index + 6'h20 - R_2b8e3efb_i;
+            mul[R_2b8e3efb_i] = M_fa_s[previous_row_fa_index];
         end
         M_fa_a[9'h1ef] = a[1'h0] & b[5'h1f];
         M_fa_b[9'h1ef] = M_fa_s[9'h1ee];

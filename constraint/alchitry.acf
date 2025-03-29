@@ -17,25 +17,28 @@ STANDARD(LVCMOS33) {
 
     
     // ABCDE
-    pin mataddr[0] C24
-    pin mataddr[1] C21
-    pin mataddr[2] C18
-    pin mataddr[3] C15
-    pin mataddr[4] C12
+    pin mataddr[0] C12
+    pin mataddr[1] C39
+    pin mataddr[2] C9
+    pin mataddr[3] C42
+    pin mataddr[4] C36
     
     // R1G1B1
-    pin mattop[0] C28 
+    pin mattop[0] C24
     pin mattop[1] C27
-    pin mattop[2] C23
+    pin mattop[2] C21
     
     // R2G2B2
-    pin matbot[0] C31
-    pin matbot[1] C30
-    pin matbot[2] C20
+    pin matbot[0] C18
+    pin matbot[1] C33
+    pin matbot[2] C15
     
     // Matrix Control
-    pin matclk C34
-    pin matoe C33
-    pin matlat C17
-
+    pin matclk C6
+    pin matoe C3
+    pin matlat C45
+    
+    //Ground
+    pin matgnd[0] C30
+    pin matgnd[1] C48
 }

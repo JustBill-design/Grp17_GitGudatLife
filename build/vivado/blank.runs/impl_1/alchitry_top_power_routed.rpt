@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Sat Mar 29 20:00:18 2025
+| Date             : Sat Mar 29 20:18:39 2025
 | Host             : PC running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
@@ -33,7 +33,7 @@ Table of Contents
 | Total On-Chip Power (W)  | 0.073        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.001        |
+| Dynamic (W)              | 0.002        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 4.9          |
 | Max Ambient (C)          | 84.6         |
@@ -57,8 +57,8 @@ Table of Contents
 |   LUT as Logic |    <0.001 |       19 |     20800 |            0.09 |
 |   Register     |    <0.001 |       30 |     41600 |            0.07 |
 |   Others       |     0.000 |        5 |       --- |             --- |
-| Signals        |    <0.001 |       45 |       --- |             --- |
-| I/O            |    <0.001 |       26 |       170 |           15.29 |
+| Signals        |    <0.001 |       46 |       --- |             --- |
+| I/O            |    <0.001 |       28 |       170 |           16.47 |
 | Static Power   |     0.072 |          |           |                 |
 | Total          |     0.073 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
@@ -139,7 +139,7 @@ Table of Contents
 +--------------+-----------+
 | Name         | Power (W) |
 +--------------+-----------+
-| alchitry_top |     0.001 |
+| alchitry_top |     0.002 |
 +--------------+-----------+
 
 

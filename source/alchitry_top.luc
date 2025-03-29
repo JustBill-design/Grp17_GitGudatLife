@@ -11,7 +11,8 @@ module alchitry_top (
     output matbot[3],       // bot led data
     output matclk,          // clock
     output matoe,           // OE
-    output matlat           // latch
+    output matlat,          // latch
+    output matgnd[2]        // ground
 ) {
     alu amod
     sig rst                 // reset signal
@@ -54,6 +55,6 @@ module alchitry_top (
         matclk = display.sclk_out
         matoe = display.blank
         matlat = display.latch
-
+        matgnd = b00
     }
 }
