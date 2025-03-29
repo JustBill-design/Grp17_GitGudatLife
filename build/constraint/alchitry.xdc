@@ -37,51 +37,51 @@ set_property IOSTANDARD LVCMOS33 [get_ports {usb_rx}]
 set_property PACKAGE_PIN P16 [get_ports {usb_tx}]
 set_property IOSTANDARD LVCMOS33 [get_ports {usb_tx}]
 
-set_property PACKAGE_PIN N3 [get_ports {mataddr[0]}]
+set_property PACKAGE_PIN N2 [get_ports {mataddr[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {mataddr[0]}]
 
-set_property PACKAGE_PIN M2 [get_ports {mataddr[1]}]
+set_property PACKAGE_PIN M1 [get_ports {mataddr[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {mataddr[1]}]
 
-set_property PACKAGE_PIN R10 [get_ports {mataddr[2]}]
+set_property PACKAGE_PIN R11 [get_ports {mataddr[2]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {mataddr[2]}]
 
-set_property PACKAGE_PIN N13 [get_ports {mataddr[3]}]
+set_property PACKAGE_PIN P13 [get_ports {mataddr[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {mataddr[3]}]
 
-set_property PACKAGE_PIN N1 [get_ports {mataddr[4]}]
+set_property PACKAGE_PIN P1 [get_ports {mataddr[4]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {mataddr[4]}]
 
-set_property PACKAGE_PIN P5 [get_ports {mattop[0]}]
+set_property PACKAGE_PIN L5 [get_ports {mattop[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {mattop[0]}]
 
-set_property PACKAGE_PIN T4 [get_ports {mattop[1]}]
+set_property PACKAGE_PIN T3 [get_ports {mattop[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {mattop[1]}]
 
-set_property PACKAGE_PIN M5 [get_ports {mattop[2]}]
+set_property PACKAGE_PIN N4 [get_ports {mattop[2]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {mattop[2]}]
 
-set_property PACKAGE_PIN L4 [get_ports {matbot[0]}]
+set_property PACKAGE_PIN M4 [get_ports {matbot[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {matbot[0]}]
 
-set_property PACKAGE_PIN R2 [get_ports {matbot[1]}]
+set_property PACKAGE_PIN R1 [get_ports {matbot[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {matbot[1]}]
 
-set_property PACKAGE_PIN P4 [get_ports {matbot[2]}]
+set_property PACKAGE_PIN P3 [get_ports {matbot[2]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {matbot[2]}]
 
-set_property PACKAGE_PIN R12 [get_ports {matclk}]
+set_property PACKAGE_PIN T12 [get_ports {matclk}]
 set_property IOSTANDARD LVCMOS33 [get_ports {matclk}]
 
-set_property PACKAGE_PIN R13 [get_ports {matoe}]
+set_property PACKAGE_PIN T13 [get_ports {matoe}]
 set_property IOSTANDARD LVCMOS33 [get_ports {matoe}]
 
-set_property PACKAGE_PIN N11 [get_ports {matlat}]
+set_property PACKAGE_PIN N12 [get_ports {matlat}]
 set_property IOSTANDARD LVCMOS33 [get_ports {matlat}]
 
-set_property PACKAGE_PIN R3 [get_ports {matgnd[0]}]
+set_property PACKAGE_PIN T2 [get_ports {matgnd[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {matgnd[0]}]
 
-set_property PACKAGE_PIN P10 [get_ports {matgnd[1]}]
+set_property PACKAGE_PIN P11 [get_ports {matgnd[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {matgnd[1]}]
 
