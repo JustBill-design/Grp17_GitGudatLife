@@ -20,16 +20,16 @@ module bram #(
         input wire wo,
         output reg [(WIDTH)-1:0] brd
     );
-    localparam _MP_WIDTH_2036682543 = WIDTH;
-    localparam _MP_ENTRIES_2036682543 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_2036682543)-1) - (0) + 1))-1:0] M_bram1_address;
-    logic [(((_MP_WIDTH_2036682543-1) - (0) + 1))-1:0] M_bram1_read_data;
-    logic [(((_MP_WIDTH_2036682543-1) - (0) + 1))-1:0] M_bram1_write_data;
+    localparam _MP_WIDTH_249207536 = WIDTH;
+    localparam _MP_ENTRIES_249207536 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_249207536)-1) - (0) + 1))-1:0] M_bram1_address;
+    logic [(((_MP_WIDTH_249207536-1) - (0) + 1))-1:0] M_bram1_read_data;
+    logic [(((_MP_WIDTH_249207536-1) - (0) + 1))-1:0] M_bram1_write_data;
     logic M_bram1_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_2036682543),
-        .ENTRIES(_MP_ENTRIES_2036682543)
+        .WIDTH(_MP_WIDTH_249207536),
+        .ENTRIES(_MP_ENTRIES_249207536)
     ) bram1 (
         .clk(clk),
         .address(M_bram1_address),
@@ -39,16 +39,16 @@ module bram #(
     );
     
     
-    localparam _MP_WIDTH_1254235876 = WIDTH;
-    localparam _MP_ENTRIES_1254235876 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_1254235876)-1) - (0) + 1))-1:0] M_bram2_address;
-    logic [(((_MP_WIDTH_1254235876-1) - (0) + 1))-1:0] M_bram2_read_data;
-    logic [(((_MP_WIDTH_1254235876-1) - (0) + 1))-1:0] M_bram2_write_data;
+    localparam _MP_WIDTH_1692147839 = WIDTH;
+    localparam _MP_ENTRIES_1692147839 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_1692147839)-1) - (0) + 1))-1:0] M_bram2_address;
+    logic [(((_MP_WIDTH_1692147839-1) - (0) + 1))-1:0] M_bram2_read_data;
+    logic [(((_MP_WIDTH_1692147839-1) - (0) + 1))-1:0] M_bram2_write_data;
     logic M_bram2_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_1254235876),
-        .ENTRIES(_MP_ENTRIES_1254235876)
+        .WIDTH(_MP_WIDTH_1692147839),
+        .ENTRIES(_MP_ENTRIES_1692147839)
     ) bram2 (
         .clk(clk),
         .address(M_bram2_address),

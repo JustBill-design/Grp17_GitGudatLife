@@ -68,12 +68,6 @@
             {
                 "file": {
                     "type": "DiskFile",
-                    "path": "source/fsm.luc"
-                }
-            },
-            {
-                "file": {
-                    "type": "DiskFile",
                     "path": "source/bram.luc"
                 }
             },
