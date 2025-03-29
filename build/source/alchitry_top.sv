@@ -18,7 +18,7 @@ module alchitry_top (
         output reg matlat,
         output reg [1:0] matgnd
     );
-    localparam _MP_SIZE_57511389 = 6'h20;
+    localparam _MP_SIZE_1574224131 = 6'h20;
     logic [31:0] M_amod_a;
     logic [31:0] M_amod_b;
     logic [5:0] M_amod_alufn;
@@ -29,7 +29,7 @@ module alchitry_top (
     logic M_amod_illop;
     
     alu #(
-        .SIZE(_MP_SIZE_57511389)
+        .SIZE(_MP_SIZE_1574224131)
     ) amod (
         .a(M_amod_a),
         .b(M_amod_b),
@@ -44,8 +44,8 @@ module alchitry_top (
     
     logic rst;
     logic [1:0] D_pixeldrive_d, D_pixeldrive_q = 0;
-    localparam _MP_ADDRESS_SIZE_844186112 = 3'h5;
-    localparam _MP_MATRIX_WIDTH_844186112 = 7'h40;
+    localparam _MP_ADDRESS_SIZE_1129243559 = 3'h5;
+    localparam _MP_MATRIX_WIDTH_1129243559 = 7'h40;
     logic [1:0] M_display_data;
     logic [12:0] M_display_addr;
     logic M_display_reading;
@@ -57,8 +57,8 @@ module alchitry_top (
     logic [4:0] M_display_address;
     
     display_driver #(
-        .ADDRESS_SIZE(_MP_ADDRESS_SIZE_844186112),
-        .MATRIX_WIDTH(_MP_MATRIX_WIDTH_844186112)
+        .ADDRESS_SIZE(_MP_ADDRESS_SIZE_1129243559),
+        .MATRIX_WIDTH(_MP_MATRIX_WIDTH_1129243559)
     ) display (
         .clk(clk),
         .rst(rst),
@@ -74,12 +74,12 @@ module alchitry_top (
     );
     
     
-    localparam _MP_STAGES_1816886302 = 3'h4;
+    localparam _MP_STAGES_2110094221 = 3'h4;
     logic M_reset_cond_in;
     logic M_reset_cond_out;
     
     reset_conditioner #(
-        .STAGES(_MP_STAGES_1816886302)
+        .STAGES(_MP_STAGES_2110094221)
     ) reset_cond (
         .clk(clk),
         .in(M_reset_cond_in),

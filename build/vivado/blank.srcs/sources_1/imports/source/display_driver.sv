@@ -83,10 +83,9 @@ module display_driver #(
         end else begin
             if (D_sclk_counter_q == 1'h1 && D_state_q == 2'h1) begin
                 D_sclk_d = 1'h0;
-                addr = (ADDRESS_SIZE + $clog2(MATRIX_WIDTH) + 2'h2)'(D_pixel_idx_q) + {1'h1, {(ADDRESS_SIZE + 1'h1){1'h0}}};
+                addr = (ADDRESS_SIZE + $clog2(MATRIX_WIDTH) + 2'h2)'(D_pixel_idx_q) + {1'h1, {(ADDRESS_SIZE + 1'h1){1'h0}}} + MATRIX_WIDTH;
                 reading = 1'h1;
                 D_rgb_data_0_d = pixeldata;
-                D_pixel_idx_d = D_pixel_idx_q + 1'h1;
             end else begin
                 if (D_sclk_counter_q == 2'h2 && D_state_q == 2'h1) begin
                     D_sclk_d = 1'h0;
@@ -99,6 +98,7 @@ module display_driver #(
                             D_state_d = 2'h2;
                             D_latch_blank_d = 2'h3;
                             D_sclk_d = 1'h0;
+                            D_pixel_idx_d = D_pixel_idx_q + 1'h1;
                         end else begin
                             if (D_sclk_counter_q == 12'hfff && D_state_q == 2'h2) begin
                                 D_latch_blank_d = 2'h0;
