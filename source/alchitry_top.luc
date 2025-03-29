@@ -59,13 +59,13 @@ module alchitry_top (
         // matlat = display.latch
         // matgnd = b00
 
-        display.data = 0
-        mataddr = 0
-        mattop = 0
-        matbot = 0
-        matclk = 0
-        matoe = 0
-        matlat = 0
-        matgnd = 0
+        display.data = 1
+        mataddr = 1
+        mattop = 1
+        matbot = 1
+        matclk = 1
+        matoe = 1
+        matlat = 1
+        matgnd = 1
     }
 }
