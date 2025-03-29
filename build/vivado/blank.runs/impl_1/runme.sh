@@ -25,7 +25,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/yourmum/Downloads/blank/build/vivado/blank.runs/impl_1'
+HD_PWD='C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/impl_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log

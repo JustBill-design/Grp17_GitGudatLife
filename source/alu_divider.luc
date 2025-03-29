@@ -1,0 +1,15 @@
+// divide a by b
+module alu_divider (
+        input a[32], // dividend
+        input b[32], // divisor
+        output d[32] // a/b
+    ) {
+
+    always {
+        if (~|b) {
+            d = b11111111111111111111111111111111
+        } else {
+            d = a/b
+        }
+    }
+}
