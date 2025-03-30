@@ -148,6 +148,12 @@
                     "type": "DiskFile",
                     "path": "source/alu_shifter_right_ari.luc"
                 }
+            },
+            {
+                "file": {
+                    "type": "Component",
+                    "path": "Miscellaneous/counter.luc"
+                }
             }
         ],
         "constraintFiles": [

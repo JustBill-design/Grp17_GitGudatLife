@@ -18,7 +18,7 @@ module alchitry_top (
         output reg matlat,
         output reg [1:0] matgnd
     );
-    localparam _MP_SIZE_1691421004 = 6'h20;
+    localparam _MP_SIZE_1906669841 = 6'h20;
     logic [31:0] M_amod_a;
     logic [31:0] M_amod_b;
     logic [5:0] M_amod_alufn;
@@ -29,7 +29,7 @@ module alchitry_top (
     logic M_amod_illop;
     
     alu #(
-        .SIZE(_MP_SIZE_1691421004)
+        .SIZE(_MP_SIZE_1906669841)
     ) amod (
         .a(M_amod_a),
         .b(M_amod_b),
@@ -43,9 +43,9 @@ module alchitry_top (
     
     
     logic rst;
-    logic [1:0] D_pixeldata_d, D_pixeldata_q = 0;
-    localparam _MP_ADDRESS_SIZE_1556791261 = 3'h5;
-    localparam _MP_MATRIX_WIDTH_1556791261 = 7'h40;
+    logic [1:0] D_pixeldata_d, D_pixeldata_q = 2'h0;
+    localparam _MP_ADDRESS_SIZE_1907744707 = 3'h5;
+    localparam _MP_MATRIX_WIDTH_1907744707 = 7'h40;
     logic [1:0] M_display_data;
     logic [12:0] M_display_addr;
     logic M_display_reading;
@@ -57,8 +57,8 @@ module alchitry_top (
     logic [4:0] M_display_address;
     
     display_driver #(
-        .ADDRESS_SIZE(_MP_ADDRESS_SIZE_1556791261),
-        .MATRIX_WIDTH(_MP_MATRIX_WIDTH_1556791261)
+        .ADDRESS_SIZE(_MP_ADDRESS_SIZE_1907744707),
+        .MATRIX_WIDTH(_MP_MATRIX_WIDTH_1907744707)
     ) display (
         .clk(clk),
         .rst(rst),
@@ -74,12 +74,12 @@ module alchitry_top (
     );
     
     
-    localparam _MP_STAGES_1299744833 = 3'h4;
+    localparam _MP_STAGES_1591205114 = 3'h4;
     logic M_reset_cond_in;
     logic M_reset_cond_out;
     
     reset_conditioner #(
-        .STAGES(_MP_STAGES_1299744833)
+        .STAGES(_MP_STAGES_1591205114)
     ) reset_cond (
         .clk(clk),
         .in(M_reset_cond_in),
@@ -104,7 +104,7 @@ module alchitry_top (
         M_amod_a = 32'h0;
         M_amod_b = 32'h0;
         M_amod_alufn = 6'h0;
-        M_display_data = D_pixeldata_q;
+        M_display_data = 2'h3;
         mataddr = M_display_address;
         mattop = M_display_toppixel;
         matbot = M_display_botpixel;
@@ -117,7 +117,7 @@ module alchitry_top (
     
     always @(posedge (clk)) begin
         if ((rst) == 1'b1) begin
-            D_pixeldata_q <= 0;
+            D_pixeldata_q <= 2'h0;
         end else begin
             D_pixeldata_q <= D_pixeldata_d;
         end
