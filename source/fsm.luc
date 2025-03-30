@@ -112,9 +112,9 @@ module fsm #(
         //current pixel is B
         B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR, B10_CHECK_B_NEIGHBOUR_EQ_2, B10_CHECK_B_NEIGHBOUR_EQ_3, B10_B_COUNTM1, 
         //current pixel is A, 
-        B01_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR, B01_CHECK_A_NEIGHBOUR_EQ_2, B01_CHECK_A_NEIGHBOUR_EQ_3, B01_A_COUNTM1, 
+        B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR, B01_CHECK_A_NEIGHBOUR_EQ_2, B01_CHECK_A_NEIGHBOUR_EQ_3, B01_A_COUNTM1, 
         
-        SET_A, SET_B, SET_C, 
+        SET_A, SET_B, SET_00, 
         
         RESET_A_NEIGHBOUR, RESET_B_NEIGHBOUR, MOVE_PIXEL_ADDRESS, CHECK_IF_PIXEL_AT_END, SWITCH_BRAM, SET_PIXEL_TO_BEGINNING, 
         
@@ -129,8 +129,15 @@ module fsm #(
     
     dff states[$width(States)](#INIT(States.IDLE), .clk(clk))
     dff decrease_timer(.clk(clk))
-    
+
+    const ADD = b000000
+    const SUB = b000001
+    const CMPEQ = b110011
+    const CMPLT = b110101
+    const CMPLE = b110111
+
     always {
+
         states.d = states.q
         out = 0
         brsel = b10
@@ -1559,6 +1566,169 @@ module fsm #(
                 wdsel = b0000
                 wa = h1
                 states.d = States.SR_EMPTY_READ_1
-        }    
+
+            States.SR_EMPTY_READ_1:
+                sre1 = b1
+                sre2 = b1
+                sre3 = b1
+                states.d = States.SR_EMPTY_READ_2
+            
+            States.SR_EMPTY_READ_2:
+                sre1 = b1
+                sre2 = b1
+                sre3 = b1
+                states.d = States.CHECK_NEIGHBOURS
+            
+            //Game logic
+            States.SR_CHECK_NEIGHBOURS:
+                ra1 = h5
+                case(rd1){
+                    b00:
+                        states.d = States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS
+                    b10:
+                        states.d = States.B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR
+                    b01:
+                        states.d = States.B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR
+                }
+            //current -pixel is game state
+            States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS:
+                alufn = b110101
+                asel = b0
+                bsel = b0000
+                ra1 = h0
+                ra2 = h1
+                case(aluout){
+                    b0:
+                        states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
+                    b1:
+                        states.d = States.SET_00
+                }
+
+            States.B00_CHECK_A_NEIGHBOUR_EQ_3:
+                alufn = b110011
+                asel = b0
+                bsel = b0011
+                ra1 = h0
+                case(aluout){
+                    b0:
+                        states.d = States.B00_A_COUNTP1
+                    b1:
+                        states.d = States.B00_CHECK_B_NEIGHBOUR_EQ_3
+                }
+        
+            States.B00_CHECK_B_NEIGHBOUR_EQ_3:
+                alufn = CMPEQ
+                asel = b0
+                bsel = b0011
+                ra1 = h1
+                case(aluout){
+                    b0:
+                        states.d = States.SET_00
+                    b1:
+                        states.d = States.B00_B_COUNTP1
+                }
+
+            States.B00_B_COUNTP1:
+                alufn = ADD
+                asel =b0
+                bsel = b0001
+                we = b1
+                ra1 = h3
+                wdsel = b0000
+                wa = h3
+                states.d = States.SET_B
+
+            States.B00_A_COUNTP1:
+                alufn = ADD
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h2
+                wdsel = b0000
+                wa = h2
+                states.d = States.SET_A
+
+            // current pixel is b10
+            States.B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR:
+                alu = CMPLT
+                asel =b0
+                bsel = b0000
+                ra1 = h0
+                ra2 = h1
+                case(aluout){
+                    b1:
+                        states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_2
+                    b0:
+                        states.d = States.B10_B_COUNTM1
+                }
+            States.B10_CHECK_B_NEIGHBOUR_EQ_2:
+                alu = CMPEQ
+                asel = b0
+                bsel = b0010
+                ra1 = h1
+                case(aluout){
+                    b0:
+                        states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_3
+                    b1:
+                        states.d = States.SET_B
+                }
+            States.B10_CHECK_B_NEIGHBOUR_EQ_3:
+                alufn = CMPEQ
+                asel = b0
+                bsel = b0011 
+                ra1 =h1
+                case(aluout){
+                    b0:
+                        states.d = States.B10_B_COUNTM1
+                    b1:
+                        states.d = States.SET_B 
+                }
+            States.B10_B_COUNTM1:
+                alufn = SUB
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h3
+                wdsel = b0000
+                wa = h3
+                states.d = States.SET_00
+
+            //current pixel is b01
+            States.B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR:
+                alufn = CMPLT
+                asel = b0
+                bsel = b0000
+                ra1 = h1
+                ra2 = h0
+                case(aluout){
+                    b1:
+                        states.d = States.B01_CHECK_A_NEIGHBOUR_EQ_2
+                    b0:
+                        states.d = States.B01_A_COUNTM1
+                }
+            
+            States.B01_CHECK_A_NEIGHBOUR_EQ_2:
+                alufn = CMPEQ
+                asel = b0
+                bsel = b0010
+                ra1 = h0
+                case(aluout){
+                    b0:
+                        states.d = States.B01_A_COUNTM1
+                    b1:
+                        states.d = States.SET_A
+                }
+            
+            States.B01_A_COUNTM1:
+                alufn = SUB
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h2
+                wdsel = b0000
+                wa = h2
+                states.d = States.SET_00
+            
+        }       
     }
 }
