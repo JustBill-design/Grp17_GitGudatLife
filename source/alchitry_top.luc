@@ -37,10 +37,9 @@ module alchitry_top (
 
         usb_tx = usb_rx         // echo the serial data
         
-        pixeldata.d = b10
-        // if (display.reading) {
-        // pixeldata.d = pixeldata.q + 1
-        // }
+        if (display.reading) {
+        pixeldata.d = pixeldata.q + 1
+        }
 
 
         amod.a = 32b0
