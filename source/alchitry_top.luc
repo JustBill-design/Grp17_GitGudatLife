@@ -49,7 +49,7 @@ module alchitry_top (
         display.data = pixeldata.q
         mataddr = display.address
         mattop = display.toppixel
-        matbot = display.botpixel
+        matbot = b001
         matclk = display.sclk_out
         matoe = display.blank
         matlat = display.latch
