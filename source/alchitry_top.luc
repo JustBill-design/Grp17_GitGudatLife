@@ -19,7 +19,6 @@ module alchitry_top (
     .clk(clk) {
         .rst(rst) {
             dff pixeldata[2]
-            dff loadstate
             display_driver display
         }
     }
@@ -38,16 +37,11 @@ module alchitry_top (
 
         usb_tx = usb_rx         // echo the serial data
         
-        pixeldata.d = b10
-        loadstate.d = 0
         if (display.reading) {
-            loadstate.d = loadstate.q + 1
+            pixeldata.d = pixeldata.q + 1
         }
 
 
-        if (display.reading && loadstate.q){
-            pixeldata.d = pixeldata.q^b11
-        } 
         amod.a = 32b0
         amod.b = 32b0
         amod.alufn = 6b0
