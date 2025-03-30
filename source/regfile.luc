@@ -1,0 +1,39 @@
+module regfile #(
+    SIZE ~ 32 : SIZE > 1
+)(
+    input clk,  // clock
+    input read_address_1[5],
+    input read_address_2[5],
+    output read_data_1[SIZE],
+    output read_data_2[SIZE],
+    input write_address[5],
+    input write_data[SIZE],
+    input write_enable,
+    output pac[SIZE],
+    output pbc[SIZE],
+    output timer[SIZE],
+    output bramsel
+) {
+  
+  dff registers[SIZE][SIZE](.clk(clk));
+  
+  always {
+    
+    //always read 
+    read_data_1 = registers.q[read_address_1];
+    read_data_2 = registers.q[read_address_2];
+    pac = registers.q[b00010]
+    pbc = registers.q[b00011]
+    timer = registers.q[b00110]   
+    bramsel = registers.q[b00111][0]       
+    // check if write_en and its not R31 
+    if (write_address != b11111 && write_enable){
+        registers.d[write_address] = write_data;
+    }
+    
+    // check if its not R31 
+    if (read_address_1 == b11111) read_data_1 = h0000;
+    if (read_address_2 == b11111) read_data_2 = h0000;
+    
+  }
+}
