@@ -113,6 +113,9 @@ module display_driver #(
         // if (sclk_counter.q == DIVx{b0} && state.q == b01 && led_bit_counter.q <= MATRIX_WIDTH)
         else if (sclk_counter.q == 1 && state.q == b01){
             
+            // off clock when changing data
+            // sclk.d = 0
+
             // give address for next column
             // BRAM address for first pixel, accounting for top row buffer
             addr = $resize(pixel_idx.q,ADDRESS_SIZE+$clog2(MATRIX_WIDTH)+2) + MATRIX_WIDTH
@@ -125,7 +128,7 @@ module display_driver #(
         else if (sclk_counter.q == 2 && state.q == b01) {
             
             // off clock when changing data 
-            sclk.d = 0
+            // sclk.d = 0
             
             // give address for next column
             // BRAM address for second pixel, accounting for top row buffer
@@ -142,7 +145,7 @@ module display_driver #(
         else if (sclk_counter.q == 3 && state.q == b01) {
         
             // off clock when changing data
-            sclk.d = 0
+            // sclk.d = 0
             
             // load data into second pixel cache
             rgb_data_1.d = pixeldata
