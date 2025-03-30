@@ -37,6 +37,10 @@ set_property IOSTANDARD LVCMOS33 [get_ports {usb_rx}]
 set_property PACKAGE_PIN P16 [get_ports {usb_tx}]
 set_property IOSTANDARD LVCMOS33 [get_ports {usb_tx}]
 
+set_property PACKAGE_PIN C7 [get_ports {testpullup}]
+set_property IOSTANDARD LVCMOS33 [get_ports {testpullup}]
+set_property PULLUP true [get_ports {testpullup}]
+
 set_property PACKAGE_PIN L2 [get_ports {mataddr[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {mataddr[0]}]
 

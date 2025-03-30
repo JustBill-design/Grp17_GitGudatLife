@@ -15,31 +15,33 @@ STANDARD(LVCMOS33) {
     pin usb_rx USB_RX
     pin usb_tx USB_TX
 
-    //PULL(DOWN) {
-        // ABCDE
-        pin mataddr[0] A11
-        pin mataddr[1] A40
-        pin mataddr[2] A8
-        pin mataddr[3] A43
-        pin mataddr[4] A37
+    PULL(UP) {
+        pin testpullup B27
+    }
+        
+    // ABCDE
+    pin mataddr[0] A11
+    pin mataddr[1] A40
+    pin mataddr[2] A8
+    pin mataddr[3] A43
+    pin mataddr[4] A37
     
-        // R1G1B1
-        pin mattop[2] A23
-        pin mattop[1] A28
-        pin mattop[0] A20
+    // R1G1B1
+    pin mattop[2] A23
+    pin mattop[1] A28
+    pin mattop[0] A20
     
-        // R2G2B2
-        pin matbot[2] A17
-        pin matbot[1] A34
-        pin matbot[0] A14
+    // R2G2B2
+    pin matbot[2] A17
+    pin matbot[1] A34
+    pin matbot[0] A14
     
-        // Matrix Control
-        pin matclk A5
-        pin matoe A2
-        pin matlat A46
+    // Matrix Control
+    pin matclk A5
+    pin matoe A2
+    pin matlat A46
     
-        //Ground
-        pin matgnd[0] A31
-        pin matgnd[1] A49
-    //}
+    // Matrix Ground
+    pin matgnd[0] A31
+    pin matgnd[1] A49
 }

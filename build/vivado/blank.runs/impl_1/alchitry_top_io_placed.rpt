@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version              : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date                      : Sun Mar 30 17:37:21 2025
+| Date                      : Sun Mar 30 21:30:18 2025
 | Host                      : PC running 64-bit major release  (build 9200)
 | Command                   : report_io -file alchitry_top_io_placed.rpt
 | Design                    : alchitry_top
@@ -25,7 +25,7 @@ Table of Contents
 +---------------+
 | Total User IO |
 +---------------+
-|            28 |
+|            29 |
 +---------------+
 
 
@@ -73,7 +73,7 @@ Table of Contents
 | C4         |             | High Range | IO_L12N_T1_MRCC_35           | User IO     |             |      35 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | C5         |             |            | GND                          | GND         |             |         |            |      |                     |                      |     0.0 |            |           |          |      |                  |              |                   |              |
 | C6         |             | High Range | IO_L5N_T0_AD13N_35           | User IO     |             |      35 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
-| C7         |             | High Range | IO_L5P_T0_AD13P_35           | User IO     |             |      35 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
+| C7         | testpullup  | High Range | IO_L5P_T0_AD13P_35           | INPUT       | LVCMOS33    |      35 |            |      |                     |                 NONE |         | FIXED      | PULLUP    |          |      | NONE             |              |                   |              |
 | C8         |             | High Range | IO_L1P_T0_AD0P_15            | User IO     |             |      15 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | C9         |             | High Range | IO_L1N_T0_AD0N_15            | User IO     |             |      15 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | C10        |             | High Range | VCCO_15                      | VCCO        |             |      15 |            |      |                     |                      |   any** |            |           |          |      |                  |              |                   |              |
