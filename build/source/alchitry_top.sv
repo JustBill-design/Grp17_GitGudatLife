@@ -18,7 +18,7 @@ module alchitry_top (
         output reg matlat,
         output reg [1:0] matgnd
     );
-    localparam _MP_SIZE_1884163152 = 6'h20;
+    localparam _MP_SIZE_2026653250 = 6'h20;
     logic [31:0] M_amod_a;
     logic [31:0] M_amod_b;
     logic [5:0] M_amod_alufn;
@@ -29,7 +29,7 @@ module alchitry_top (
     logic M_amod_illop;
     
     alu #(
-        .SIZE(_MP_SIZE_1884163152)
+        .SIZE(_MP_SIZE_2026653250)
     ) amod (
         .a(M_amod_a),
         .b(M_amod_b),
@@ -43,9 +43,10 @@ module alchitry_top (
     
     
     logic rst;
-    logic [1:0] D_pixeldrive_d, D_pixeldrive_q = 0;
-    localparam _MP_ADDRESS_SIZE_477438729 = 3'h5;
-    localparam _MP_MATRIX_WIDTH_477438729 = 7'h40;
+    logic [1:0] D_pixeldata_d, D_pixeldata_q = 0;
+    logic D_loadstate_d, D_loadstate_q = 0;
+    localparam _MP_ADDRESS_SIZE_2087116063 = 3'h5;
+    localparam _MP_MATRIX_WIDTH_2087116063 = 7'h40;
     logic [1:0] M_display_data;
     logic [12:0] M_display_addr;
     logic M_display_reading;
@@ -57,8 +58,8 @@ module alchitry_top (
     logic [4:0] M_display_address;
     
     display_driver #(
-        .ADDRESS_SIZE(_MP_ADDRESS_SIZE_477438729),
-        .MATRIX_WIDTH(_MP_MATRIX_WIDTH_477438729)
+        .ADDRESS_SIZE(_MP_ADDRESS_SIZE_2087116063),
+        .MATRIX_WIDTH(_MP_MATRIX_WIDTH_2087116063)
     ) display (
         .clk(clk),
         .rst(rst),
@@ -74,12 +75,12 @@ module alchitry_top (
     );
     
     
-    localparam _MP_STAGES_1763299697 = 3'h4;
+    localparam _MP_STAGES_441246395 = 3'h4;
     logic M_reset_cond_in;
     logic M_reset_cond_out;
     
     reset_conditioner #(
-        .STAGES(_MP_STAGES_1763299697)
+        .STAGES(_MP_STAGES_441246395)
     ) reset_cond (
         .clk(clk),
         .in(M_reset_cond_in),
@@ -88,17 +89,25 @@ module alchitry_top (
     
     
     always @* begin
-        D_pixeldrive_d = D_pixeldrive_q;
+        D_pixeldata_d = D_pixeldata_q;
+        D_loadstate_d = D_loadstate_q;
         
         M_reset_cond_in = ~rst_n;
         rst = M_reset_cond_out;
         led = 8'h0;
         usb_tx = usb_rx;
-        D_pixeldrive_d = 2'h3;
+        D_pixeldata_d = 2'h2;
+        D_loadstate_d = 1'h0;
+        if (M_display_reading) begin
+            D_loadstate_d = D_loadstate_q + 1'h1;
+        end
+        if (M_display_reading && D_loadstate_q) begin
+            D_pixeldata_d = D_pixeldata_q ^ 2'h3;
+        end
         M_amod_a = 32'h0;
         M_amod_b = 32'h0;
         M_amod_alufn = 6'h0;
-        M_display_data = D_pixeldrive_q;
+        M_display_data = D_pixeldata_q;
         mataddr = M_display_address;
         mattop = 3'h7;
         matbot = 3'h7;
@@ -111,9 +120,11 @@ module alchitry_top (
     
     always @(posedge (clk)) begin
         if ((rst) == 1'b1) begin
-            D_pixeldrive_q <= 0;
+            D_pixeldata_q <= 0;
+            D_loadstate_q <= 0;
         end else begin
-            D_pixeldrive_q <= D_pixeldrive_d;
+            D_pixeldata_q <= D_pixeldata_d;
+            D_loadstate_q <= D_loadstate_d;
         end
     end
 endmodule

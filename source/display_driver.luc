@@ -30,7 +30,7 @@ module display_driver #(
     
 ) {
     
-    const DIV = 12 //slowdown speed of the CLK, suitable for 100MHz clock
+    const DIV = 8 //slowdown speed of the CLK, suitable for 100MHz clock
     sig pixeldata[3]
     
     .clk(clk){
@@ -53,7 +53,6 @@ module display_driver #(
             dff latch_blank[2]      // [0] MSB is latch value, [1] LSB is blank value
             
         }
-        
     }
     
     
