@@ -18,12 +18,15 @@ module alchitry_top (
     input testpullup        // default high?
 
 ) {
+    const CLK = 100000000
+
     alu amod
     sig rst                 // reset signal
     .clk(clk) {
         .rst(rst) {
             display_driver display
             dff pixeldata[2](#INIT(b00))
+            counter gameclk(#SIZE(1),#TOP(CLK),#DIV($clog(CLK)))
         }
     }
 
@@ -73,6 +76,6 @@ module alchitry_top (
         // matgnd = 1
 
         butt_cond.in = testpullup
-        led = butt_cond.out
+        led = 8x{butt_cond.out}
     }
 }
