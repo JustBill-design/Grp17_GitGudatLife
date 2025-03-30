@@ -4,6 +4,14 @@ module alchitry_top (
     output led[8],          // 8 user controllable LEDs
     input usb_rx,           // USB->Serial input
     output usb_tx,          // USB->Serial output
+
+    // buttons
+    // TODO: pass through conditioner and add edge detector
+    input butt_dirs[4],     // direction buttons
+    input butt_sel_desel[2],// select and deselect buttons
+    input butt_reset,       // reset button, to override reset button
+    input butt_next_play,   // next and play button, action based on FSM state
+    // ^ to pass through edge detector
     
     // matrix connections
     output mataddr[5],      // ABCDE addresses
@@ -14,6 +22,11 @@ module alchitry_top (
     output matlat,          // latch
     output matgnd[2],       // ground
 
+    // seven segment leds
+    output acount[12],      // counter for player A
+    output bcount[12],      // counter for player B
+    output timer[12],       // game timer
+
     // testing
     input testpullup        // default high?
 
@@ -22,30 +35,54 @@ module alchitry_top (
 
     alu amod
     sig rst                 // reset signal
-    .clk(clk) {
-        .rst(rst) {
-            display_driver display
-            dff pixeldata[2](#INIT(b00))
-            
-            counter gameclk(#SIZE(1),#TOP(CLK),#DIV($clog(CLK)))
-            edge_detector(#RISE(0),#FALL(1))
-        }
-    }
 
     .clk(clk) {
+
         // The reset conditioner is used to synchronize the reset signal to the FPGA
         // clock. This ensures the entire FPGA comes out of reset at the same time.
         reset_conditioner reset_cond
-        button_conditioner butt_cond(#CLK_FREQ(100000000))
+        
+        
+        // button conditioners and edge detector for next/play
+        button_conditioner cond_butt_dirs[4]
+        button_conditioner cond_butt_sel_desel[2]
+        button_conditioner cond_butt_next_play
+        edge_detector edge_next_play(#RISE(1),#FALL(0))
+
+        .rst(butt_reset) {
+            display_driver display
+            dff pixeldata[2](#INIT(b00))
+            
+            // gameclk ticks when gamecounter is 0, once a second
+            counter gamecounter(#SIZE($clog2(CLK)),#TOP(CLK),#DIV(0))
+            edge_detector gameclk(#RISE(0),#FALL(1))
+            
+
+        }
     }
 
+
     always {
-        reset_cond.in = ~rst_n  // input raw inverted reset signal
-        rst = reset_cond.out    // conditioned reset
+        reset_cond.in = ~butt_reset     // input raw inverted reset signal
+        rst = reset_cond.out            // conditioned reset
+        led = 8h00                      // turn LEDs off
+        usb_tx = usb_rx                 // echo the serial data
+        
 
-        led = 8h00              // turn LEDs off
 
-        usb_tx = usb_rx         // echo the serial data
+
+
+
+
+
+
+
+
+
+
+
+
+        
         
         if (display.reading && display.addr[6]) {
             pixeldata.d = b10
