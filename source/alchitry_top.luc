@@ -23,9 +23,9 @@ module alchitry_top (
     output matgnd[2],       // ground
 
     // seven segment leds
-    output acount[12],      // counter for player A
-    output bcount[12],      // counter for player B
-    output timer[12],       // game timer
+    output aseg[12],      // counter for player A
+    output bseg[12],      // counter for player B
+    output timerseg[12],       // game timer
 
     // testing
     input testpullup        // default high?
@@ -63,11 +63,34 @@ module alchitry_top (
 
 
     always {
+
         reset_cond.in = ~butt_reset     // input raw inverted reset signal
         rst = reset_cond.out            // conditioned reset
         led = 8h00                      // turn LEDs off
         usb_tx = usb_rx                 // echo the serial data
         
+        // button processing
+        cond_butt_dirs.in = butt_dirs
+        cond_butt_sel_desel.in = butt_sel_desel
+        cond_butt_next_play.in = butt_next_play
+        edge_next_play.in = cond_butt_next_play.out
+
+        // connect game clock
+        gameclk.in = gamecounter[$clog2(gamecounter)]
+        
+        // matrix default connections
+        mataddr = 0
+        mattop = 0
+        matbot = 0
+        matclk = 0
+        matoe = 0
+        matlat = 0
+        matgnd = 0
+        
+        // seven segment default connections
+        acount = 0
+        bcount = 0
+        timer = 0
 
 
 

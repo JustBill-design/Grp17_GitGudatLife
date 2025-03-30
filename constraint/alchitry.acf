@@ -17,7 +17,58 @@ STANDARD(LVCMOS33) {
 
     PULL(UP) {
         pin testpullup B30
+
+        pin butt_dirs[0] C3
+        pin butt_dirs[1] C2
+        pin butt_dirs[2] C48
+        pin butt_dirs[3] C49
+
+        pin butt_sel_desel[0] C6
+        pin butt_sel_desel[1] C5
+        
+        pin butt_reset C45
+        pin butt_next_play C46
     }
+    
+    // seven segment pins
+    pin aseg[0] C9
+    pin aseg[1] C8
+    pin aseg[2] C42
+    pin aseg[3] C43
+    pin aseg[4] C12
+    pin aseg[5] C11
+    pin aseg[6] C39
+    pin aseg[7] C40
+    pin aseg[8] C15
+    pin aseg[9] C14
+    pin aseg[10] C36
+    pin aseg[11] C37
+
+    pin bseg[0] C18
+    pin bseg[1] C17
+    pin bseg[2] C33
+    pin bseg[3] C34
+    pin bseg[4] C21
+    pin bseg[5] C20
+    pin bseg[6] C30
+    pin bseg[7] C31
+    pin bseg[8] C24
+    pin bseg[9] C23
+    pin bseg[10] C27
+    pin bseg[11] C28
+
+    pin timerseg[0] B2
+    pin timerseg[1] B3
+    pin timerseg[2] B49
+    pin timerseg[3] B48
+    pin timerseg[4] B5
+    pin timerseg[5] B6
+    pin timerseg[6] B46
+    pin timerseg[7] B45
+    pin timerseg[8] B8
+    pin timerseg[9] B9
+    pin timerseg[10] B43
+    pin timerseg[11] B42
         
     // ABCDE
     pin mataddr[0] A11
