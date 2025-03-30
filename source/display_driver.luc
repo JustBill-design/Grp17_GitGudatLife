@@ -30,7 +30,7 @@ module display_driver #(
     
 ) {
     
-    const DIV = 7 //slowdown speed of the CLK, suitable for 100MHz clock
+    const DIV = 9 //slowdown speed of the CLK, suitable for 100MHz clock
     sig pixeldata[3]
     
     .clk(clk){
