@@ -94,7 +94,7 @@ module display_driver #(
         
         if (state.q == b00){ // START state
             latch_blank.d = b01 // latch off, blank on, begin 
-            // current_address.d = ADDRESS_SIZEx{b1} // start from address 1111 
+            // start from address 1111 
             pixel_idx.d = (ADDRESS_SIZE+$clog2(MATRIX_WIDTH))x{b1} // start from last address
             
             state.d = b01
@@ -114,7 +114,7 @@ module display_driver #(
         else if (sclk_counter.q == 1 && state.q == b01){
             
             // off clock when changing data
-            // sclk.d = 0
+            sclk.d = 0
 
             // give address for next column
             // BRAM address for first pixel, accounting for top row buffer
@@ -128,11 +128,11 @@ module display_driver #(
         else if (sclk_counter.q == 2 && state.q == b01) {
             
             // off clock when changing data 
-            // sclk.d = 0
+            sclk.d = 0
             
             // give address for next column
             // BRAM address for second pixel, accounting for top row buffer
-            addr = $resize(pixel_idx.q,ADDRESS_SIZE+$clog2(MATRIX_WIDTH)+2) + c{b1,(ADDRESS_SIZE+1)x{b0}} + MATRIX_WIDTH
+            addr = $resize(pixel_idx.q,ADDRESS_SIZE+$clog2(MATRIX_WIDTH)+2) + c{b1,($clog2(MATRIX_WIDTH)+ADDRESS_SIZE)x{b0}} + MATRIX_WIDTH
             
             // send read override for BRAM
             reading = 1
@@ -145,7 +145,7 @@ module display_driver #(
         else if (sclk_counter.q == 3 && state.q == b01) {
         
             // off clock when changing data
-            // sclk.d = 0
+            sclk.d = 0
             
             // load data into second pixel cache
             rgb_data_1.d = pixeldata

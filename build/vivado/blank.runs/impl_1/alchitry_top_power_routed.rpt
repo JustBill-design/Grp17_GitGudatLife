@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Sun Mar 30 14:57:37 2025
+| Date             : Sun Mar 30 15:19:02 2025
 | Host             : PC running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
@@ -30,7 +30,7 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.073        |
+| Total On-Chip Power (W)  | 0.074        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
 | Dynamic (W)              | 0.002        |
@@ -53,14 +53,14 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |    <0.001 |        3 |       --- |             --- |
-| Slice Logic    |    <0.001 |       78 |       --- |             --- |
-|   LUT as Logic |    <0.001 |       30 |     20800 |            0.14 |
+| Slice Logic    |    <0.001 |       80 |       --- |             --- |
+|   LUT as Logic |    <0.001 |       31 |     20800 |            0.15 |
 |   Register     |    <0.001 |       34 |     41600 |            0.08 |
 |   Others       |     0.000 |        6 |       --- |             --- |
-| Signals        |    <0.001 |       50 |       --- |             --- |
+| Signals        |    <0.001 |       53 |       --- |             --- |
 | I/O            |    <0.001 |       28 |       170 |           16.47 |
 | Static Power   |     0.072 |          |           |                 |
-| Total          |     0.073 |          |           |                 |
+| Total          |     0.074 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -70,7 +70,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.010 |       0.001 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.011 |       0.001 |      0.010 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.013 |       0.000 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.001 |       0.000 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
