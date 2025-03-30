@@ -1246,12 +1246,48 @@ module fsm #(
                 swe1 = b1
                 sre1 = b0
                 if (ddr){
-                    states.d = States.READ_BRAM
+                    states.d = States.RB_LOAD_TOP_RIGHT
                 }
                 else if (~ddr){
-                    states.d = States.SR_LOAD_TOP_RIGHT
+                    states.d = States.RB_LOAD_MID_RIGHT
                 }
-
+            States.RB_LOAD_MID_RIGHT:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                ra1 = h4
+                bra = aluout
+                swd1 = brd
+                swe1 = b1
+                sre1 = b0
+                if (ddr){
+                    states.d = States.RB_LOAD_MID_RIGHT
+                }
+                else if (~ddr){
+                    states.d = States.RB_LOAD_BOT_RIGHT
+                }
+            States.RB_LOAD_BOT_RIGHT:
+                swd3 = brd
+                swe3 = b1
+                sre3 = b0
+                if (ddr){
+                    states.d = States.RB_LOAD_BOT_RIGHT
+                }
+                else if (~ddr){
+                    states.d = States.READ_TOP_LEFT
+                }
+            //SR at the end
+            States.READ_CURR_PIXEL_VALUE_00_ALL_SR:
+                swd3 = brd
+                swe3 = b1
+                sre3 = b0
+                if (ddr){
+                    states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
+                }
+                else if (~ddr){
+                    states.d = States.READ_TOP_LEFT
+                }
+            
         }    
     }
 }
