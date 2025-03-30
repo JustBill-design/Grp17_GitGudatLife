@@ -1186,6 +1186,72 @@ module fsm #(
                 else if (~ddr){
                     states.d = States.SR_LOAD_MID_RIGHT
                 }
-        }   
+            States.SR_LOAD_MID_RIGHT:
+                alufn = b000000
+                asel  = b0
+                bsel = b0100
+                ra1 = h4
+                bra = aluout
+                bwe = b0
+                swd2 = brd
+                swe2 = b1
+                sre2 = b0
+                if (ddr){
+                    states.d = States.SR_LOAD_MID_RIGHT
+                }
+                else if (~ddr){
+                    states.d = States.SR_LOAD_BOT_MID
+                }
+            States.SR_LOAD_BOT_MID:
+                alufn = b000000
+                asel  = b0
+                bsel = b0101
+                ra1 = h4
+                bra = aluout
+                bwe = b0
+                swd3 = brd
+                swe3 = b1
+                sre3 = b0
+                if (ddr){
+                    states.d = States.SR_LOAD_BOT_MID
+                }
+                else if (~ddr){
+                    states.d = States.SR_LOAD_BOT_RIGHT
+                }
+            States.SR_LOAD_BOT_RIGHT:
+                swd3 = brd
+                swe3 = b1
+                sre3 = b0
+                states.d = States.READ_TOP_LEFT
+            // Pixel is at middle row to load sr
+            States.READ_BRAM:
+                alufn = b000001
+                asel = b0
+                bsel = b0100
+                ra1 = h4
+                bra = aluout
+                if (ddr){
+                    states.d = States.READ_BRAM
+                }
+                else if (~ddr){
+                    states.d = States.RB_LOAD_TOP_RIGHT
+                }
+            States.RB_LOAD_TOP_RIGHT:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                ra1 = h4
+                bra = aluout
+                swd1 = brd
+                swe1 = b1
+                sre1 = b0
+                if (ddr){
+                    states.d = States.READ_BRAM
+                }
+                else if (~ddr){
+                    states.d = States.SR_LOAD_TOP_RIGHT
+                }
+
+        }    
     }
 }
