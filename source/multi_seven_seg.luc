@@ -21,21 +21,21 @@ module multi_seven_seg #(
     decoder digit_dec (#WIDTH(DIGIT_BITS)) // digit decoder
     
     always {
-        output = b000000000000
-        seg_dec.char = values[ctr.value]    // select the value for the active digit
-        seg = seg_dec.segs                  // output the decoded value
+        out = b000000000000
+
         case(values[ctr.value]){
-            4h0: segs = 12b011001001011;
-            4h1: segs = 12b000001001000;
-            4h2: segs = 12b010001010011;
-            4h3: segs = 12b010001011010;
-            4h4: segs = 12b001001011000;
-            4h5: segs = 12b011000011010;
-            4h6: segs = 12b011000011011;
-            4h7: segs = 12b010001001000;
-            4h8: segs = 12b011001011011;
-            4h9: segs = 12b011001011010;
+            4h0: out = 12b011001001011;
+            4h1: out = 12b000001001000;
+            4h2: out = 12b010001010011;
+            4h3: out = 12b010001011010;
+            4h4: out = 12b001001011000;
+            4h5: out = 12b011000011010;
+            4h6: out = 12b011000011011;
+            4h7: out = 12b010001001000;
+            4h8: out = 12b011001011011;
+            4h9: out = 12b011001011010;
             default:
+                out = 12b000000000000;
         }
         case(ctr.value){
             b00:
@@ -47,7 +47,5 @@ module multi_seven_seg #(
             b11:
                 out[11] = b1
         }
-        digit_dec.in = ctr.value           // decode active digit to one-hot
-        sel = digit_dec.out                // output the active digit
     }
 }

@@ -1,8 +1,7 @@
 module fsm #(
 ) (
     input clk,  // clock
-    input rst,  // reset
-    
+
     // buttons
     input next_start_button,
     input reset_button,
@@ -62,11 +61,11 @@ module fsm #(
     output sre1,
 
     output swe2,
-    output swd2,
+    output swd2[2],
     output sre2,
 
     output swe3,
-    output swd3,
+    output swd3[2],
     output sre3, 
     output out
     
@@ -127,7 +126,7 @@ module fsm #(
         IDLE
     }
     
-    dff states[$width(States)](#INIT(States.IDLE), .clk(clk))
+    dff states[$width(States)](#INIT(States.SET_PIXEL_ADDRESS_TO_0), .clk(clk), .rst(reset_button))
     dff decrease_timer(.clk(clk))
 
     const ADD = b000000
@@ -165,9 +164,23 @@ module fsm #(
         asel = 0
         bsel = 0
         wdsel = 0
+
         srst1 = 0
         srst2 = 0
         srst3 = 0
+
+        swe1 = 0
+        swd1 = 0
+        sre1 = 0
+
+        swe2 = 0
+        swd2 = 0
+        sre2 = 0
+
+        swe3 = 0
+        swd3 = 0
+        sre3 = 0
+
         decrease_timer.d = 0
         if (game_clk){
             decrease_timer.d = 1
