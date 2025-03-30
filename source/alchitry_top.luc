@@ -61,6 +61,14 @@ module alchitry_top (
             
             // dual bram module
             bram brams
+            
+            // custom 32-bit regfile
+            regfile reg
+            
+            // shift registers
+            fifo sr1(#WIDTH(2),#ENTRIES(4))
+            fifo sr2(#WIDTH(2),#ENTRIES(4))
+            fifo sr3(#WIDTH(2),#ENTRIES(4))
         }
     }
 
@@ -94,6 +102,8 @@ module alchitry_top (
         acount = 0
         bcount = 0
         timer = 0
+        
+        
 
 
 
