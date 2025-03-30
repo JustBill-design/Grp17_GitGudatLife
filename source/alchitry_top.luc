@@ -37,10 +37,10 @@ module alchitry_top (
 
         usb_tx = usb_rx         // echo the serial data
         
-        pixeldata.d = b11
-        if (display.reading) {
-            pixeldata.d = pixeldata.q + 1
-        }
+        pixeldata.d = b10
+        // if (display.reading) {
+        // pixeldata.d = pixeldata.q + 1
+        // }
 
 
         amod.a = 32b0
@@ -49,8 +49,8 @@ module alchitry_top (
         
         display.data = pixeldata.q
         mataddr = display.address
-        mattop = b001
-        matbot = b111
+        mattop = display.toppixel
+        matbot = display.botpixel
         matclk = display.sclk_out
         matoe = display.blank
         matlat = display.latch
