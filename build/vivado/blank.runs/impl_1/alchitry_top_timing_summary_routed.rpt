@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Sun Mar 30 02:11:07 2025
+| Date         : Sun Mar 30 13:27:22 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_timing_summary -max_paths 10 -report_unconstrained -file alchitry_top_timing_summary_routed.rpt -pb alchitry_top_timing_summary_routed.pb -rpx alchitry_top_timing_summary_routed.rpx -warn_on_violation
 | Design       : alchitry_top
@@ -801,9 +801,9 @@ Min Delay Paths
 --------------------------------------------------------------------------------------
 Slack (MET) :             0.243ns  (arrival time - required time)
   Source:                 reset_cond/D_stage_q_reg[1]/C
-                            (rising edge-triggered cell FDSE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+                            (rising edge-triggered cell FDPE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
   Destination:            reset_cond/D_stage_q_reg[2]/D
-                            (rising edge-triggered cell FDSE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+                            (rising edge-triggered cell FDPE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             clk_0
   Path Type:              Hold (Min at Fast Process Corner)
   Requirement:            0.000ns  (clk_0 rise@0.000ns - clk_0 rise@0.000ns)
@@ -823,11 +823,11 @@ Slack (MET) :             0.243ns  (arrival time - required time)
                          net (fo=1, routed)           0.634     0.918    clk_IBUF
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.944 r  clk_IBUF_BUFG_inst/O
                          net (fo=24, routed)          0.592     1.536    reset_cond/clk_IBUF_BUFG
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[1]/C
+    SLICE_X0Y12          FDPE                                         r  reset_cond/D_stage_q_reg[1]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X0Y12          FDSE (Prop_fdse_C_Q)         0.141     1.677 r  reset_cond/D_stage_q_reg[1]/Q
+    SLICE_X0Y12          FDPE (Prop_fdpe_C_Q)         0.141     1.677 r  reset_cond/D_stage_q_reg[1]/Q
                          net (fo=1, routed)           0.172     1.849    reset_cond/D_stage_d[2]
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[2]/D
+    SLICE_X0Y12          FDPE                                         r  reset_cond/D_stage_q_reg[2]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock clk_0 rise edge)      0.000     0.000 r  
@@ -837,9 +837,9 @@ Slack (MET) :             0.243ns  (arrival time - required time)
                          net (fo=1, routed)           0.689     1.161    clk_IBUF
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_IBUF_BUFG_inst/O
                          net (fo=24, routed)          0.862     2.052    reset_cond/clk_IBUF_BUFG
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[2]/C
+    SLICE_X0Y12          FDPE                                         r  reset_cond/D_stage_q_reg[2]/C
                          clock pessimism             -0.516     1.536    
-    SLICE_X0Y12          FDSE (Hold_fdse_C_D)         0.070     1.606    reset_cond/D_stage_q_reg[2]
+    SLICE_X0Y12          FDPE (Hold_fdpe_C_D)         0.070     1.606    reset_cond/D_stage_q_reg[2]
   -------------------------------------------------------------------
                          required time                         -1.606    
                          arrival time                           1.849    
@@ -848,9 +848,9 @@ Slack (MET) :             0.243ns  (arrival time - required time)
 
 Slack (MET) :             0.249ns  (arrival time - required time)
   Source:                 reset_cond/D_stage_q_reg[0]/C
-                            (rising edge-triggered cell FDSE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+                            (rising edge-triggered cell FDPE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
   Destination:            reset_cond/D_stage_q_reg[1]/D
-                            (rising edge-triggered cell FDSE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+                            (rising edge-triggered cell FDPE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             clk_0
   Path Type:              Hold (Min at Fast Process Corner)
   Requirement:            0.000ns  (clk_0 rise@0.000ns - clk_0 rise@0.000ns)
@@ -870,11 +870,11 @@ Slack (MET) :             0.249ns  (arrival time - required time)
                          net (fo=1, routed)           0.634     0.918    clk_IBUF
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.026     0.944 r  clk_IBUF_BUFG_inst/O
                          net (fo=24, routed)          0.592     1.536    reset_cond/clk_IBUF_BUFG
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[0]/C
+    SLICE_X0Y12          FDPE                                         r  reset_cond/D_stage_q_reg[0]/C
   -------------------------------------------------------------------    -------------------
-    SLICE_X0Y12          FDSE (Prop_fdse_C_Q)         0.141     1.677 r  reset_cond/D_stage_q_reg[0]/Q
+    SLICE_X0Y12          FDPE (Prop_fdpe_C_Q)         0.141     1.677 r  reset_cond/D_stage_q_reg[0]/Q
                          net (fo=1, routed)           0.174     1.851    reset_cond/D_stage_d[1]
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[1]/D
+    SLICE_X0Y12          FDPE                                         r  reset_cond/D_stage_q_reg[1]/D
   -------------------------------------------------------------------    -------------------
 
                          (clock clk_0 rise edge)      0.000     0.000 r  
@@ -884,9 +884,9 @@ Slack (MET) :             0.249ns  (arrival time - required time)
                          net (fo=1, routed)           0.689     1.161    clk_IBUF
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_IBUF_BUFG_inst/O
                          net (fo=24, routed)          0.862     2.052    reset_cond/clk_IBUF_BUFG
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[1]/C
+    SLICE_X0Y12          FDPE                                         r  reset_cond/D_stage_q_reg[1]/C
                          clock pessimism             -0.516     1.536    
-    SLICE_X0Y12          FDSE (Hold_fdse_C_D)         0.066     1.602    reset_cond/D_stage_q_reg[1]
+    SLICE_X0Y12          FDPE (Hold_fdpe_C_D)         0.066     1.602    reset_cond/D_stage_q_reg[1]
   -------------------------------------------------------------------
                          required time                         -1.602    
                          arrival time                           1.851    
@@ -1903,10 +1903,10 @@ Max Delay Paths
 Slack:                    inf
   Source:                 rst_n
                             (input port)
-  Destination:            reset_cond/D_stage_q_reg[0]/S
-                            (rising edge-triggered cell FDSE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            reset_cond/D_stage_q_reg[0]/PRE
+                            (recovery check against rising-edge clock clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             (none)
-  Path Type:              Setup (Max at Slow Process Corner)
+  Path Type:              Recovery (Max at Slow Process Corner)
   Data Path Delay:        3.656ns  (logic 1.634ns (44.686%)  route 2.022ns (55.314%))
   Logic Levels:           2  (IBUF=1 LUT1=1)
   Clock Path Skew:        4.920ns (DCD - SCD + CPR)
@@ -1922,13 +1922,13 @@ Slack:                    inf
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    P6                                                0.000     0.000 f  rst_n (IN)
+    P6                                                0.000     0.000 r  rst_n (IN)
                          net (fo=0)                   0.000     0.000    rst_n
-    P6                   IBUF (Prop_ibuf_I_O)         1.510     1.510 f  rst_n_IBUF_inst/O
+    P6                   IBUF (Prop_ibuf_I_O)         1.510     1.510 r  rst_n_IBUF_inst/O
                          net (fo=1, routed)           1.398     2.908    reset_cond/rst_n_IBUF
-    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.124     3.032 r  reset_cond/D_stage_q[3]_i_1/O
+    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.124     3.032 f  reset_cond/D_stage_q[3]_i_1/O
                          net (fo=4, routed)           0.625     3.656    reset_cond/M_reset_cond_in
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[0]/S
+    SLICE_X0Y12          FDPE                                         f  reset_cond/D_stage_q_reg[0]/PRE
   -------------------------------------------------------------------    -------------------
 
                          (clock clk_0 rise edge)      0.000     0.000 r  
@@ -1938,15 +1938,15 @@ Slack:                    inf
                          net (fo=1, routed)           1.868     3.314    clk_IBUF
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     3.405 r  clk_IBUF_BUFG_inst/O
                          net (fo=24, routed)          1.515     4.920    reset_cond/clk_IBUF_BUFG
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[0]/C
+    SLICE_X0Y12          FDPE                                         r  reset_cond/D_stage_q_reg[0]/C
 
 Slack:                    inf
   Source:                 rst_n
                             (input port)
-  Destination:            reset_cond/D_stage_q_reg[1]/S
-                            (rising edge-triggered cell FDSE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            reset_cond/D_stage_q_reg[1]/PRE
+                            (recovery check against rising-edge clock clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             (none)
-  Path Type:              Setup (Max at Slow Process Corner)
+  Path Type:              Recovery (Max at Slow Process Corner)
   Data Path Delay:        3.656ns  (logic 1.634ns (44.686%)  route 2.022ns (55.314%))
   Logic Levels:           2  (IBUF=1 LUT1=1)
   Clock Path Skew:        4.920ns (DCD - SCD + CPR)
@@ -1962,13 +1962,13 @@ Slack:                    inf
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    P6                                                0.000     0.000 f  rst_n (IN)
+    P6                                                0.000     0.000 r  rst_n (IN)
                          net (fo=0)                   0.000     0.000    rst_n
-    P6                   IBUF (Prop_ibuf_I_O)         1.510     1.510 f  rst_n_IBUF_inst/O
+    P6                   IBUF (Prop_ibuf_I_O)         1.510     1.510 r  rst_n_IBUF_inst/O
                          net (fo=1, routed)           1.398     2.908    reset_cond/rst_n_IBUF
-    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.124     3.032 r  reset_cond/D_stage_q[3]_i_1/O
+    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.124     3.032 f  reset_cond/D_stage_q[3]_i_1/O
                          net (fo=4, routed)           0.625     3.656    reset_cond/M_reset_cond_in
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[1]/S
+    SLICE_X0Y12          FDPE                                         f  reset_cond/D_stage_q_reg[1]/PRE
   -------------------------------------------------------------------    -------------------
 
                          (clock clk_0 rise edge)      0.000     0.000 r  
@@ -1978,15 +1978,15 @@ Slack:                    inf
                          net (fo=1, routed)           1.868     3.314    clk_IBUF
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     3.405 r  clk_IBUF_BUFG_inst/O
                          net (fo=24, routed)          1.515     4.920    reset_cond/clk_IBUF_BUFG
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[1]/C
+    SLICE_X0Y12          FDPE                                         r  reset_cond/D_stage_q_reg[1]/C
 
 Slack:                    inf
   Source:                 rst_n
                             (input port)
-  Destination:            reset_cond/D_stage_q_reg[2]/S
-                            (rising edge-triggered cell FDSE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            reset_cond/D_stage_q_reg[2]/PRE
+                            (recovery check against rising-edge clock clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             (none)
-  Path Type:              Setup (Max at Slow Process Corner)
+  Path Type:              Recovery (Max at Slow Process Corner)
   Data Path Delay:        3.656ns  (logic 1.634ns (44.686%)  route 2.022ns (55.314%))
   Logic Levels:           2  (IBUF=1 LUT1=1)
   Clock Path Skew:        4.920ns (DCD - SCD + CPR)
@@ -2002,13 +2002,13 @@ Slack:                    inf
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    P6                                                0.000     0.000 f  rst_n (IN)
+    P6                                                0.000     0.000 r  rst_n (IN)
                          net (fo=0)                   0.000     0.000    rst_n
-    P6                   IBUF (Prop_ibuf_I_O)         1.510     1.510 f  rst_n_IBUF_inst/O
+    P6                   IBUF (Prop_ibuf_I_O)         1.510     1.510 r  rst_n_IBUF_inst/O
                          net (fo=1, routed)           1.398     2.908    reset_cond/rst_n_IBUF
-    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.124     3.032 r  reset_cond/D_stage_q[3]_i_1/O
+    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.124     3.032 f  reset_cond/D_stage_q[3]_i_1/O
                          net (fo=4, routed)           0.625     3.656    reset_cond/M_reset_cond_in
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[2]/S
+    SLICE_X0Y12          FDPE                                         f  reset_cond/D_stage_q_reg[2]/PRE
   -------------------------------------------------------------------    -------------------
 
                          (clock clk_0 rise edge)      0.000     0.000 r  
@@ -2018,15 +2018,15 @@ Slack:                    inf
                          net (fo=1, routed)           1.868     3.314    clk_IBUF
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     3.405 r  clk_IBUF_BUFG_inst/O
                          net (fo=24, routed)          1.515     4.920    reset_cond/clk_IBUF_BUFG
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[2]/C
+    SLICE_X0Y12          FDPE                                         r  reset_cond/D_stage_q_reg[2]/C
 
 Slack:                    inf
   Source:                 rst_n
                             (input port)
-  Destination:            reset_cond/D_stage_q_reg[3]/S
-                            (rising edge-triggered cell FDSE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            reset_cond/D_stage_q_reg[3]/PRE
+                            (recovery check against rising-edge clock clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             (none)
-  Path Type:              Setup (Max at Slow Process Corner)
+  Path Type:              Recovery (Max at Slow Process Corner)
   Data Path Delay:        3.656ns  (logic 1.634ns (44.686%)  route 2.022ns (55.314%))
   Logic Levels:           2  (IBUF=1 LUT1=1)
   Clock Path Skew:        4.920ns (DCD - SCD + CPR)
@@ -2042,13 +2042,13 @@ Slack:                    inf
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    P6                                                0.000     0.000 f  rst_n (IN)
+    P6                                                0.000     0.000 r  rst_n (IN)
                          net (fo=0)                   0.000     0.000    rst_n
-    P6                   IBUF (Prop_ibuf_I_O)         1.510     1.510 f  rst_n_IBUF_inst/O
+    P6                   IBUF (Prop_ibuf_I_O)         1.510     1.510 r  rst_n_IBUF_inst/O
                          net (fo=1, routed)           1.398     2.908    reset_cond/rst_n_IBUF
-    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.124     3.032 r  reset_cond/D_stage_q[3]_i_1/O
+    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.124     3.032 f  reset_cond/D_stage_q[3]_i_1/O
                          net (fo=4, routed)           0.625     3.656    reset_cond/M_reset_cond_in
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[3]/S
+    SLICE_X0Y12          FDPE                                         f  reset_cond/D_stage_q_reg[3]/PRE
   -------------------------------------------------------------------    -------------------
 
                          (clock clk_0 rise edge)      0.000     0.000 r  
@@ -2058,7 +2058,7 @@ Slack:                    inf
                          net (fo=1, routed)           1.868     3.314    clk_IBUF
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.091     3.405 r  clk_IBUF_BUFG_inst/O
                          net (fo=24, routed)          1.515     4.920    reset_cond/clk_IBUF_BUFG
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[3]/C
+    SLICE_X0Y12          FDPE                                         r  reset_cond/D_stage_q_reg[3]/C
 
 
 
@@ -2069,10 +2069,10 @@ Min Delay Paths
 Slack:                    inf
   Source:                 rst_n
                             (input port)
-  Destination:            reset_cond/D_stage_q_reg[0]/S
-                            (rising edge-triggered cell FDSE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            reset_cond/D_stage_q_reg[0]/PRE
+                            (removal check against rising-edge clock clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             (none)
-  Path Type:              Hold (Min at Fast Process Corner)
+  Path Type:              Removal (Min at Fast Process Corner)
   Data Path Delay:        1.095ns  (logic 0.322ns (29.448%)  route 0.772ns (70.552%))
   Logic Levels:           2  (IBUF=1 LUT1=1)
   Clock Path Skew:        2.052ns (DCD - SCD - CPR)
@@ -2083,13 +2083,13 @@ Slack:                    inf
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    P6                                                0.000     0.000 f  rst_n (IN)
+    P6                                                0.000     0.000 r  rst_n (IN)
                          net (fo=0)                   0.000     0.000    rst_n
-    P6                   IBUF (Prop_ibuf_I_O)         0.277     0.277 f  rst_n_IBUF_inst/O
+    P6                   IBUF (Prop_ibuf_I_O)         0.277     0.277 r  rst_n_IBUF_inst/O
                          net (fo=1, routed)           0.546     0.823    reset_cond/rst_n_IBUF
-    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.045     0.868 r  reset_cond/D_stage_q[3]_i_1/O
+    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.045     0.868 f  reset_cond/D_stage_q[3]_i_1/O
                          net (fo=4, routed)           0.227     1.095    reset_cond/M_reset_cond_in
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[0]/S
+    SLICE_X0Y12          FDPE                                         f  reset_cond/D_stage_q_reg[0]/PRE
   -------------------------------------------------------------------    -------------------
 
                          (clock clk_0 rise edge)      0.000     0.000 r  
@@ -2099,15 +2099,15 @@ Slack:                    inf
                          net (fo=1, routed)           0.689     1.161    clk_IBUF
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_IBUF_BUFG_inst/O
                          net (fo=24, routed)          0.862     2.052    reset_cond/clk_IBUF_BUFG
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[0]/C
+    SLICE_X0Y12          FDPE                                         r  reset_cond/D_stage_q_reg[0]/C
 
 Slack:                    inf
   Source:                 rst_n
                             (input port)
-  Destination:            reset_cond/D_stage_q_reg[1]/S
-                            (rising edge-triggered cell FDSE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            reset_cond/D_stage_q_reg[1]/PRE
+                            (removal check against rising-edge clock clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             (none)
-  Path Type:              Hold (Min at Fast Process Corner)
+  Path Type:              Removal (Min at Fast Process Corner)
   Data Path Delay:        1.095ns  (logic 0.322ns (29.448%)  route 0.772ns (70.552%))
   Logic Levels:           2  (IBUF=1 LUT1=1)
   Clock Path Skew:        2.052ns (DCD - SCD - CPR)
@@ -2118,13 +2118,13 @@ Slack:                    inf
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    P6                                                0.000     0.000 f  rst_n (IN)
+    P6                                                0.000     0.000 r  rst_n (IN)
                          net (fo=0)                   0.000     0.000    rst_n
-    P6                   IBUF (Prop_ibuf_I_O)         0.277     0.277 f  rst_n_IBUF_inst/O
+    P6                   IBUF (Prop_ibuf_I_O)         0.277     0.277 r  rst_n_IBUF_inst/O
                          net (fo=1, routed)           0.546     0.823    reset_cond/rst_n_IBUF
-    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.045     0.868 r  reset_cond/D_stage_q[3]_i_1/O
+    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.045     0.868 f  reset_cond/D_stage_q[3]_i_1/O
                          net (fo=4, routed)           0.227     1.095    reset_cond/M_reset_cond_in
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[1]/S
+    SLICE_X0Y12          FDPE                                         f  reset_cond/D_stage_q_reg[1]/PRE
   -------------------------------------------------------------------    -------------------
 
                          (clock clk_0 rise edge)      0.000     0.000 r  
@@ -2134,15 +2134,15 @@ Slack:                    inf
                          net (fo=1, routed)           0.689     1.161    clk_IBUF
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_IBUF_BUFG_inst/O
                          net (fo=24, routed)          0.862     2.052    reset_cond/clk_IBUF_BUFG
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[1]/C
+    SLICE_X0Y12          FDPE                                         r  reset_cond/D_stage_q_reg[1]/C
 
 Slack:                    inf
   Source:                 rst_n
                             (input port)
-  Destination:            reset_cond/D_stage_q_reg[2]/S
-                            (rising edge-triggered cell FDSE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            reset_cond/D_stage_q_reg[2]/PRE
+                            (removal check against rising-edge clock clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             (none)
-  Path Type:              Hold (Min at Fast Process Corner)
+  Path Type:              Removal (Min at Fast Process Corner)
   Data Path Delay:        1.095ns  (logic 0.322ns (29.448%)  route 0.772ns (70.552%))
   Logic Levels:           2  (IBUF=1 LUT1=1)
   Clock Path Skew:        2.052ns (DCD - SCD - CPR)
@@ -2153,13 +2153,13 @@ Slack:                    inf
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    P6                                                0.000     0.000 f  rst_n (IN)
+    P6                                                0.000     0.000 r  rst_n (IN)
                          net (fo=0)                   0.000     0.000    rst_n
-    P6                   IBUF (Prop_ibuf_I_O)         0.277     0.277 f  rst_n_IBUF_inst/O
+    P6                   IBUF (Prop_ibuf_I_O)         0.277     0.277 r  rst_n_IBUF_inst/O
                          net (fo=1, routed)           0.546     0.823    reset_cond/rst_n_IBUF
-    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.045     0.868 r  reset_cond/D_stage_q[3]_i_1/O
+    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.045     0.868 f  reset_cond/D_stage_q[3]_i_1/O
                          net (fo=4, routed)           0.227     1.095    reset_cond/M_reset_cond_in
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[2]/S
+    SLICE_X0Y12          FDPE                                         f  reset_cond/D_stage_q_reg[2]/PRE
   -------------------------------------------------------------------    -------------------
 
                          (clock clk_0 rise edge)      0.000     0.000 r  
@@ -2169,15 +2169,15 @@ Slack:                    inf
                          net (fo=1, routed)           0.689     1.161    clk_IBUF
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_IBUF_BUFG_inst/O
                          net (fo=24, routed)          0.862     2.052    reset_cond/clk_IBUF_BUFG
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[2]/C
+    SLICE_X0Y12          FDPE                                         r  reset_cond/D_stage_q_reg[2]/C
 
 Slack:                    inf
   Source:                 rst_n
                             (input port)
-  Destination:            reset_cond/D_stage_q_reg[3]/S
-                            (rising edge-triggered cell FDSE clocked by clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            reset_cond/D_stage_q_reg[3]/PRE
+                            (removal check against rising-edge clock clk_0  {rise@0.000ns fall@5.000ns period=10.000ns})
   Path Group:             (none)
-  Path Type:              Hold (Min at Fast Process Corner)
+  Path Type:              Removal (Min at Fast Process Corner)
   Data Path Delay:        1.095ns  (logic 0.322ns (29.448%)  route 0.772ns (70.552%))
   Logic Levels:           2  (IBUF=1 LUT1=1)
   Clock Path Skew:        2.052ns (DCD - SCD - CPR)
@@ -2188,13 +2188,13 @@ Slack:                    inf
 
     Location             Delay type                Incr(ns)  Path(ns)    Netlist Resource(s)
   -------------------------------------------------------------------    -------------------
-    P6                                                0.000     0.000 f  rst_n (IN)
+    P6                                                0.000     0.000 r  rst_n (IN)
                          net (fo=0)                   0.000     0.000    rst_n
-    P6                   IBUF (Prop_ibuf_I_O)         0.277     0.277 f  rst_n_IBUF_inst/O
+    P6                   IBUF (Prop_ibuf_I_O)         0.277     0.277 r  rst_n_IBUF_inst/O
                          net (fo=1, routed)           0.546     0.823    reset_cond/rst_n_IBUF
-    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.045     0.868 r  reset_cond/D_stage_q[3]_i_1/O
+    SLICE_X0Y10          LUT1 (Prop_lut1_I0_O)        0.045     0.868 f  reset_cond/D_stage_q[3]_i_1/O
                          net (fo=4, routed)           0.227     1.095    reset_cond/M_reset_cond_in
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[3]/S
+    SLICE_X0Y12          FDPE                                         f  reset_cond/D_stage_q_reg[3]/PRE
   -------------------------------------------------------------------    -------------------
 
                          (clock clk_0 rise edge)      0.000     0.000 r  
@@ -2204,7 +2204,7 @@ Slack:                    inf
                          net (fo=1, routed)           0.689     1.161    clk_IBUF
     BUFGCTRL_X0Y0        BUFG (Prop_bufg_I_O)         0.029     1.190 r  clk_IBUF_BUFG_inst/O
                          net (fo=24, routed)          0.862     2.052    reset_cond/clk_IBUF_BUFG
-    SLICE_X0Y12          FDSE                                         r  reset_cond/D_stage_q_reg[3]/C
+    SLICE_X0Y12          FDPE                                         r  reset_cond/D_stage_q_reg[3]/C
 
 
 

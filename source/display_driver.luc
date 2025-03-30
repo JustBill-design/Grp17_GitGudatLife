@@ -26,7 +26,7 @@ module display_driver #(
     output latch, 
     output blank, // also known as OE
     output sclk_out,
-    output address[ADDRESS_SIZE] //row address current write to LED matrix
+    output address[ADDRESS_SIZE] // row address current write to LED matrix
     
 ) {
     
@@ -43,17 +43,14 @@ module display_driver #(
             dff state[2] //to remember whether loading or displaying 
             
             dff sclk_counter[DIV] // clock to load shift register, whenever sclk_counter == DIVx{b1} that's the cycle of shift reg clk
-            // dff led_bit_counter[$clog2(MATRIX_WIDTH)+1] // counter to keep track which LED in a row is currently loaded 
-            // dff current_address[ADDRESS_SIZE] // pointer of the current row address of the matrix, used when LATCH is 1 OR BLANK = 0
             dff pixel_idx[ADDRESS_SIZE+$clog2(MATRIX_WIDTH)] // sequential indexing of top half of pixels
             
-            // dff debug_dff[16]U 
             
             // dffs to store data out
-            dff rgb_data_0[3] // r0g0b0
-            dff rgb_data_1[3] // r1g1b1
-            dff sclk // clk signal to shift register
-            dff latch_blank[2] // [0] MSB is latch value, [1] LSB is blank value
+            dff rgb_data_0[3]       // r0g0b0
+            dff rgb_data_1[3]       // r1g1b1
+            dff sclk                // clk signal to shift register
+            dff latch_blank[2]      // [0] MSB is latch value, [1] LSB is blank value
             
         }
         
