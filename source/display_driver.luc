@@ -30,7 +30,7 @@ module display_driver #(
     
 ) {
     
-    const DIV = 10 //slowdown speed of the CLK, suitable for 100MHz clock
+    const DIV = 7 //slowdown speed of the CLK, suitable for 100MHz clock
     sig pixeldata[3]
     
     .clk(clk){
@@ -111,10 +111,7 @@ module display_driver #(
         
         // loading data when sclk is all 0 
         // if (sclk_counter.q == DIVx{b0} && state.q == b01 && led_bit_counter.q <= MATRIX_WIDTH)
-        if (sclk_counter.q == 1 && state.q == b01){
-            
-            // off clock when changing data 
-            sclk.d = 0
+        else if (sclk_counter.q == 1 && state.q == b01){
             
             // give address for next column
             // BRAM address for first pixel, accounting for top row buffer
