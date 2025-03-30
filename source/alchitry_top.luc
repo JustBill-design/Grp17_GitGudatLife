@@ -18,7 +18,7 @@ module alchitry_top (
     sig rst                 // reset signal
     .clk(clk) {
         .rst(rst) {
-            //dff pixeldata[2]
+            dff pixeldata[2]
             display_driver display
         }
     }
@@ -37,12 +37,12 @@ module alchitry_top (
 
         usb_tx = usb_rx         // echo the serial data
         
-        // if (display.reading && display.addr == b0000001000000) {
-        //    pixeldata.d = b10
-        // }
-        // else if (display.reading) {
-        //     pixeldata.d = pixeldata.q + 1
-        // }
+        if (display.reading && display.addr == b0000001000000) {
+           pixeldata.d = b10
+        }
+        else if (display.reading) {
+            pixeldata.d = pixeldata.q + b01
+        }
 
 
         amod.a = 32b0
