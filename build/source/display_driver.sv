@@ -65,7 +65,7 @@ module display_driver #(
                 pixeldata = 3'h1;
             end
             2'h3: begin
-                pixeldata = 3'h1;
+                pixeldata = 3'h7;
             end
             default: begin
                 pixeldata = 3'h2;

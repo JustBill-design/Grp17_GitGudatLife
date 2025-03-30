@@ -88,7 +88,7 @@ module display_driver #(
             b00: pixeldata = b000
             b01: pixeldata = b100
             b10: pixeldata = b001
-            b11: pixeldata = b001
+            b11: pixeldata = b111
             default: pixeldata = b010
         }
         
