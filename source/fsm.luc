@@ -3,15 +3,17 @@ module fsm #(
     input clk,  // clock
     input rst,  // reset
     
-    input next_player_button,
+    // buttons
+    input next_start_button,
     input reset_button,
     
+    // movement buttons
     input move_up_button,
     input move_down_button,
     input move_left_button,
     input move_right_button,
     
-    input play_button,
+    //input play_button,
     
     input deselect_button,
     input select_button,
@@ -22,17 +24,20 @@ module fsm #(
     input brd,
     input ddr,
     
+    // alu
     input rd1[32],
     input rd2[32],
     input aluout[32],
 
+    // game clock
     input game_clk,
 
-    output brsel[2],                        // selector override
+    // BRAM
+    output brsel[2],         // selector override
     output bra[13],          // read address
     output bwa[13],          // write address
-    output bwe,                          // write enable
-    output bwd[2],                   // write data
+    output bwe,              // write enable
+    output bwd[2],           // write data
     
     output ra1[32],
     output ra2[32],
@@ -43,9 +48,14 @@ module fsm #(
     output bsel[4],
     output wdsel[4],
 
+    // shift registers
     output srst1,
     output srst2,
     output srst3,
+
+    input srd1[2],
+    input srd2[2],
+    input srd3[2],
 
     output swe1,
     output swd1[2],
@@ -227,7 +237,7 @@ module fsm #(
                         states.d = States.A_SET_PIXEL_0
                     }
                 }
-                else if (next_player_button){
+                else if (next_start_button){
                     states.d = States.B_INPUT_IDLE
                 }
                 
@@ -676,7 +686,7 @@ module fsm #(
                         states.d = States.B_SET_PIXEL_0
                     }
                 }
-                else if (next_player_button){
+                else if (next_start_button){
                     states.d = States.GAME_IDLE
                 }
                 
@@ -786,7 +796,7 @@ module fsm #(
                 states.d = States.B_UP_DIR_IDLE
             
             
-            //DOWN BUTTON PRESSED
+            // DOWN BUTTON PRESSED
             States.B_DOWN_DIR_IDLE:
                 alufn = b011010
                 asel = b0
@@ -1246,12 +1256,309 @@ module fsm #(
                 swe1 = b1
                 sre1 = b0
                 if (ddr){
-                    states.d = States.READ_BRAM
+                    states.d = States.RB_LOAD_TOP_RIGHT
                 }
                 else if (~ddr){
-                    states.d = States.SR_LOAD_TOP_RIGHT
+                    states.d = States.RB_LOAD_MID_RIGHT
                 }
+            States.RB_LOAD_MID_RIGHT:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                ra1 = h4
+                bra = aluout
+                swd1 = brd
+                swe1 = b1
+                sre1 = b0
+                if (ddr){
+                    states.d = States.RB_LOAD_MID_RIGHT
+                }
+                else if (~ddr){
+                    states.d = States.RB_LOAD_BOT_RIGHT
+                }
+            States.RB_LOAD_BOT_RIGHT:
+                swd3 = brd
+                swe3 = b1
+                sre3 = b0
+                if (ddr){
+                    states.d = States.RB_LOAD_BOT_RIGHT
+                }
+                else if (~ddr){
+                    states.d = States.READ_TOP_LEFT
+                }
+            //SR at the end
+            States.READ_CURR_PIXEL_VALUE_00_ALL_SR:
+                swd3 = brd
+                swe3 = b1
+                sre3 = b0
+                if (ddr){
+                    states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
+                }
+                else if (~ddr){
+                    states.d = States.READ_TOP_LEFT
+                }
+            // Reading top left pixel for neighbours
+            States.READ_TOP_LEFT:
+                sre1 = b1
+                case(srd1){
+                    b01:
+                        states.d = States.TOP_LEFT_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.TOP_LEFT_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.READ_TOP_MID
+                }
+            
+            States.TOP_LEFT_ADD_A_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h0
+                wdsel = b0000
+                wa = h0
+                states.d = States.READ_TOP_MID
+            
+            States.TOP_LEFT_ADD_B_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h1
+                wdsel = b0000
+                wa = h1
+                states.d = States.READ_TOP_MID
+            
+            // Reading top mid pixel for neighbours
+            States.READ_TOP_MID:
+                sre1 = b1
+                case(srd1){
+                    b01:
+                        states.d = States.TOP_MID_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.TOP_MID_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.READ_TOP_RIGHT
+                }
+            
+            States.TOP_MID_ADD_A_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h0
+                wdsel = b0000
+                wa = h0
+                states.d = States.READ_TOP_MID
+            
+            States.TOP_MID_ADD_B_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h1
+                wdsel = b0000
+                wa = h1
+                states.d = States.READ_TOP_MID
+            
+            // Reading top right pixel for neighbours
+            States.READ_TOP_RIGHT:
+                sre1 = b1
+                case(srd1){
+                    b01:
+                        states.d = States.TOP_RIGHT_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.TOP_RIGHT_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.READ_MID_LEFT
+                }
+            
+            States.TOP_RIGHT_ADD_A_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h0
+                wdsel = b0000
+                wa = h0
+                states.d = States.READ_TOP_RIGHT
+            
+            States.TOP_RIGHT_ADD_B_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h1
+                wdsel = b0000
+                wa = h1
+                states.d = States.READ_TOP_RIGHT
+        
+            // Reading mid left pixel for neighbours
+            States.READ_MID_LEFT:
+                sre1 = b1
+                case(srd1){
+                    b01:
+                        states.d = States.MID_LEFT_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.MID_LEFT_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.READ_TARGET_PIXEL
+                }
+            
+            States.MID_LEFT_ADD_A_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h0
+                wdsel = b0000
+                wa = h0
+                states.d = States.READ_MID_MID
+            
+            States.MID_LEFT_ADD_B_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h1
+                wdsel = b0000
+                wa = h1
+                states.d = States.READ_TARGET_PIXEL
+            
+            // Reading target pixel for neighbours
+            States.READ_TARGET_PIXEL:
+                we = b1
+                wdsel = b101
+                wa = h5
+                sre2 = b1
 
+            // Reading mid right pixel for neighbours
+            States.READ_MID_RIGHT:
+                sre1 = b1
+                case(srd1){
+                    b01:
+                        states.d = States.MID_RIGHT_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.MID_RIGHT_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.READ_BOT_LEFT
+                }
+            
+            States.MID_RIGHT_ADD_A_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h0
+                wdsel = b0000
+                wa = h0
+                states.d = States.READ_MID_RIGHT
+            
+            States.MID_RIGHT_ADD_B_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h1
+                wdsel = b0000
+                wa = h1
+                states.d = States.READ_MID_RIGHT
+            
+            // Reading bot left pixel for neighbours
+            States.READ_BOT_LEFT:
+                sre1 = b1
+                case(srd1){
+                    b01:
+                        states.d = States.BOT_LEFT_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.BOT_LEFT_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.READ_BOT_MID
+                }
+            
+            States.BOT_LEFT_ADD_A_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h0
+                wdsel = b0000
+                wa = h0
+                states.d = States.READ_BOT_MID
+            
+            States.BOT_LEFT_ADD_B_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h1
+                wdsel = b0000
+                wa = h1
+                states.d = States.READ_BOT_MID
+            
+            // Reading bot mid pixel for neighbours
+            States.READ_BOT_MID:
+                sre1 = b1
+                case(srd1){
+                    b01:
+                        states.d = States.BOT_MID_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.BOT_MID_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.READ_BOT_RIGHT
+                }
+            
+            States.BOT_MID_ADD_A_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h0
+                wdsel = b0000
+                wa = h0
+                states.d = States.READ_BOT_MID
+            
+            States.BOT_MID_ADD_B_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h1
+                wdsel = b0000
+                wa = h1
+                states.d = States.READ_BOT_MID
+            
+            // Reading bot right pixel for neighbours
+            States.READ_BOT_RIGHT:
+                sre1 = b1
+                case(srd1){
+                    b01:
+                        states.d = States.BOT_RIGHT_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.BOT_RIGHT_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.SR_EMPTY_READ_1
+                }
+            
+            States.BOT_RIGHT_ADD_A_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h0
+                wdsel = b0000
+                wa = h0
+                states.d = States.SR_EMPTY_READ_1
+            
+            States.BOT_RIGHT_ADD_B_NEIGHBOUR:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = h1
+                wdsel = b0000
+                wa = h1
+                states.d = States.SR_EMPTY_READ_1
         }    
     }
 }
