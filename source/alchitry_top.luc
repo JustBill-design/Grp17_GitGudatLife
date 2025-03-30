@@ -34,7 +34,7 @@ module alchitry_top (
     const CLK = 100000000
 
     alu amod
-    sig rst                 // reset signal
+    
 
     .clk(clk) {
 
@@ -44,20 +44,23 @@ module alchitry_top (
         
         
         // button conditioners and edge detector for next/play
-        button_conditioner cond_butt_dirs[4]
-        button_conditioner cond_butt_sel_desel[2]
-        button_conditioner cond_butt_next_play
+        button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}))
+        button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}))
+        button_conditioner cond_butt_next_play(#CLK_FREQ(CLK))
         edge_detector edge_next_play(#RISE(1),#FALL(0))
+        
+        
+        dff pixeldata[2](#INIT(b00))
 
-        .rst(butt_reset) {
+        .rst(rst) {
             display_driver display
-            dff pixeldata[2](#INIT(b00))
             
             // gameclk ticks when gamecounter is 0, once a second
             counter gamecounter(#SIZE($clog2(CLK)),#TOP(CLK),#DIV(0))
             edge_detector gameclk(#RISE(0),#FALL(1))
             
-
+            // dual bram module
+            bram brams
         }
     }
 
