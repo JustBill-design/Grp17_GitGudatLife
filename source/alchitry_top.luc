@@ -73,6 +73,6 @@ module alchitry_top (
         // matgnd = 1
 
         butt_cond.in = testpullup
-        led[0] = ~butt_cond.out
+        led = butt_cond.out
     }
 }
