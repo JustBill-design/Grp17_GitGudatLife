@@ -19,7 +19,7 @@ module alchitry_top (
         output reg [1:0] matgnd,
         input wire testpullup
     );
-    localparam _MP_SIZE_270718233 = 6'h20;
+    localparam _MP_SIZE_1281865099 = 6'h20;
     logic [31:0] M_amod_a;
     logic [31:0] M_amod_b;
     logic [5:0] M_amod_alufn;
@@ -30,7 +30,7 @@ module alchitry_top (
     logic M_amod_illop;
     
     alu #(
-        .SIZE(_MP_SIZE_270718233)
+        .SIZE(_MP_SIZE_1281865099)
     ) amod (
         .a(M_amod_a),
         .b(M_amod_b),
@@ -44,8 +44,8 @@ module alchitry_top (
     
     
     logic rst;
-    localparam _MP_ADDRESS_SIZE_1380248656 = 3'h5;
-    localparam _MP_MATRIX_WIDTH_1380248656 = 7'h40;
+    localparam _MP_ADDRESS_SIZE_249305294 = 3'h5;
+    localparam _MP_MATRIX_WIDTH_249305294 = 7'h40;
     logic [1:0] M_display_data;
     logic [12:0] M_display_addr;
     logic M_display_reading;
@@ -57,8 +57,8 @@ module alchitry_top (
     logic [4:0] M_display_address;
     
     display_driver #(
-        .ADDRESS_SIZE(_MP_ADDRESS_SIZE_1380248656),
-        .MATRIX_WIDTH(_MP_MATRIX_WIDTH_1380248656)
+        .ADDRESS_SIZE(_MP_ADDRESS_SIZE_249305294),
+        .MATRIX_WIDTH(_MP_MATRIX_WIDTH_249305294)
     ) display (
         .clk(clk),
         .rst(rst),
@@ -75,12 +75,12 @@ module alchitry_top (
     
     
     logic [1:0] D_pixeldata_d, D_pixeldata_q = 2'h0;
-    localparam _MP_STAGES_1441605102 = 3'h4;
+    localparam _MP_STAGES_638146283 = 3'h4;
     logic M_reset_cond_in;
     logic M_reset_cond_out;
     
     reset_conditioner #(
-        .STAGES(_MP_STAGES_1441605102)
+        .STAGES(_MP_STAGES_638146283)
     ) reset_cond (
         .clk(clk),
         .in(M_reset_cond_in),
@@ -88,16 +88,16 @@ module alchitry_top (
     );
     
     
-    localparam _MP_CLK_FREQ_394932579 = 27'h5f5e100;
-    localparam _MP_MIN_DELAY_394932579 = 5'h14;
-    localparam _MP_NUM_SYNC_394932579 = 2'h2;
+    localparam _MP_CLK_FREQ_1238919689 = 27'h5f5e100;
+    localparam _MP_MIN_DELAY_1238919689 = 5'h14;
+    localparam _MP_NUM_SYNC_1238919689 = 2'h2;
     logic M_butt_cond_in;
     logic M_butt_cond_out;
     
     button_conditioner #(
-        .CLK_FREQ(_MP_CLK_FREQ_394932579),
-        .MIN_DELAY(_MP_MIN_DELAY_394932579),
-        .NUM_SYNC(_MP_NUM_SYNC_394932579)
+        .CLK_FREQ(_MP_CLK_FREQ_1238919689),
+        .MIN_DELAY(_MP_MIN_DELAY_1238919689),
+        .NUM_SYNC(_MP_NUM_SYNC_1238919689)
     ) butt_cond (
         .clk(clk),
         .in(M_butt_cond_in),
@@ -131,7 +131,7 @@ module alchitry_top (
         matlat = M_display_latch;
         matgnd = 2'h0;
         M_butt_cond_in = testpullup;
-        led[1'h0] = M_butt_cond_out;
+        led[1'h0] = ~M_butt_cond_out;
     end
     
     

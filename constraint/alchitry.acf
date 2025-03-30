@@ -16,7 +16,7 @@ STANDARD(LVCMOS33) {
     pin usb_tx USB_TX
 
     PULL(UP) {
-        pin testpullup B27
+        pin testpullup B30
     }
         
     // ABCDE
