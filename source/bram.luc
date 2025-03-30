@@ -1,6 +1,6 @@
 module bram #(
     WIDTH = 2 : WIDTH > 0,  // bit width
-    ENTRIES = 4223: ENTRIES > 0  // number of entries
+    ENTRIES = 4224: ENTRIES > 0  // number of entries
 ) (
     input clk,  // clock
     input rst,  // reset
