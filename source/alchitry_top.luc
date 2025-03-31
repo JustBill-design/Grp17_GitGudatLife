@@ -59,6 +59,9 @@ module alchitry_top (
             counter gamecounter(#SIZE($clog2(CLK)),#TOP(CLK),#DIV(0))
             edge_detector gameclk(#RISE(0),#FALL(1))
             
+            // FSM
+            fsm sm
+            
             // dual bram module
             bram brams
             
@@ -103,9 +106,18 @@ module alchitry_top (
         bcount = 0
         timer = 0
         
-        
+        // FSM connections
+        // buttons
+        sm.next_start_button = edge_next_play.out
+        sm.reset_button = butt_reset
+        sm.move_up_button = cond_butt_dirs[0]
+        sm.move_down_button = cond_butt_dirs[1]
+        sm.move_left_button = cond_butt_dirs[2]
+        sm.move_right_button = cond_butt_dirs[3]
+        sm.select_button = cond_butt_sel_desel[0]
+        sm.deselect_button = cond_butt_sel_desel[1]
 
-
+        // 
 
 
 
