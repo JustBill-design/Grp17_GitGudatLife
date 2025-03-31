@@ -56,7 +56,7 @@ module fsm #(
     // reset for all shift registers
     output srst,
 
-    read enable
+    // read enable
     output sre1,
     output sre2,
     output sre3, 
@@ -359,19 +359,19 @@ module fsm #(
                 states.d = States.A_UP_MOVE_CURSOR
             
             States.A_UP_MOVE_CURSOR:
-                alufn = b000001
-                asel = b0
-                bsel = b0100
-                we = b1
-                ra1 = TARGET_PIXEL_ADDRESS
-                wdsel = b0000
-                wa = TARGET_PIXEL_ADDRESS
-                bra = aluout
-                brsel = b01
-                if (ddr){
+                if (ddr) {
                     states.d = States.A_UP_MOVE_CURSOR
                 }
-                else if(~ddr){
+                else {
+                    alufn = b000001
+                    asel = b0
+                    bsel = b0100
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    wa = TARGET_PIXEL_ADDRESS
+                    bra = aluout
+                    brsel = b01
                     states.d = States.A_UP_STORE_PIXEL
                 }
             
@@ -465,19 +465,20 @@ module fsm #(
                 states.d = States.A_DOWN_MOVE_CURSOR
             
             States.A_DOWN_MOVE_CURSOR:
-                alufn = ADD
-                asel = b0
-                bsel = b0100
-                we = b1
-                ra1 = TARGET_PIXEL_ADDRESS
-                wdsel = b0000
-                wa = TARGET_PIXEL_ADDRESS
-                bra = aluout
-                brsel = b01
-                if (ddr){
+                if (ddr) {
                     states.d = States.A_DOWN_MOVE_CURSOR
                 }
-                else if(~ddr){
+                else {
+                    alufn = ADD
+                    asel = b0
+                    bsel = b0100
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    wa = TARGET_PIXEL_ADDRESS
+                    bra = aluout
+                    brsel = b01
+
                     states.d = States.A_DOWN_STORE_PIXEL
                 }
             
@@ -568,19 +569,20 @@ module fsm #(
                 states.d = States.A_LEFT_MOVE_CURSOR
             
             States.A_LEFT_MOVE_CURSOR:
-                alufn = b00001
-                asel = b0
-                bsel = b0001
-                we = b1
-                ra1 = TARGET_PIXEL_ADDRESS
-                wdsel = b0000
-                wa = TARGET_PIXEL_ADDRESS
-                bra = aluout
-                brsel = b01
-                if (ddr){
+                if (ddr) {
                     states.d = States.A_LEFT_MOVE_CURSOR
                 }
-                else if(~ddr){
+                else {
+                    alufn = b00001
+                    asel = b0
+                    bsel = b0001
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    wa = TARGET_PIXEL_ADDRESS
+                    bra = aluout
+                    brsel = b01
+
                     states.d = States.A_LEFT_STORE_PIXEL
                 }
             
@@ -672,19 +674,20 @@ module fsm #(
                 states.d = States.A_RIGHT_MOVE_CURSOR
             
             States.A_RIGHT_MOVE_CURSOR:
-                alufn = b00001
-                asel = b0
-                bsel = b0001
-                we = b1
-                ra1 = TARGET_PIXEL_ADDRESS
-                wdsel = b0000
-                wa = TARGET_PIXEL_ADDRESS
-                bra = aluout
-                brsel = b01
-                if (ddr){
+                if (ddr) {
                     states.d = States.A_RIGHT_MOVE_CURSOR
                 }
-                else if(~ddr){
+                else {
+                    alufn = b00001
+                    asel = b0
+                    bsel = b0001
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    wa = TARGET_PIXEL_ADDRESS
+                    bra = aluout
+                    brsel = b01
+
                     states.d = States.A_RIGHT_STORE_PIXEL
                 }
             
@@ -808,19 +811,20 @@ module fsm #(
                 states.d = States.B_UP_MOVE_CURSOR
             
             States.B_UP_MOVE_CURSOR:
-                alufn = b00001
-                asel = b0
-                bsel = b0100
-                we = b1
-                ra1 = TARGET_PIXEL_ADDRESS
-                wdsel = b0000
-                wa = TARGET_PIXEL_ADDRESS
-                bra = aluout
-                brsel = b01
-                if (ddr){
+                if (ddr) {
                     states.d = States.B_UP_MOVE_CURSOR
                 }
-                else if(~ddr){
+                else {
+                    alufn = b00001
+                    asel = b0
+                    bsel = b0100
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    wa = TARGET_PIXEL_ADDRESS
+                    bra = aluout
+                    brsel = b01
+
                     states.d = States.B_UP_STORE_PIXEL
                 }
             
@@ -914,19 +918,20 @@ module fsm #(
                 states.d = States.B_DOWN_MOVE_CURSOR
             
             States.B_DOWN_MOVE_CURSOR:
-                alufn = ADD
-                asel = b0
-                bsel = b0100
-                we = b1
-                ra1 = TARGET_PIXEL_ADDRESS
-                wdsel = b0000
-                wa = TARGET_PIXEL_ADDRESS
-                bra = aluout
-                brsel = b01
-                if (ddr){
+                if (ddr) {
                     states.d = States.B_DOWN_MOVE_CURSOR
                 }
-                else if(~ddr){
+                else {
+                    alufn = ADD
+                    asel = b0
+                    bsel = b0100
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    wa = TARGET_PIXEL_ADDRESS
+                    bra = aluout
+                    brsel = b01
+
                     states.d = States.B_DOWN_STORE_PIXEL
                 }
             
@@ -1017,19 +1022,20 @@ module fsm #(
                 states.d = States.B_LEFT_MOVE_CURSOR
             
             States.B_LEFT_MOVE_CURSOR:
-                alufn = b00001
-                asel = b0
-                bsel = b0001
-                we = b1
-                ra1 = TARGET_PIXEL_ADDRESS
-                wdsel = b0000
-                wa = TARGET_PIXEL_ADDRESS
-                bra = aluout
-                brsel = b01
-                if (ddr){
+                if (ddr) {
                     states.d = States.B_LEFT_MOVE_CURSOR
                 }
-                else if(~ddr){
+                else {
+                    alufn = b00001
+                    asel = b0
+                    bsel = b0001
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    wa = TARGET_PIXEL_ADDRESS
+                    bra = aluout
+                    brsel = b01
+
                     states.d = States.B_LEFT_STORE_PIXEL
                 }
             
@@ -1121,19 +1127,20 @@ module fsm #(
                 states.d = States.B_RIGHT_MOVE_CURSOR
             
             States.B_RIGHT_MOVE_CURSOR:
-                alufn = b00001
-                asel = b0
-                bsel = b0001
-                we = b1
-                ra1 = TARGET_PIXEL_ADDRESS
-                wdsel = b0000
-                wa = TARGET_PIXEL_ADDRESS
-                bra = aluout
-                brsel = b01
-                if (ddr){
+                if (ddr) {
                     states.d = States.B_RIGHT_MOVE_CURSOR
                 }
-                else if(~ddr){
+                else {
+                    alufn = b00001
+                    asel = b0
+                    bsel = b0001
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    wa = TARGET_PIXEL_ADDRESS
+                    bra = aluout
+                    brsel = b01
+
                     states.d = States.B_RIGHT_STORE_PIXEL
                 }
             
@@ -1199,89 +1206,94 @@ module fsm #(
                 states.d = States.SR_00_ALL_SR
 
             States.SR_00_ALL_SR:
-                alufn = SUB
-                asel = b0
-                bsel = b0100 
-                bra = aluout
-                bwe = b0
-                swd1 = b00
-                swe1 = b1
-                sre1 = b0
-                swd2 = b00
-                swe2 = b1
-                sre2 = b0
-                swd3 = b00
-                swe3 = b1
-                sre3 = b0
-                if (ddr){
+                if (ddr) {
                     states.d = States.SR_00_ALL_SR
                 }
-                else if (~ddr){
+                else {
+                    alufn = SUB
+                    asel = b0
+                    bsel = b0100 
+                    bra = aluout
+                    bwe = b0
+                    swd1 = b00
+                    swe1 = b1
+                    sre1 = b0
+                    swd2 = b00
+                    swe2 = b1
+                    sre2 = b0
+                    swd3 = b00
+                    swe3 = b1
+                    sre3 = b0
+
                     states.d = States.SR_LOAD_TOP_MID
                 }
             
             States.SR_LOAD_TOP_MID:
-                alufn = SUB
-                asel  = b0
-                bsel = b0101 
-                ra1 = TARGET_PIXEL_ADDRESS
-                bra = aluout
-                bwe = b0
-                swd1 = brd
-                swe1 = b1
-                sre1 = b0
-                if (ddr){
+                if (ddr) {
                     states.d = States.SR_LOAD_TOP_MID
                 }
-                else if (~ddr){
+                else {
+                    alufn = SUB
+                    asel  = b0
+                    bsel = b0101 
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    bra = aluout
+                    bwe = b0
+                    swd1 = brd
+                    swe1 = b1
+                    sre1 = b0
+
                     states.d = States.SR_LOAD_MID_MID
                 }
             States.SR_LOAD_MID_MID:
-                alufn = ADD
-                asel  = b0
-                bsel = b0001
-                ra1 = TARGET_PIXEL_ADDRESS
-                bra = aluout
-                bwe = b0
-                swd2 = brd
-                swe2 = b1
-                sre2 = b0
-                if (ddr){
+                if (ddr) {
                     states.d = States.SR_LOAD_MID_MID
                 }
-                else if (~ddr){
+                else {
+                    alufn = ADD
+                    asel  = b0
+                    bsel = b0001
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    bra = aluout
+                    bwe = b0
+                    swd2 = brd
+                    swe2 = b1
+                    sre2 = b0
+
                     states.d = States.SR_LOAD_MID_RIGHT
                 }
             States.SR_LOAD_MID_RIGHT:
-                alufn = ADD
-                asel  = b0
-                bsel = b0100
-                ra1 = TARGET_PIXEL_ADDRESS
-                bra = aluout
-                bwe = b0
-                swd2 = brd
-                swe2 = b1
-                sre2 = b0
-                if (ddr){
+                if (ddr) {
                     states.d = States.SR_LOAD_MID_RIGHT
                 }
-                else if (~ddr){
+                else {
+                    alufn = ADD
+                    asel  = b0
+                    bsel = b0100
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    bra = aluout
+                    bwe = b0
+                    swd2 = brd
+                    swe2 = b1
+                    sre2 = b0
+
                     states.d = States.SR_LOAD_BOT_MID
                 }
             States.SR_LOAD_BOT_MID:
-                alufn = ADD
-                asel  = b0
-                bsel = b0101
-                ra1 = TARGET_PIXEL_ADDRESS
-                bra = aluout
-                bwe = b0
-                swd3 = brd
-                swe3 = b1
-                sre3 = b0
-                if (ddr){
+                if (ddr) {
                     states.d = States.SR_LOAD_BOT_MID
                 }
-                else if (~ddr){
+                else {
+                    alufn = ADD
+                    asel  = b0
+                    bsel = b0101
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    bra = aluout
+                    bwe = b0
+                    swd3 = brd
+                    swe3 = b1
+                    sre3 = b0
+
                     states.d = States.SR_LOAD_BOT_RIGHT
                 }
             States.SR_LOAD_BOT_RIGHT:
@@ -1291,66 +1303,71 @@ module fsm #(
                 states.d = States.READ_TOP_LEFT
             // Pixel is at middle row to load sr
             States.READ_BRAM:
-                alufn = SUB
-                asel = b0
-                bsel = b0100
-                ra1 = TARGET_PIXEL_ADDRESS
-                bra = aluout
-                if (ddr){
+                if (ddr) {
                     states.d = States.READ_BRAM
                 }
-                else if (~ddr){
+                else {
+                    alufn = SUB
+                    asel = b0
+                    bsel = b0100
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    bra = aluout
+
                     states.d = States.RB_LOAD_TOP_RIGHT
                 }
             States.RB_LOAD_TOP_RIGHT:
-                alufn = ADD
-                asel = b0
-                bsel = b0001
-                ra1 = TARGET_PIXEL_ADDRESS
-                bra = aluout
-                swd1 = brd
-                swe1 = b1
-                sre1 = b0
-                if (ddr){
+                if (ddr) {
                     states.d = States.RB_LOAD_TOP_RIGHT
                 }
-                else if (~ddr){
+                else {
+                    alufn = ADD
+                    asel = b0
+                    bsel = b0001
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    bra = aluout
+                    swd1 = brd
+                    swe1 = b1
+                    sre1 = b0
+
                     states.d = States.RB_LOAD_MID_RIGHT
                 }
             States.RB_LOAD_MID_RIGHT:
-                alufn = ADD
-                asel = b0
-                bsel = b0001
-                ra1 = TARGET_PIXEL_ADDRESS
-                bra = aluout
-                swd1 = brd
-                swe1 = b1
-                sre1 = b0
-                if (ddr){
+                if (ddr) {
                     states.d = States.RB_LOAD_MID_RIGHT
                 }
-                else if (~ddr){
+                else {
+                    alufn = ADD
+                    asel = b0
+                    bsel = b0001
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    bra = aluout
+                    swd1 = brd
+                    swe1 = b1
+                    sre1 = b0
+
                     states.d = States.RB_LOAD_BOT_RIGHT
                 }
             States.RB_LOAD_BOT_RIGHT:
-                swd3 = brd
-                swe3 = b1
-                sre3 = b0
-                if (ddr){
+                if (ddr) {
                     states.d = States.RB_LOAD_BOT_RIGHT
                 }
-                else if (~ddr){
+                else {
+                    swd3 = brd
+                    swe3 = b1
+                    sre3 = b0
+
                     states.d = States.READ_TOP_LEFT
                 }
             //SR at the end
             States.READ_CURR_PIXEL_VALUE_00_ALL_SR:
-                swd3 = brd
-                swe3 = b1
-                sre3 = b0
-                if (ddr){
+                if (ddr) {
                     states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
                 }
-                else if (~ddr){
+                else {
+                    swd3 = brd
+                    swe3 = b1
+                    sre3 = b0
+
                     states.d = States.READ_TOP_LEFT
                 }
             // Reading top left pixel for neighbours
@@ -1836,18 +1853,19 @@ module fsm #(
                         states.d = States.GAME_IDLE
                 }
             States.SWITCH_BRAM:
-                alufn = XOR
-                asel = b0
-                bsel = b0001
-                we = b1
-                wa = BRAM_SWITCH
-                ra1 = BRAM_SWITCH
-                wdsel = b0000
-                case(ddr){
-                    b1:
-                        states.d = States.SWITCH_BRAM
-                    b0:
-                        states.d = States.SET_PIXEL_TO_BEGINNING
+                if (ddr) {
+                    states.d = States.SWITCH_BRAM
+                }
+                else {
+                    alufn = XOR
+                    asel = b0
+                    bsel = b0001
+                    we = b1
+                    wa = BRAM_SWITCH
+                    ra1 = BRAM_SWITCH
+                    wdsel = b0000
+
+                    states.d = States.SET_PIXEL_TO_BEGINNING
                 }
             
             States.SET_PIXEL_TO_BEGINNING:

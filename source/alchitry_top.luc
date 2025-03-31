@@ -56,12 +56,10 @@ module alchitry_top (
         .rst(rst) {
             display_driver display
             
-            // timerclk ticks when gamecounter is 0, once a second
+            // counter resets every second
             counter gamecounter(#SIZE($clog2(CLK)),#TOP(CLK),#DIV(0))
-            edge_detector timerclk(#RISE(0),#FALL(1))
-            
-            // gameclk to tick roughly 10 times per second
-            edge_detector gameclk(#RISE(1),#FALL(0))
+            edge_detector timerclk(#RISE(0),#FALL(1))   // ticks once per second
+            edge_detector gameclk(#RISE(1),#FALL(0))    // ticks roughly 10 times per second
             
             // FSM
             fsm sm
@@ -190,9 +188,9 @@ module alchitry_top (
         sr2.din = sm.swd2
         sr3.din = sm.swd3
         // read enable
-        sr1.rget = sm sre1
-        sr2.rget = sm sre2
-        sr3.rget = sm sre3
+        sr1.rget = sm.sre1
+        sr2.rget = sm.sre2
+        sr3.rget = sm.sre3
         // read data
         sm.srd1 = sr1.dout
         sm.srd2 = sr2.dout
