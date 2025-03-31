@@ -28,8 +28,9 @@ module fsm #(
     input aluout[32],       // alu result
     output alufn[6],        // alu function
 
-    // game clock
-    input game_clk,
+    // slow clocks
+    input timerclk,         // once a second
+    input gameclk,          // ticks roughly 10 times a second
 
     // BRAM
     input brd[2],           // bram read data
@@ -59,7 +60,6 @@ module fsm #(
     output sre1,
     output sre2,
     output sre3, 
-    output out
 
     // read data
     input srd1[2],
@@ -74,7 +74,7 @@ module fsm #(
     // write data
     output swd1[2],
     output swd2[2],
-    output swd3[2],
+    output swd3[2]
 
 ) {
     enum States {
@@ -133,7 +133,8 @@ module fsm #(
     }
     
     dff states[$width(States)](#INIT(States.SET_PIXEL_ADDRESS_TO_0), .clk(clk), .rst(reset_button))
-    dff decrease_timer(.clk(clk))
+    dff decrease_timer(.clk(clk), .rst(reset_button))
+    dff game_tick(.clk(clk), .rst(reset_button))
 
     const ADD = b000000
     const SUB = b000001
@@ -156,16 +157,18 @@ module fsm #(
     always {
 
         states.d = states.q
-        out = 0
+
         brsel = b10
         bra = 0
         bwa = 0
         bwe = 0
         bwd = 0
+
         ra1 = 0
         ra2 = 0
         wa = 0 
         we = 0 
+
         alufn = 0
         asel = 0
         bsel = 0
@@ -185,9 +188,14 @@ module fsm #(
         swd3 = 0
         sre3 = 0
 
-        decrease_timer.d = 0
-        if (game_clk){
+        // timer and game update triggers
+        decrease_timer.d = decrease_timer.d
+        if (timerclk) {
             decrease_timer.d = 1
+        }
+        game_tick.d = game_tick.q
+        if (gameclk) {
+            game_tick.d = 1
         }
 
         
@@ -1146,18 +1154,24 @@ module fsm #(
             // Game Idle Stage
             States.GAME_IDLE:
                 if(decrease_timer.q){
+                    decrease_timer.d = 0
                     states.d = States.TIMER_M1
                 }
-                else if(~timer){
+                else if (~|timer){
                     states.d = States.END_GAME
                 }
-                else if(~pac){
+                else if (~|pac){
                     states.d = States.END_GAME
                 }
-                else if(~pbc){
+                else if (~|pbc){
                     states.d = States.END_GAME
                 }
-                states.d = States.GAME_IDLE_READ_CURR_PIXEL_VALUE
+                else if (game_tick.q) {
+                    states.d = States.GAME_IDLE_READ_CURR_PIXEL_VALUE
+                }
+                else {
+                    states.d = States.GAME_IDLE
+                }
             
             States.TIMER_M1:
                 alufn = SUB
@@ -1169,13 +1183,13 @@ module fsm #(
                 
             States.GAME_IDLE_READ_CURR_PIXEL_VALUE:
                 ra1 = TARGET_PIXEL_ADDRESS
-                if(&rd1[5:0]){
+                if (&rd1[5:0]){
                     states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
                 }
                 else if (~|rd1[5:0]){
                     states.d = States.RESET_SR_POINTERS
                 }
-                else{
+                else {
                     states.d = States.READ_BRAM
                 }
             // Reading BRAM and loading SR

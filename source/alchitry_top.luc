@@ -56,9 +56,12 @@ module alchitry_top (
         .rst(rst) {
             display_driver display
             
-            // gameclk ticks when gamecounter is 0, once a second
+            // timerclk ticks when gamecounter is 0, once a second
             counter gamecounter(#SIZE($clog2(CLK)),#TOP(CLK),#DIV(0))
-            edge_detector gameclk(#RISE(0),#FALL(1))
+            edge_detector timerclk(#RISE(0),#FALL(1))
+            
+            // gameclk to tick roughly 10 times per second
+            edge_detector gameclk(#RISE(1),#FALL(0))
             
             // FSM
             fsm sm
@@ -93,9 +96,6 @@ module alchitry_top (
         cond_butt_next_play.in = butt_next_play
         edge_next_play.in = cond_butt_next_play.out
 
-        // connect game clock
-        gameclk.in = gamecounter[$clog2(gamecounter)]
-        
         // matrix and display driver connections
         mataddr = display.address
         mattop = display.toppixel
@@ -105,6 +105,12 @@ module alchitry_top (
         matlat = display.latch
         matgnd = 0
         
+        // connect slow clocks
+        timerclk.in = gamecounter.value[$clog2(gamecounter)]
+        gameclk.in = gamecounter.value[$clog2(CLK/10)]
+        sm.timeclk = timerclk.out
+        sm.gameclk = gameclk.out
+
         // buttons connections
         sm.next_start_button = edge_next_play.out
         sm.reset_button = rst
