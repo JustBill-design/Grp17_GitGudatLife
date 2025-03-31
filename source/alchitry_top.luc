@@ -6,7 +6,6 @@ module alchitry_top (
     output usb_tx,          // USB->Serial output
 
     // buttons
-    // TODO: pass through conditioner and add edge detector
     input butt_dirs[4],     // direction buttons
     input butt_sel_desel[2],// select and deselect buttons
     input butt_reset,       // reset button, to override reset button

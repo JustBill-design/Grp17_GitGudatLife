@@ -72,7 +72,7 @@ module alu #(
 
             b10:
                 temp_out = shifter.shift
-                //v = shifter.v
+                // v = shifter.v
                 illop = shifter.illop
 
             b11:
