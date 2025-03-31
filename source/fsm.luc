@@ -2,33 +2,31 @@ module fsm #(
 ) (
     input clk,  // clock
 
-    // buttons
+    // buttons ----------------------------------------------
     input next_start_button,
     input reset_button,
     
-    // movement buttons
+    // movement buttons, no edge detector
     input move_up_button,
     input move_down_button,
     input move_left_button,
     input move_right_button,
     
-    //input play_button,
-    
+    // select and deselect buttons, with edge detector
     input deselect_button,
     input select_button,
     
     // seven segments
-    input pac[32],              // A cell count
-    input pbc[32],              // B cell count
-    input timer[32],            // game timer countdown
-    output aseg[12],            // corresponding segment
-    output bseg[12],            // corresponding segment
-    output timerseg[12],        // corresponding segment
+    input pac[32],          // A cell count
+    input pbc[32],          // B cell count
+    input timer[32],        // game timer countdown
+    output aseg[12],        // corresponding segment
+    output bseg[12],        // corresponding segment
+    output timerseg[12],    // corresponding segment
     
     // alu
-    input rd1[32],
-    input rd2[32],
-    input aluout[32],
+    input aluout[32],       // alu result
+    output alufn[6],        // alu function
 
     // game clock
     input game_clk,
@@ -43,38 +41,41 @@ module fsm #(
     input ddr,              // display driver read override
     
     // regfile
-    output ra1[32],
-    output ra2[32],
-    output wa[3],
-    output we,
-    output alufn[6],
-    output asel,
-    output bsel[4],
-    output wdsel[4],
+    output ra1[32],         // read address 1
+    output ra2[32],         // read address 2
+    input rd1[32],          // read data
+    input rd2[32],          // read data
+    output wa[3],           // write address
+    output we,              // write enable
+    output asel,            // a selector
+    output bsel[4],         // b selector
+    output wdsel[4],        // write data selector
 
-    // shift registers
-    output srst1,
-    output srst2,
-    output srst3,
+    // shift registers ----------------------------------------
+    // reset for all shift registers
+    output srst,
 
+    read enable
+    output sre1,
+    output sre2,
+    output sre3, 
+    output out
+
+    // read data
     input srd1[2],
     input srd2[2],
     input srd3[2],
 
+    // write enable
     output swe1,
-    output swd1[2],
-    output sre1,
-
     output swe2,
-    output swd2[2],
-    output sre2,
-
     output swe3,
+
+    // write data
+    output swd1[2],
+    output swd2[2],
     output swd3[2],
-    output sre3, 
-    output out
-    
-    
+
 ) {
     enum States {
         A_INPUT_IDLE, A_SET_PIXEL_A, A_SET_PIXEL_0, 
@@ -170,9 +171,7 @@ module fsm #(
         bsel = 0
         wdsel = 0
 
-        srst1 = 0
-        srst2 = 0
-        srst3 = 0
+        srst = 0
 
         swe1 = 0
         swd1 = 0
@@ -1182,9 +1181,7 @@ module fsm #(
             // Reading BRAM and loading SR
             // First in the row
             States.RESET_SR_POINTERS:
-                srst1 = 1
-                srst2 = 1
-                srst3 = 1
+                srst = 1
                 states.d = States.SR_00_ALL_SR
 
             States.SR_00_ALL_SR:

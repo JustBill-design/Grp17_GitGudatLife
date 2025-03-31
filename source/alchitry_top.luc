@@ -41,6 +41,7 @@ module alchitry_top (
         // The reset conditioner is used to synchronize the reset signal to the FPGA
         // clock. This ensures the entire FPGA comes out of reset at the same time.
         reset_conditioner reset_cond
+        reset_conditioner fifo_reset
         
         
         // button conditioners and edge detector for next/play
@@ -79,10 +80,12 @@ module alchitry_top (
 
     always {
 
-        reset_cond.in = ~butt_reset     // input raw inverted reset signal
-        rst = reset_cond.out            // conditioned reset
-        led = 8h00                      // turn LEDs off
-        usb_tx = usb_rx                 // echo the serial data
+        // whole board reset
+        reset_cond.in = ~butt_reset
+        rst = reset_cond.out
+        // default board led and usb connection
+        led = 8h00
+        usb_tx = usb_rx
         
         // button processing
         cond_butt_dirs.in = butt_dirs
@@ -93,26 +96,24 @@ module alchitry_top (
         // connect game clock
         gameclk.in = gamecounter[$clog2(gamecounter)]
         
-        // matrix default connections
-        mataddr = 0
-        mattop = 0
-        matbot = 0
-        matclk = 0
-        matoe = 0
-        matlat = 0
+        // matrix and display driver connections
+        mataddr = display.address
+        mattop = display.toppixel
+        matbot = display.botpixel
+        matclk = display.sclk_out
+        matoe = display.blank
+        matlat = display.latch
         matgnd = 0
-        
-        // FSM connections -------------------------------------------------
         
         // buttons connections
         sm.next_start_button = edge_next_play.out
-        sm.reset_button = butt_reset
-        sm.move_up_button = cond_butt_dirs[0]
-        sm.move_down_button = cond_butt_dirs[1]
-        sm.move_left_button = cond_butt_dirs[2]
-        sm.move_right_button = cond_butt_dirs[3]
-        sm.select_button = cond_butt_sel_desel[0]
-        sm.deselect_button = cond_butt_sel_desel[1]
+        sm.reset_button = rst
+        sm.move_up_button = cond_butt_dirs.out[0]
+        sm.move_down_button = cond_butt_dirs.out[1]
+        sm.move_left_button = cond_butt_dirs.out[2]
+        sm.move_right_button = cond_butt_dirs.out[3]
+        sm.select_button = cond_butt_sel_desel.out[0]
+        sm.deselect_button = cond_butt_sel_desel.out[1]
 
         // seven segment // ~ if not cathode/anode
         aseg = sm.aseg
@@ -126,9 +127,11 @@ module alchitry_top (
         reg.ra1 = sm.ra1
         reg.ra2 = sm.ra2
         reg.wa = sm.wa
+        reg.we = sm.we
         
         // alu
         sm.aluout = alum.out
+        alum.alufn = sm.alufn
         
         // a selector
         case(sm.asel) {
@@ -166,11 +169,38 @@ module alchitry_top (
         }
 
         // shift register connections
+        // reset conditioner
+        fifo_reset.in = sm.srst
+        // reset
+        sr1.rst = fifo_reset.out | reset_cond.out
+        sr2.rst = fifo_reset.out | reset_cond.out
+        sr3.rst = fifo_reset.out | reset_cond.out
+        // write enable
+        sr1.wput = sm.swe1
+        sr2.wput = sm.swe2
+        sr3.wput = sm.swe3
+        // write data
+        sr1.din = sm.swd1
+        sr2.din = sm.swd2
+        sr3.din = sm.swd3
+        // read enable
+        sr1.rget = sm sre1
+        sr2.rget = sm sre2
+        sr3.rget = sm sre3
+        // read data
+        sm.srd1 = sr1.dout
+        sm.srd2 = sr2.dout
+        sm.srd3 = sr3.dout
+
+        // BRAM connections
+        sm.ddr = display.reading
+        sm.brd = brams.brd
+        brams.brsel = sm.brsel
+        brams.bra = sm.bra
+        brams.bwa = sm.bwa
+        brams.bwe = sm.bwe
+        brams.bwd = sm.bwd
         
-
-
-
-
 
 
 
@@ -189,23 +219,14 @@ module alchitry_top (
         amod.b = 32b0
         amod.alufn = 6b0
         
-        display.data = pixeldata.q
-        mataddr = display.address
-        mattop = display.toppixel
-        matbot = display.botpixel
-        matclk = display.sclk_out
-        matoe = display.blank
-        matlat = display.latch
-        matgnd = b00
-
-        // display.data = 1
-        // mataddr = 1
-        // mattop = 1
-        // matbot = 1
-        // matclk = 1
-        // matoe = 1
-        // matlat = 1
-        // matgnd = 1
+        // display.data = pixeldata.q
+        // mataddr = display.address
+        // mattop = display.toppixel
+        // matbot = display.botpixel
+        // matclk = display.sclk_out
+        // matoe = display.blank
+        // matlat = display.latch
+        // matgnd = b00
 
         butt_cond.in = testpullup
         led = 8x{butt_cond.out}
