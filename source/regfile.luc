@@ -23,8 +23,8 @@ module regfile #(
     always {
       
         // always read 
-        rd1 = registers.q[ra1];
-        rd2 = registers.q[ra2];
+        rd1 = registers.q[ra1]
+        rd2 = registers.q[ra2]
         pac = registers.q[2]
         pbc = registers.q[3]
         timer = registers.q[6]

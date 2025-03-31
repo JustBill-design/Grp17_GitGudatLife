@@ -33,7 +33,7 @@ module alchitry_top (
 ) {
     const CLK = 100000000
 
-    alu amod
+    alu alum
     
 
     .clk(clk) {
@@ -72,6 +72,7 @@ module alchitry_top (
             fifo sr1(#WIDTH(2),#ENTRIES(4))
             fifo sr2(#WIDTH(2),#ENTRIES(4))
             fifo sr3(#WIDTH(2),#ENTRIES(4))
+            
         }
     }
 
@@ -101,13 +102,9 @@ module alchitry_top (
         matlat = 0
         matgnd = 0
         
-        // seven segment default connections
-        acount = 0
-        bcount = 0
-        timer = 0
+        // FSM connections -------------------------------------------------
         
-        // FSM connections
-        // buttons
+        // buttons connections
         sm.next_start_button = edge_next_play.out
         sm.reset_button = butt_reset
         sm.move_up_button = cond_butt_dirs[0]
@@ -117,11 +114,59 @@ module alchitry_top (
         sm.select_button = cond_butt_sel_desel[0]
         sm.deselect_button = cond_butt_sel_desel[1]
 
-        // 
+        // seven segment // ~ if not cathode/anode
+        aseg = sm.aseg
+        bseg = sm.bseg
+        timerseg = sm.timerseg
+        sm.pac = reg.pac
+        sm.pbc = reg.pbc
+        sm.timer = reg.timer
+        
+        // regfile inputs
+        reg.ra1 = sm.ra1
+        reg.ra2 = sm.ra2
+        reg.wa = sm.wa
+        
+        // alu
+        sm.aluout = alum.out
+        
+        // a selector
+        case(sm.asel) {
+            0: alum.a = reg.rd1
+            default: alu.a = reg.rd1
+        }
+        
+        // b selector
+        case(sm.bsel) {
+            0: alum.b = reg.rd2
+            1: alum.b = 1
+            2: alum.b = 2
+            3: alum.b = 3
+            4: alum.b = 64
+            5: alum.b = 63
+            6: alum.b = 128
+            7: alum.b = 255
+            8: alum.b = 4223
+            9: alum.b = 4160
+        }
 
+        // wd selector
+        case(sm.wdsel) {
+            0: reg.wd = alu.out
+            1: reg.wd = 0
+            2: reg.wd = 1
+            3: reg.wd = 2
+            4: reg.wd = brams.brd
+            5: reg.wd = sr1.dout
+            6: reg.wd = 60
+            7: reg.wd = 2144
+            8: reg.wd = 11
+            9: reg.wd = 64
+            default: reg.wd = 0
+        }
 
-
-
+        // shift register connections
+        
 
 
 

@@ -17,11 +17,13 @@ module fsm #(
     input deselect_button,
     input select_button,
     
-    input pac,
-    input pbc,
-    input timer,
-    input brd,
-    input ddr,
+    // seven segments
+    input pac[32],              // A cell count
+    input pbc[32],              // B cell count
+    input timer[32],            // game timer countdown
+    output aseg[12],            // corresponding segment
+    output bseg[12],            // corresponding segment
+    output timerseg[12],        // corresponding segment
     
     // alu
     input rd1[32],
@@ -32,12 +34,15 @@ module fsm #(
     input game_clk,
 
     // BRAM
-    output brsel[2],         // selector override
-    output bra[13],          // read address
-    output bwa[13],          // write address
-    output bwe,              // write enable
-    output bwd[2],           // write data
+    input brd[2],           // bram read data
+    output brsel[2],        // bram selector override
+    output bra[13],         // bram read address
+    output bwa[13],         // bram write address
+    output bwe,             // bram write enable
+    output bwd[2],          // bram write data
+    input ddr,              // display driver read override
     
+    // regfile
     output ra1[32],
     output ra2[32],
     output wa[3],
