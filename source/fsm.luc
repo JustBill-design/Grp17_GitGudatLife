@@ -1,10 +1,10 @@
 module fsm #(
 ) (
     input clk,  // clock
+    input rst,  // reset
 
     // buttons ----------------------------------------------
     input next_start_button,
-    input reset_button,
     
     // movement buttons, no edge detector
     input move_up_button,
@@ -20,9 +20,6 @@ module fsm #(
     input pac[32],          // A cell count
     input pbc[32],          // B cell count
     input timer[32],        // game timer countdown
-    output aseg[12],        // corresponding segment
-    output bseg[12],        // corresponding segment
-    output timerseg[12],    // corresponding segment
     
     // alu
     input aluout[32],       // alu result
@@ -132,9 +129,9 @@ module fsm #(
         IDLE
     }
     
-    dff states[$width(States)](#INIT(States.SET_PIXEL_ADDRESS_TO_0), .clk(clk), .rst(reset_button))
-    dff decrease_timer(.clk(clk), .rst(reset_button))
-    dff game_tick(.clk(clk), .rst(reset_button))
+    dff states[$width(States)](#INIT(States.SET_PIXEL_ADDRESS_TO_0), .clk(clk), .rst(rst))
+    dff decrease_timer(.clk(clk), .rst(rst))
+    dff game_tick(.clk(clk), .rst(rst))
 
     const ADD = b000000
     const SUB = b000001
@@ -189,7 +186,7 @@ module fsm #(
         sre3 = 0
 
         // timer and game update triggers
-        decrease_timer.d = decrease_timer.d
+        decrease_timer.d = decrease_timer.q
         if (timerclk) {
             decrease_timer.d = 1
         }
@@ -1174,6 +1171,7 @@ module fsm #(
                     states.d = States.END_GAME
                 }
                 else if (game_tick.q) {
+                    game_tick.d = 0
                     states.d = States.GAME_IDLE_READ_CURR_PIXEL_VALUE
                 }
                 else {

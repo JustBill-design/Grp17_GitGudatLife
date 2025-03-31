@@ -6,9 +6,9 @@ module bram #(
     input rst,  // reset
     input bram_selector,                // selector from regfile
     input brsel,                        // selector override
-    input bra[$clog2(ENTRIES)],          // read address
-    input bwa[$clog2(ENTRIES)],          // write address
-    input bwa_override[$clog2(ENTRIES)], // override write address
+    input bra[$clog2(ENTRIES)],         // read address
+    input bwa[$clog2(ENTRIES)],         // write address
+    input bra_override[$clog2(ENTRIES)],// override read address
     input bwe,                          // write enable
     input bwd[WIDTH],                   // write data
     input wo,                           // write override
@@ -37,7 +37,7 @@ module bram #(
         
         // write override mux
         if (wo) {
-            override_address = bwa_override
+            override_address = bra_override
         } else {
             override_address = bra
         }

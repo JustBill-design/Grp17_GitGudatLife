@@ -35,31 +35,37 @@ module alchitry_top (
 
     alu alum
     
+    sig rst
+    sig fifo_rst
+    
 
     .clk(clk) {
+    
+        reset_conditioner reset_cond        // whole board reset
+        reset_conditioner fifo_reset_cond   // reset for shift registers
 
-        // The reset conditioner is used to synchronize the reset signal to the FPGA
-        // clock. This ensures the entire FPGA comes out of reset at the same time.
-        reset_conditioner reset_cond
-        reset_conditioner fifo_reset
-        
-        
-        // button conditioners and edge detector for next/play
+        // button conditioners
         button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}))
         button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}))
         button_conditioner cond_butt_next_play(#CLK_FREQ(CLK))
+        button_conditioner butt_cond(#CLK_FREQ(CLK))            // CAN REMOVE WITH BUTTON TESTER
+        
+        // edge detector for next/play button
         edge_detector edge_next_play(#RISE(1),#FALL(0))
         
+        // edge detecors for internal clocks
+        edge_detector timerclk(#RISE(0),#FALL(1))   // ticks once per second
+        edge_detector gameclk(#RISE(1),#FALL(0))    // ticks roughly 10 times per second
         
-        dff pixeldata[2](#INIT(b00))
+        // dff pixeldata[2](#INIT(b00))
 
         .rst(rst) {
+        
+            // display driver
             display_driver display
             
             // counter resets every second
             counter gamecounter(#SIZE($clog2(CLK)),#TOP(CLK),#DIV(0))
-            edge_detector timerclk(#RISE(0),#FALL(1))   // ticks once per second
-            edge_detector gameclk(#RISE(1),#FALL(0))    // ticks roughly 10 times per second
             
             // FSM
             fsm sm
@@ -70,16 +76,39 @@ module alchitry_top (
             // custom 32-bit regfile
             regfile reg
             
+            // seven segment drivers
+            multi_seven_seg aseg_driver
+            multi_seven_seg bseg_driver
+            multi_seven_seg timerseg_driver
+            
+        }
+        .rst(fifo_rst) {
             // shift registers
             fifo sr1(#WIDTH(2),#ENTRIES(4))
             fifo sr2(#WIDTH(2),#ENTRIES(4))
             fifo sr3(#WIDTH(2),#ENTRIES(4))
-            
         }
     }
 
 
     always {
+    
+        // default display blue-white stripes
+        // if (display.reading && display.addr[6]) {
+        //     pixeldata.d = b10
+        // }
+        // else if (display.reading) {
+        //     pixeldata.d = b11
+        // }
+
+        // button tester
+        butt_cond.in = testpullup
+        led = 8x{butt_cond.out}
+
+
+
+
+
 
         // whole board reset
         reset_cond.in = ~butt_reset
@@ -102,16 +131,17 @@ module alchitry_top (
         matoe = display.blank
         matlat = display.latch
         matgnd = 0
+
+        sm.ddr = display.reading
         
         // connect slow clocks
-        timerclk.in = gamecounter.value[$clog2(gamecounter)]
+        timerclk.in = gamecounter.value[$clog2(CLK)-1]
         gameclk.in = gamecounter.value[$clog2(CLK/10)]
-        sm.timeclk = timerclk.out
+        sm.timerclk = timerclk.out
         sm.gameclk = gameclk.out
 
         // buttons connections
         sm.next_start_button = edge_next_play.out
-        sm.reset_button = rst
         sm.move_up_button = cond_butt_dirs.out[0]
         sm.move_down_button = cond_butt_dirs.out[1]
         sm.move_left_button = cond_butt_dirs.out[2]
@@ -120,18 +150,23 @@ module alchitry_top (
         sm.deselect_button = cond_butt_sel_desel.out[1]
 
         // seven segment // ~ if not cathode/anode
-        aseg = sm.aseg
-        bseg = sm.bseg
-        timerseg = sm.timerseg
-        sm.pac = reg.pac
-        sm.pbc = reg.pbc
-        sm.timer = reg.timer
+        aseg_driver.value = reg.pac
+        bseg_driver.value = reg.pbc
+        timerseg_driver.value = reg.timer
+        aseg = aseg_driver.out
+        bseg = bseg_driver.out
+        timerseg = timerseg_driver.out
         
-        // regfile inputs
+        // FSM and regfile connections
         reg.ra1 = sm.ra1
         reg.ra2 = sm.ra2
         reg.wa = sm.wa
         reg.we = sm.we
+        sm.rd1 = reg.rd1
+        sm.rd2 = reg.rd2
+        sm.pac = reg.pac
+        sm.pbc = reg.pbc
+        sm.timer = reg.timer
         
         // alu
         sm.aluout = alum.out
@@ -140,12 +175,11 @@ module alchitry_top (
         // a selector
         case(sm.asel) {
             0: alum.a = reg.rd1
-            default: alu.a = reg.rd1
+            default: alum.a = reg.rd1
         }
         
         // b selector
         case(sm.bsel) {
-            0: alum.b = reg.rd2
             1: alum.b = 1
             2: alum.b = 2
             3: alum.b = 3
@@ -155,11 +189,11 @@ module alchitry_top (
             7: alum.b = 255
             8: alum.b = 4223
             9: alum.b = 4160
+            default: alum.b = reg.rd2
         }
 
         // wd selector
         case(sm.wdsel) {
-            0: reg.wd = alu.out
             1: reg.wd = 0
             2: reg.wd = 1
             3: reg.wd = 2
@@ -169,16 +203,14 @@ module alchitry_top (
             7: reg.wd = 2144
             8: reg.wd = 11
             9: reg.wd = 64
-            default: reg.wd = 0
+            default: reg.wd = alum.out
         }
 
         // shift register connections
         // reset conditioner
-        fifo_reset.in = sm.srst
+        fifo_reset_cond.in = sm.srst
         // reset
-        sr1.rst = fifo_reset.out | reset_cond.out
-        sr2.rst = fifo_reset.out | reset_cond.out
-        sr3.rst = fifo_reset.out | reset_cond.out
+        fifo_rst = fifo_reset_cond.out | reset_cond.out
         // write enable
         sr1.wput = sm.swe1
         sr2.wput = sm.swe2
@@ -196,8 +228,12 @@ module alchitry_top (
         sm.srd2 = sr2.dout
         sm.srd3 = sr3.dout
 
-        // BRAM connections
-        sm.ddr = display.reading
+        // BRAM and display driver connections
+        display.data = brams.brd
+        brams.bra_override = display.addr
+        brams.wo = display.reading
+        
+        // BRAM and FSM connections
         sm.brd = brams.brd
         brams.brsel = sm.brsel
         brams.bra = sm.bra
@@ -205,34 +241,7 @@ module alchitry_top (
         brams.bwe = sm.bwe
         brams.bwd = sm.bwd
         
-
-
-
-
-        
-        
-        if (display.reading && display.addr[6]) {
-            pixeldata.d = b10
-        }
-        else if (display.reading) {
-            pixeldata.d = b11
-        }
-
-
-        amod.a = 32b0
-        amod.b = 32b0
-        amod.alufn = 6b0
-        
-        // display.data = pixeldata.q
-        // mataddr = display.address
-        // mattop = display.toppixel
-        // matbot = display.botpixel
-        // matclk = display.sclk_out
-        // matoe = display.blank
-        // matlat = display.latch
-        // matgnd = b00
-
-        butt_cond.in = testpullup
-        led = 8x{butt_cond.out}
+        // BRAM and regfile connections
+        brams.bram_selector = reg.brsel
     }
 }

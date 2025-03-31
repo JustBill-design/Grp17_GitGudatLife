@@ -7,7 +7,7 @@ module multi_seven_seg #(
 
     input value[$clog2($pow(10, DIGITS))],//bin_to_dec
 
-    input values[DIGITS][4],  // values to show
+    //input values[DIGITS][4],  // values to show
     output out[12]
 ) {
     
