@@ -1,0 +1,1624 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
+| Date         : Tue Apr  1 12:57:06 2025
+| Host         : PC running 64-bit major release  (build 9200)
+| Command      : report_methodology -file alchitry_top_methodology_drc_routed.rpt -pb alchitry_top_methodology_drc_routed.pb -rpx alchitry_top_methodology_drc_routed.rpx
+| Design       : alchitry_top
+| Device       : xc7a35tftg256-1
+| Speed File   : -1
+| Design State : Fully Routed
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report Methodology
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+             Max checks: <unlimited>
+             Checks found: 317
++-----------+----------+--------------------------------------------+--------+
+| Rule      | Severity | Description                                | Checks |
++-----------+----------+--------------------------------------------+--------+
+| LUTAR-1   | Warning  | LUT drives async reset alert               | 1      |
+| SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 2      |
+| TIMING-16 | Warning  | Large setup violation                      | 256    |
+| TIMING-18 | Warning  | Missing input or output delay              | 58     |
++-----------+----------+--------------------------------------------+--------+
+
+2. REPORT DETAILS
+-----------------
+LUTAR-1#1 Warning
+LUT drives async reset alert  
+LUT cell sm/D_stage_q[3]_i_1, with 2 or more inputs, drives asynchronous preset/clear pin(s) fifo_reset_cond/D_stage_q_reg[0]/PRE, fifo_reset_cond/D_stage_q_reg[1]/PRE,
+fifo_reset_cond/D_stage_q_reg[2]/PRE, fifo_reset_cond/D_stage_q_reg[3]/PRE. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
+Related violations: <none>
+
+SYNTH-6#1 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance brams/bram1/ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+SYNTH-6#2 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance brams/bram2/ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+TIMING-16#1 Warning
+Large setup violation  
+There is a large setup violation of -1.009 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][17]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#2 Warning
+Large setup violation  
+There is a large setup violation of -1.010 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][5]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#3 Warning
+Large setup violation  
+There is a large setup violation of -1.011 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][8]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#4 Warning
+Large setup violation  
+There is a large setup violation of -1.013 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][1]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#5 Warning
+Large setup violation  
+There is a large setup violation of -1.016 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][6]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#6 Warning
+Large setup violation  
+There is a large setup violation of -1.028 ns between sm/D_states_q_reg[2]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][3]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#7 Warning
+Large setup violation  
+There is a large setup violation of -1.029 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][4]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#8 Warning
+Large setup violation  
+There is a large setup violation of -1.032 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][2]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#9 Warning
+Large setup violation  
+There is a large setup violation of -1.045 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][17]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#10 Warning
+Large setup violation  
+There is a large setup violation of -1.065 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][17]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#11 Warning
+Large setup violation  
+There is a large setup violation of -1.069 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][4]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#12 Warning
+Large setup violation  
+There is a large setup violation of -1.071 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][17]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#13 Warning
+Large setup violation  
+There is a large setup violation of -1.076 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][2]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#14 Warning
+Large setup violation  
+There is a large setup violation of -1.087 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][5]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#15 Warning
+Large setup violation  
+There is a large setup violation of -1.098 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][7]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#16 Warning
+Large setup violation  
+There is a large setup violation of -1.107 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][1]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#17 Warning
+Large setup violation  
+There is a large setup violation of -1.115 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][1]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#18 Warning
+Large setup violation  
+There is a large setup violation of -1.117 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][8]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#19 Warning
+Large setup violation  
+There is a large setup violation of -1.121 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][19]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#20 Warning
+Large setup violation  
+There is a large setup violation of -1.130 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][5]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#21 Warning
+Large setup violation  
+There is a large setup violation of -1.138 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][8]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#22 Warning
+Large setup violation  
+There is a large setup violation of -1.141 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][8]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#23 Warning
+Large setup violation  
+There is a large setup violation of -1.143 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][1]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#24 Warning
+Large setup violation  
+There is a large setup violation of -1.144 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][5]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#25 Warning
+Large setup violation  
+There is a large setup violation of -1.150 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][3]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#26 Warning
+Large setup violation  
+There is a large setup violation of -1.157 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][17]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#27 Warning
+Large setup violation  
+There is a large setup violation of -1.165 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][1]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#28 Warning
+Large setup violation  
+There is a large setup violation of -1.167 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][4]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#29 Warning
+Large setup violation  
+There is a large setup violation of -1.175 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][4]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#30 Warning
+Large setup violation  
+There is a large setup violation of -1.178 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][12]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#31 Warning
+Large setup violation  
+There is a large setup violation of -1.180 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][1]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#32 Warning
+Large setup violation  
+There is a large setup violation of -1.187 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][8]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#33 Warning
+Large setup violation  
+There is a large setup violation of -1.191 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][7]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#34 Warning
+Large setup violation  
+There is a large setup violation of -1.191 ns between sm/D_states_q_reg[2]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][3]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#35 Warning
+Large setup violation  
+There is a large setup violation of -1.228 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][4]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#36 Warning
+Large setup violation  
+There is a large setup violation of -1.236 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][16]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#37 Warning
+Large setup violation  
+There is a large setup violation of -1.244 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][8]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#38 Warning
+Large setup violation  
+There is a large setup violation of -1.249 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][13]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#39 Warning
+Large setup violation  
+There is a large setup violation of -1.293 ns between sm/D_states_q_reg[2]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][3]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#40 Warning
+Large setup violation  
+There is a large setup violation of -1.299 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][4]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#41 Warning
+Large setup violation  
+There is a large setup violation of -1.300 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][5]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#42 Warning
+Large setup violation  
+There is a large setup violation of -1.302 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][12]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#43 Warning
+Large setup violation  
+There is a large setup violation of -1.323 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][5]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#44 Warning
+Large setup violation  
+There is a large setup violation of -1.325 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][1]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#45 Warning
+Large setup violation  
+There is a large setup violation of -1.331 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][8]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#46 Warning
+Large setup violation  
+There is a large setup violation of -1.349 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][12]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#47 Warning
+Large setup violation  
+There is a large setup violation of -1.352 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][7]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#48 Warning
+Large setup violation  
+There is a large setup violation of -1.357 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][12]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#49 Warning
+Large setup violation  
+There is a large setup violation of -1.357 ns between sm/D_states_q_reg[2]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][3]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#50 Warning
+Large setup violation  
+There is a large setup violation of -1.358 ns between sm/D_states_q_reg[2]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][3]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#51 Warning
+Large setup violation  
+There is a large setup violation of -1.369 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][5]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#52 Warning
+Large setup violation  
+There is a large setup violation of -1.378 ns between sm/D_states_q_reg[2]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][3]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#53 Warning
+Large setup violation  
+There is a large setup violation of -1.384 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][11]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#54 Warning
+Large setup violation  
+There is a large setup violation of -1.410 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][2]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#55 Warning
+Large setup violation  
+There is a large setup violation of -1.413 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][7]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#56 Warning
+Large setup violation  
+There is a large setup violation of -1.417 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][11]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#57 Warning
+Large setup violation  
+There is a large setup violation of -1.417 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][11]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#58 Warning
+Large setup violation  
+There is a large setup violation of -1.421 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][12]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#59 Warning
+Large setup violation  
+There is a large setup violation of -1.422 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][2]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#60 Warning
+Large setup violation  
+There is a large setup violation of -1.423 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][16]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#61 Warning
+Large setup violation  
+There is a large setup violation of -1.423 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][2]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#62 Warning
+Large setup violation  
+There is a large setup violation of -1.425 ns between sm/D_states_q_reg[2]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][3]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#63 Warning
+Large setup violation  
+There is a large setup violation of -1.431 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][21]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#64 Warning
+Large setup violation  
+There is a large setup violation of -1.467 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][21]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#65 Warning
+Large setup violation  
+There is a large setup violation of -1.469 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][13]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#66 Warning
+Large setup violation  
+There is a large setup violation of -1.484 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][13]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#67 Warning
+Large setup violation  
+There is a large setup violation of -1.488 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][16]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#68 Warning
+Large setup violation  
+There is a large setup violation of -1.522 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][2]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#69 Warning
+Large setup violation  
+There is a large setup violation of -1.523 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][4]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#70 Warning
+Large setup violation  
+There is a large setup violation of -1.532 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][11]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#71 Warning
+Large setup violation  
+There is a large setup violation of -1.534 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][16]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#72 Warning
+Large setup violation  
+There is a large setup violation of -1.535 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][2]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#73 Warning
+Large setup violation  
+There is a large setup violation of -1.537 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][14]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#74 Warning
+Large setup violation  
+There is a large setup violation of -1.540 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][21]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#75 Warning
+Large setup violation  
+There is a large setup violation of -1.543 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][12]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#76 Warning
+Large setup violation  
+There is a large setup violation of -1.545 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][12]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#77 Warning
+Large setup violation  
+There is a large setup violation of -1.554 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][18]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#78 Warning
+Large setup violation  
+There is a large setup violation of -1.564 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][16]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#79 Warning
+Large setup violation  
+There is a large setup violation of -1.568 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][16]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#80 Warning
+Large setup violation  
+There is a large setup violation of -1.571 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][21]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#81 Warning
+Large setup violation  
+There is a large setup violation of -1.575 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][19]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#82 Warning
+Large setup violation  
+There is a large setup violation of -1.578 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][1]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#83 Warning
+Large setup violation  
+There is a large setup violation of -1.584 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][16]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#84 Warning
+Large setup violation  
+There is a large setup violation of -1.591 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][16]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#85 Warning
+Large setup violation  
+There is a large setup violation of -1.602 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][11]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#86 Warning
+Large setup violation  
+There is a large setup violation of -1.607 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][9]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#87 Warning
+Large setup violation  
+There is a large setup violation of -1.608 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][18]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#88 Warning
+Large setup violation  
+There is a large setup violation of -1.611 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][10]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#89 Warning
+Large setup violation  
+There is a large setup violation of -1.612 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][9]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#90 Warning
+Large setup violation  
+There is a large setup violation of -1.620 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][19]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#91 Warning
+Large setup violation  
+There is a large setup violation of -1.620 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][19]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#92 Warning
+Large setup violation  
+There is a large setup violation of -1.621 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][14]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#93 Warning
+Large setup violation  
+There is a large setup violation of -1.623 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][22]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#94 Warning
+Large setup violation  
+There is a large setup violation of -1.629 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][13]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#95 Warning
+Large setup violation  
+There is a large setup violation of -1.640 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][10]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#96 Warning
+Large setup violation  
+There is a large setup violation of -1.646 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][11]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#97 Warning
+Large setup violation  
+There is a large setup violation of -1.652 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][13]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#98 Warning
+Large setup violation  
+There is a large setup violation of -1.653 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][10]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#99 Warning
+Large setup violation  
+There is a large setup violation of -1.657 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][15]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#100 Warning
+Large setup violation  
+There is a large setup violation of -1.664 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][18]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#101 Warning
+Large setup violation  
+There is a large setup violation of -1.678 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][2]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#102 Warning
+Large setup violation  
+There is a large setup violation of -1.680 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][18]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#103 Warning
+Large setup violation  
+There is a large setup violation of -1.683 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][18]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#104 Warning
+Large setup violation  
+There is a large setup violation of -1.684 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][21]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#105 Warning
+Large setup violation  
+There is a large setup violation of -1.688 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][18]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#106 Warning
+Large setup violation  
+There is a large setup violation of -1.690 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][11]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#107 Warning
+Large setup violation  
+There is a large setup violation of -1.696 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][18]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#108 Warning
+Large setup violation  
+There is a large setup violation of -1.699 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][11]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#109 Warning
+Large setup violation  
+There is a large setup violation of -1.704 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][21]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#110 Warning
+Large setup violation  
+There is a large setup violation of -1.720 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][15]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#111 Warning
+Large setup violation  
+There is a large setup violation of -1.731 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][14]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#112 Warning
+Large setup violation  
+There is a large setup violation of -1.738 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][19]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#113 Warning
+Large setup violation  
+There is a large setup violation of -1.747 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][18]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#114 Warning
+Large setup violation  
+There is a large setup violation of -1.752 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][13]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#115 Warning
+Large setup violation  
+There is a large setup violation of -1.754 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][13]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#116 Warning
+Large setup violation  
+There is a large setup violation of -1.758 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][14]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#117 Warning
+Large setup violation  
+There is a large setup violation of -1.758 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][13]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#118 Warning
+Large setup violation  
+There is a large setup violation of -1.759 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][19]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#119 Warning
+Large setup violation  
+There is a large setup violation of -1.769 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][19]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#120 Warning
+Large setup violation  
+There is a large setup violation of -1.780 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][14]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#121 Warning
+Large setup violation  
+There is a large setup violation of -1.792 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][15]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#122 Warning
+Large setup violation  
+There is a large setup violation of -1.807 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][10]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#123 Warning
+Large setup violation  
+There is a large setup violation of -1.819 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][14]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#124 Warning
+Large setup violation  
+There is a large setup violation of -1.830 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][10]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#125 Warning
+Large setup violation  
+There is a large setup violation of -1.834 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][14]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#126 Warning
+Large setup violation  
+There is a large setup violation of -1.844 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][15]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#127 Warning
+Large setup violation  
+There is a large setup violation of -1.848 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][9]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#128 Warning
+Large setup violation  
+There is a large setup violation of -1.851 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][12]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#129 Warning
+Large setup violation  
+There is a large setup violation of -1.858 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][21]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#130 Warning
+Large setup violation  
+There is a large setup violation of -1.862 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][15]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#131 Warning
+Large setup violation  
+There is a large setup violation of -1.884 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][14]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#132 Warning
+Large setup violation  
+There is a large setup violation of -1.890 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][22]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#133 Warning
+Large setup violation  
+There is a large setup violation of -1.894 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][21]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#134 Warning
+Large setup violation  
+There is a large setup violation of -1.895 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][9]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#135 Warning
+Large setup violation  
+There is a large setup violation of -1.919 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][29]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#136 Warning
+Large setup violation  
+There is a large setup violation of -1.930 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][29]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#137 Warning
+Large setup violation  
+There is a large setup violation of -1.932 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][9]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#138 Warning
+Large setup violation  
+There is a large setup violation of -1.937 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][9]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#139 Warning
+Large setup violation  
+There is a large setup violation of -1.951 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][29]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#140 Warning
+Large setup violation  
+There is a large setup violation of -1.952 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][29]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#141 Warning
+Large setup violation  
+There is a large setup violation of -1.952 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][10]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#142 Warning
+Large setup violation  
+There is a large setup violation of -1.958 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][15]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#143 Warning
+Large setup violation  
+There is a large setup violation of -1.962 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][22]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#144 Warning
+Large setup violation  
+There is a large setup violation of -1.970 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][19]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#145 Warning
+Large setup violation  
+There is a large setup violation of -1.978 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][22]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#146 Warning
+Large setup violation  
+There is a large setup violation of -1.979 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][29]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#147 Warning
+Large setup violation  
+There is a large setup violation of -1.985 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][15]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#148 Warning
+Large setup violation  
+There is a large setup violation of -1.988 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][9]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#149 Warning
+Large setup violation  
+There is a large setup violation of -1.990 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][29]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#150 Warning
+Large setup violation  
+There is a large setup violation of -1.995 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][10]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#151 Warning
+Large setup violation  
+There is a large setup violation of -2.006 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][22]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#152 Warning
+Large setup violation  
+There is a large setup violation of -2.025 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][26]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#153 Warning
+Large setup violation  
+There is a large setup violation of -2.046 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][24]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#154 Warning
+Large setup violation  
+There is a large setup violation of -2.051 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][26]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#155 Warning
+Large setup violation  
+There is a large setup violation of -2.061 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][15]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#156 Warning
+Large setup violation  
+There is a large setup violation of -2.069 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][29]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#157 Warning
+Large setup violation  
+There is a large setup violation of -2.071 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][20]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#158 Warning
+Large setup violation  
+There is a large setup violation of -2.075 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][26]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#159 Warning
+Large setup violation  
+There is a large setup violation of -2.077 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][22]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#160 Warning
+Large setup violation  
+There is a large setup violation of -2.099 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][10]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#161 Warning
+Large setup violation  
+There is a large setup violation of -2.114 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][22]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#162 Warning
+Large setup violation  
+There is a large setup violation of -2.125 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][29]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#163 Warning
+Large setup violation  
+There is a large setup violation of -2.126 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][9]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#164 Warning
+Large setup violation  
+There is a large setup violation of -2.154 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][20]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#165 Warning
+Large setup violation  
+There is a large setup violation of -2.186 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][24]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#166 Warning
+Large setup violation  
+There is a large setup violation of -2.207 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][24]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#167 Warning
+Large setup violation  
+There is a large setup violation of -2.217 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][22]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#168 Warning
+Large setup violation  
+There is a large setup violation of -2.244 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][24]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#169 Warning
+Large setup violation  
+There is a large setup violation of -2.267 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][24]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#170 Warning
+Large setup violation  
+There is a large setup violation of -2.269 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][26]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#171 Warning
+Large setup violation  
+There is a large setup violation of -2.272 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][24]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#172 Warning
+Large setup violation  
+There is a large setup violation of -2.280 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][24]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#173 Warning
+Large setup violation  
+There is a large setup violation of -2.295 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][26]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#174 Warning
+Large setup violation  
+There is a large setup violation of -2.307 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][20]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#175 Warning
+Large setup violation  
+There is a large setup violation of -2.309 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][26]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#176 Warning
+Large setup violation  
+There is a large setup violation of -2.314 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][20]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#177 Warning
+Large setup violation  
+There is a large setup violation of -2.368 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][23]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#178 Warning
+Large setup violation  
+There is a large setup violation of -2.369 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][26]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#179 Warning
+Large setup violation  
+There is a large setup violation of -2.370 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][23]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#180 Warning
+Large setup violation  
+There is a large setup violation of -2.410 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][27]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#181 Warning
+Large setup violation  
+There is a large setup violation of -2.412 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][26]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#182 Warning
+Large setup violation  
+There is a large setup violation of -2.417 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][23]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#183 Warning
+Large setup violation  
+There is a large setup violation of -2.453 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][23]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#184 Warning
+Large setup violation  
+There is a large setup violation of -2.461 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][24]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#185 Warning
+Large setup violation  
+There is a large setup violation of -2.463 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][23]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#186 Warning
+Large setup violation  
+There is a large setup violation of -2.504 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][23]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#187 Warning
+Large setup violation  
+There is a large setup violation of -2.507 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][20]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#188 Warning
+Large setup violation  
+There is a large setup violation of -2.508 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][23]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#189 Warning
+Large setup violation  
+There is a large setup violation of -2.513 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][20]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#190 Warning
+Large setup violation  
+There is a large setup violation of -2.517 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][25]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#191 Warning
+Large setup violation  
+There is a large setup violation of -2.523 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][25]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#192 Warning
+Large setup violation  
+There is a large setup violation of -2.524 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][23]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#193 Warning
+Large setup violation  
+There is a large setup violation of -2.541 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][28]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#194 Warning
+Large setup violation  
+There is a large setup violation of -2.549 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][20]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#195 Warning
+Large setup violation  
+There is a large setup violation of -2.614 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][28]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#196 Warning
+Large setup violation  
+There is a large setup violation of -2.632 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][28]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#197 Warning
+Large setup violation  
+There is a large setup violation of -2.636 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][28]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#198 Warning
+Large setup violation  
+There is a large setup violation of -2.640 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][28]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#199 Warning
+Large setup violation  
+There is a large setup violation of -2.661 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][25]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#200 Warning
+Large setup violation  
+There is a large setup violation of -2.663 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][25]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#201 Warning
+Large setup violation  
+There is a large setup violation of -2.667 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][25]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#202 Warning
+Large setup violation  
+There is a large setup violation of -2.668 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][28]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#203 Warning
+Large setup violation  
+There is a large setup violation of -2.671 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][31]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#204 Warning
+Large setup violation  
+There is a large setup violation of -2.699 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][30]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#205 Warning
+Large setup violation  
+There is a large setup violation of -2.702 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][28]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#206 Warning
+Large setup violation  
+There is a large setup violation of -2.796 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][25]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#207 Warning
+Large setup violation  
+There is a large setup violation of -2.796 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][25]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#208 Warning
+Large setup violation  
+There is a large setup violation of -2.810 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][27]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#209 Warning
+Large setup violation  
+There is a large setup violation of -2.811 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][25]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#210 Warning
+Large setup violation  
+There is a large setup violation of -2.849 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][20]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#211 Warning
+Large setup violation  
+There is a large setup violation of -2.849 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][30]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#212 Warning
+Large setup violation  
+There is a large setup violation of -2.850 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][30]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#213 Warning
+Large setup violation  
+There is a large setup violation of -2.950 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][28]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#214 Warning
+Large setup violation  
+There is a large setup violation of -2.978 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][27]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#215 Warning
+Large setup violation  
+There is a large setup violation of -2.989 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][30]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#216 Warning
+Large setup violation  
+There is a large setup violation of -3.003 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][0]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#217 Warning
+Large setup violation  
+There is a large setup violation of -3.050 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][30]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#218 Warning
+Large setup violation  
+There is a large setup violation of -3.086 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][30]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#219 Warning
+Large setup violation  
+There is a large setup violation of -3.091 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][27]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#220 Warning
+Large setup violation  
+There is a large setup violation of -3.106 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][27]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#221 Warning
+Large setup violation  
+There is a large setup violation of -3.135 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][30]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#222 Warning
+Large setup violation  
+There is a large setup violation of -3.135 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][31]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#223 Warning
+Large setup violation  
+There is a large setup violation of -3.141 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][31]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#224 Warning
+Large setup violation  
+There is a large setup violation of -3.141 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][31]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#225 Warning
+Large setup violation  
+There is a large setup violation of -3.157 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][27]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#226 Warning
+Large setup violation  
+There is a large setup violation of -3.167 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[4][31]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#227 Warning
+Large setup violation  
+There is a large setup violation of -3.171 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][31]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#228 Warning
+Large setup violation  
+There is a large setup violation of -3.177 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][31]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#229 Warning
+Large setup violation  
+There is a large setup violation of -3.189 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][27]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#230 Warning
+Large setup violation  
+There is a large setup violation of -3.209 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][27]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#231 Warning
+Large setup violation  
+There is a large setup violation of -3.210 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][30]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#232 Warning
+Large setup violation  
+There is a large setup violation of -3.297 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][31]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#233 Warning
+Large setup violation  
+There is a large setup violation of -3.387 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[1][0]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#234 Warning
+Large setup violation  
+There is a large setup violation of -3.492 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[3][0]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#235 Warning
+Large setup violation  
+There is a large setup violation of -3.501 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[2][0]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#236 Warning
+Large setup violation  
+There is a large setup violation of -3.504 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[0][0]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#237 Warning
+Large setup violation  
+There is a large setup violation of -3.537 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[7][0]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#238 Warning
+Large setup violation  
+There is a large setup violation of -3.543 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[6][0]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#239 Warning
+Large setup violation  
+There is a large setup violation of -3.549 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and L_reg/D_registers_q_reg[5][0]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#240 Warning
+Large setup violation  
+There is a large setup violation of -3.879 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and sm/D_states_q_reg[3]/CE (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#241 Warning
+Large setup violation  
+There is a large setup violation of -3.883 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and sm/D_states_q_reg[7]/CE (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#242 Warning
+Large setup violation  
+There is a large setup violation of -3.968 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and brams/bram1/ram_reg/ADDRARDADDR[1] (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#243 Warning
+Large setup violation  
+There is a large setup violation of -4.026 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and sm/D_states_q_reg[4]/CE (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#244 Warning
+Large setup violation  
+There is a large setup violation of -4.026 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and sm/D_states_q_reg[5]/CE (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#245 Warning
+Large setup violation  
+There is a large setup violation of -4.029 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and sm/D_states_q_reg[0]/CE (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#246 Warning
+Large setup violation  
+There is a large setup violation of -4.029 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and sm/D_states_q_reg[2]/CE (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#247 Warning
+Large setup violation  
+There is a large setup violation of -4.036 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and sm/D_states_q_reg[6]/CE (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#248 Warning
+Large setup violation  
+There is a large setup violation of -4.038 ns between sm/D_states_q_reg[1]/C (clocked by clk_0) and sm/D_states_q_reg[1]/CE (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#249 Warning
+Large setup violation  
+There is a large setup violation of -4.209 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and sm/D_states_q_reg[3]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#250 Warning
+Large setup violation  
+There is a large setup violation of -4.230 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and sm/D_states_q_reg[7]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#251 Warning
+Large setup violation  
+There is a large setup violation of -4.246 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and brams/bram2/ram_reg/ADDRARDADDR[1] (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#252 Warning
+Large setup violation  
+There is a large setup violation of -4.300 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and sm/D_states_q_reg[4]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#253 Warning
+Large setup violation  
+There is a large setup violation of -4.310 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and sm/D_states_q_reg[6]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#254 Warning
+Large setup violation  
+There is a large setup violation of -4.327 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and sm/D_states_q_reg[1]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#255 Warning
+Large setup violation  
+There is a large setup violation of -4.334 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and sm/D_states_q_reg[0]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-16#256 Warning
+Large setup violation  
+There is a large setup violation of -4.362 ns between display/D_latch_blank_q_reg[1]/C (clocked by clk_0) and sm/D_states_q_reg[2]/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
+Related violations: <none>
+
+TIMING-18#1 Warning
+Missing input or output delay  
+An input delay is missing on butt_dirs[0] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#2 Warning
+Missing input or output delay  
+An input delay is missing on butt_dirs[1] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#3 Warning
+Missing input or output delay  
+An input delay is missing on butt_dirs[2] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#4 Warning
+Missing input or output delay  
+An input delay is missing on butt_dirs[3] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#5 Warning
+Missing input or output delay  
+An input delay is missing on butt_next_play relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#6 Warning
+Missing input or output delay  
+An input delay is missing on butt_reset relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#7 Warning
+Missing input or output delay  
+An input delay is missing on butt_sel_desel[0] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#8 Warning
+Missing input or output delay  
+An input delay is missing on butt_sel_desel[1] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#9 Warning
+Missing input or output delay  
+An output delay is missing on aseg[0] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#10 Warning
+Missing input or output delay  
+An output delay is missing on aseg[10] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#11 Warning
+Missing input or output delay  
+An output delay is missing on aseg[11] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#12 Warning
+Missing input or output delay  
+An output delay is missing on aseg[1] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#13 Warning
+Missing input or output delay  
+An output delay is missing on aseg[2] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#14 Warning
+Missing input or output delay  
+An output delay is missing on aseg[3] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#15 Warning
+Missing input or output delay  
+An output delay is missing on aseg[4] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#16 Warning
+Missing input or output delay  
+An output delay is missing on aseg[5] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#17 Warning
+Missing input or output delay  
+An output delay is missing on aseg[6] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#18 Warning
+Missing input or output delay  
+An output delay is missing on aseg[7] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#19 Warning
+Missing input or output delay  
+An output delay is missing on aseg[8] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#20 Warning
+Missing input or output delay  
+An output delay is missing on aseg[9] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#21 Warning
+Missing input or output delay  
+An output delay is missing on bseg[0] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#22 Warning
+Missing input or output delay  
+An output delay is missing on bseg[10] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#23 Warning
+Missing input or output delay  
+An output delay is missing on bseg[11] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#24 Warning
+Missing input or output delay  
+An output delay is missing on bseg[1] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#25 Warning
+Missing input or output delay  
+An output delay is missing on bseg[2] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#26 Warning
+Missing input or output delay  
+An output delay is missing on bseg[3] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#27 Warning
+Missing input or output delay  
+An output delay is missing on bseg[4] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#28 Warning
+Missing input or output delay  
+An output delay is missing on bseg[5] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#29 Warning
+Missing input or output delay  
+An output delay is missing on bseg[6] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#30 Warning
+Missing input or output delay  
+An output delay is missing on bseg[7] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#31 Warning
+Missing input or output delay  
+An output delay is missing on bseg[8] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#32 Warning
+Missing input or output delay  
+An output delay is missing on bseg[9] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#33 Warning
+Missing input or output delay  
+An output delay is missing on mataddr[0] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#34 Warning
+Missing input or output delay  
+An output delay is missing on mataddr[1] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#35 Warning
+Missing input or output delay  
+An output delay is missing on mataddr[2] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#36 Warning
+Missing input or output delay  
+An output delay is missing on mataddr[3] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#37 Warning
+Missing input or output delay  
+An output delay is missing on mataddr[4] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#38 Warning
+Missing input or output delay  
+An output delay is missing on matbot[0] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#39 Warning
+Missing input or output delay  
+An output delay is missing on matbot[1] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#40 Warning
+Missing input or output delay  
+An output delay is missing on matbot[2] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#41 Warning
+Missing input or output delay  
+An output delay is missing on matclk relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#42 Warning
+Missing input or output delay  
+An output delay is missing on matlat relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#43 Warning
+Missing input or output delay  
+An output delay is missing on matoe relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#44 Warning
+Missing input or output delay  
+An output delay is missing on mattop[0] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#45 Warning
+Missing input or output delay  
+An output delay is missing on mattop[1] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#46 Warning
+Missing input or output delay  
+An output delay is missing on mattop[2] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#47 Warning
+Missing input or output delay  
+An output delay is missing on timerseg[0] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#48 Warning
+Missing input or output delay  
+An output delay is missing on timerseg[10] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#49 Warning
+Missing input or output delay  
+An output delay is missing on timerseg[11] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#50 Warning
+Missing input or output delay  
+An output delay is missing on timerseg[1] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#51 Warning
+Missing input or output delay  
+An output delay is missing on timerseg[2] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#52 Warning
+Missing input or output delay  
+An output delay is missing on timerseg[3] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#53 Warning
+Missing input or output delay  
+An output delay is missing on timerseg[4] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#54 Warning
+Missing input or output delay  
+An output delay is missing on timerseg[5] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#55 Warning
+Missing input or output delay  
+An output delay is missing on timerseg[6] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#56 Warning
+Missing input or output delay  
+An output delay is missing on timerseg[7] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#57 Warning
+Missing input or output delay  
+An output delay is missing on timerseg[8] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#58 Warning
+Missing input or output delay  
+An output delay is missing on timerseg[9] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+

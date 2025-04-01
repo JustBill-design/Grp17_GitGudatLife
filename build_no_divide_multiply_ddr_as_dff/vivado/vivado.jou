@@ -23,3 +23,6 @@
 #-----------------------------------------------------------
 start_gui
 open_project C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build_no_divide_multiply_ddr_as_dff/vivado/blank.xpr
+update_compile_order -fileset sources_1
+open_run impl_1
+report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 100000 -nworst 100000 -input_pins -routable_nets -name timing_1wor
