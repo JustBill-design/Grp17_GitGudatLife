@@ -14,8 +14,8 @@ module alu #(
     alu_compare compare
     alu_boolean boolean
     alu_shifter shifter
-    alu_multiplier multiplier
-    alu_divider divider
+    //alu_multiplier multiplier
+    //alu_divider divider
     sig temp_out[SIZE]
     always {
         adder.a = a
@@ -35,11 +35,11 @@ module alu #(
         shifter.b = b
         shifter.alufn = alufn
         
-        multiplier.a = a
-        multiplier.b = b
+        //multiplier.a = a
+        //multiplier.b = b
         
-        divider.a = a
-        divider.b = b
+        //divider.a = a
+        //divider.b = b
         
         // flags default to 0
         z = 0
@@ -56,10 +56,10 @@ module alu #(
                     b0001:
                         temp_out = adder.out
                         v = adder.v
-                    b0010:
-                        temp_out = multiplier.mul
-                    b0011:
-                        temp_out = divider.d
+                    //b0010:
+                    //    temp_out = multiplier.mul
+                    //b0011:
+                    //    temp_out = divider.d
                     default:
                         temp_out = 0
                         illop = 1

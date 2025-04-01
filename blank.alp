@@ -116,18 +116,6 @@
             {
                 "file": {
                     "type": "DiskFile",
-                    "path": "source/alu_divider.luc"
-                }
-            },
-            {
-                "file": {
-                    "type": "DiskFile",
-                    "path": "source/alu_multiplier.luc"
-                }
-            },
-            {
-                "file": {
-                    "type": "DiskFile",
                     "path": "source/alu_shifter.luc"
                 }
             },

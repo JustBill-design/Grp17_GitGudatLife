@@ -45,6 +45,8 @@ module display_driver #(
             dff sclk_counter[DIV] // clock to load shift register, whenever sclk_counter == DIVx{b1} that's the cycle of shift reg clk
             dff pixel_idx[ADDRESS_SIZE+$clog2(MATRIX_WIDTH)] // sequential indexing of top half of pixels
             
+            // display override signal
+            dff ddr
             
             // dffs to store data out
             dff rgb_data_0[3]       // r0g0b0
@@ -66,7 +68,8 @@ module display_driver #(
         rgb_data_1.d = rgb_data_1.q
         sclk.d = sclk.q
         latch_blank.d = latch_blank.q 
-        reading = 0
+        ddr.d = ddr.q
+        reading = ddr.q
 
         pixel_idx.d = pixel_idx.q
         state.d = state.q
@@ -107,10 +110,20 @@ module display_driver #(
             // shift the index to go to next LED in the row 
             pixel_idx.d = pixel_idx.q + 1
         }
+        
+
+        // set ddr to high for read in next clock
+        else if (sclk_counter.q == 1 && state.q == b01) {
+            
+            // off clock when changing data
+            sclk.d = 0
+            
+            // set ddr to high
+            ddr.d = 1
+        }
 
         
-        // loading data when sclk is all 0 
-        // if (sclk_counter.q == DIVx{b0} && state.q == b01 && led_bit_counter.q <= MATRIX_WIDTH)
+        // send first read signal
         else if (sclk_counter.q == 1 && state.q == b01){
             
             // off clock when changing data
@@ -125,6 +138,7 @@ module display_driver #(
         }
         
 
+        // read from BRAM, send second read signal, and set ddr to low
         else if (sclk_counter.q == 2 && state.q == b01) {
             
             // off clock when changing data 
@@ -134,6 +148,9 @@ module display_driver #(
             // BRAM address for second pixel, accounting for top row buffer
             addr = $resize(pixel_idx.q,ADDRESS_SIZE+$clog2(MATRIX_WIDTH)+2) + c{b1,($clog2(MATRIX_WIDTH)+ADDRESS_SIZE)x{b0}} + MATRIX_WIDTH
             
+            // set ddr to low
+            ddr.d = 0
+
             // send read override for BRAM
             reading = 1
             
@@ -142,6 +159,7 @@ module display_driver #(
         }
 
 
+        // read from BRAM
         else if (sclk_counter.q == 3 && state.q == b01) {
         
             // off clock when changing data
