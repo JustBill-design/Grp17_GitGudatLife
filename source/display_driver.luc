@@ -9,8 +9,9 @@ Will not work for 16 by 32, 1:4 scan rate (p10 variant)
 module display_driver #(
     // default: 32 by 64 LED matrix, writing is separated into top-16 rows and bottom 16-rows
     // both halves row i are written together for all rows 0 to 15 in a rapid loop 
-    ADDRESS_SIZE = 5 : ADDRESS_SIZE > 0, // width of the address field (ABCD signals for matrix_led) 
-    MATRIX_WIDTH = 64 : MATRIX_WIDTH > 0 // number of LEDs per row in the matrix
+    ADDRESS_SIZE = 5 : ADDRESS_SIZE > 0,    // width of the address field (ABCD signals for matrix_led) 
+    MATRIX_WIDTH = 64 : MATRIX_WIDTH > 0,   // number of LEDs per row in the matrix
+    CLK_FREQ = 100_000_000 : CLK_FREQ > 0   // clock frequency
 ) (
     input clk,  // clock
     input rst,  // reset
@@ -30,7 +31,7 @@ module display_driver #(
     
 ) {
     
-    const DIV = 6 //slowdown speed of the CLK, suitable for 100MHz clock
+    const DIV = $clog2(CLK_FREQ) - 20
     sig pixeldata[3]
     
     .clk(clk){
@@ -124,9 +125,6 @@ module display_driver #(
             // give address for next column
             // BRAM address for first pixel, accounting for top row buffer
             addr = $resize(pixel_idx.q,ADDRESS_SIZE+$clog2(MATRIX_WIDTH)+2) + MATRIX_WIDTH
-            
-            // send read override for BRAM
-            reading = 1
         }
         
 
@@ -143,9 +141,6 @@ module display_driver #(
             // set ddr to low
             ddr.d = 0
 
-            // send read override for BRAM
-            reading = 1
-            
             // load data into first pixel cache
             rgb_data_0.d = pixeldata
         }

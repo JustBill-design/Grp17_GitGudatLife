@@ -30,7 +30,7 @@ module alchitry_top (
     input testpullup        // default high?
 
 ) {
-    const CLK = c{1,8x{b0}}
+    const CLK = 10_000_000
 
     alu alum
     
@@ -61,7 +61,7 @@ module alchitry_top (
         .rst(rst) {
         
             // display driver
-            display_driver display
+            display_driver display(#CLK_FREQ(50_000_000))
             
             // counter resets every second
             counter gamecounter(#SIZE($clog2(CLK)),#TOP(CLK),#DIV(0))
