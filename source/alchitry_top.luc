@@ -233,7 +233,7 @@ module alchitry_top (
 
 
         // test for bram read
-        if (~display.reading && gamecounter.value[$width(gamecounter.value)-1]) {
+        if (~display.reading && gameclk.out) {
             brams.brsel = 0
             brams.bwa = bramtest.value
             brams.bwd = c{butt_cond.out,b1}
