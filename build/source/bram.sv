@@ -15,21 +15,21 @@ module bram #(
         input wire [($clog2(ENTRIES))-1:0] bra,
         input wire [($clog2(ENTRIES))-1:0] bwa,
         input wire [($clog2(ENTRIES))-1:0] bra_override,
+        input wire ro,
         input wire bwe,
         input wire [(WIDTH)-1:0] bwd,
-        input wire wo,
         output reg [(WIDTH)-1:0] brd
     );
-    localparam _MP_WIDTH_2035504901 = WIDTH;
-    localparam _MP_ENTRIES_2035504901 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_2035504901)-1) - (0) + 1))-1:0] M_bram1_address;
-    logic [(((_MP_WIDTH_2035504901-1) - (0) + 1))-1:0] M_bram1_read_data;
-    logic [(((_MP_WIDTH_2035504901-1) - (0) + 1))-1:0] M_bram1_write_data;
+    localparam _MP_WIDTH_1186153178 = WIDTH;
+    localparam _MP_ENTRIES_1186153178 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_1186153178)-1) - (0) + 1))-1:0] M_bram1_address;
+    logic [(((_MP_WIDTH_1186153178-1) - (0) + 1))-1:0] M_bram1_read_data;
+    logic [(((_MP_WIDTH_1186153178-1) - (0) + 1))-1:0] M_bram1_write_data;
     logic M_bram1_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_2035504901),
-        .ENTRIES(_MP_ENTRIES_2035504901)
+        .WIDTH(_MP_WIDTH_1186153178),
+        .ENTRIES(_MP_ENTRIES_1186153178)
     ) bram1 (
         .clk(clk),
         .address(M_bram1_address),
@@ -39,16 +39,16 @@ module bram #(
     );
     
     
-    localparam _MP_WIDTH_1923259693 = WIDTH;
-    localparam _MP_ENTRIES_1923259693 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_1923259693)-1) - (0) + 1))-1:0] M_bram2_address;
-    logic [(((_MP_WIDTH_1923259693-1) - (0) + 1))-1:0] M_bram2_read_data;
-    logic [(((_MP_WIDTH_1923259693-1) - (0) + 1))-1:0] M_bram2_write_data;
+    localparam _MP_WIDTH_220268617 = WIDTH;
+    localparam _MP_ENTRIES_220268617 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_220268617)-1) - (0) + 1))-1:0] M_bram2_address;
+    logic [(((_MP_WIDTH_220268617-1) - (0) + 1))-1:0] M_bram2_read_data;
+    logic [(((_MP_WIDTH_220268617-1) - (0) + 1))-1:0] M_bram2_write_data;
     logic M_bram2_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_1923259693),
-        .ENTRIES(_MP_ENTRIES_1923259693)
+        .WIDTH(_MP_WIDTH_220268617),
+        .ENTRIES(_MP_ENTRIES_220268617)
     ) bram2 (
         .clk(clk),
         .address(M_bram2_address),
@@ -74,7 +74,7 @@ module bram #(
                 bram_switch = brsel;
             end
         endcase
-        if (wo) begin
+        if (ro) begin
             override_address = bra_override;
         end else begin
             override_address = bra;

@@ -80,6 +80,9 @@ module alchitry_top (
             multi_seven_seg bseg_driver
             multi_seven_seg timerseg_driver
             
+            // bram testing counter
+            counter bramtest(#SIZE(13),#TOP(4222))
+            
         }
         .rst(fifo_rst) {
             // shift registers
@@ -223,7 +226,7 @@ module alchitry_top (
         // BRAM and display driver connections
         display.data = brams.brd
         brams.bra_override = display.addr
-        brams.wo = display.reading
+        brams.ro = display.reading
         
         // BRAM and FSM connections
         sm.brd = brams.brd
@@ -235,6 +238,16 @@ module alchitry_top (
         
         // BRAM and regfile connections
         brams.bram_selector = reg.brsel
+        
+        // BRAM TESTING
+        if (display.reading) {
+            brams.brsel = 1
+        } else {
+            brams.bwa = bramtest.value
+            brams.brsel = 0
+            brams.bwe = 1
+            brams.bwd = b11
+        }
         
         
         // default display blue-white stripes
