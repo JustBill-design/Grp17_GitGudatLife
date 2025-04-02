@@ -87,6 +87,7 @@ module display_driver #(
             if (D_sclk_counter_q == 1'h1 && D_state_q == 2'h1) begin
                 D_sclk_d = 1'h0;
                 addr = (ADDRESS_SIZE + $clog2(MATRIX_WIDTH) + 2'h2)'(D_pixel_idx_q) + MATRIX_WIDTH;
+                D_ddr_d = 1'h1;
             end else begin
                 if (D_sclk_counter_q == 2'h2 && D_state_q == 2'h1) begin
                     D_sclk_d = 1'h0;

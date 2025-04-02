@@ -61,7 +61,7 @@ module alchitry_top (
         .rst(rst) {
         
             // display driver
-            display_driver display(#CLK_FREQ(50_000_000))
+            display_driver display(#CLK_FREQ(CLK))
             
             // counter resets every second
             counter gamecounter(#SIZE($clog2(CLK)),#TOP(CLK),#DIV(0))

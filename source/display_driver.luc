@@ -11,7 +11,7 @@ module display_driver #(
     // both halves row i are written together for all rows 0 to 15 in a rapid loop 
     ADDRESS_SIZE = 5 : ADDRESS_SIZE > 0,    // width of the address field (ABCD signals for matrix_led) 
     MATRIX_WIDTH = 64 : MATRIX_WIDTH > 0,   // number of LEDs per row in the matrix
-    CLK_FREQ = 100_000_000 : CLK_FREQ > 0   // clock frequency
+    CLK_FREQ ~ 100_000_000 : CLK_FREQ > 0   // clock frequency
 ) (
     input clk,  // clock
     input rst,  // reset
@@ -125,6 +125,9 @@ module display_driver #(
             // give address for next column
             // BRAM address for first pixel, accounting for top row buffer
             addr = $resize(pixel_idx.q,ADDRESS_SIZE+$clog2(MATRIX_WIDTH)+2) + MATRIX_WIDTH
+            
+            // set ddr to high fir read in next clock
+            ddr.d = 1
         }
         
 
@@ -132,10 +135,7 @@ module display_driver #(
         else if (sclk_counter.q == 2 && state.q == b01) {
             
             // off clock when changing data 
-            sclk.d = 0
-            
-            // give address for next column
-            // BRAM address for second pixel, accounting for top row buffer
+            sclk.d = 0 // give address for next column BRAM address for second pixel, accounting for top row buffer
             addr = $resize(pixel_idx.q,ADDRESS_SIZE+$clog2(MATRIX_WIDTH)+2) + c{b1,($clog2(MATRIX_WIDTH)+ADDRESS_SIZE)x{b0}} + MATRIX_WIDTH
             
             // set ddr to low
