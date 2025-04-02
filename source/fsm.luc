@@ -140,15 +140,15 @@ module fsm #(
     const CMPLE = b110111
     const XOR = b010110
 
-    const A_NEIGHBOUR_ADDRESS = h0
-    const B_NEIGHBOUR_ADDRESS = h1
-    const A_COUNT = h2
-    const B_COUNT = h3
+    const A_NEIGHBOUR_ADDRESS = 0
+    const B_NEIGHBOUR_ADDRESS = 1
+    const A_COUNT = 2
+    const B_COUNT = 3
 
-    const TARGET_PIXEL_ADDRESS = h4
-    const TARGET_PIXEL_VALUE = h5
-    const TIMER = h6
-    const BRAM_SWITCH = h7
+    const TARGET_PIXEL_ADDRESS = 4
+    const TARGET_PIXEL_VALUE = 5
+    const TIMER = 6
+    const BRAM_SWITCH = 7
     
 
     always {
@@ -200,7 +200,7 @@ module fsm #(
             States.SET_PIXEL_ADDRESS_TO_0:
                 we = b1
                 wdsel = b0001
-                wa = b100
+                wa = TARGET_PIXEL_ADDRESS
                 states.d = States.ZERO_BRAM
 
             States.ZERO_BRAM:
@@ -210,7 +210,7 @@ module fsm #(
                 we = b1
                 ra1 = b100
                 wdsel = b0000
-                wa = b100
+                wa = TARGET_PIXEL_ADDRESS
                 bwa = rd1
                 bwe = b1
                 bwd = b00
@@ -231,19 +231,19 @@ module fsm #(
             States.SET_TIMER:
                 we = b1
                 wdsel = b0110
-                wa = b110
+                wa = TIMER
                 states.d = States.RESET_PIXEL_VALUE
             
             States.RESET_PIXEL_VALUE:
                 we = b1
                 wdsel = b0001
-                wa = b101
+                wa = TARGET_PIXEL_VALUE
                 states.d = States.RESET_PIXEL_ADDRESS
             
             States.RESET_PIXEL_ADDRESS:
                 we = b1
                 wdsel = b0111
-                wa = b100
+                wa = TARGET_PIXEL_ADDRESS
                 states.d = States.SET_SELECTOR_PIXEL_STATE
             
             States.SET_SELECTOR_PIXEL_STATE:
