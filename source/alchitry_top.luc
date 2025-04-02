@@ -238,12 +238,14 @@ module alchitry_top (
         
         
         // default display blue-white stripes
-        if (display.reading && display.addr[6]) {
-            pixeldata.d = b10
-        }
-        else if (display.reading) {
-            pixeldata.d = b11
-        display.data = pixeldata.q
-        }
+        // if (display.reading && display.addr[6]) {
+        //     pixeldata.d = b10
+        // }
+        // else if (display.reading) {
+        //     pixeldata.d = b11
+        // display.data = pixeldata.q
+        // }
+        pixeldata.d = pixeldata.q
+        display.data = b01
     }
 }
