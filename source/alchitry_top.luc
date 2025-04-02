@@ -239,12 +239,14 @@ module alchitry_top (
 
 
         // test display.addre range more
-        if (display.addr == 64) {            // top left corner blue
+        if (display.addr == 0) {            // top left corner blue
             pixeldata.d = b10
-        } else if (display.addr == 4223) {   // bottom right corner red
+        } else if (display.addr == 4159) {   // bottom right corner red
             pixeldata.d = b01
-        } else if (display.addr == 128) {    // second row, left side
+        } else if (display.addr == 64) {    // second row, left side
             pixeldata.d = b11
+        } else {
+            pixeldata.d = b00
         }
         display.data = pixeldata.q
 
