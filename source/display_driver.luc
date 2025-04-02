@@ -111,7 +111,7 @@ module display_driver #(
             // shift the index to go to next LED in the row 
             pixel_idx.d = pixel_idx.q + 1
 
-            // set ddr to high fir read in next clock
+            // set ddr to high for read in next clock
             ddr.d = 1
         }
         
