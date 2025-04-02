@@ -20,16 +20,16 @@ module bram #(
         input wire wo,
         output reg [(WIDTH)-1:0] brd
     );
-    localparam _MP_WIDTH_1873739246 = WIDTH;
-    localparam _MP_ENTRIES_1873739246 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_1873739246)-1) - (0) + 1))-1:0] M_bram1_address;
-    logic [(((_MP_WIDTH_1873739246-1) - (0) + 1))-1:0] M_bram1_read_data;
-    logic [(((_MP_WIDTH_1873739246-1) - (0) + 1))-1:0] M_bram1_write_data;
+    localparam _MP_WIDTH_1454201942 = WIDTH;
+    localparam _MP_ENTRIES_1454201942 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_1454201942)-1) - (0) + 1))-1:0] M_bram1_address;
+    logic [(((_MP_WIDTH_1454201942-1) - (0) + 1))-1:0] M_bram1_read_data;
+    logic [(((_MP_WIDTH_1454201942-1) - (0) + 1))-1:0] M_bram1_write_data;
     logic M_bram1_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_1873739246),
-        .ENTRIES(_MP_ENTRIES_1873739246)
+        .WIDTH(_MP_WIDTH_1454201942),
+        .ENTRIES(_MP_ENTRIES_1454201942)
     ) bram1 (
         .clk(clk),
         .address(M_bram1_address),
@@ -39,16 +39,16 @@ module bram #(
     );
     
     
-    localparam _MP_WIDTH_1449836080 = WIDTH;
-    localparam _MP_ENTRIES_1449836080 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_1449836080)-1) - (0) + 1))-1:0] M_bram2_address;
-    logic [(((_MP_WIDTH_1449836080-1) - (0) + 1))-1:0] M_bram2_read_data;
-    logic [(((_MP_WIDTH_1449836080-1) - (0) + 1))-1:0] M_bram2_write_data;
+    localparam _MP_WIDTH_1797176919 = WIDTH;
+    localparam _MP_ENTRIES_1797176919 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_1797176919)-1) - (0) + 1))-1:0] M_bram2_address;
+    logic [(((_MP_WIDTH_1797176919-1) - (0) + 1))-1:0] M_bram2_read_data;
+    logic [(((_MP_WIDTH_1797176919-1) - (0) + 1))-1:0] M_bram2_write_data;
     logic M_bram2_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_1449836080),
-        .ENTRIES(_MP_ENTRIES_1449836080)
+        .WIDTH(_MP_WIDTH_1797176919),
+        .ENTRIES(_MP_ENTRIES_1797176919)
     ) bram2 (
         .clk(clk),
         .address(M_bram2_address),
