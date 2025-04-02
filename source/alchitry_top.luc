@@ -239,52 +239,16 @@ module alchitry_top (
         // BRAM and regfile connections
         brams.bram_selector = reg.brsel
         
-
-
-
-
-
-
-
-        // // display testing
-        // if (cond_butt_next_play.out) {
-        //     display.data = b11
-        // }
-
-
-
-        // 
-        // 
-        // // BRAM TESTING
-        // if (display.reading) {
-        //     brams.brsel = 1
-        // } else {
-        //     brams.bwa = bramtest.value
-        //     brams.brsel = 0
-        //     brams.bwe = 1
-        //     brams.bwd = b11
-        // }
-        // if (display.addr >=0 && display.addr <4224) {
-        //     led[1] = 1
-        // } else {
-        //     led[1] = 0
-        // }
-        // led[2] = 1
-        // led[3] = 0
-        
-        
-
-
-
         
         // default display blue-white stripes
-        if (display.reading && display.addr[6]) {
-            pixeldata.d = b10
-        }
-        else if (display.reading) {
-            pixeldata.d = b11
-        display.data = pixeldata.q
-        }
+        // if (display.reading && display.addr[6]) {
+        //     pixeldata.d = b10
+        // }
+        // else if (display.reading) {
+        //     pixeldata.d = b11
+        // display.data = pixeldata.q
+        // }
         pixeldata.d = pixeldata.q
+        display.data = b01
     }
 }
