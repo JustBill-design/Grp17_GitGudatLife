@@ -230,6 +230,28 @@ module alchitry_top (
         // BRAM and regfile connections
         brams.bram_selector = reg.brsel
         
+        
+
+
+
+
+
+
+
+        // test display.addre range more
+        if (display.addr < 1000) {
+            pixeldata.d = b00
+        } else if (display.addr < 2000) {
+            pixeldata.d = b01
+        } else if (display.addr < 3000) {
+            pixeldata.d = b10
+        } else {
+            pixeldata.d = b11
+        }
+        display.data = pixeldata.q
+
+
+
 
 
         // // test for bram read
@@ -245,21 +267,21 @@ module alchitry_top (
         // }
 
  
-        // test for display.addr range
-        if (display.addr>=64 && display.addr<4160) {
-            if (butt_cond.out) {
-                pixeldata.d = b10
-            } else {
-                pixeldata.d = b11
-            }
-        } else {
-            if (butt_cond.out) {
-                pixeldata.d = b11
-            } else {
-                pixeldata.d = b01
-            }
-        }
-        display.data = pixeldata.q
+        // // test for display.addr range
+        // if (display.addr>=64 && display.addr<4160) {
+        //     if (butt_cond.out) {
+        //         pixeldata.d = b10
+        //     } else {
+        //         pixeldata.d = b11
+        //     }
+        // } else {
+        //     if (butt_cond.out) {
+        //         pixeldata.d = b11
+        //     } else {
+        //         pixeldata.d = b01
+        //     }
+        // }
+        // display.data = pixeldata.q
         
         
         // // default display blue-white stripes
