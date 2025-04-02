@@ -230,6 +230,17 @@ module alchitry_top (
         brams.bram_selector = reg.brsel
         
 
+
+        // test for bram read
+        if (~display.reading) {
+            brams.brsel = 0
+            brams.bwa = bramtest.value
+            brams.bwd = b11
+            brams.bwe = 1
+        } else {
+            brams.brsel = 1
+        }
+
  
         // // test for display.addr range
         // if (display.addr>=0 && display.addr<4224) {
