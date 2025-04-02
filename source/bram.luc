@@ -21,7 +21,7 @@ module bram #(
     }
     
     sig bram_switch
-    sig override_address
+    sig override_address[$clog2(ENTRIES)]
 
     always {
     
