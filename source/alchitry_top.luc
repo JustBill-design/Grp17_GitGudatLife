@@ -56,7 +56,7 @@ module alchitry_top (
         edge_detector timerclk(#RISE(0),#FALL(1))   // ticks once per second
         edge_detector gameclk(#RISE(1),#FALL(0))    // ticks roughly 10 times per second
         
-        dff pixeldata[2](#INIT(b00))
+        // dff pixeldata[2](#INIT(b00))
 
         .rst(rst) {
         
@@ -231,21 +231,21 @@ module alchitry_top (
         
 
  
-        // test for display.addr range
-        if (display.addr>=0 && display.addr<4224) {
-            if (butt_cond.out) {
-                pixeldata.d = b10
-            } else {
-                pixeldata.d = b11
-            }
-        } else {
-            if (butt_cond.out) {
-                pixeldata.d = b11
-            } else {
-                pixeldata.d = b01
-            }
-        }
-        display.data = pixeldata.q
+        // // test for display.addr range
+        // if (display.addr>=0 && display.addr<4224) {
+        //     if (butt_cond.out) {
+        //         pixeldata.d = b10
+        //     } else {
+        //         pixeldata.d = b11
+        //     }
+        // } else {
+        //     if (butt_cond.out) {
+        //         pixeldata.d = b11
+        //     } else {
+        //         pixeldata.d = b01
+        //     }
+        // }
+        // display.data = pixeldata.q
         
         
         // // default display blue-white stripes
