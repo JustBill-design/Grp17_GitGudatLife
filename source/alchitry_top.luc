@@ -56,7 +56,7 @@ module alchitry_top (
         edge_detector timerclk(#RISE(0),#FALL(1))   // ticks once per second
         edge_detector gameclk(#RISE(1),#FALL(0))    // ticks roughly 10 times per second
         
-        // dff pixeldata[2](#INIT(b00))
+        dff pixeldata[2](#INIT(b00))
 
         .rst(rst) {
         
@@ -92,13 +92,6 @@ module alchitry_top (
 
     always {
     
-        // default display blue-white stripes
-        // if (display.reading && display.addr[6]) {
-        //     pixeldata.d = b10
-        // }
-        // else if (display.reading) {
-        //     pixeldata.d = b11
-        // }
 
         // button tester
         butt_cond.in = testpullup
@@ -242,5 +235,14 @@ module alchitry_top (
         
         // BRAM and regfile connections
         brams.bram_selector = reg.brsel
+        
+        
+        // default display blue-white stripes
+        if (display.reading && display.addr[6]) {
+            pixeldata.d = b10
+        }
+        else if (display.reading) {
+            pixeldata.d = b11
+        }
     }
 }
