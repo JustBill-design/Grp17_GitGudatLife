@@ -81,7 +81,7 @@ module alchitry_top (
             multi_seven_seg timerseg_driver
             
             // bram testing counter
-            counter bramtest(#SIZE(13),#TOP(4222))
+            counter bramtest(#SIZE(13),#TOP(4223))
             dff bdff[2]
 
         }
@@ -233,10 +233,11 @@ module alchitry_top (
 
 
         // test for bram read
-        if (~display.reading) {
+        if (~display.reading && gamecounter.value[$width(gamecounter.value)-4]) {
             brams.brsel = 0
             brams.bwa = bramtest.value
-            brams.bwd = bdff.q
+            brams.bwd = bramtest.value[1:0]
+            // gamecounter.value[$width(gamecounter.value)-1-:2]
             bdff.d = bdff.q + 1
             brams.bwe = 1
         } else {
