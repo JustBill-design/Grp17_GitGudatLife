@@ -229,14 +229,32 @@ module alchitry_top (
         // BRAM and regfile connections
         brams.bram_selector = reg.brsel
         
-        
-        // default display blue-white stripes
-        if (display.reading && display.addr[6]) {
-            pixeldata.d = b10
-        } else if (display.reading) {
-            pixeldata.d = b11
+
+ 
+        // test for display.addr range
+        if (display.addr>=0 && display.addr<4224) {
+            if (butt_cond.out) {
+                pixeldata.d = b10
+            } else {
+                pixeldata.d = b11
+            }
+        } else {
+            if (butt_cond.out) {
+                pixeldata.d = b11
+            } else {
+                pixeldata.d = b01
+            }
         }
         display.data = pixeldata.q
+        
+        
+        // // default display blue-white stripes
+        // if (display.reading && display.addr[6]) {
+        //     pixeldata.d = b10
+        // } else if (display.reading) {
+        //     pixeldata.d = b11
+        // }
+        // display.data = pixeldata.q
         
 
         // // display testing (working)
