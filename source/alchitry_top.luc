@@ -236,15 +236,7 @@ module alchitry_top (
         if (~display.reading && gamecounter.value[$width(gamecounter.value)-1]) {
             brams.brsel = 0
             brams.bwa = bramtest.value
-            if (bramtest.value<1000) {
-                brams.bwd = b11
-            } else if (bramtest.value<2000) {
-                brams.bwd = b00
-            } else if (bramtest.value<3000) {
-                brams.bwd = b10
-            } else {
-                brams.bwd = b01
-            }
+            brams.bwd = c{butt_cond.out,b1}
             // gamecounter.value[$width(gamecounter.value)-1-:2]
             bdff.d = bdff.q + 1
             brams.bwe = 1
