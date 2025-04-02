@@ -235,7 +235,7 @@ module alchitry_top (
         if (~display.reading) {
             brams.brsel = 0
             brams.bwa = bramtest.value
-            brams.bwd = b11
+            brams.bwd = bramtest.value[1:0]
             brams.bwe = 1
         } else {
             brams.brsel = 1
