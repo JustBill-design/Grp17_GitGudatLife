@@ -94,13 +94,6 @@ module alchitry_top (
 
 
     always {
-    
-
-
-
-
-
-
 
         // whole board reset
         reset_cond.in = ~butt_reset
@@ -238,21 +231,23 @@ module alchitry_top (
         
         
         // default display blue-white stripes
-        // if (display.reading && display.addr[6]) {
-        //     pixeldata.d = b10
-        // }
-        // else if (display.reading) {
-        //     pixeldata.d = b11
-        // display.data = pixeldata.q
-        // }
-        pixeldata.d = pixeldata.q
-        if (butt_cond.out) {
+        if (display.reading && display.addr[6]) {
+            pixeldata.d = b10
+        } else if (display.reading) {
             pixeldata.d = b11
-        } else {
-            pixeldata.d = b01
         }
         display.data = pixeldata.q
         
+
+        // // display testing (working)
+        // pixeldata.d = pixeldata.q
+        // if (butt_cond.out) {
+        //     pixeldata.d = b11
+        // } else {
+        //     pixeldata.d = b01
+        // }
+        // display.data = pixeldata.q
+
 
         // button tester
         butt_cond.in = testpullup

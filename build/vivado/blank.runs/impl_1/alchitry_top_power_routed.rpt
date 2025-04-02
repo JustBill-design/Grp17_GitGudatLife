@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Wed Apr  2 14:36:30 2025
+| Date             : Wed Apr  2 14:57:07 2025
 | Host             : PC running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
@@ -53,14 +53,14 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |    <0.001 |        3 |       --- |             --- |
-| Slice Logic              |     0.002 |     3976 |       --- |             --- |
-|   LUT as Logic           |     0.002 |     2565 |     20800 |           12.33 |
+| Slice Logic              |     0.002 |     3979 |       --- |             --- |
+|   LUT as Logic           |     0.002 |     2563 |     20800 |           12.32 |
 |   CARRY4                 |    <0.001 |      371 |      8150 |            4.55 |
 |   Register               |    <0.001 |      536 |     41600 |            1.29 |
 |   F7/F8 Muxes            |    <0.001 |       41 |     32600 |            0.13 |
 |   LUT as Distributed RAM |    <0.001 |        6 |      9600 |            0.06 |
 |   Others                 |     0.000 |       78 |       --- |             --- |
-| Signals                  |     0.002 |     3674 |       --- |             --- |
+| Signals                  |     0.002 |     3673 |       --- |             --- |
 | Block RAM                |    <0.001 |        1 |        50 |            2.00 |
 | I/O                      |     0.003 |       72 |       170 |           42.35 |
 | Static Power             |     0.072 |          |           |                 |
