@@ -243,6 +243,7 @@ module alchitry_top (
         }
         else if (display.reading) {
             pixeldata.d = b11
+        display.data = pixeldata.q
         }
     }
 }
