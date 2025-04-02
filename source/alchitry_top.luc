@@ -223,7 +223,7 @@ module alchitry_top (
         // BRAM and display driver connections
         display.data = brams.brd
         brams.bra_override = display.addr
-        brams.wo = display.reading
+        brams.ro = display.reading
         
         // BRAM and FSM connections
         sm.brd = brams.brd
@@ -245,7 +245,7 @@ module alchitry_top (
         //     pixeldata.d = b11
         // display.data = pixeldata.q
         // }
-        pixeldata.d = pixeldata.q
-        display.data = b01
+        pixeldata.d = b11
+        display.data = pixeldata.q
     }
 }

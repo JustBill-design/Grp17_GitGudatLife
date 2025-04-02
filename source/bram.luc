@@ -11,7 +11,7 @@ module bram #(
     input bra_override[$clog2(ENTRIES)],// override read address
     input bwe,                          // write enable
     input bwd[WIDTH],                   // write data
-    input wo,                           // write override
+    input ro,                           // write override
     output brd[WIDTH]                   // read data
 ) {
 
@@ -36,7 +36,7 @@ module bram #(
         }
         
         // write override mux
-        if (wo) {
+        if (ro) {
             override_address = bra_override
         } else {
             override_address = bra
