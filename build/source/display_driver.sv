@@ -26,7 +26,6 @@ module display_driver #(
     logic [1:0] D_state_d, D_state_q = 0;
     logic [(DIV)-1:0] D_sclk_counter_d, D_sclk_counter_q = 0;
     logic [(ADDRESS_SIZE + $clog2(MATRIX_WIDTH))-1:0] D_pixel_idx_d, D_pixel_idx_q = 0;
-    logic D_ddr_d, D_ddr_q = 0;
     logic [2:0] D_rgb_data_0_d, D_rgb_data_0_q = 0;
     logic [2:0] D_rgb_data_1_d, D_rgb_data_1_q = 0;
     logic D_sclk_d, D_sclk_q = 0;
@@ -36,7 +35,6 @@ module display_driver #(
         D_rgb_data_1_d = D_rgb_data_1_q;
         D_sclk_d = D_sclk_q;
         D_latch_blank_d = D_latch_blank_q;
-        D_ddr_d = D_ddr_q;
         D_pixel_idx_d = D_pixel_idx_q;
         D_state_d = D_state_q;
         D_sclk_counter_d = D_sclk_counter_q;
@@ -46,8 +44,7 @@ module display_driver #(
         D_rgb_data_1_d = D_rgb_data_1_q;
         D_sclk_d = D_sclk_q;
         D_latch_blank_d = D_latch_blank_q;
-        D_ddr_d = D_ddr_q;
-        reading = D_ddr_q;
+        reading = 1'h0;
         D_pixel_idx_d = D_pixel_idx_q;
         D_state_d = D_state_q;
         toppixel = D_rgb_data_0_q;
@@ -82,17 +79,16 @@ module display_driver #(
         end
         if (D_sclk_counter_q == 1'h0 && D_state_q == 2'h1) begin
             D_pixel_idx_d = D_pixel_idx_q + 1'h1;
-            D_ddr_d = 1'h1;
         end else begin
             if (D_sclk_counter_q == 1'h1 && D_state_q == 2'h1) begin
                 D_sclk_d = 1'h0;
                 addr = (ADDRESS_SIZE + $clog2(MATRIX_WIDTH) + 2'h2)'(D_pixel_idx_q) + MATRIX_WIDTH;
-                D_ddr_d = 1'h1;
+                reading = 1'h1;
             end else begin
                 if (D_sclk_counter_q == 2'h2 && D_state_q == 2'h1) begin
                     D_sclk_d = 1'h0;
                     addr = (ADDRESS_SIZE + $clog2(MATRIX_WIDTH) + 2'h2)'(D_pixel_idx_q) + {1'h1, {($clog2(MATRIX_WIDTH) + ADDRESS_SIZE){1'h0}}} + MATRIX_WIDTH;
-                    D_ddr_d = 1'h0;
+                    reading = 1'h1;
                     D_rgb_data_0_d = pixeldata;
                 end else begin
                     if (D_sclk_counter_q == 2'h3 && D_state_q == 2'h1) begin
@@ -125,7 +121,6 @@ module display_driver #(
             D_state_q <= 0;
             D_sclk_counter_q <= 0;
             D_pixel_idx_q <= 0;
-            D_ddr_q <= 0;
             D_rgb_data_0_q <= 0;
             D_rgb_data_1_q <= 0;
             D_sclk_q <= 0;
@@ -134,7 +129,6 @@ module display_driver #(
             D_state_q <= D_state_d;
             D_sclk_counter_q <= D_sclk_counter_d;
             D_pixel_idx_q <= D_pixel_idx_d;
-            D_ddr_q <= D_ddr_d;
             D_rgb_data_0_q <= D_rgb_data_0_d;
             D_rgb_data_1_q <= D_rgb_data_1_d;
             D_sclk_q <= D_sclk_d;
