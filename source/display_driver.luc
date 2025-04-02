@@ -11,7 +11,7 @@ module display_driver #(
     // both halves row i are written together for all rows 0 to 15 in a rapid loop 
     ADDRESS_SIZE = 5 : ADDRESS_SIZE > 0,    // width of the address field (ABCD signals for matrix_led) 
     MATRIX_WIDTH = 64 : MATRIX_WIDTH > 0,   // number of LEDs per row in the matrix
-    CLK_FREQ = 100_000_000 : CLK_FREQ > 0
+    CLK_FREQ ~ 100_000_000 : CLK_FREQ > 0   // clock frequency
 ) (
     input clk,  // clock
     input rst,  // reset
@@ -31,6 +31,7 @@ module display_driver #(
     
 ) {
     
+    // const DIV = $clog2(CLK_FREQ) - 19
     const DIV = 8
     sig pixeldata[3]
     
@@ -46,6 +47,8 @@ module display_driver #(
             dff sclk_counter[DIV] // clock to load shift register, whenever sclk_counter == DIVx{b1} that's the cycle of shift reg clk
             dff pixel_idx[ADDRESS_SIZE+$clog2(MATRIX_WIDTH)] // sequential indexing of top half of pixels
             
+            // display override signal
+            dff ddr
             
             // dffs to store data out
             dff rgb_data_0[3]       // r0g0b0
@@ -67,7 +70,8 @@ module display_driver #(
         rgb_data_1.d = rgb_data_1.q
         sclk.d = sclk.q
         latch_blank.d = latch_blank.q 
-        reading = 0
+        ddr.d = ddr.q
+        reading = ddr.q
 
         pixel_idx.d = pixel_idx.q
         state.d = state.q
@@ -107,11 +111,13 @@ module display_driver #(
 
             // shift the index to go to next LED in the row 
             pixel_idx.d = pixel_idx.q + 1
-        }
 
+            // set ddr to high fir read in next clock
+            ddr.d = 1
+        }
         
-        // loading data when sclk is all 0 
-        // if (sclk_counter.q == DIVx{b0} && state.q == b01 && led_bit_counter.q <= MATRIX_WIDTH)
+        
+        // send first read signal
         else if (sclk_counter.q == 1 && state.q == b01){
             
             // off clock when changing data
@@ -121,28 +127,27 @@ module display_driver #(
             // BRAM address for first pixel, accounting for top row buffer
             addr = $resize(pixel_idx.q,ADDRESS_SIZE+$clog2(MATRIX_WIDTH)+2) + MATRIX_WIDTH
             
-            // send read override for BRAM
-            reading = 1
+            // set ddr to high fir read in next clock
+            ddr.d = 1
         }
         
 
+        // read from BRAM, send second read signal, and set ddr to low
         else if (sclk_counter.q == 2 && state.q == b01) {
             
             // off clock when changing data 
-            sclk.d = 0
-            
-            // give address for next column
-            // BRAM address for second pixel, accounting for top row buffer
+            sclk.d = 0 // give address for next column BRAM address for second pixel, accounting for top row buffer
             addr = $resize(pixel_idx.q,ADDRESS_SIZE+$clog2(MATRIX_WIDTH)+2) + c{b1,($clog2(MATRIX_WIDTH)+ADDRESS_SIZE)x{b0}} + MATRIX_WIDTH
             
-            // send read override for BRAM
-            reading = 1
-            
+            // set ddr to high fir read in next clock
+            ddr.d = 1
+
             // load data into first pixel cache
             rgb_data_0.d = pixeldata
         }
 
 
+        // read from BRAM
         else if (sclk_counter.q == 3 && state.q == b01) {
         
             // off clock when changing data
@@ -150,6 +155,9 @@ module display_driver #(
             
             // load data into second pixel cache
             rgb_data_1.d = pixeldata
+
+            // set ddr to low
+            ddr.d = 0
         }
 
         
