@@ -96,9 +96,6 @@ module alchitry_top (
     always {
     
 
-        // button tester
-        butt_cond.in = testpullup
-        led[0] = butt_cond.out
 
 
 
@@ -249,6 +246,16 @@ module alchitry_top (
         // display.data = pixeldata.q
         // }
         pixeldata.d = pixeldata.q
-        display.data = b01
+        if (butt_cond.out) {
+            pixeldata.d = b11
+        } else {
+            pixeldata.d = b01
+        }
+        display.data = pixeldata.q
+        
+
+        // button tester
+        butt_cond.in = testpullup
+        led[0] = butt_cond.out
     }
 }
