@@ -20,16 +20,16 @@ module bram #(
         input wire wo,
         output reg [(WIDTH)-1:0] brd
     );
-    localparam _MP_WIDTH_936724308 = WIDTH;
-    localparam _MP_ENTRIES_936724308 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_936724308)-1) - (0) + 1))-1:0] M_bram1_address;
-    logic [(((_MP_WIDTH_936724308-1) - (0) + 1))-1:0] M_bram1_read_data;
-    logic [(((_MP_WIDTH_936724308-1) - (0) + 1))-1:0] M_bram1_write_data;
+    localparam _MP_WIDTH_129285217 = WIDTH;
+    localparam _MP_ENTRIES_129285217 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_129285217)-1) - (0) + 1))-1:0] M_bram1_address;
+    logic [(((_MP_WIDTH_129285217-1) - (0) + 1))-1:0] M_bram1_read_data;
+    logic [(((_MP_WIDTH_129285217-1) - (0) + 1))-1:0] M_bram1_write_data;
     logic M_bram1_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_936724308),
-        .ENTRIES(_MP_ENTRIES_936724308)
+        .WIDTH(_MP_WIDTH_129285217),
+        .ENTRIES(_MP_ENTRIES_129285217)
     ) bram1 (
         .clk(clk),
         .address(M_bram1_address),
@@ -39,16 +39,16 @@ module bram #(
     );
     
     
-    localparam _MP_WIDTH_361471300 = WIDTH;
-    localparam _MP_ENTRIES_361471300 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_361471300)-1) - (0) + 1))-1:0] M_bram2_address;
-    logic [(((_MP_WIDTH_361471300-1) - (0) + 1))-1:0] M_bram2_read_data;
-    logic [(((_MP_WIDTH_361471300-1) - (0) + 1))-1:0] M_bram2_write_data;
+    localparam _MP_WIDTH_939886337 = WIDTH;
+    localparam _MP_ENTRIES_939886337 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_939886337)-1) - (0) + 1))-1:0] M_bram2_address;
+    logic [(((_MP_WIDTH_939886337-1) - (0) + 1))-1:0] M_bram2_read_data;
+    logic [(((_MP_WIDTH_939886337-1) - (0) + 1))-1:0] M_bram2_write_data;
     logic M_bram2_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_361471300),
-        .ENTRIES(_MP_ENTRIES_361471300)
+        .WIDTH(_MP_WIDTH_939886337),
+        .ENTRIES(_MP_ENTRIES_939886337)
     ) bram2 (
         .clk(clk),
         .address(M_bram2_address),
