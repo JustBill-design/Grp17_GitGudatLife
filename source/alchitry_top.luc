@@ -82,7 +82,8 @@ module alchitry_top (
             
             // bram testing counter
             counter bramtest(#SIZE(13),#TOP(4222))
-            
+            dff bdff[2]
+
         }
         .rst(fifo_rst) {
             // shift registers
@@ -235,7 +236,8 @@ module alchitry_top (
         if (~display.reading) {
             brams.brsel = 0
             brams.bwa = bramtest.value
-            brams.bwd = bramtest.value[1:0]
+            brams.bwd = bdff.q
+            bdff.d = bdff.q
             brams.bwe = 1
         } else {
             brams.brsel = 1
