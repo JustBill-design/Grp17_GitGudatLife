@@ -233,10 +233,15 @@ module alchitry_top (
 
 
         // test for bram read
-        if (~display.reading && gamecounter.value[$width(gamecounter.value)-4]) {
+        if (~display.reading && gamecounter.value[$width(gamecounter.value)-1]) {
             brams.brsel = 0
             brams.bwa = bramtest.value
             brams.bwd = bramtest.value[1:0]
+            if (bramtest.value[0]) {
+                brams.bwd = b11
+            } else {
+                brams.bwd = b01
+            }
             // gamecounter.value[$width(gamecounter.value)-1-:2]
             bdff.d = bdff.q + 1
             brams.bwe = 1
