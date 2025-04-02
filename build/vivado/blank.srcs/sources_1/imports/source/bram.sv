@@ -11,7 +11,7 @@ module bram #(
         input wire clk,
         input wire rst,
         input wire bram_selector,
-        input wire brsel,
+        input wire [1:0] brsel,
         input wire [($clog2(ENTRIES))-1:0] bra,
         input wire [($clog2(ENTRIES))-1:0] bwa,
         input wire [($clog2(ENTRIES))-1:0] bra_override,
@@ -20,16 +20,16 @@ module bram #(
         input wire [(WIDTH)-1:0] bwd,
         output reg [(WIDTH)-1:0] brd
     );
-    localparam _MP_WIDTH_1382316687 = WIDTH;
-    localparam _MP_ENTRIES_1382316687 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_1382316687)-1) - (0) + 1))-1:0] M_bram1_address;
-    logic [(((_MP_WIDTH_1382316687-1) - (0) + 1))-1:0] M_bram1_read_data;
-    logic [(((_MP_WIDTH_1382316687-1) - (0) + 1))-1:0] M_bram1_write_data;
+    localparam _MP_WIDTH_1304293006 = WIDTH;
+    localparam _MP_ENTRIES_1304293006 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_1304293006)-1) - (0) + 1))-1:0] M_bram1_address;
+    logic [(((_MP_WIDTH_1304293006-1) - (0) + 1))-1:0] M_bram1_read_data;
+    logic [(((_MP_WIDTH_1304293006-1) - (0) + 1))-1:0] M_bram1_write_data;
     logic M_bram1_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_1382316687),
-        .ENTRIES(_MP_ENTRIES_1382316687)
+        .WIDTH(_MP_WIDTH_1304293006),
+        .ENTRIES(_MP_ENTRIES_1304293006)
     ) bram1 (
         .clk(clk),
         .address(M_bram1_address),
@@ -39,16 +39,16 @@ module bram #(
     );
     
     
-    localparam _MP_WIDTH_1486102781 = WIDTH;
-    localparam _MP_ENTRIES_1486102781 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_1486102781)-1) - (0) + 1))-1:0] M_bram2_address;
-    logic [(((_MP_WIDTH_1486102781-1) - (0) + 1))-1:0] M_bram2_read_data;
-    logic [(((_MP_WIDTH_1486102781-1) - (0) + 1))-1:0] M_bram2_write_data;
+    localparam _MP_WIDTH_1252759636 = WIDTH;
+    localparam _MP_ENTRIES_1252759636 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_1252759636)-1) - (0) + 1))-1:0] M_bram2_address;
+    logic [(((_MP_WIDTH_1252759636-1) - (0) + 1))-1:0] M_bram2_read_data;
+    logic [(((_MP_WIDTH_1252759636-1) - (0) + 1))-1:0] M_bram2_write_data;
     logic M_bram2_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_1486102781),
-        .ENTRIES(_MP_ENTRIES_1486102781)
+        .WIDTH(_MP_WIDTH_1252759636),
+        .ENTRIES(_MP_ENTRIES_1252759636)
     ) bram2 (
         .clk(clk),
         .address(M_bram2_address),
@@ -71,7 +71,7 @@ module bram #(
                 bram_switch = 1'h1;
             end
             2'h2: begin
-                bram_switch = brsel;
+                bram_switch = bram_selector;
             end
         endcase
         if (ro) begin

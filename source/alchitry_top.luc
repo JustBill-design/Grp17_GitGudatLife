@@ -228,7 +228,7 @@ module alchitry_top (
         brams.bwd = sm.bwd
         
         // BRAM and regfile connections
-        brams.bram_selector = reg.brsel
+        brams.bram_selector = reg.bram_selector
         
         
 
@@ -239,13 +239,11 @@ module alchitry_top (
 
 
         // test display.addre range more
-        if (display.addr < 1000) {
-            pixeldata.d = b00
-        } else if (display.addr < 2000) {
-            pixeldata.d = b01
-        } else if (display.addr < 3000) {
+        if (display.addr == 64) {            // top left corner blue
             pixeldata.d = b10
-        } else {
+        } else if (display.addr == 4223) {   // bottom right corner red
+            pixeldata.d = b01
+        } else if (display.addr == 128) {    // second row, left side
             pixeldata.d = b11
         }
         display.data = pixeldata.q

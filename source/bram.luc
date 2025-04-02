@@ -5,7 +5,7 @@ module bram #(
     input clk,  // clock
     input rst,  // reset
     input bram_selector,                // selector from regfile
-    input brsel,                        // selector override
+    input brsel[2],                     // selector override
     input bra[$clog2(ENTRIES)],         // read address
     input bwa[$clog2(ENTRIES)],         // write address
     input bra_override[$clog2(ENTRIES)],// override read address
@@ -32,7 +32,7 @@ module bram #(
         case(brsel) {
             b00: bram_switch = b0
             b01: bram_switch = b1
-            b10: bram_switch = brsel
+            b10: bram_switch = bram_selector
         }
         
         // write override mux
