@@ -56,8 +56,8 @@ module alchitry_top (
         edge_detector timerclk(#RISE(0),#FALL(1))   // ticks once per second
         edge_detector gameclk(#RISE(1),#FALL(0))    // ticks roughly 10 times per second
         
-        dff pixeldata[2](#INIT(b00))
-        // dff bramtest_8points[3]
+        // dff pixeldata[2](#INIT(b00))
+        dff bramtest_8points[3]
 
         .rst(rst) {
         
@@ -252,27 +252,27 @@ module alchitry_top (
 
 
 
-        // // test for bram read and write at specific addresses
-        // if (~display.reading && gamecounter.value[15]) {
-        //     case (bramtest_8points.q) {
-        //         0: brams.bwa = 64 // first led, first row
-        //         1: brams.bwa = 96 // middle led, first row
-        //         2: brams.bwa = 127 // last led, second row
-        //         3: brams.bwa = 2112 // first led, middle row
-        //         4: brams.bwa = 2144 // middle led, middle row
-        //         5: brams.bwa = 2175 // last led, middle row
-        //         6: brams.bwa = 4096 // first led, second last row
-        //         7: brams.bwa = 4159 // last led, last row
-        //     }
-        //     brams.bwd = c{b1,butt_cond.out}
-        //     bramtest_8points.d = bramtest_8points.q + 1
-        //     // gamecounter.value[$width(gamecounter.value)-1-:2]
-        //     brams.brsel = 0
-        //     brams.bwe = 1
-        // } else {
-        //     brams.brsel = 1
-        //     brams.bwe = 0
-        // }
+        // test for bram read and write at specific addresses
+        if (~display.reading && gamecounter.value[15]) {
+            case (bramtest_8points.q) {
+                0: brams.bwa = 64 // first led, first row
+                1: brams.bwa = 96 // middle led, first row
+                2: brams.bwa = 127 // last led, second row
+                3: brams.bwa = 2112 // first led, middle row
+                4: brams.bwa = 2144 // middle led, middle row
+                5: brams.bwa = 2175 // last led, middle row
+                6: brams.bwa = 4096 // first led, second last row
+                7: brams.bwa = 4159 // last led, last row
+            }
+            brams.bwd = c{b1,butt_cond.out}
+            bramtest_8points.d = bramtest_8points.q + 1
+            // gamecounter.value[$width(gamecounter.value)-1-:2]
+            brams.brsel = 0
+            brams.bwe = 1
+        } else {
+            brams.brsel = 1
+            brams.bwe = 0
+        }
 
 
 
@@ -320,13 +320,13 @@ module alchitry_top (
         // display.data = pixeldata.q
         
         
-        // default display blue-white stripes (working)
-        if (display.reading && display.addr[6]) {
-            pixeldata.d = b10
-        } else if (display.reading) {
-            pixeldata.d = b11
-        }
-        display.data = pixeldata.q
+        // // default display blue-white stripes (working)
+        // if (display.reading && display.addr[6]) {
+        //     pixeldata.d = b10
+        // } else if (display.reading) {
+        //     pixeldata.d = b11
+        // }
+        // display.data = pixeldata.q
         
 
         // // display testing (working)

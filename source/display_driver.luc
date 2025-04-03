@@ -97,14 +97,19 @@ module display_driver #(
             b11: pixeldata = b111
             default: pixeldata = b010
         }
+
         
         if (state.q == b00){ // START state
-            latch_blank.d = b01 // latch off, blank on, begin 
-            // start from address 1111 
+         
+            // latch off, blank on, begin 
+            latch_blank.d = b01 
+
+            // start from last address 
             pixel_idx.d = $width(pixel_idx.q)x{b1} // start from last address
             
             state.d = b01
         }
+
 
         // shift pixel_idx
         if (sclk_counter.q == 0 && state.q == b01) {
@@ -114,9 +119,8 @@ module display_driver #(
         }
 
         
-        
         // set first read signal
-        else if (sclk_counter.q == 1 && state.q == b01){
+        else if (sclk_counter.q == 1 && state.q == b01) {
             
             // BRAM address for first pixel, accounting for top row buffer
             bram_addr.d = $resize(pixel_idx.q,$width(addr)) + MATRIX_WIDTH
@@ -126,7 +130,7 @@ module display_driver #(
         }
         
         
-        else if (sclk_counter.q == 2 && state.q == b01){
+        else if (sclk_counter.q == 2 && state.q == b01) {
             
             // BRAM address for second pixel, accounting for top row buffer
             // bram_addr.d = $resize(pixel_idx.q,$width(addr)) + c{b1,($clog2(MATRIX_WIDTH)+ADDRESS_SIZE)x{b0}} + MATRIX_WIDTH            
@@ -164,8 +168,9 @@ module display_driver #(
             sclk.d = 1
         }
         
+
         // if we have loaded all LEDs in the row, latch for 1 sclk_counter cycle 
-        else if( sclk_counter.q == (DIV)x{b1} && state.q == b01 && pixel_idx.q[$clog2(MATRIX_WIDTH)-2:0] == $clog2(MATRIX_WIDTH-1)x{b1} ) {
+        else if( sclk_counter.q == (DIV)x{b1} && state.q == b01 && pixel_idx.q[0+:$clog2(MATRIX_WIDTH-1)] == $clog2(MATRIX_WIDTH-1)x{b1} ) {
 
             // change state 
             state.d = b10
@@ -177,6 +182,7 @@ module display_driver #(
             sclk.d = 0 
         }
     
+
         // in the next sclk_counter cycle, when sclk contains all 1, then DISPLAY
         else if(sclk_counter.q == (DIV)x{b1} && state.q == b10) {
 
@@ -185,6 +191,11 @@ module display_driver #(
             
             // change state to load again
             state.d = b01
+            
+            // reset pixel_idx if at last row
+            if (pixel_idx.q[$width(pixel_idx.q)-1-:5] == ADDRESS_SIZEx{b1}) {
+                pixel_idx.d = $width(pixel_idx.q)x{b1}
+            }
         }
     }
 }
