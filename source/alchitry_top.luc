@@ -238,18 +238,18 @@ module alchitry_top (
 
 
 
-        // test display.addre range more
-        pixeldata.d = b00
-        if (display.addr == 127) {            // top left corner blue
-            pixeldata.d = b10
-        }
-        if (display.addr == 4095) {   // bottom right corner red
-            pixeldata.d = b01
-        }
-        if (display.addr == 32) {    // second row, left side
-            pixeldata.d = b11
-        }
-        display.data = pixeldata.q
+        // // test display.addre range more
+        // pixeldata.d = b00
+        // if (display.addr == 127) {            // top left corner blue
+        //     pixeldata.d = b10
+        // }
+        // if (display.addr == 4095) {   // bottom right corner red
+        //     pixeldata.d = b01
+        // }
+        // if (display.addr == 32) {    // second row, left side
+        //     pixeldata.d = b11
+        // }
+        // display.data = pixeldata.q
 
 
 
@@ -285,13 +285,13 @@ module alchitry_top (
         // display.data = pixeldata.q
         
         
-        // // default display blue-white stripes
-        // if (display.reading && display.addr[6]) {
-        //     pixeldata.d = b10
-        // } else if (display.reading) {
-        //     pixeldata.d = b11
-        // }
-        // display.data = pixeldata.q
+        // default display blue-white stripes (working)
+        if (display.reading && display.addr[6]) {
+            pixeldata.d = b10
+        } else if (display.reading) {
+            pixeldata.d = b11
+        }
+        display.data = pixeldata.q
         
 
         // // display testing (working)
