@@ -239,6 +239,21 @@ module alchitry_top (
 
         // test for bram read and write at specific addresses
         if (~display.reading && gamecounter.value[15]) {
+            brams.bwa = 155
+            brams.bwd = c{b1,butt_cond.out}
+            bramtest_8points.d = bramtest_8points.q + 1
+            brams.brsel = 0
+            brams.bwe = 1
+        } else {
+            brams.brsel = 1
+            brams.bwe = 0
+        }
+
+
+
+
+        // test for bram read and write at specific addresses
+        if (~display.reading && gamecounter.value[15]) {
             case (bramtest_8points.q) {
                 0: brams.bwa = 64 // first led, first row
                 1: brams.bwa = 96 // middle led, first row
