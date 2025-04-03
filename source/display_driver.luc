@@ -162,14 +162,13 @@ module display_driver #(
         // change rising clock for shift registers in matrix to load input data in the second half of sclk_counter cycle
         else if (sclk_counter.q == (DIV-1)x{b1} && state.q == b01) {
             sclk.d = 1
-            state.d = b10
         }
         
         // if we have loaded all LEDs in the row, latch for 1 sclk_counter cycle 
-        else if( sclk_counter.q == (DIV)x{b1} && state.q == b10 && pixel_idx.q[$clog2(MATRIX_WIDTH)-1:0] == $clog2(MATRIX_WIDTH)x{b1} ) {
+        else if( sclk_counter.q == (DIV)x{b1} && state.q == b01 && pixel_idx.q[$clog2(MATRIX_WIDTH)-2:0] == $clog2(MATRIX_WIDTH-1)x{b1} ) {
 
             // change state 
-            state.d = b11
+            state.d = b10
             
             // latch on, blank on
             latch_blank.d = b11
@@ -179,7 +178,7 @@ module display_driver #(
         }
     
         // in the next sclk_counter cycle, when sclk contains all 1, then DISPLAY
-        else if(sclk_counter.q == (DIV)x{b1} && state.q == b11) {
+        else if(sclk_counter.q == (DIV)x{b1} && state.q == b10) {
 
             //latch off, blank off
             latch_blank.d = b00 

@@ -20,16 +20,16 @@ module bram #(
         input wire [(WIDTH)-1:0] bwd,
         output reg [(WIDTH)-1:0] brd
     );
-    localparam _MP_WIDTH_965612614 = WIDTH;
-    localparam _MP_ENTRIES_965612614 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_965612614)-1) - (0) + 1))-1:0] M_bram1_address;
-    logic [(((_MP_WIDTH_965612614-1) - (0) + 1))-1:0] M_bram1_read_data;
-    logic [(((_MP_WIDTH_965612614-1) - (0) + 1))-1:0] M_bram1_write_data;
+    localparam _MP_WIDTH_1918701198 = WIDTH;
+    localparam _MP_ENTRIES_1918701198 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_1918701198)-1) - (0) + 1))-1:0] M_bram1_address;
+    logic [(((_MP_WIDTH_1918701198-1) - (0) + 1))-1:0] M_bram1_read_data;
+    logic [(((_MP_WIDTH_1918701198-1) - (0) + 1))-1:0] M_bram1_write_data;
     logic M_bram1_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_965612614),
-        .ENTRIES(_MP_ENTRIES_965612614)
+        .WIDTH(_MP_WIDTH_1918701198),
+        .ENTRIES(_MP_ENTRIES_1918701198)
     ) bram1 (
         .clk(clk),
         .address(M_bram1_address),
@@ -39,16 +39,16 @@ module bram #(
     );
     
     
-    localparam _MP_WIDTH_446933181 = WIDTH;
-    localparam _MP_ENTRIES_446933181 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_446933181)-1) - (0) + 1))-1:0] M_bram2_address;
-    logic [(((_MP_WIDTH_446933181-1) - (0) + 1))-1:0] M_bram2_read_data;
-    logic [(((_MP_WIDTH_446933181-1) - (0) + 1))-1:0] M_bram2_write_data;
+    localparam _MP_WIDTH_396730445 = WIDTH;
+    localparam _MP_ENTRIES_396730445 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_396730445)-1) - (0) + 1))-1:0] M_bram2_address;
+    logic [(((_MP_WIDTH_396730445-1) - (0) + 1))-1:0] M_bram2_read_data;
+    logic [(((_MP_WIDTH_396730445-1) - (0) + 1))-1:0] M_bram2_write_data;
     logic M_bram2_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_446933181),
-        .ENTRIES(_MP_ENTRIES_446933181)
+        .WIDTH(_MP_WIDTH_396730445),
+        .ENTRIES(_MP_ENTRIES_396730445)
     ) bram2 (
         .clk(clk),
         .address(M_bram2_address),
