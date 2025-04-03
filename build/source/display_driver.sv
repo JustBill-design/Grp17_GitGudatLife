@@ -96,10 +96,11 @@ module display_driver #(
                 end else begin
                     if (D_sclk_counter_q == 2'h3 && D_state_q == 2'h1) begin
                         D_rgb_data_0_d = pixeldata;
-                        D_ddr_d = 1'h0;
+                        D_ddr_d = 1'h1;
                     end else begin
                         if (D_sclk_counter_q == 3'h4 && D_state_q == 2'h1) begin
                             D_rgb_data_1_d = pixeldata;
+                            D_ddr_d = 1'h0;
                         end else begin
                             if (D_sclk_counter_q == {(DIV - 1'h1){1'h1}} && D_state_q == 2'h1) begin
                                 D_sclk_d = 1'h1;

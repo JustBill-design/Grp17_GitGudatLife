@@ -142,8 +142,8 @@ module display_driver #(
             // load data into first pixel cache
             rgb_data_0.d = pixeldata
 
-            // set ddr to low for no read in next clock
-            ddr.d = 0
+            // set ddr to high for read in next clock
+            ddr.d = 1
         }
 
 
@@ -152,6 +152,9 @@ module display_driver #(
         
             // load data into second pixel cache
             rgb_data_1.d = pixeldata
+            
+            // set ddr to low for no read in next clock
+            ddr.d = 0
         }
 
         
