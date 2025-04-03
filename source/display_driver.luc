@@ -31,7 +31,7 @@ module display_driver #(
     
 ) {
     
-    const DIV = $clog2(CLK_FREQ) - 20
+    const DIV = $clog2(CLK_FREQ) - 18
     sig pixeldata[3]
     
     .clk(clk){
