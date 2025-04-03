@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Thu Apr  3 20:43:58 2025
+| Date         : Thu Apr  3 21:05:16 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb
 | Design       : alchitry_top
@@ -157,8 +157,8 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 | FDRE     |  529 |        Flop & Latch |
 | CARRY4   |  371 |          CarryLogic |
 | LUT5     |  308 |                 LUT |
-| LUT2     |  290 |                 LUT |
-| LUT4     |  267 |                 LUT |
+| LUT2     |  289 |                 LUT |
+| LUT4     |  266 |                 LUT |
 | OBUF     |   61 |                  IO |
 | LUT1     |   61 |                 LUT |
 | MUXF7    |   42 |               MuxFx |

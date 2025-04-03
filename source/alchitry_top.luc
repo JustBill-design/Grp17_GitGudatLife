@@ -252,9 +252,6 @@ module alchitry_top (
         // display.data = pixeldata.q
 
 
-
-
-
         // // test for bram read
         // if (~display.reading && gameclk.out) {
         //     brams.brsel = 0
@@ -285,23 +282,23 @@ module alchitry_top (
         // display.data = pixeldata.q
         
         
-        // default display blue-white stripes (working)
-        if (display.reading && display.addr[6]) {
-            pixeldata.d = b10
-        } else if (display.reading) {
-            pixeldata.d = b11
-        }
-        display.data = pixeldata.q
-        
-
-        // // display testing (working)
-        // pixeldata.d = pixeldata.q
-        // if (butt_cond.out) {
+        // // default display blue-white stripes (working)
+        // if (display.reading && display.addr[6]) {
+        //     pixeldata.d = b10
+        // } else if (display.reading) {
         //     pixeldata.d = b11
-        // } else {
-        //     pixeldata.d = b01
         // }
         // display.data = pixeldata.q
+        
+
+        // display testing (working)
+        pixeldata.d = pixeldata.q
+        if (butt_cond.out) {
+            pixeldata.d = b11
+        } else {
+            pixeldata.d = b01
+        }
+        display.data = pixeldata.q
 
 
         // button tester
