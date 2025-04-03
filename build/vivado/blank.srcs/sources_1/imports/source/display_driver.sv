@@ -26,12 +26,14 @@ module display_driver #(
     logic [1:0] D_state_d, D_state_q = 0;
     logic [(DIV)-1:0] D_sclk_counter_d, D_sclk_counter_q = 0;
     logic [(ADDRESS_SIZE + $clog2(MATRIX_WIDTH))-1:0] D_pixel_idx_d, D_pixel_idx_q = 0;
+    logic [($bits(addr))-1:0] D_bram_addr_d, D_bram_addr_q = 0;
     logic D_ddr_d, D_ddr_q = 0;
     logic [2:0] D_rgb_data_0_d, D_rgb_data_0_q = 0;
     logic [2:0] D_rgb_data_1_d, D_rgb_data_1_q = 0;
     logic D_sclk_d, D_sclk_q = 0;
     logic [1:0] D_latch_blank_d, D_latch_blank_q = 0;
     always @* begin
+        D_bram_addr_d = D_bram_addr_q;
         D_rgb_data_0_d = D_rgb_data_0_q;
         D_rgb_data_1_d = D_rgb_data_1_q;
         D_sclk_d = D_sclk_q;
@@ -41,12 +43,12 @@ module display_driver #(
         D_state_d = D_state_q;
         D_sclk_counter_d = D_sclk_counter_q;
         
-        addr = 7'h40;
+        D_bram_addr_d = 7'h40;
         D_rgb_data_0_d = D_rgb_data_0_q;
         D_rgb_data_1_d = D_rgb_data_1_q;
         D_sclk_d = D_sclk_q;
         D_latch_blank_d = D_latch_blank_q;
-        D_ddr_d = D_ddr_q;
+        D_ddr_d = 1'h0;
         reading = D_ddr_q;
         D_pixel_idx_d = D_pixel_idx_q;
         D_state_d = D_state_q;
@@ -55,7 +57,8 @@ module display_driver #(
         blank = D_latch_blank_q[1'h0];
         latch = D_latch_blank_q[1'h1];
         sclk_out = D_sclk_q;
-        address = D_pixel_idx_q[ADDRESS_SIZE + $clog2(MATRIX_WIDTH) - 1'h1:$clog2(MATRIX_WIDTH)];
+        addr = D_bram_addr_q;
+        address = D_pixel_idx_q[$bits(D_pixel_idx_q) - 1'h1-:3'h5];
         D_sclk_counter_d = D_sclk_counter_q + 1'h1;
         
         case (data)
@@ -77,39 +80,39 @@ module display_driver #(
         endcase
         if (D_state_q == 2'h0) begin
             D_latch_blank_d = 2'h1;
-            D_pixel_idx_d = {(ADDRESS_SIZE + $clog2(MATRIX_WIDTH)){1'h1}};
+            D_pixel_idx_d = {$bits(D_pixel_idx_q){1'h1}};
             D_state_d = 2'h1;
         end
         if (D_sclk_counter_q == 1'h0 && D_state_q == 2'h1) begin
             D_pixel_idx_d = D_pixel_idx_q + 1'h1;
-            D_ddr_d = 1'h1;
         end else begin
             if (D_sclk_counter_q == 1'h1 && D_state_q == 2'h1) begin
-                D_sclk_d = 1'h0;
-                addr = (ADDRESS_SIZE + $clog2(MATRIX_WIDTH) + 2'h2)'(D_pixel_idx_q) + MATRIX_WIDTH;
+                D_bram_addr_d = ($bits(addr))'(D_pixel_idx_q) + MATRIX_WIDTH;
                 D_ddr_d = 1'h1;
             end else begin
                 if (D_sclk_counter_q == 2'h2 && D_state_q == 2'h1) begin
-                    D_sclk_d = 1'h0;
-                    addr = (ADDRESS_SIZE + $clog2(MATRIX_WIDTH) + 2'h2)'(D_pixel_idx_q) + {1'h1, {($clog2(MATRIX_WIDTH) + ADDRESS_SIZE){1'h0}}} + MATRIX_WIDTH;
-                    D_ddr_d = 1'h0;
-                    D_rgb_data_0_d = pixeldata;
+                    D_bram_addr_d = ($bits(addr))'(D_pixel_idx_q) + {1'h1, {($clog2(MATRIX_WIDTH) + ADDRESS_SIZE){1'h0}}} + MATRIX_WIDTH;
+                    D_ddr_d = 1'h1;
                 end else begin
                     if (D_sclk_counter_q == 2'h3 && D_state_q == 2'h1) begin
-                        D_sclk_d = 1'h0;
-                        D_rgb_data_1_d = pixeldata;
+                        D_rgb_data_0_d = pixeldata;
+                        D_ddr_d = 1'h0;
                     end else begin
-                        if (D_sclk_counter_q == {(DIV - 1'h1){1'h1}} && D_state_q == 2'h1) begin
-                            D_sclk_d = 1'h1;
+                        if (D_sclk_counter_q == 3'h4 && D_state_q == 2'h1) begin
+                            D_rgb_data_1_d = pixeldata;
                         end else begin
-                            if (D_sclk_counter_q == {(DIV){1'h1}} && D_state_q == 2'h1 && D_pixel_idx_q[$clog2(MATRIX_WIDTH) - 1'h1:1'h0] == {$clog2(MATRIX_WIDTH){1'h1}}) begin
-                                D_state_d = 2'h2;
-                                D_latch_blank_d = 2'h3;
-                                D_sclk_d = 1'h0;
+                            if (D_sclk_counter_q == {(DIV - 1'h1){1'h1}} && D_state_q == 2'h1) begin
+                                D_sclk_d = 1'h1;
                             end else begin
-                                if (D_sclk_counter_q == {(DIV){1'h1}} && D_state_q == 2'h2) begin
-                                    D_latch_blank_d = 2'h0;
-                                    D_state_d = 2'h1;
+                                if (D_sclk_counter_q == {(DIV){1'h1}} && D_state_q == 2'h1 && D_pixel_idx_q[$clog2(MATRIX_WIDTH) - 1'h1:1'h0] == {$clog2(MATRIX_WIDTH){1'h1}}) begin
+                                    D_state_d = 2'h2;
+                                    D_latch_blank_d = 2'h3;
+                                    D_sclk_d = 1'h0;
+                                end else begin
+                                    if (D_sclk_counter_q == {(DIV){1'h1}} && D_state_q == 2'h2) begin
+                                        D_latch_blank_d = 2'h0;
+                                        D_state_d = 2'h1;
+                                    end
                                 end
                             end
                         end
@@ -125,6 +128,7 @@ module display_driver #(
             D_state_q <= 0;
             D_sclk_counter_q <= 0;
             D_pixel_idx_q <= 0;
+            D_bram_addr_q <= 0;
             D_ddr_q <= 0;
             D_rgb_data_0_q <= 0;
             D_rgb_data_1_q <= 0;
@@ -134,6 +138,7 @@ module display_driver #(
             D_state_q <= D_state_d;
             D_sclk_counter_q <= D_sclk_counter_d;
             D_pixel_idx_q <= D_pixel_idx_d;
+            D_bram_addr_q <= D_bram_addr_d;
             D_ddr_q <= D_ddr_d;
             D_rgb_data_0_q <= D_rgb_data_0_d;
             D_rgb_data_1_q <= D_rgb_data_1_d;

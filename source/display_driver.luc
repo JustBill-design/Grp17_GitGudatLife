@@ -45,6 +45,7 @@ module display_driver #(
             
             dff sclk_counter[DIV] // clock to load shift register, whenever sclk_counter == DIVx{b1} that's the cycle of shift reg clk
             dff pixel_idx[ADDRESS_SIZE+$clog2(MATRIX_WIDTH)] // sequential indexing of top half of pixels
+            dff bram_addr[$width(addr)] // holds bram address
             
             // display override signal
             dff ddr
@@ -62,14 +63,14 @@ module display_driver #(
     always {
         
         // output to address external simple ram 
-        addr = 64
+        bram_addr.d = 64
         
         // dff default connections
         rgb_data_0.d = rgb_data_0.q
         rgb_data_1.d = rgb_data_1.q
         sclk.d = sclk.q
         latch_blank.d = latch_blank.q 
-        ddr.d = ddr.q
+        ddr.d = 0
         reading = ddr.q
 
         pixel_idx.d = pixel_idx.q
@@ -81,7 +82,8 @@ module display_driver #(
         blank = latch_blank.q[0] // LSB
         latch = latch_blank.q[1] // MSB
         sclk_out = sclk.q
-        address = pixel_idx.q[ADDRESS_SIZE+$clog2(MATRIX_WIDTH)-1:$clog2(MATRIX_WIDTH)] // row number, 0-indexed
+        addr = bram_addr.q // display [pixel address on display]
+        address = pixel_idx.q[$width(pixel_idx.q)-1-:5] // row number, 0-indexed
         
         
         // internal counter to keep track what value we should give to shift register's clock sclk
@@ -99,62 +101,57 @@ module display_driver #(
         if (state.q == b00){ // START state
             latch_blank.d = b01 // latch off, blank on, begin 
             // start from address 1111 
-            pixel_idx.d = (ADDRESS_SIZE+$clog2(MATRIX_WIDTH))x{b1} // start from last address
+            pixel_idx.d = $width(pixel_idx.q)x{b1} // start from last address
             
             state.d = b01
-
         }
 
         // shift pixel_idx
         if (sclk_counter.q == 0 && state.q == b01) {
 
-            // shift the index to go to next LED in the row 
+            // shift the index to go to next LED
             pixel_idx.d = pixel_idx.q + 1
+        }
 
+        
+        
+        // set first read signal
+        else if (sclk_counter.q == 1 && state.q == b01){
+            
+            // BRAM address for first pixel, accounting for top row buffer
+            bram_addr.d = $resize(pixel_idx.q,$width(addr)) + MATRIX_WIDTH
+            
             // set ddr to high for read in next clock
             ddr.d = 1
         }
         
         
-        // send first read signal
-        else if (sclk_counter.q == 1 && state.q == b01){
+        else if (sclk_counter.q == 2 && state.q == b01){
             
-            // off clock when changing data
-            sclk.d = 0
+            // BRAM address for second pixel, accounting for top row buffer
+            bram_addr.d = $resize(pixel_idx.q,$width(addr)) + c{b1,($clog2(MATRIX_WIDTH)+ADDRESS_SIZE)x{b0}} + MATRIX_WIDTH            
 
-            // give address for next column
-            // BRAM address for first pixel, accounting for top row buffer
-            addr = $resize(pixel_idx.q,ADDRESS_SIZE+$clog2(MATRIX_WIDTH)+2) + MATRIX_WIDTH
-            
-            // set ddr to high fir read in next clock
+            // set ddr to high for read in next clock
             ddr.d = 1
         }
         
 
         // read from BRAM, send second read signal, and set ddr to low
-        else if (sclk_counter.q == 2 && state.q == b01) {
-            
-            // off clock when changing data 
-            sclk.d = 0 // give address for next column BRAM address for second pixel, accounting for top row buffer
-            addr = $resize(pixel_idx.q,ADDRESS_SIZE+$clog2(MATRIX_WIDTH)+2) + c{b1,($clog2(MATRIX_WIDTH)+ADDRESS_SIZE)x{b0}} + MATRIX_WIDTH
-            
-            // set ddr to high for read in next clock
-            ddr.d = 0
+        else if (sclk_counter.q == 3 && state.q == b01) {
 
             // load data into first pixel cache
             rgb_data_0.d = pixeldata
+
+            // set ddr to low for no read in next clock
+            ddr.d = 0
         }
 
 
         // read from BRAM
-        else if (sclk_counter.q == 3 && state.q == b01) {
+        else if (sclk_counter.q == 4 && state.q == b01) {
         
-            // off clock when changing data
-            sclk.d = 0
-            
             // load data into second pixel cache
             rgb_data_1.d = pixeldata
-
         }
 
         

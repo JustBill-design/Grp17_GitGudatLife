@@ -56,7 +56,7 @@ module alchitry_top (
         edge_detector timerclk(#RISE(0),#FALL(1))   // ticks once per second
         edge_detector gameclk(#RISE(1),#FALL(0))    // ticks roughly 10 times per second
         
-        dff pixeldata[2](#INIT(b00))
+        // dff pixeldata[2](#INIT(b00))
 
         .rst(rst) {
         
@@ -82,7 +82,6 @@ module alchitry_top (
             
             // bram testing counter
             counter bramtest(#SIZE(13),#TOP(4223))
-            // dff bdff[2]
 
         }
         .rst(fifo_rst) {
@@ -238,7 +237,7 @@ module alchitry_top (
 
 
 
-        // // test display.addre range more
+        // // test display.addr range more
         // pixeldata.d = b00
         // if (display.addr == 127) {            // top left corner blue
         //     pixeldata.d = b10
@@ -252,17 +251,17 @@ module alchitry_top (
         // display.data = pixeldata.q
 
 
-        // // test for bram read
-        // if (~display.reading && gameclk.out) {
-        //     brams.brsel = 0
-        //     brams.bwa = bramtest.value
-        //     brams.bwd = c{butt_cond.out,b1}
-        //     // gamecounter.value[$width(gamecounter.value)-1-:2]
-        //     bdff.d = bdff.q + 1
-        //     brams.bwe = 1
-        // } else {
-        //     brams.brsel = 1
-        // }
+        // test for bram read
+        if (~display.reading && gamecounter.value[15]) {
+            brams.bwa = bramtest.value
+            brams.bwd = c{butt_cond.out,b1}
+            // gamecounter.value[$width(gamecounter.value)-1-:2]
+            brams.brsel = 0
+            brams.bwe = 1
+        } else {
+            brams.brsel = 1
+            brams.bwe = 0
+        }
 
  
         // // test for display.addr range
@@ -291,14 +290,14 @@ module alchitry_top (
         // display.data = pixeldata.q
         
 
-        // display testing (working)
-        pixeldata.d = pixeldata.q
-        if (butt_cond.out) {
-            pixeldata.d = b11
-        } else {
-            pixeldata.d = b01
-        }
-        display.data = pixeldata.q
+        // // display testing (working)
+        // pixeldata.d = pixeldata.q
+        // if (butt_cond.out) {
+        //     pixeldata.d = b11
+        // } else {
+        //     pixeldata.d = b01
+        // }
+        // display.data = pixeldata.q
 
 
         // button tester
