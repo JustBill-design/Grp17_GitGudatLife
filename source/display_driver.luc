@@ -138,8 +138,8 @@ module display_driver #(
             sclk.d = 0 // give address for next column BRAM address for second pixel, accounting for top row buffer
             addr = $resize(pixel_idx.q,ADDRESS_SIZE+$clog2(MATRIX_WIDTH)+2) + c{b1,($clog2(MATRIX_WIDTH)+ADDRESS_SIZE)x{b0}} + MATRIX_WIDTH
             
-            // set ddr to high fir read in next clock
-            ddr.d = 1
+            // set ddr to high for read in next clock
+            ddr.d = 0
 
             // load data into first pixel cache
             rgb_data_0.d = pixeldata
@@ -155,8 +155,6 @@ module display_driver #(
             // load data into second pixel cache
             rgb_data_1.d = pixeldata
 
-            // set ddr to low
-            ddr.d = 0
         }
 
         

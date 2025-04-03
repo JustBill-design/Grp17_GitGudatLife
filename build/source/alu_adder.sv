@@ -15,14 +15,14 @@ module alu_adder #(
         output reg v,
         output reg n
     );
-    localparam _MP_SIZE_1002682619 = SIZE;
-    logic [(_MP_SIZE_1002682619)-1:0] M_rca_a;
-    logic [(_MP_SIZE_1002682619)-1:0] M_rca_b;
+    localparam _MP_SIZE_2132264367 = SIZE;
+    logic [(_MP_SIZE_2132264367)-1:0] M_rca_a;
+    logic [(_MP_SIZE_2132264367)-1:0] M_rca_b;
     logic M_rca_cin;
-    logic [(_MP_SIZE_1002682619)-1:0] M_rca_s;
+    logic [(_MP_SIZE_2132264367)-1:0] M_rca_s;
     
     alu_adder_rca #(
-        .SIZE(_MP_SIZE_1002682619)
+        .SIZE(_MP_SIZE_2132264367)
     ) rca (
         .a(M_rca_a),
         .b(M_rca_b),
