@@ -280,7 +280,6 @@ module fsm (
             end
             8'h9a: begin
                 alufn = 6'h0;
-                asel = 1'h0;
                 bsel = 4'h1;
                 we = 1'h1;
                 ra1 = 3'h4;
@@ -293,7 +292,6 @@ module fsm (
             end
             8'h9b: begin
                 alufn = 6'h35;
-                asel = 1'h0;
                 bsel = 4'h8;
                 ra1 = 3'h4;
                 
