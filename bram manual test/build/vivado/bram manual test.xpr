@@ -7,7 +7,7 @@
 <Project Product="Vivado" Version="7" Minor="68" Path="C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/bram manual test/build/vivado/bram manual test.xpr">
   <DefaultLaunch Dir="$PRUNDIR"/>
   <Configuration>
-    <Option Name="Id" Val="5eda35cab98347d2ac77f7defddb1942"/>
+    <Option Name="Id" Val="10b4d9bf4e834ba994da8e3a101266d5"/>
     <Option Name="Part" Val="xc7a35tftg256-1"/>
     <Option Name="CompiledLibDir" Val="$PCACHEDIR/compile_simlib"/>
     <Option Name="CompiledLibDirXSim" Val=""/>
@@ -92,7 +92,7 @@
       <File Path="$PSRCDIR/sources_1/imports/source/simple_ram.v">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../source/simple_ram.v"/>
-          <Attr Name="ImportTime" Val="1743776670"/>
+          <Attr Name="ImportTime" Val="1743778714"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -101,7 +101,7 @@
       <File Path="$PSRCDIR/sources_1/imports/source/bram.sv">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../source/bram.sv"/>
-          <Attr Name="ImportTime" Val="1743776670"/>
+          <Attr Name="ImportTime" Val="1743778714"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -110,7 +110,7 @@
       <File Path="$PSRCDIR/sources_1/imports/source/counter.sv">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../source/counter.sv"/>
-          <Attr Name="ImportTime" Val="1743776670"/>
+          <Attr Name="ImportTime" Val="1743778714"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -119,7 +119,7 @@
       <File Path="$PSRCDIR/sources_1/imports/source/reset_conditioner.sv">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../source/reset_conditioner.sv"/>
-          <Attr Name="ImportTime" Val="1743776670"/>
+          <Attr Name="ImportTime" Val="1743778714"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -128,7 +128,7 @@
       <File Path="$PSRCDIR/sources_1/imports/source/alchitry_top.sv">
         <FileInfo>
           <Attr Name="ImportPath" Val="$PPRDIR/../source/alchitry_top.sv"/>
-          <Attr Name="ImportTime" Val="1743776670"/>
+          <Attr Name="ImportTime" Val="1743778714"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>
@@ -138,7 +138,7 @@
         <FileInfo>
           <Attr Name="AutoDisabled" Val="1"/>
           <Attr Name="ImportPath" Val="$PPRDIR/../source/lucid_globals.sv"/>
-          <Attr Name="ImportTime" Val="1743776670"/>
+          <Attr Name="ImportTime" Val="1743778714"/>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
           <Attr Name="UsedIn" Val="simulation"/>

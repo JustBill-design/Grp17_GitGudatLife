@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Fri Apr  4 22:24:53 2025
+| Date         : Fri Apr  4 22:58:57 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb
 | Design       : alchitry_top
@@ -151,13 +151,13 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
 | OBUF     |    9 |                  IO |
-| LUT3     |    4 |                 LUT |
 | FDPE     |    4 |        Flop & Latch |
 | IBUF     |    3 |                  IO |
+| LUT3     |    2 |                 LUT |
+| LUT2     |    2 |                 LUT |
 | LUT1     |    2 |                 LUT |
 | FDRE     |    2 |        Flop & Latch |
 | RAMB18E1 |    1 |        Block Memory |
-| LUT2     |    1 |                 LUT |
 | BUFG     |    1 |               Clock |
 +----------+------+---------------------+
 

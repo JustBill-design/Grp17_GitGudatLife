@@ -6,7 +6,7 @@ module alchitry_top (
     output usb_tx           // USB->Serial output
 ) {
 
-    const CLK = 9_000_000
+    const CLK = 100_000_000
 
     sig rst                 // reset signal
 
@@ -19,6 +19,8 @@ module alchitry_top (
             bram brams
             
             counter cnt(#SIZE(2),#TOP(2),#DIV(0))
+            
+            dff ledstate
         }
     }
 
@@ -52,8 +54,9 @@ module alchitry_top (
                 brams.ro = 1
             b10:
                 brams.brsel = 1
-                led[2:1] = brams.brd
+                ledstate.d = brams.brd
         }
-        
+        led[2:1] = ledstate.q
+        led[0] = 1
     }
 }
