@@ -27,11 +27,13 @@ module display_driver #(
     output latch, 
     output blank, // also known as OE
     output sclk_out,
-    output address[ADDRESS_SIZE] // row address current write to LED matrix
+    output address[ADDRESS_SIZE], // row address current write to LED matrix
     
+    // debug IO
+    output raw_pixel_idx[ADDRESS_SIZE+$clog2(MATRIX_WIDTH)] // raw output of pixel_idx
 ) {
     
-    const DIV = $clog2(CLK_FREQ) - 18
+    const DIV = $clog2(CLK_FREQ) - 0
     sig pixeldata[3]
     
     .clk(clk){
@@ -56,11 +58,15 @@ module display_driver #(
             dff sclk                // clk signal to shift register
             dff latch_blank[2]      // [0] MSB is latch value, [1] LSB is blank value
             
+            // debug modules
         }
     }
     
     
     always {
+    
+        // debug connections
+        raw_pixel_idx = pixel_idx.q
         
         // output to address external simple ram 
         bram_addr.d = 64
