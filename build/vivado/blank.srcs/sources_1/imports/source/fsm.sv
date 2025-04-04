@@ -327,7 +327,7 @@ module fsm (
             8'h9f: begin
                 bwa = 12'h860;
                 bwe = 1'h1;
-                bwd = 4'hb;
+                bwd = 2'h3;
                 brsel = 2'h0;
                 D_states_d = 8'h0;
             end

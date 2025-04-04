@@ -12,20 +12,20 @@ module alu_shifter_right #(
         input wire pad,
         output reg [31:0] out
     );
-    logic [31:0] R_0480a131_i;
-    logic [31:0] RR_0480a131_i;
+    logic [31:0] R_6e5e5953_i;
+    logic [31:0] RR_6e5e5953_i;
     logic [31:0] M_mux_32_s0;
     logic [31:0][1:0] M_mux_32_in;
     logic [31:0] M_mux_32_out;
     
-    genvar idx_0_2133122043;
+    genvar idx_0_1325183119;
     
     generate
-        for (idx_0_2133122043 = 0; idx_0_2133122043 < 32; idx_0_2133122043 = idx_0_2133122043 + 1) begin: forLoop_idx_0_2133122043
+        for (idx_0_1325183119 = 0; idx_0_1325183119 < 32; idx_0_1325183119 = idx_0_1325183119 + 1) begin: forLoop_idx_0_1325183119
             alu_shifter_mux2 mux_32 (
-                .s0(M_mux_32_s0[idx_0_2133122043]),
-                .in(M_mux_32_in[idx_0_2133122043]),
-                .out(M_mux_32_out[idx_0_2133122043])
+                .s0(M_mux_32_s0[idx_0_1325183119]),
+                .in(M_mux_32_in[idx_0_1325183119]),
+                .out(M_mux_32_out[idx_0_1325183119])
             );
         end
     endgenerate
@@ -35,10 +35,10 @@ module alu_shifter_right #(
     always @* begin
         shifted_bits = {{SHIFT{pad}}, a[5'h1f:SHIFT]};
         M_mux_32_s0 = {6'h20{shift}};
-        for (RR_0480a131_i = 0; RR_0480a131_i < 6'h20; RR_0480a131_i = RR_0480a131_i + 1) begin
-      R_0480a131_i = (0) + RR_0480a131_i * (1);
-            M_mux_32_in[R_0480a131_i][1'h0] = a[R_0480a131_i];
-            M_mux_32_in[R_0480a131_i][1'h1] = shifted_bits[R_0480a131_i];
+        for (RR_6e5e5953_i = 0; RR_6e5e5953_i < 6'h20; RR_6e5e5953_i = RR_6e5e5953_i + 1) begin
+      R_6e5e5953_i = (0) + RR_6e5e5953_i * (1);
+            M_mux_32_in[R_6e5e5953_i][1'h0] = a[R_6e5e5953_i];
+            M_mux_32_in[R_6e5e5953_i][1'h1] = shifted_bits[R_6e5e5953_i];
         end
         out = M_mux_32_out;
     end
