@@ -249,7 +249,7 @@ module fsm #(
             States.SET_SELECTOR_PIXEL_STATE:
                 bwa = h860
                 bwe = b1
-                bwd = hB
+                bwd = b11
                 brsel = b00
                 states.d = States.A_INPUT_IDLE
             // Player A Turn
