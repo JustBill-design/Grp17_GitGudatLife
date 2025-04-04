@@ -22,7 +22,7 @@ module display_driver #(
         output reg [(ADDRESS_SIZE)-1:0] address,
         output reg [(ADDRESS_SIZE + $clog2(MATRIX_WIDTH))-1:0] raw_pixel_idx
     );
-    localparam DIV = $clog2(CLK_FREQ) - 3'h6;
+    localparam DIV = $clog2(CLK_FREQ) - 3'h7;
     logic [2:0] pixeldata;
     logic [1:0] D_state_d, D_state_q = 0;
     logic [(DIV)-1:0] D_sclk_counter_d, D_sclk_counter_q = 0;
@@ -86,6 +86,7 @@ module display_driver #(
             D_state_d = 2'h1;
         end
         if (D_sclk_counter_q == 1'h0 && D_state_q == 2'h1) begin
+            D_sclk_d = 1'h0;
             D_pixel_idx_d = D_pixel_idx_q + 1'h1;
         end else begin
             if (D_sclk_counter_q == 1'h1 && D_state_q == 2'h1) begin

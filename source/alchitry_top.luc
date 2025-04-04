@@ -246,16 +246,16 @@ module alchitry_top (
         
 
 
-        // test display clock full white
-        display.data = buff1.q
-        buff1.d = b11
+        // // test display clock full white
+        // display.data = buff1.q
+        // buff1.d = b11
         
 
-        // // test dispaly driver clock
-        // if (display.reading) {
-        //     buff1.d = c{display.addr[0],butt_cond.out}
-        // }
-        // display.data = buff1.q
+        // test dispaly driver clock
+        if (display.reading) {
+            buff1.d = c{display.addr[0],butt_cond.out}
+        }
+        display.data = buff1.q
 
 
         // // test for bram read and write at specific addresses

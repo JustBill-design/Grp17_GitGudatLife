@@ -33,7 +33,7 @@ module display_driver #(
     output raw_pixel_idx[ADDRESS_SIZE+$clog2(MATRIX_WIDTH)] // raw output of pixel_idx
 ) {
     
-    const DIV = $clog2(CLK_FREQ) - 6
+    const DIV = $clog2(CLK_FREQ) - 7
     sig pixeldata[3]
     
     .clk(clk){
@@ -120,6 +120,9 @@ module display_driver #(
         // shift pixel_idx
         if (sclk_counter.q == 0 && state.q == b01) {
 
+            // sclk off to enter new data
+            sclk.d = 0
+
             // shift the index to go to next LED
             pixel_idx.d = pixel_idx.q + 1
         }
@@ -171,6 +174,8 @@ module display_driver #(
         
         // change rising clock for shift registers in matrix to load input data in the second half of sclk_counter cycle
         else if (sclk_counter.q == (DIV-1)x{b1} && state.q == b01) {
+            
+            // sclk on to shift to next register
             sclk.d = 1
         }
         
