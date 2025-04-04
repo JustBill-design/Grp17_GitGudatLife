@@ -108,7 +108,7 @@ module display_driver #(
                             if (D_sclk_counter_q == {(DIV - 1'h1){1'h1}} && D_state_q == 2'h1) begin
                                 D_sclk_d = 1'h1;
                             end else begin
-                                if (D_sclk_counter_q == {(DIV){1'h1}} && D_state_q == 2'h1 && D_pixel_idx_q[1'h0+:($clog2(MATRIX_WIDTH) - 1'h1)] == {($clog2(MATRIX_WIDTH) - 1'h1){1'h1}}) begin
+                                if (D_sclk_counter_q == {(DIV){1'h1}} && D_state_q == 2'h1 && D_pixel_idx_q[1'h0+:($clog2(MATRIX_WIDTH))] == {$clog2(MATRIX_WIDTH){1'h1}}) begin
                                     D_state_d = 2'h2;
                                     D_latch_blank_d = 2'h3;
                                     D_sclk_d = 1'h0;
