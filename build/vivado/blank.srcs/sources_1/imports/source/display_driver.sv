@@ -60,7 +60,7 @@ module display_driver #(
         latch = D_latch_blank_q[1'h1];
         sclk_out = D_sclk_q;
         addr = D_bram_addr_q;
-        address = D_pixel_idx_q[$bits(D_pixel_idx_q) - 1'h1-:ADDRESS_SIZE];
+        address = D_pixel_idx_q[$bits(D_pixel_idx_q) - 1'h1-:ADDRESS_SIZE] - 1'h1;
         D_sclk_counter_d = D_sclk_counter_q + 1'h1;
         
         case (data)

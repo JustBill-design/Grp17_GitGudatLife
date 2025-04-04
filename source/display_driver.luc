@@ -89,7 +89,7 @@ module display_driver #(
         latch = latch_blank.q[1] // MSB
         sclk_out = sclk.q
         addr = bram_addr.q // display [pixel address on display]
-        address = pixel_idx.q[$width(pixel_idx.q)-1-:ADDRESS_SIZE] // row number, 0-indexed
+        address = pixel_idx.q[$width(pixel_idx.q)-1-:ADDRESS_SIZE] - 1 // row number, 0-indexed
         
         
         // internal counter to keep track what value we should give to shift register's clock sclk
