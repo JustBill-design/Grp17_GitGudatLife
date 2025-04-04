@@ -287,7 +287,7 @@ module alchitry_top (
             brams.brsel = 1
             brams.bwe = 0
         }
-        led[5] = &buff1.q
+        led[5] = buff1.q[0]
 
 
         // // test display.addr range more
