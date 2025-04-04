@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Fri Apr  4 22:59:26 2025
+| Date         : Fri Apr  4 23:25:05 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_methodology -file alchitry_top_methodology_drc_routed.rpt -pb alchitry_top_methodology_drc_routed.pb -rpx alchitry_top_methodology_drc_routed.rpx
 | Design       : alchitry_top
@@ -23,15 +23,21 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 9
-+-----------+----------+-------------------------------+--------+
-| Rule      | Severity | Description                   | Checks |
-+-----------+----------+-------------------------------+--------+
-| TIMING-18 | Warning  | Missing input or output delay | 9      |
-+-----------+----------+-------------------------------+--------+
+             Checks found: 10
++-----------+----------+--------------------------------------------+--------+
+| Rule      | Severity | Description                                | Checks |
++-----------+----------+--------------------------------------------+--------+
+| SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 1      |
+| TIMING-18 | Warning  | Missing input or output delay              | 9      |
++-----------+----------+--------------------------------------------+--------+
 
 2. REPORT DETAILS
 -----------------
+SYNTH-6#1 Warning
+Timing of a RAM block might be sub-optimal  
+The timing for the instance brams/bram1/ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
 TIMING-18#1 Warning
 Missing input or output delay  
 An input delay is missing on rst_n relative to the rising and/or falling clock edge(s) of clk_0.

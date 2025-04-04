@@ -13,12 +13,12 @@ module alchitry_top (
     );
     localparam CLK = 27'h5f5e100;
     logic rst;
-    localparam _MP_STAGES_133240687 = 3'h4;
+    localparam _MP_STAGES_1605733726 = 3'h4;
     logic M_reset_cond_in;
     logic M_reset_cond_out;
     
     reset_conditioner #(
-        .STAGES(_MP_STAGES_133240687)
+        .STAGES(_MP_STAGES_1605733726)
     ) reset_cond (
         .clk(clk),
         .in(M_reset_cond_in),
@@ -26,8 +26,8 @@ module alchitry_top (
     );
     
     
-    localparam _MP_WIDTH_692847628 = 2'h2;
-    localparam _MP_ENTRIES_692847628 = 13'h1080;
+    localparam _MP_WIDTH_2145653361 = 2'h2;
+    localparam _MP_ENTRIES_2145653361 = 13'h1080;
     logic M_brams_bram_selector;
     logic [1:0] M_brams_brsel;
     logic [12:0] M_brams_bra;
@@ -39,8 +39,8 @@ module alchitry_top (
     logic [1:0] M_brams_brd;
     
     bram #(
-        .WIDTH(_MP_WIDTH_692847628),
-        .ENTRIES(_MP_ENTRIES_692847628)
+        .WIDTH(_MP_WIDTH_2145653361),
+        .ENTRIES(_MP_ENTRIES_2145653361)
     ) brams (
         .clk(clk),
         .rst(rst),
@@ -56,17 +56,17 @@ module alchitry_top (
     );
     
     
-    localparam _MP_SIZE_397843665 = 2'h2;
-    localparam _MP_DIV_397843665 = 1'h0;
-    localparam _MP_TOP_397843665 = 2'h2;
-    localparam _MP_UP_397843665 = 1'h1;
+    localparam _MP_SIZE_1835057499 = 2'h2;
+    localparam _MP_DIV_1835057499 = 1'h0;
+    localparam _MP_TOP_1835057499 = 2'h2;
+    localparam _MP_UP_1835057499 = 1'h1;
     logic [1:0] M_cnt_value;
     
     counter #(
-        .SIZE(_MP_SIZE_397843665),
-        .DIV(_MP_DIV_397843665),
-        .TOP(_MP_TOP_397843665),
-        .UP(_MP_UP_397843665)
+        .SIZE(_MP_SIZE_1835057499),
+        .DIV(_MP_DIV_1835057499),
+        .TOP(_MP_TOP_1835057499),
+        .UP(_MP_UP_1835057499)
     ) cnt (
         .clk(clk),
         .rst(rst),
@@ -80,7 +80,7 @@ module alchitry_top (
         
         M_reset_cond_in = ~rst_n;
         rst = M_reset_cond_out;
-        led = 8'h0;
+        led = 8'hff;
         usb_tx = usb_rx;
         M_brams_bram_selector = 1'h0;
         M_brams_brsel = 1'h0;
@@ -108,8 +108,7 @@ module alchitry_top (
                 D_ledstate_d = M_brams_brd;
             end
         endcase
-        led[2'h2:1'h1] = D_ledstate_q;
-        led[1'h0] = 1'h1;
+        led[2'h2:1'h1] = ~D_ledstate_q;
     end
     
     
