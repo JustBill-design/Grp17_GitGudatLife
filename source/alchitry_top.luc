@@ -246,7 +246,7 @@ module alchitry_top (
         
 
         if (display.reading) {
-            buff1.d = display.addr[0+:2]
+            buff1.d = c{display.addr[0],butt_cond.out}
         }
         display.data = buff1.q
 

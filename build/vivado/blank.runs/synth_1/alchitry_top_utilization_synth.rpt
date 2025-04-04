@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Fri Apr  4 23:30:52 2025
+| Date         : Fri Apr  4 23:45:45 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb
 | Design       : alchitry_top
@@ -31,8 +31,8 @@ Table of Contents
 +----------------------------+------+-------+------------+-----------+-------+
 |          Site Type         | Used | Fixed | Prohibited | Available | Util% |
 +----------------------------+------+-------+------------+-----------+-------+
-| Slice LUTs*                | 2806 |     0 |          0 |     20800 | 13.49 |
-|   LUT as Logic             | 2794 |     0 |          0 |     20800 | 13.43 |
+| Slice LUTs*                | 2807 |     0 |          0 |     20800 | 13.50 |
+|   LUT as Logic             | 2795 |     0 |          0 |     20800 | 13.44 |
 |   LUT as Memory            |   12 |     0 |          0 |      9600 |  0.13 |
 |     LUT as Distributed RAM |   12 |     0 |            |           |       |
 |     LUT as Shift Register  |    0 |     0 |            |           |       |
@@ -152,8 +152,8 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT3     | 1264 |                 LUT |
-| LUT6     |  954 |                 LUT |
+| LUT3     | 1263 |                 LUT |
+| LUT6     |  955 |                 LUT |
 | FDRE     |  556 |        Flop & Latch |
 | CARRY4   |  376 |          CarryLogic |
 | LUT5     |  318 |                 LUT |

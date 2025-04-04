@@ -6,7 +6,7 @@ module alchitry_top (
     output usb_tx           // USB->Serial output
 ) {
 
-    const CLK = $is_sim() ? 1000 : 100_000_000
+    const CLK = $is_sim() ? 1000 : 9_000_000
 
     sig rst                 // reset signal
 
@@ -28,7 +28,7 @@ module alchitry_top (
         reset_cond.in = ~rst_n  // input raw inverted reset signal
         rst = reset_cond.out    // conditioned reset
 
-        led = b11111111              // turn LEDs off
+        led[7:0] = b11111111              // turn LEDs off
 
         usb_tx = usb_rx         // echo the serial data
         
@@ -56,6 +56,6 @@ module alchitry_top (
                 brams.brsel = 1
                 ledstate.d = brams.brd
         }
-        led[2:1] = ~ledstate.q
+        led[3:2] = ledstate.q
     }
 }

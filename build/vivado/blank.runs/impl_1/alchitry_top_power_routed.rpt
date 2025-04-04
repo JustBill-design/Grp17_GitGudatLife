@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Fri Apr  4 23:31:32 2025
+| Date             : Fri Apr  4 23:46:26 2025
 | Host             : PC running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
@@ -30,7 +30,7 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.079        |
+| Total On-Chip Power (W)  | 0.080        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
 | Dynamic (W)              | 0.008        |
@@ -54,17 +54,17 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |    <0.001 |        3 |       --- |             --- |
 | Slice Logic              |     0.002 |     4203 |       --- |             --- |
-|   LUT as Logic           |     0.001 |     2713 |     20800 |           13.04 |
+|   LUT as Logic           |     0.001 |     2714 |     20800 |           13.05 |
 |   CARRY4                 |    <0.001 |      376 |      8150 |            4.61 |
 |   Register               |    <0.001 |      569 |     41600 |            1.37 |
 |   F7/F8 Muxes            |    <0.001 |       42 |     32600 |            0.13 |
 |   LUT as Distributed RAM |    <0.001 |        6 |      9600 |            0.06 |
 |   Others                 |     0.000 |       78 |       --- |             --- |
-| Signals                  |     0.002 |     3882 |       --- |             --- |
+| Signals                  |     0.002 |     3885 |       --- |             --- |
 | Block RAM                |    <0.001 |        1 |        50 |            2.00 |
 | I/O                      |     0.003 |       72 |       170 |           42.35 |
 | Static Power             |     0.072 |          |           |                 |
-| Total                    |     0.079 |          |           |                 |
+| Total                    |     0.080 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
