@@ -248,7 +248,7 @@ module alchitry_top (
 
 
         // test raw pixel idx values
-        if (display.reading && display.addr == 127) {
+        if (display.reading && display.raw_pixel_idx == 127) {
             buff1.d = b11
         } else {
             buff1.d = b01
