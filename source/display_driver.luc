@@ -133,8 +133,8 @@ module display_driver #(
         else if (sclk_counter.q == 2 && state.q == b01) {
             
             // BRAM address for second pixel, accounting for top row buffer
-            // bram_addr.d = $resize(pixel_idx.q,$width(addr)) + c{b1,($clog2(MATRIX_WIDTH)+ADDRESS_SIZE)x{b0}} + MATRIX_WIDTH            
-            bram_addr.d = $resize(pixel_idx.q,$width(addr)) + 2048 + MATRIX_WIDTH            
+            bram_addr.d = $resize(pixel_idx.q,$width(addr)) + c{b1,($clog2(MATRIX_WIDTH)+ADDRESS_SIZE)x{b0}} + MATRIX_WIDTH            
+            // bram_addr.d = $resize(pixel_idx.q,$width(addr)) + 2048 + MATRIX_WIDTH            
 
             // set ddr to high for read in next clock
             ddr.d = 1
@@ -181,7 +181,7 @@ module display_driver #(
             // off latch clock
             sclk.d = 0 
         }
-    
+
 
         // in the next sclk_counter cycle, when sclk contains all 1, then DISPLAY
         else if(sclk_counter.q == (DIV)x{b1} && state.q == b10) {

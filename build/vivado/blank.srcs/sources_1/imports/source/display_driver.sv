@@ -91,7 +91,7 @@ module display_driver #(
                 D_ddr_d = 1'h1;
             end else begin
                 if (D_sclk_counter_q == 2'h2 && D_state_q == 2'h1) begin
-                    D_bram_addr_d = ($bits(addr))'(D_pixel_idx_q) + 12'h800 + MATRIX_WIDTH;
+                    D_bram_addr_d = ($bits(addr))'(D_pixel_idx_q) + {1'h1, {($clog2(MATRIX_WIDTH) + ADDRESS_SIZE){1'h0}}} + MATRIX_WIDTH;
                     D_ddr_d = 1'h1;
                 end else begin
                     if (D_sclk_counter_q == 2'h3 && D_state_q == 2'h1) begin
