@@ -263,7 +263,7 @@ module fsm #(
                 debug_dff.d = 6
             
             States.SET_SELECTOR_PIXEL_STATE:
-                bwa = h860
+                bwa = 2144
                 bwe = b1
                 bwd = b11
                 brsel = b00
