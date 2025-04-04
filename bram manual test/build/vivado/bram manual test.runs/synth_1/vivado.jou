@@ -3,8 +3,8 @@
 # SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
 # IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
 # SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
-# Start of session at: Fri Apr  4 23:46:27 2025
-# Process ID         : 22868
+# Start of session at: Fri Apr  4 23:57:33 2025
+# Process ID         : 30208
 # Current directory  : C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/bram manual test/build/vivado/bram manual test.runs/synth_1
 # Command line       : vivado.exe -log alchitry_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source alchitry_top.tcl
 # Log file           : C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/bram manual test/build/vivado/bram manual test.runs/synth_1/alchitry_top.vds
@@ -19,6 +19,6 @@
 # Host memory        : 66125 MB
 # Swap memory        : 4160 MB
 # Total Virtual      : 70286 MB
-# Available Virtual  : 40147 MB
+# Available Virtual  : 42885 MB
 #-----------------------------------------------------------
 source alchitry_top.tcl -notrace
