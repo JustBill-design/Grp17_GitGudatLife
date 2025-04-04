@@ -380,6 +380,6 @@ module alchitry_top (
         led[0] = butt_cond.out
         
         // debugging
-        led = sm.debug_out
+        led[7:0] = sm.debug_out
     }
 }
