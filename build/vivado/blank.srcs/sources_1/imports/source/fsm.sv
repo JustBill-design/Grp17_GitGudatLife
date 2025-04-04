@@ -205,18 +205,19 @@ module fsm (
     localparam E_States_CHECK_AT_LAST_PIXEL = 8'h96;
     localparam E_States_SWITCH_BRAM = 8'h97;
     localparam E_States_SET_PIXEL_TO_BEGINNING = 8'h98;
-    localparam E_States_SET_PIXEL_ADDRESS_TO_0 = 8'h99;
-    localparam E_States_ZERO_BRAM = 8'h9a;
-    localparam E_States_CHECK_ADDRESS_AT_MAX = 8'h9b;
-    localparam E_States_SET_TIMER = 8'h9c;
-    localparam E_States_RESET_PIXEL_VALUE = 8'h9d;
-    localparam E_States_RESET_PIXEL_ADDRESS = 8'h9e;
-    localparam E_States_SET_SELECTOR_PIXEL_STATE = 8'h9f;
-    localparam E_States_SET_B_LOW = 8'ha0;
-    localparam E_States_SET_B_HIGH = 8'ha1;
-    localparam E_States_COMPUTE = 8'ha2;
-    localparam E_States_AUTO = 8'ha3;
-    localparam E_States_IDLE = 8'ha4;
+    localparam E_States_SET_BRAM_SELECTOR_TO_1 = 8'h99;
+    localparam E_States_SET_PIXEL_ADDRESS_TO_0 = 8'h9a;
+    localparam E_States_ZERO_BRAM = 8'h9b;
+    localparam E_States_CHECK_ADDRESS_AT_MAX = 8'h9c;
+    localparam E_States_SET_TIMER = 8'h9d;
+    localparam E_States_RESET_PIXEL_VALUE = 8'h9e;
+    localparam E_States_RESET_PIXEL_ADDRESS = 8'h9f;
+    localparam E_States_SET_SELECTOR_PIXEL_STATE = 8'ha0;
+    localparam E_States_SET_B_LOW = 8'ha1;
+    localparam E_States_SET_B_HIGH = 8'ha2;
+    localparam E_States_COMPUTE = 8'ha3;
+    localparam E_States_AUTO = 8'ha4;
+    localparam E_States_IDLE = 8'ha5;
     logic [7:0] D_states_d, D_states_q = 8'h99;
     logic D_decrease_timer_d, D_decrease_timer_q = 0;
     logic D_game_tick_d, D_game_tick_q = 0;
@@ -279,12 +280,18 @@ module fsm (
         case (D_states_q)
             8'h99: begin
                 we = 1'h1;
-                wdsel = 4'h1;
-                wa = 3'h4;
+                wdsel = 4'h2;
+                wa = 3'h7;
                 D_states_d = 8'h9a;
-                D_debug_dff_d = 1'h1;
             end
             8'h9a: begin
+                we = 1'h1;
+                wdsel = 4'h1;
+                wa = 3'h4;
+                D_states_d = 8'h9b;
+                D_debug_dff_d = 1'h1;
+            end
+            8'h9b: begin
                 alufn = 6'h0;
                 bsel = 4'h1;
                 we = 1'h1;
@@ -294,46 +301,47 @@ module fsm (
                 bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h0;
-                D_states_d = 8'h9b;
+                brsel = 2'h0;
+                D_states_d = 8'h9c;
                 D_debug_dff_d = 2'h2;
             end
-            8'h9b: begin
+            8'h9c: begin
                 alufn = 6'h35;
                 bsel = 4'h8;
                 ra1 = 3'h4;
                 
                 case (aluout[1'h0])
                     1'h1: begin
-                        D_states_d = 8'h9a;
+                        D_states_d = 8'h9b;
                     end
                     1'h0: begin
-                        D_states_d = 8'h9c;
+                        D_states_d = 8'h9d;
                     end
                 endcase
                 D_debug_dff_d = 2'h3;
             end
-            8'h9c: begin
+            8'h9d: begin
                 we = 1'h1;
                 wdsel = 4'h6;
                 wa = 3'h6;
-                D_states_d = 8'h9d;
-                D_debug_dff_d = 3'h4;
-            end
-            8'h9d: begin
-                we = 1'h1;
-                wdsel = 4'h1;
-                wa = 3'h5;
                 D_states_d = 8'h9e;
-                D_debug_dff_d = 3'h5;
+                D_debug_dff_d = 3'h4;
             end
             8'h9e: begin
                 we = 1'h1;
-                wdsel = 4'h7;
-                wa = 3'h4;
+                wdsel = 4'h1;
+                wa = 3'h5;
                 D_states_d = 8'h9f;
-                D_debug_dff_d = 3'h6;
+                D_debug_dff_d = 3'h5;
             end
             8'h9f: begin
+                we = 1'h1;
+                wdsel = 4'h7;
+                wa = 3'h4;
+                D_states_d = 8'ha0;
+                D_debug_dff_d = 3'h6;
+            end
+            8'ha0: begin
                 bwa = 12'h860;
                 bwe = 1'h1;
                 bwd = 2'h3;
@@ -1272,6 +1280,11 @@ module fsm (
                 we = 1'h1;
                 wdsel = 4'h0;
                 wa = 3'h6;
+            end
+            8'h58: begin
+                if (next_start_button) begin
+                    D_states_d = 8'h99;
+                end
             end
             8'h59: begin
                 ra1 = 3'h4;

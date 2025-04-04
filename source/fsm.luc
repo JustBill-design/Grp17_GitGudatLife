@@ -124,7 +124,7 @@ module fsm #(
         RESET_A_NEIGHBOUR, RESET_B_NEIGHBOUR, MOVE_PIXEL_ADDRESS, CHECK_AT_LAST_PIXEL, SWITCH_BRAM, SET_PIXEL_TO_BEGINNING, 
         
         //End game
-        SET_PIXEL_ADDRESS_TO_0, ZERO_BRAM, CHECK_ADDRESS_AT_MAX, SET_TIMER, RESET_PIXEL_VALUE, RESET_PIXEL_ADDRESS, SET_SELECTOR_PIXEL_STATE, 
+        SET_BRAM_SELECTOR_TO_1, SET_PIXEL_ADDRESS_TO_0, ZERO_BRAM, CHECK_ADDRESS_AT_MAX, SET_TIMER, RESET_PIXEL_VALUE, RESET_PIXEL_ADDRESS, SET_SELECTOR_PIXEL_STATE, 
         SET_B_LOW, 
         SET_B_HIGH, 
         COMPUTE, 
@@ -132,7 +132,7 @@ module fsm #(
         IDLE
     }
     
-    dff states[$width(States)](#INIT(States.SET_PIXEL_ADDRESS_TO_0), .clk(clk), .rst(rst))
+    dff states[$width(States)](#INIT(States.SET_BRAM_SELECTOR_TO_1), .clk(clk), .rst(rst))
     dff decrease_timer(.clk(clk), .rst(rst))
     dff game_tick(.clk(clk), .rst(rst))
     dff debug_dff[8](.clk(clk), .rst(rst))
@@ -205,6 +205,12 @@ module fsm #(
 
         
         case (states.q){
+            States.SET_BRAM_SELECTOR_TO_1:
+                we = b1
+                wdsel = b0010
+                wa = BRAM_SWITCH
+                states.d = States.SET_PIXEL_ADDRESS_TO_0
+
             States.SET_PIXEL_ADDRESS_TO_0:
                 we = b1
                 wdsel = b0001
@@ -223,6 +229,7 @@ module fsm #(
                 bwa = rd1
                 bwe = b1
                 bwd = b00
+                brsel = b00
                 states.d = States.CHECK_ADDRESS_AT_MAX
                 // debugging
                 debug_dff.d = 2
@@ -1207,6 +1214,11 @@ module fsm #(
                 we = b1
                 wdsel = b0000
                 wa = TIMER
+                
+            States.END_GAME:
+                if (next_start_button) {
+                    states.d = States.SET_BRAM_SELECTOR_TO_1
+                }
                 
             States.GAME_IDLE_READ_CURR_PIXEL_VALUE:
                 ra1 = TARGET_PIXEL_ADDRESS
