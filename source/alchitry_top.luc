@@ -89,7 +89,7 @@ module alchitry_top (
             dff buff4[2]
 
             // dff pixeldata[2](#INIT(b00))
-            dff bramtest_8points[3]
+            // dff bramtest_8points[3]
 
         }
         .rst(fifo_rst) {
@@ -246,6 +246,17 @@ module alchitry_top (
         
 
 
+
+        // test raw pixel idx values
+        if (display.reading && display.addr == 127) {
+            buff1.d = b11
+        } else {
+            buff1.d = b01
+        }
+        display.data = buff1.q
+
+
+
         // // test display clock full white
         // display.data = buff1.q
         // buff1.d = b11
@@ -258,17 +269,17 @@ module alchitry_top (
         // display.data = buff1.q
 
 
-        // test for bram read and write at specific addresses
-        if (~display.reading && gamecounter.value[15]) {
-            brams.bwa = 127
-            brams.bwd = c{b1,butt_cond.out}
-            bramtest_8points.d = bramtest_8points.q + 1
-            brams.brsel = 0
-            brams.bwe = 1
-        } else {
-            brams.brsel = 1
-            brams.bwe = 0
-        }
+        // // test for bram read and write at specific addresses
+        // if (~display.reading && gamecounter.value[15]) {
+        //     brams.bwa = 127
+        //     brams.bwd = c{b1,butt_cond.out}
+        //     bramtest_8points.d = bramtest_8points.q + 1
+        //     brams.brsel = 0
+        //     brams.bwe = 1
+        // } else {
+        //     brams.brsel = 1
+        //     brams.bwe = 0
+        // }
 
 
         // // test for bram read and write at specific addresses
