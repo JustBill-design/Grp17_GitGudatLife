@@ -250,8 +250,6 @@ module alchitry_top (
         // }
 
 
-
-
         // test for bram read and write at specific addresses
         if (~display.reading && gamecounter.value[15]) {
             case (bramtest_8points.q) {
@@ -273,7 +271,6 @@ module alchitry_top (
             brams.brsel = 1
             brams.bwe = 0
         }
-
 
 
         // // test display.addr range more
