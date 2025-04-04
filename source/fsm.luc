@@ -71,7 +71,10 @@ module fsm #(
     // write data
     output swd1[2],
     output swd2[2],
-    output swd3[2]
+    output swd3[2],
+    
+    // debug
+    output debug_out[8]
 
 ) {
     enum States {
@@ -132,6 +135,7 @@ module fsm #(
     dff states[$width(States)](#INIT(States.SET_PIXEL_ADDRESS_TO_0), .clk(clk), .rst(rst))
     dff decrease_timer(.clk(clk), .rst(rst))
     dff game_tick(.clk(clk), .rst(rst))
+    dff debug_dff[8](.clk(clk), .rst(rst))
 
     const ADD = b000000
     const SUB = b000001
@@ -152,6 +156,10 @@ module fsm #(
     
 
     always {
+    
+        // debugging
+        debug_out = debug_dff.q
+        debug_dff.d = debug_dff.q
 
         states.d = states.q
 
@@ -202,6 +210,8 @@ module fsm #(
                 wdsel = b0001
                 wa = TARGET_PIXEL_ADDRESS
                 states.d = States.ZERO_BRAM
+                // debugging
+                debug_dff.d = 1
 
             States.ZERO_BRAM:
                 alufn = ADD
@@ -214,6 +224,8 @@ module fsm #(
                 bwe = b1
                 bwd = b00
                 states.d = States.CHECK_ADDRESS_AT_MAX
+                // debugging
+                debug_dff.d = 2
 
             States.CHECK_ADDRESS_AT_MAX:
                 alufn = CMPLT
@@ -223,24 +235,32 @@ module fsm #(
                     1: states.d = States.ZERO_BRAM
                     0: states.d = States.SET_TIMER
                 }
+                // debugging
+                debug_dff.d = 3
             
             States.SET_TIMER:
                 we = b1
                 wdsel = b0110
                 wa = TIMER
                 states.d = States.RESET_PIXEL_VALUE
+                // debugging
+                debug_dff.d = 4
             
             States.RESET_PIXEL_VALUE:
                 we = b1
                 wdsel = b0001
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.RESET_PIXEL_ADDRESS
+                // debugging
+                debug_dff.d = 5
             
             States.RESET_PIXEL_ADDRESS:
                 we = b1
                 wdsel = b0111
                 wa = TARGET_PIXEL_ADDRESS
                 states.d = States.SET_SELECTOR_PIXEL_STATE
+                // debugging
+                debug_dff.d = 6
             
             States.SET_SELECTOR_PIXEL_STATE:
                 bwa = h860
@@ -248,10 +268,16 @@ module fsm #(
                 bwd = b11
                 brsel = b00
                 states.d = States.A_INPUT_IDLE
+                // debugging
+                debug_dff.d = 7
+
             // Player A Turn
             States.A_INPUT_IDLE:
                 asel = b0
                 ra1 = TARGET_PIXEL_VALUE
+                // debugging
+                debug_dff.d = 8
+
                 if (move_up_button){
                     states.d = States.A_UP_DIR_IDLE
                 }

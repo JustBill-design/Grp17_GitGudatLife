@@ -49,7 +49,8 @@ module fsm (
         output reg swe3,
         output reg [1:0] swd1,
         output reg [1:0] swd2,
-        output reg [1:0] swd3
+        output reg [1:0] swd3,
+        output reg [7:0] debug_out
     );
     localparam E_States_A_INPUT_IDLE = 8'h0;
     localparam E_States_A_SET_PIXEL_A = 8'h1;
@@ -219,6 +220,7 @@ module fsm (
     logic [7:0] D_states_d, D_states_q = 8'h99;
     logic D_decrease_timer_d, D_decrease_timer_q = 0;
     logic D_game_tick_d, D_game_tick_q = 0;
+    logic [7:0] D_debug_dff_d, D_debug_dff_q = 0;
     localparam ADD = 6'h0;
     localparam SUB = 6'h1;
     localparam CMPEQ = 6'h33;
@@ -234,10 +236,13 @@ module fsm (
     localparam TIMER = 3'h6;
     localparam BRAM_SWITCH = 3'h7;
     always @* begin
+        D_debug_dff_d = D_debug_dff_q;
         D_states_d = D_states_q;
         D_decrease_timer_d = D_decrease_timer_q;
         D_game_tick_d = D_game_tick_q;
         
+        debug_out = D_debug_dff_q;
+        D_debug_dff_d = D_debug_dff_q;
         D_states_d = D_states_q;
         brsel = 2'h2;
         bra = 1'h0;
@@ -277,6 +282,7 @@ module fsm (
                 wdsel = 4'h1;
                 wa = 3'h4;
                 D_states_d = 8'h9a;
+                D_debug_dff_d = 1'h1;
             end
             8'h9a: begin
                 alufn = 6'h0;
@@ -289,6 +295,7 @@ module fsm (
                 bwe = 1'h1;
                 bwd = 2'h0;
                 D_states_d = 8'h9b;
+                D_debug_dff_d = 2'h2;
             end
             8'h9b: begin
                 alufn = 6'h35;
@@ -303,24 +310,28 @@ module fsm (
                         D_states_d = 8'h9c;
                     end
                 endcase
+                D_debug_dff_d = 2'h3;
             end
             8'h9c: begin
                 we = 1'h1;
                 wdsel = 4'h6;
                 wa = 3'h6;
                 D_states_d = 8'h9d;
+                D_debug_dff_d = 3'h4;
             end
             8'h9d: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
                 D_states_d = 8'h9e;
+                D_debug_dff_d = 3'h5;
             end
             8'h9e: begin
                 we = 1'h1;
                 wdsel = 4'h7;
                 wa = 3'h4;
                 D_states_d = 8'h9f;
+                D_debug_dff_d = 3'h6;
             end
             8'h9f: begin
                 bwa = 12'h860;
@@ -328,10 +339,12 @@ module fsm (
                 bwd = 2'h3;
                 brsel = 2'h0;
                 D_states_d = 8'h0;
+                D_debug_dff_d = 3'h7;
             end
             8'h0: begin
                 asel = 1'h0;
                 ra1 = 3'h5;
+                D_debug_dff_d = 4'h8;
                 if (move_up_button) begin
                     D_states_d = 8'h3;
                 end else begin
@@ -1992,10 +2005,12 @@ module fsm (
             D_states_q <= 8'h99;
             D_decrease_timer_q <= 0;
             D_game_tick_q <= 0;
+            D_debug_dff_q <= 0;
         end else begin
             D_states_q <= D_states_d;
             D_decrease_timer_q <= D_decrease_timer_d;
             D_game_tick_q <= D_game_tick_d;
+            D_debug_dff_q <= D_debug_dff_d;
         end
     end
 endmodule
