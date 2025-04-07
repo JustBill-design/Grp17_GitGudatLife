@@ -402,6 +402,8 @@ module fsm (
                     end else begin
                         if (move_up_button) begin
                             D_states_d = 8'h8;
+                        end else begin
+                            D_states_d = 8'h0;
                         end
                     end
                 end
@@ -517,9 +519,12 @@ module fsm (
                     end else begin
                         if (move_up_button) begin
                             D_states_d = 8'h12;
+                        end else begin
+                            D_states_d = 8'h0;
                         end
                     end
                 end
+                D_debug_dff_d = 5'h14;
             end
             8'he: begin
                 alufn = 6'h0;
@@ -530,12 +535,14 @@ module fsm (
                 wdsel = 4'h0;
                 wa = 2'h2;
                 D_states_d = 8'hf;
+                D_debug_dff_d = 5'h15;
             end
             8'hf: begin
                 we = 1'h1;
                 wdsel = 4'h2;
                 wa = 3'h5;
                 D_states_d = 8'h12;
+                D_debug_dff_d = 5'h16;
             end
             8'h10: begin
                 alufn = 5'h1;
@@ -546,12 +553,14 @@ module fsm (
                 wdsel = 4'h0;
                 wa = 2'h2;
                 D_states_d = 8'h11;
+                D_debug_dff_d = 5'h17;
             end
             8'h11: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
                 D_states_d = 8'h12;
+                D_debug_dff_d = 5'h18;
             end
             8'h12: begin
                 alufn = 6'h35;
@@ -564,6 +573,7 @@ module fsm (
                 if (aluout[1'h0]) begin
                     D_states_d = 8'hd;
                 end
+                D_debug_dff_d = 5'h19;
             end
             8'h13: begin
                 asel = 1'h0;
@@ -574,6 +584,7 @@ module fsm (
                 bwd = rd2;
                 brsel = 2'h0;
                 D_states_d = 8'h14;
+                D_debug_dff_d = 5'h1a;
             end
             8'h14: begin
                 if (ddr) begin
@@ -590,12 +601,14 @@ module fsm (
                     brsel = 2'h1;
                     D_states_d = 8'h15;
                 end
+                D_debug_dff_d = 5'h1b;
             end
             8'h15: begin
                 we = 1'h1;
                 wdsel = 4'h4;
                 wa = 3'h5;
                 D_states_d = 8'h16;
+                D_debug_dff_d = 5'h1c;
             end
             8'h16: begin
                 asel = 1'h0;
@@ -605,6 +618,7 @@ module fsm (
                 bwd = 2'h3;
                 brsel = 2'h0;
                 D_states_d = 8'hd;
+                D_debug_dff_d = 5'h1d;
             end
             8'h17: begin
                 alufn = 6'h1a;
@@ -622,9 +636,12 @@ module fsm (
                     end else begin
                         if (move_up_button) begin
                             D_states_d = 8'h1c;
+                        end else begin
+                            D_states_d = 8'h0;
                         end
                     end
                 end
+                D_debug_dff_d = 5'h1e;
             end
             8'h18: begin
                 alufn = 6'h0;
@@ -635,12 +652,14 @@ module fsm (
                 wdsel = 4'h0;
                 wa = 2'h2;
                 D_states_d = 8'h19;
+                D_debug_dff_d = 5'h1f;
             end
             8'h19: begin
                 we = 1'h1;
                 wdsel = 4'h2;
                 wa = 3'h5;
                 D_states_d = 8'h1c;
+                D_debug_dff_d = 6'h20;
             end
             8'h1a: begin
                 alufn = 5'h1;
@@ -651,12 +670,14 @@ module fsm (
                 wdsel = 4'h0;
                 wa = 2'h2;
                 D_states_d = 8'h1b;
+                D_debug_dff_d = 6'h21;
             end
             8'h1b: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
                 D_states_d = 8'h1c;
+                D_debug_dff_d = 6'h22;
             end
             8'h1c: begin
                 asel = 1'h0;
@@ -666,6 +687,7 @@ module fsm (
                 end else begin
                     D_states_d = 8'h17;
                 end
+                D_debug_dff_d = 6'h23;
             end
             8'h1d: begin
                 asel = 1'h0;
@@ -676,6 +698,7 @@ module fsm (
                 bwd = rd2;
                 brsel = 2'h0;
                 D_states_d = 8'h1e;
+                D_debug_dff_d = 6'h24;
             end
             8'h1e: begin
                 if (ddr) begin
@@ -692,12 +715,14 @@ module fsm (
                     brsel = 2'h1;
                     D_states_d = 8'h1f;
                 end
+                D_debug_dff_d = 6'h25;
             end
             8'h1f: begin
                 we = 1'h1;
                 wdsel = 4'h4;
                 wa = 3'h5;
                 D_states_d = 8'h20;
+                D_debug_dff_d = 6'h26;
             end
             8'h20: begin
                 asel = 1'h0;
@@ -707,6 +732,7 @@ module fsm (
                 bwd = 2'h3;
                 brsel = 2'h0;
                 D_states_d = 8'h17;
+                D_debug_dff_d = 6'h27;
             end
             8'h21: begin
                 alufn = 6'h1a;
@@ -724,9 +750,12 @@ module fsm (
                     end else begin
                         if (move_up_button) begin
                             D_states_d = 8'h26;
+                        end else begin
+                            D_states_d = 8'h0;
                         end
                     end
                 end
+                D_debug_dff_d = 6'h28;
             end
             8'h22: begin
                 alufn = 6'h0;
@@ -737,12 +766,14 @@ module fsm (
                 wdsel = 4'h0;
                 wa = 2'h2;
                 D_states_d = 8'h23;
+                D_debug_dff_d = 6'h29;
             end
             8'h23: begin
                 we = 1'h1;
                 wdsel = 4'h2;
                 wa = 3'h5;
                 D_states_d = 8'h26;
+                D_debug_dff_d = 6'h2a;
             end
             8'h24: begin
                 alufn = 5'h1;
@@ -753,12 +784,14 @@ module fsm (
                 wdsel = 4'h0;
                 wa = 2'h2;
                 D_states_d = 8'h25;
+                D_debug_dff_d = 6'h2b;
             end
             8'h25: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
                 D_states_d = 8'h26;
+                D_debug_dff_d = 6'h2c;
             end
             8'h26: begin
                 asel = 1'h0;
@@ -768,6 +801,7 @@ module fsm (
                 end else begin
                     D_states_d = 8'h21;
                 end
+                D_debug_dff_d = 6'h2d;
             end
             8'h27: begin
                 asel = 1'h0;
@@ -778,6 +812,7 @@ module fsm (
                 bwd = rd2;
                 brsel = 2'h0;
                 D_states_d = 8'h28;
+                D_debug_dff_d = 6'h2e;
             end
             8'h28: begin
                 if (ddr) begin
@@ -794,12 +829,14 @@ module fsm (
                     brsel = 2'h1;
                     D_states_d = 8'h29;
                 end
+                D_debug_dff_d = 6'h2f;
             end
             8'h29: begin
                 we = 1'h1;
                 wdsel = 4'h4;
                 wa = 3'h5;
                 D_states_d = 8'h2a;
+                D_debug_dff_d = 6'h30;
             end
             8'h2a: begin
                 asel = 1'h0;
@@ -809,6 +846,7 @@ module fsm (
                 bwd = 2'h3;
                 brsel = 2'h0;
                 D_states_d = 8'h21;
+                D_debug_dff_d = 6'h31;
             end
             8'h2b: begin
                 asel = 1'h0;
@@ -844,6 +882,7 @@ module fsm (
                         end
                     end
                 end
+                D_debug_dff_d = 6'h32;
             end
             8'h2e: begin
                 alufn = 6'h1a;
@@ -861,9 +900,12 @@ module fsm (
                     end else begin
                         if (move_up_button) begin
                             D_states_d = 8'h33;
+                        end else begin
+                            D_states_d = 8'h2b;
                         end
                     end
                 end
+                D_debug_dff_d = 6'h33;
             end
             8'h2f: begin
                 alufn = 6'h0;
@@ -874,12 +916,14 @@ module fsm (
                 wdsel = 4'h0;
                 wa = 2'h3;
                 D_states_d = 8'h30;
+                D_debug_dff_d = 6'h34;
             end
             8'h30: begin
                 we = 1'h1;
                 wdsel = 4'h2;
                 wa = 3'h5;
                 D_states_d = 8'h33;
+                D_debug_dff_d = 6'h35;
             end
             8'h31: begin
                 alufn = 5'h1;
@@ -890,12 +934,14 @@ module fsm (
                 wdsel = 4'h0;
                 wa = 2'h3;
                 D_states_d = 8'h32;
+                D_debug_dff_d = 6'h36;
             end
             8'h32: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
                 D_states_d = 8'h33;
+                D_debug_dff_d = 6'h37;
             end
             8'h33: begin
                 alufn = 6'h35;
@@ -908,6 +954,7 @@ module fsm (
                 if (aluout[1'h0]) begin
                     D_states_d = 8'h2e;
                 end
+                D_debug_dff_d = 6'h38;
             end
             8'h34: begin
                 asel = 1'h0;
@@ -918,6 +965,7 @@ module fsm (
                 bwd = rd2;
                 brsel = 2'h0;
                 D_states_d = 8'h35;
+                D_debug_dff_d = 6'h39;
             end
             8'h35: begin
                 if (ddr) begin
@@ -934,12 +982,14 @@ module fsm (
                     brsel = 2'h1;
                     D_states_d = 8'h36;
                 end
+                D_debug_dff_d = 6'h3a;
             end
             8'h36: begin
                 we = 1'h1;
                 wdsel = 4'h4;
                 wa = 3'h5;
                 D_states_d = 8'h37;
+                D_debug_dff_d = 6'h3b;
             end
             8'h37: begin
                 asel = 1'h0;
@@ -949,6 +999,7 @@ module fsm (
                 bwd = 2'h3;
                 brsel = 2'h0;
                 D_states_d = 8'h2e;
+                D_debug_dff_d = 6'h3c;
             end
             8'h38: begin
                 alufn = 6'h1a;
@@ -966,9 +1017,12 @@ module fsm (
                     end else begin
                         if (move_up_button) begin
                             D_states_d = 8'h3d;
+                        end else begin
+                            D_states_d = 8'h2b;
                         end
                     end
                 end
+                D_debug_dff_d = 6'h3d;
             end
             8'h39: begin
                 alufn = 6'h0;
@@ -979,12 +1033,14 @@ module fsm (
                 wdsel = 4'h0;
                 wa = 2'h3;
                 D_states_d = 8'h3a;
+                D_debug_dff_d = 6'h3e;
             end
             8'h3a: begin
                 we = 1'h1;
                 wdsel = 4'h2;
                 wa = 3'h5;
                 D_states_d = 8'h3d;
+                D_debug_dff_d = 6'h3f;
             end
             8'h3b: begin
                 alufn = 5'h1;
@@ -995,12 +1051,14 @@ module fsm (
                 wdsel = 4'h0;
                 wa = 2'h3;
                 D_states_d = 8'h3c;
+                D_debug_dff_d = 7'h40;
             end
             8'h3c: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
                 D_states_d = 8'h3d;
+                D_debug_dff_d = 7'h41;
             end
             8'h3d: begin
                 alufn = 6'h35;
@@ -1013,6 +1071,7 @@ module fsm (
                 if (aluout[1'h0]) begin
                     D_states_d = 8'h38;
                 end
+                D_debug_dff_d = 7'h42;
             end
             8'h3e: begin
                 asel = 1'h0;
@@ -1023,6 +1082,7 @@ module fsm (
                 bwd = rd2;
                 brsel = 2'h0;
                 D_states_d = 8'h3f;
+                D_debug_dff_d = 7'h43;
             end
             8'h3f: begin
                 if (ddr) begin
@@ -1039,12 +1099,14 @@ module fsm (
                     brsel = 2'h1;
                     D_states_d = 8'h40;
                 end
+                D_debug_dff_d = 7'h44;
             end
             8'h40: begin
                 we = 1'h1;
                 wdsel = 4'h4;
                 wa = 3'h5;
                 D_states_d = 8'h41;
+                D_debug_dff_d = 7'h45;
             end
             8'h41: begin
                 asel = 1'h0;
@@ -1054,6 +1116,7 @@ module fsm (
                 bwd = 2'h3;
                 brsel = 2'h0;
                 D_states_d = 8'h38;
+                D_debug_dff_d = 7'h46;
             end
             8'h42: begin
                 alufn = 6'h1a;
@@ -1071,9 +1134,12 @@ module fsm (
                     end else begin
                         if (move_up_button) begin
                             D_states_d = 8'h47;
+                        end else begin
+                            D_states_d = 8'h2b;
                         end
                     end
                 end
+                D_debug_dff_d = 7'h47;
             end
             8'h43: begin
                 alufn = 6'h0;
@@ -1084,12 +1150,14 @@ module fsm (
                 wdsel = 4'h0;
                 wa = 2'h3;
                 D_states_d = 8'h44;
+                D_debug_dff_d = 7'h48;
             end
             8'h44: begin
                 we = 1'h1;
                 wdsel = 4'h2;
                 wa = 3'h5;
                 D_states_d = 8'h47;
+                D_debug_dff_d = 7'h49;
             end
             8'h45: begin
                 alufn = 5'h1;
@@ -1100,12 +1168,14 @@ module fsm (
                 wdsel = 4'h0;
                 wa = 2'h3;
                 D_states_d = 8'h46;
+                D_debug_dff_d = 7'h4a;
             end
             8'h46: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
                 D_states_d = 8'h47;
+                D_debug_dff_d = 7'h4b;
             end
             8'h47: begin
                 asel = 1'h0;
@@ -1115,6 +1185,7 @@ module fsm (
                 end else begin
                     D_states_d = 8'h42;
                 end
+                D_debug_dff_d = 7'h4c;
             end
             8'h48: begin
                 asel = 1'h0;
@@ -1125,6 +1196,7 @@ module fsm (
                 bwd = rd2;
                 brsel = 2'h0;
                 D_states_d = 8'h49;
+                D_debug_dff_d = 7'h4d;
             end
             8'h49: begin
                 if (ddr) begin
@@ -1141,6 +1213,7 @@ module fsm (
                     brsel = 2'h1;
                     D_states_d = 8'h4a;
                 end
+                D_debug_dff_d = 7'h4e;
             end
             8'h4a: begin
                 we = 1'h1;
@@ -1173,6 +1246,8 @@ module fsm (
                     end else begin
                         if (move_up_button) begin
                             D_states_d = 8'h51;
+                        end else begin
+                            D_states_d = 8'h2b;
                         end
                     end
                 end

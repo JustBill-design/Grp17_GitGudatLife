@@ -725,6 +725,7 @@ module fsm #(
                 }
                 else {
                     states.d = States.A_INPUT_IDLE
+                }
                 
                 // debugging
                 debug_dff.d = 40
