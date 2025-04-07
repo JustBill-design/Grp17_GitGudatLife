@@ -259,9 +259,9 @@ module alchitry_top (
 
 
 
-        // test display clock full white
-        display.data = buff1.q
-        buff1.d = b11
+        // // test display clock full white
+        // display.data = buff1.q
+        // buff1.d = b11
         
 
         // // test dispaly driver clock

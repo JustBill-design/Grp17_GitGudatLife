@@ -16,18 +16,19 @@ module fsm #(
     input deselect_button,
     input select_button,
     
-    // seven segments
+    // seven segments ---------------------------------------
     input pac[32],          // A cell count
     input pbc[32],          // B cell count
     input timer[32],        // game timer countdown
+
+    // slow clocks -------------------------------------------
+    input timerclk,         // once a second
+    input gameclk,          // ticks roughly 10 times a second
     
+    // external modules connections --------------------------
     // alu
     input aluout[32],       // alu result
     output alufn[6],        // alu function
-
-    // slow clocks
-    input timerclk,         // once a second
-    input gameclk,          // ticks roughly 10 times a second
 
     // BRAM
     input brd[2],           // bram read data
@@ -73,7 +74,7 @@ module fsm #(
     output swd2[2],
     output swd3[2],
     
-    // debug
+    // debug ----------------------------------------------
     output debug_out[8]
 
 ) {
@@ -132,10 +133,16 @@ module fsm #(
         IDLE
     }
     
-    dff states[$width(States)](#INIT(States.SET_BRAM_SELECTOR_TO_1), .clk(clk), .rst(rst))
-    dff decrease_timer(.clk(clk), .rst(rst))
-    dff game_tick(.clk(clk), .rst(rst))
-    dff debug_dff[8](.clk(clk), .rst(rst))
+    .clk(clk) {
+        .rst(rst) {
+            dff states[$width(States)](#INIT(States.SET_BRAM_SELECTOR_TO_1))
+            dff decrease_timer
+            dff game_tick
+
+            // debug
+            dff debug_dff[8]
+        }
+    }
 
     const ADD = b000000
     const SUB = b000001
@@ -161,6 +168,7 @@ module fsm #(
         debug_out = debug_dff.q
         debug_dff.d = debug_dff.q
 
+        // default connections, all 0 except brsel=b10 ----------------------
         states.d = states.q
 
         brsel = b10
