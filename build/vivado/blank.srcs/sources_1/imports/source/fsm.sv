@@ -366,12 +366,12 @@ module fsm (
                                 D_states_d = 8'h21;
                             end else begin
                                 if (select_button) begin
-                                    if (~rd2[1'h0]) begin
+                                    if (~(|rd1[1'h1:1'h0])) begin
                                         D_states_d = 8'h1;
                                     end
                                 end else begin
                                     if (deselect_button) begin
-                                        if (rd2[1'h0]) begin
+                                        if (rd1[1'h0]) begin
                                             D_states_d = 8'h2;
                                         end
                                     end else begin
@@ -389,7 +389,7 @@ module fsm (
             8'h3: begin
                 ra1 = 3'h5;
                 if (select_button) begin
-                    if (~rd1[1'h0]) begin
+                    if (~(|rd1[1'h1:1'h0])) begin
                         D_states_d = 8'h4;
                     end
                 end else begin
@@ -504,7 +504,7 @@ module fsm (
             8'hd: begin
                 ra1 = 3'h5;
                 if (select_button) begin
-                    if (~rd1[1'h0]) begin
+                    if (~(|rd1[1'h1:1'h0])) begin
                         D_states_d = 8'he;
                     end
                 end else begin
@@ -619,7 +619,7 @@ module fsm (
             8'h17: begin
                 ra1 = 3'h5;
                 if (select_button) begin
-                    if (~rd1[1'h0]) begin
+                    if (~(|rd1[1'h1:1'h0])) begin
                         D_states_d = 8'h18;
                     end
                 end else begin
@@ -731,7 +731,7 @@ module fsm (
             8'h21: begin
                 ra1 = 3'h5;
                 if (select_button) begin
-                    if (~rd1[1'h0]) begin
+                    if (~(|rd1[1'h1:1'h0])) begin
                         D_states_d = 8'h22;
                     end
                 end else begin
@@ -856,12 +856,12 @@ module fsm (
                                 D_states_d = 8'h4c;
                             end else begin
                                 if (select_button) begin
-                                    if (~rd2[1'h0]) begin
+                                    if (~(|rd1[1'h1:1'h0])) begin
                                         D_states_d = 8'h2c;
                                     end
                                 end else begin
                                     if (deselect_button) begin
-                                        if (rd2[1'h0]) begin
+                                        if (rd1[1'h1]) begin
                                             D_states_d = 8'h2d;
                                         end
                                     end else begin
@@ -879,12 +879,12 @@ module fsm (
             8'h2e: begin
                 ra1 = 3'h5;
                 if (select_button) begin
-                    if (~rd1[1'h0]) begin
+                    if (~(|rd1[1'h1:1'h0])) begin
                         D_states_d = 8'h2f;
                     end
                 end else begin
                     if (deselect_button) begin
-                        if (rd1[1'h0]) begin
+                        if (rd1[1'h1]) begin
                             D_states_d = 8'h31;
                         end
                     end else begin
@@ -996,12 +996,12 @@ module fsm (
                 asel = 1'h0;
                 ra1 = 3'h5;
                 if (select_button) begin
-                    if (~rd1[1'h0]) begin
+                    if (~(|rd1[1'h1:1'h0])) begin
                         D_states_d = 8'h39;
                     end
                 end else begin
                     if (deselect_button) begin
-                        if (rd1[1'h0]) begin
+                        if (rd1[1'h1]) begin
                             D_states_d = 8'h3b;
                         end
                     end else begin
@@ -1111,12 +1111,12 @@ module fsm (
             8'h42: begin
                 ra1 = 3'h5;
                 if (select_button) begin
-                    if (~rd1[1'h0]) begin
+                    if (~(|rd1[1'h1:1'h0])) begin
                         D_states_d = 8'h43;
                     end
                 end else begin
                     if (deselect_button) begin
-                        if (rd1[1'h0]) begin
+                        if (rd1[1'h1]) begin
                             D_states_d = 8'h45;
                         end
                     end else begin
@@ -1223,12 +1223,12 @@ module fsm (
                 asel = 1'h0;
                 ra1 = 3'h5;
                 if (select_button) begin
-                    if (~rd1[1'h0]) begin
+                    if (~(|rd1[1'h1:1'h0])) begin
                         D_states_d = 8'h4d;
                     end
                 end else begin
                     if (deselect_button) begin
-                        if (rd1[1'h0]) begin
+                        if (rd1[1'h1]) begin
                             D_states_d = 8'h4f;
                         end
                     end else begin

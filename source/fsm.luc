@@ -305,12 +305,12 @@ module fsm #(
                     states.d = States.A_RIGHT_DIR_IDLE
                 }
                 else if (select_button){
-                    if (~rd2[0]){
+                    if (~|rd1[1:0]){
                         states.d = States.A_SET_PIXEL_A
                     }
                 }
                 else if (deselect_button){
-                    if (rd2[0]){
+                    if (rd1[0]){
                         states.d = States.A_SET_PIXEL_0
                     }
                 }
@@ -324,7 +324,7 @@ module fsm #(
             States.A_UP_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
-                    if(~rd1[0]){
+                    if(~|rd1[1:0]){
                         states.d = States.A_UP_COUNTP1
                     }
                 }
@@ -451,7 +451,7 @@ module fsm #(
             States.A_DOWN_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
-                    if(~rd1[0]){
+                    if(~|rd1[1:0]){
                         states.d = States.A_DOWN_COUNTP1
                     }
                 }
@@ -578,7 +578,7 @@ module fsm #(
             States.A_LEFT_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
-                    if(~rd1[0]){
+                    if(~|rd1[1:0]){
                         states.d = States.A_LEFT_COUNTP1
                     }
                 }
@@ -703,7 +703,7 @@ module fsm #(
             States.A_RIGHT_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
-                    if(~rd1[0]){
+                    if(~|rd1[1:0]){
                         states.d = States.A_RIGHT_COUNTP1
                     }
                 }
@@ -845,12 +845,12 @@ module fsm #(
                     states.d = States.B_RIGHT_DIR_IDLE
                 }
                 else if (select_button){
-                    if (~rd2[0]){
+                    if (~|rd1[1:0]){
                         states.d = States.B_SET_PIXEL_B
                     }
                 }
                 else if (deselect_button){
-                    if (rd2[0]){
+                    if (rd1[1]){
                         states.d = States.B_SET_PIXEL_0
                     }
                 }
@@ -864,12 +864,12 @@ module fsm #(
             States.B_UP_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
-                    if(~rd1[0]){
+                    if(~|rd1[1:0]){
                         states.d = States.B_UP_COUNTP1
                     }
                 }
                 else if (deselect_button){
-                    if (rd1[0]){
+                    if (rd1[1]){
                         states.d = States.B_UP_COUNTM1
                     }
                 }
@@ -994,12 +994,12 @@ module fsm #(
                 asel = b0
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
-                    if(~rd1[0]){
+                    if(~|rd1[1:0]){
                         states.d = States.B_DOWN_COUNTP1
                     }
                 }
                 else if (deselect_button){
-                    if (rd1[0]){
+                    if (rd1[1]){
                         states.d = States.B_DOWN_COUNTM1
                     }
                 }
@@ -1121,12 +1121,12 @@ module fsm #(
             States.B_LEFT_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
-                    if(~rd1[0]){
+                    if(~|rd1[1:0]){
                         states.d = States.B_LEFT_COUNTP1
                     }
                 }
                 else if (deselect_button){
-                    if (rd1[0]){
+                    if (rd1[1]){
                         states.d = States.B_LEFT_COUNTM1
                     }
                 }
@@ -1244,12 +1244,12 @@ module fsm #(
                 asel = b0
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
-                    if(~rd1[0]){
+                    if(~|rd1[1:0]){
                         states.d = States.B_RIGHT_COUNTP1
                     }
                 }
                 else if (deselect_button){
-                    if (rd1[0]){
+                    if (rd1[1]){
                         states.d = States.B_RIGHT_COUNTM1
                     }
                 }
