@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Mon Apr  7 16:29:12 2025
+| Date             : Mon Apr  7 16:41:10 2025
 | Host             : PC running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
@@ -53,14 +53,14 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |    <0.001 |        3 |       --- |             --- |
-| Slice Logic              |     0.002 |     4191 |       --- |             --- |
-|   LUT as Logic           |     0.002 |     2721 |     20800 |           13.08 |
+| Slice Logic              |     0.002 |     4188 |       --- |             --- |
+|   LUT as Logic           |     0.002 |     2724 |     20800 |           13.10 |
 |   CARRY4                 |    <0.001 |      367 |      8150 |            4.50 |
-|   Register               |    <0.001 |      553 |     41600 |            1.33 |
+|   Register               |    <0.001 |      551 |     41600 |            1.32 |
 |   F7/F8 Muxes            |    <0.001 |       39 |     32600 |            0.12 |
 |   LUT as Distributed RAM |    <0.001 |        6 |      9600 |            0.06 |
 |   Others                 |     0.000 |       74 |       --- |             --- |
-| Signals                  |     0.003 |     3873 |       --- |             --- |
+| Signals                  |     0.003 |     3871 |       --- |             --- |
 | Block RAM                |    <0.001 |        1 |        50 |            2.00 |
 | I/O                      |     0.003 |       71 |       170 |           41.76 |
 | Static Power             |     0.072 |          |           |                 |
