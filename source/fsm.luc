@@ -464,7 +464,7 @@ module fsm #(
                         states.d = States.A_DOWN_COUNTM1
                     }
                 }
-                else if (move_up_button){
+                else if (move_down_button){
                     states.d = States.A_DOWN_CHECK_PIXEL
                 }
                 else {
@@ -593,7 +593,7 @@ module fsm #(
                         states.d = States.A_LEFT_COUNTM1
                     }
                 }
-                else if (move_up_button){
+                else if (move_left_button){
                     states.d = States.A_LEFT_CHECK_PIXEL
                 }
                 else {
@@ -720,7 +720,7 @@ module fsm #(
                         states.d = States.A_RIGHT_COUNTM1
                     }
                 }
-                else if (move_up_button){
+                else if (move_right_button){
                     states.d = States.A_RIGHT_CHECK_PIXEL
                 }
                 else {
@@ -1013,7 +1013,7 @@ module fsm #(
                         states.d = States.B_DOWN_COUNTM1
                     }
                 }
-                else if (move_up_button){
+                else if (move_down_button){
                     states.d = States.B_DOWN_CHECK_PIXEL
                 }
                 else {
@@ -1142,7 +1142,7 @@ module fsm #(
                         states.d = States.B_LEFT_COUNTM1
                     }
                 }
-                else if (move_up_button){
+                else if (move_left_button){
                     states.d = States.B_LEFT_CHECK_PIXEL
                 }
                 else {
@@ -1265,7 +1265,7 @@ module fsm #(
                         states.d = States.B_RIGHT_COUNTM1
                     }
                 }
-                else if (move_up_button){
+                else if (move_right_button){
                     states.d = States.B_RIGHT_CHECK_PIXEL
                 }
                 else {

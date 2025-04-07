@@ -517,7 +517,7 @@ module fsm (
                             D_states_d = 8'h10;
                         end
                     end else begin
-                        if (move_up_button) begin
+                        if (move_down_button) begin
                             D_states_d = 8'h12;
                         end else begin
                             D_states_d = 8'h0;
@@ -634,7 +634,7 @@ module fsm (
                             D_states_d = 8'h1a;
                         end
                     end else begin
-                        if (move_up_button) begin
+                        if (move_left_button) begin
                             D_states_d = 8'h1c;
                         end else begin
                             D_states_d = 8'h0;
@@ -748,7 +748,7 @@ module fsm (
                             D_states_d = 8'h24;
                         end
                     end else begin
-                        if (move_up_button) begin
+                        if (move_right_button) begin
                             D_states_d = 8'h26;
                         end else begin
                             D_states_d = 8'h0;
@@ -1015,7 +1015,7 @@ module fsm (
                             D_states_d = 8'h3b;
                         end
                     end else begin
-                        if (move_up_button) begin
+                        if (move_down_button) begin
                             D_states_d = 8'h3d;
                         end else begin
                             D_states_d = 8'h2b;
@@ -1132,7 +1132,7 @@ module fsm (
                             D_states_d = 8'h45;
                         end
                     end else begin
-                        if (move_up_button) begin
+                        if (move_left_button) begin
                             D_states_d = 8'h47;
                         end else begin
                             D_states_d = 8'h2b;
@@ -1244,7 +1244,7 @@ module fsm (
                             D_states_d = 8'h4f;
                         end
                     end else begin
-                        if (move_up_button) begin
+                        if (move_right_button) begin
                             D_states_d = 8'h51;
                         end else begin
                             D_states_d = 8'h2b;
