@@ -338,6 +338,9 @@ module fsm #(
                 else if (move_up_button){
                     states.d = States.A_UP_CHECK_PIXEL
                 }
+                else {
+                    states.d = States.A_INPUT_IDLE
+                }
                 // debugging
                 debug_dff.d = 10
             
@@ -464,6 +467,9 @@ module fsm #(
                 else if (move_up_button){
                     states.d = States.A_DOWN_CHECK_PIXEL
                 }
+                else {
+                    states.d = States.A_INPUT_IDLE
+                }
             
             States.A_DOWN_COUNTP1:
                 alufn = ADD
@@ -570,6 +576,9 @@ module fsm #(
                 else if (move_up_button){
                     states.d = States.A_LEFT_CHECK_PIXEL
                 }
+                else {
+                    states.d = States.A_INPUT_IDLE
+                }
             
             States.A_LEFT_COUNTP1:
                 alufn = ADD
@@ -673,6 +682,9 @@ module fsm #(
                 }
                 else if (move_up_button){
                     states.d = States.A_RIGHT_CHECK_PIXEL
+                }
+                else {
+                    states.d = States.A_INPUT_IDLE
                 }
             
             States.A_RIGHT_COUNTP1:
@@ -810,6 +822,9 @@ module fsm #(
                 else if (move_up_button){
                     states.d = States.B_UP_CHECK_PIXEL
                 }
+                else {
+                    states.d = States.B_INPUT_IDLE
+                }
             
             States.B_UP_COUNTP1:
                 alufn = ADD
@@ -917,6 +932,9 @@ module fsm #(
                 else if (move_up_button){
                     states.d = States.B_DOWN_CHECK_PIXEL
                 }
+                else {
+                    states.d = States.B_INPUT_IDLE
+                }
             
             States.B_DOWN_COUNTP1:
                 alufn = ADD
@@ -1023,6 +1041,9 @@ module fsm #(
                 else if (move_up_button){
                     states.d = States.B_LEFT_CHECK_PIXEL
                 }
+                else {
+                    states.d = States.B_INPUT_IDLE
+                }
             
             States.B_LEFT_COUNTP1:
                 alufn = ADD
@@ -1126,6 +1147,9 @@ module fsm #(
                 }
                 else if (move_up_button){
                     states.d = States.B_RIGHT_CHECK_PIXEL
+                }
+                else {
+                    states.d = States.B_INPUT_IDLE
                 }
             
             States.B_RIGHT_COUNTP1:
