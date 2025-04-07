@@ -230,7 +230,7 @@ module fsm #(
                 debug_dff.d = 2
 
             States.ZERO_BRAM:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = TARGET_PIXEL_ADDRESS
@@ -245,7 +245,7 @@ module fsm #(
                 debug_dff.d = 3
 
             States.CHECK_ADDRESS_AT_MAX:
-                alufn = b110101
+                alufn = CMPLT
                 bsel = b1000
                 ra1 = TARGET_PIXEL_ADDRESS
                 case(aluout[0]) {
@@ -322,8 +322,6 @@ module fsm #(
                 
 
             States.A_UP_DIR_IDLE:
-                alufn = b011010
-                asel = b0
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
                     if(~rd1[0]){
@@ -365,7 +363,7 @@ module fsm #(
                 debug_dff.d = 12
             
             States.A_UP_COUNTM1:
-                alufn = b00001
+                alufn = SUB
                 asel = b0
                 bsel = b0001
                 we = b1
@@ -415,7 +413,7 @@ module fsm #(
                     states.d = States.A_UP_MOVE_CURSOR
                 }
                 else {
-                    alufn = b000001
+                    alufn = SUB
                     asel = b0
                     bsel = b0100
                     we = b1
@@ -451,8 +449,6 @@ module fsm #(
             
             //DOWN BUTTON PRESSED
             States.A_DOWN_DIR_IDLE:
-                alufn = b011010
-                asel = b0
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
                     if(~rd1[0]){
@@ -580,8 +576,6 @@ module fsm #(
             
             //Left button is pressed
             States.A_LEFT_DIR_IDLE:
-                alufn = b011010
-                asel = b0
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
                     if(~rd1[0]){
@@ -623,7 +617,7 @@ module fsm #(
                 debug_dff.d = 32
             
             States.A_LEFT_COUNTM1:
-                alufn = b00001
+                alufn = SUB
                 asel = b0
                 bsel = b0001
                 we = b1
@@ -671,7 +665,7 @@ module fsm #(
                     states.d = States.A_LEFT_MOVE_CURSOR
                 }
                 else {
-                    alufn = b00001
+                    alufn = SUB
                     asel = b0
                     bsel = b0001
                     we = b1
@@ -707,8 +701,6 @@ module fsm #(
             
             // Right button is pressed
             States.A_RIGHT_DIR_IDLE:
-                alufn = b011010
-                asel = b0
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
                     if(~rd1[0]){
@@ -752,7 +744,7 @@ module fsm #(
                 debug_dff.d = 42
             
             States.A_RIGHT_COUNTM1:
-                alufn = b00001
+                alufn = SUB
                 asel = b0
                 bsel = b0001
                 we = b1
@@ -801,7 +793,7 @@ module fsm #(
                     states.d = States.A_RIGHT_MOVE_CURSOR
                 }
                 else {
-                    alufn = b00001
+                    alufn = SUB
                     asel = b0
                     bsel = b0001
                     we = b1
@@ -870,8 +862,6 @@ module fsm #(
                 
 
             States.B_UP_DIR_IDLE:
-                alufn = b011010
-                asel = b0
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
                     if(~rd1[0]){
@@ -913,7 +903,7 @@ module fsm #(
                 debug_dff.d = 53
             
             States.B_UP_COUNTM1:
-                alufn = b00001
+                alufn = SUB
                 asel = b0
                 bsel = b0001
                 we = b1
@@ -963,7 +953,7 @@ module fsm #(
                     states.d = States.B_UP_MOVE_CURSOR
                 }
                 else {
-                    alufn = b00001
+                    alufn = SUB
                     asel = b0
                     bsel = b0100
                     we = b1
@@ -1000,7 +990,7 @@ module fsm #(
             
             // DOWN BUTTON PRESSED
             States.B_DOWN_DIR_IDLE:
-                alufn = b011010
+                alufn = SUB
                 asel = b0
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
@@ -1043,7 +1033,7 @@ module fsm #(
                 debug_dff.d = 63
             
             States.B_DOWN_COUNTM1:
-                alufn = b00001
+                alufn = SUB
                 asel = b0
                 bsel = b0001
                 we = b1
@@ -1129,8 +1119,6 @@ module fsm #(
             
             //Left button is pressed
             States.B_LEFT_DIR_IDLE:
-                alufn = b011010
-                asel = b0
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
                     if(~rd1[0]){
@@ -1172,7 +1160,7 @@ module fsm #(
                 debug_dff.d = 73
             
             States.B_LEFT_COUNTM1:
-                alufn = b00001
+                alufn = SUB
                 asel = b0
                 bsel = b0001
                 we = b1
@@ -1220,7 +1208,7 @@ module fsm #(
                     states.d = States.B_LEFT_MOVE_CURSOR
                 }
                 else {
-                    alufn = b00001
+                    alufn = SUB
                     asel = b0
                     bsel = b0001
                     we = b1
@@ -1252,7 +1240,7 @@ module fsm #(
             
             // Right button is pressed
             States.B_RIGHT_DIR_IDLE:
-                alufn = b011010
+                alufn = SUB
                 asel = b0
                 ra1 = TARGET_PIXEL_VALUE
                 if (select_button){
@@ -1289,7 +1277,7 @@ module fsm #(
                 states.d = States.B_RIGHT_CHECK_PIXEL
             
             States.B_RIGHT_COUNTM1:
-                alufn = b00001
+                alufn = SUB
                 asel = b0
                 bsel = b0001
                 we = b1
@@ -1330,7 +1318,7 @@ module fsm #(
                     states.d = States.B_RIGHT_MOVE_CURSOR
                 }
                 else {
-                    alufn = b00001
+                    alufn = SUB
                     asel = b0
                     bsel = b0001
                     we = b1
