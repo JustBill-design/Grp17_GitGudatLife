@@ -470,6 +470,8 @@ module fsm #(
                 else {
                     states.d = States.A_INPUT_IDLE
                 }
+                // debugging
+                debug_dff.d = 20
             
             States.A_DOWN_COUNTP1:
                 alufn = ADD
@@ -480,12 +482,16 @@ module fsm #(
                 wdsel = b0000
                 wa = A_COUNT
                 states.d = States.A_DOWN_SET_PIXEL_A
+                // debugging
+                debug_dff.d = 21
             
             States.A_DOWN_SET_PIXEL_A:
                 we = b1 
                 wdsel = b0010
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.A_DOWN_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 22
             
             States.A_DOWN_COUNTM1:
                 alufn = b00001
@@ -496,12 +502,16 @@ module fsm #(
                 wdsel = b0000
                 wa = A_COUNT
                 states.d = States.A_DOWN_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 23
             
             States.A_DOWN_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.A_DOWN_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 24
             
             States.A_DOWN_CHECK_PIXEL:
                 alufn = CMPLT
@@ -514,6 +524,8 @@ module fsm #(
                 if(aluout[0]){
                     states.d = States.A_DOWN_DIR_IDLE
                 }
+                // debugging
+                debug_dff.d = 25
             
             States.A_DOWN_RESET_PIXEL:
                 asel = b0
@@ -524,6 +536,8 @@ module fsm #(
                 bwd = rd2
                 brsel = b00
                 states.d = States.A_DOWN_MOVE_CURSOR
+                // debugging
+                debug_dff.d = 26
             
             States.A_DOWN_MOVE_CURSOR:
                 if (ddr) {
@@ -542,12 +556,16 @@ module fsm #(
 
                     states.d = States.A_DOWN_STORE_PIXEL
                 }
+                // debugging
+                debug_dff.d = 27
             
             States.A_DOWN_STORE_PIXEL:
                 we = b1
                 wdsel = b0100
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.A_DOWN_CURSOR_COLOUR
+                // debugging
+                debug_dff.d = 28
             
             States.A_DOWN_CURSOR_COLOUR:
                 asel = b0
@@ -557,6 +575,8 @@ module fsm #(
                 bwd = b11
                 brsel = b00
                 states.d = States.A_DOWN_DIR_IDLE
+                // debugging
+                debug_dff.d = 29
             
             //Left button is pressed
             States.A_LEFT_DIR_IDLE:
@@ -579,6 +599,8 @@ module fsm #(
                 else {
                     states.d = States.A_INPUT_IDLE
                 }
+                // debugging
+                debug_dff.d = 30
             
             States.A_LEFT_COUNTP1:
                 alufn = ADD
@@ -589,12 +611,16 @@ module fsm #(
                 wdsel = b0000
                 wa = A_COUNT
                 states.d = States.A_LEFT_SET_PIXEL_A
+                // debugging
+                debug_dff.d = 31
             
             States.A_LEFT_SET_PIXEL_A:
                 we = b1 
                 wdsel = b0010
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.A_LEFT_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 32
             
             States.A_LEFT_COUNTM1:
                 alufn = b00001
@@ -605,12 +631,16 @@ module fsm #(
                 wdsel = b0000
                 wa = A_COUNT
                 states.d = States.A_LEFT_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 33
             
             States.A_LEFT_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.A_LEFT_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 34
             
             States.A_LEFT_CHECK_PIXEL:
                 asel = b0
@@ -621,6 +651,8 @@ module fsm #(
                 else {
                     states.d = States.A_LEFT_DIR_IDLE
                 }
+                // debugging
+                debug_dff.d = 35
             
             States.A_LEFT_RESET_PIXEL:
                 asel = b0
@@ -631,6 +663,8 @@ module fsm #(
                 bwd = rd2
                 brsel = b00
                 states.d = States.A_LEFT_MOVE_CURSOR
+                // debugging
+                debug_dff.d = 36
             
             States.A_LEFT_MOVE_CURSOR:
                 if (ddr) {
@@ -649,12 +683,16 @@ module fsm #(
 
                     states.d = States.A_LEFT_STORE_PIXEL
                 }
+                // debugging
+                debug_dff.d = 37
             
             States.A_LEFT_STORE_PIXEL:
                 we = b1
                 wdsel = b0100
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.A_LEFT_CURSOR_COLOUR
+                // debugging
+                debug_dff.d = 38
             
             States.A_LEFT_CURSOR_COLOUR:
                 asel = b0
@@ -664,6 +702,8 @@ module fsm #(
                 bwd = b11
                 brsel = b00
                 states.d = States.A_LEFT_DIR_IDLE
+                // debugging
+                debug_dff.d = 39
             
             // Right button is pressed
             States.A_RIGHT_DIR_IDLE:
@@ -685,7 +725,10 @@ module fsm #(
                 }
                 else {
                     states.d = States.A_INPUT_IDLE
-                }
+                
+                // debugging
+                debug_dff.d = 40
+
             
             States.A_RIGHT_COUNTP1:
                 alufn = ADD
@@ -696,12 +739,16 @@ module fsm #(
                 wdsel = b0000
                 wa = A_COUNT
                 states.d = States.A_RIGHT_SET_PIXEL_A
+                // debugging
+                debug_dff.d = 41
             
             States.A_RIGHT_SET_PIXEL_A:
                 we = b1 
                 wdsel = b0010
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.A_RIGHT_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 42
             
             States.A_RIGHT_COUNTM1:
                 alufn = b00001
@@ -712,12 +759,16 @@ module fsm #(
                 wdsel = b0000
                 wa = A_COUNT
                 states.d = States.A_RIGHT_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 43
             
             States.A_RIGHT_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.A_RIGHT_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 44
             
             States.A_RIGHT_CHECK_PIXEL:
                 asel = b0
@@ -729,6 +780,8 @@ module fsm #(
                 else {
                     states.d = States.A_RIGHT_DIR_IDLE
                 }
+                // debugging
+                debug_dff.d = 45
             
             States.A_RIGHT_RESET_PIXEL:
                 asel = b0
@@ -739,6 +792,8 @@ module fsm #(
                 bwd = rd2
                 brsel = b00
                 states.d = States.A_RIGHT_MOVE_CURSOR
+                // debugging
+                debug_dff.d = 46
             
             States.A_RIGHT_MOVE_CURSOR:
                 if (ddr) {
@@ -757,12 +812,16 @@ module fsm #(
 
                     states.d = States.A_RIGHT_STORE_PIXEL
                 }
+                // debugging
+                debug_dff.d = 47
             
             States.A_RIGHT_STORE_PIXEL:
                 we = b1
                 wdsel = b0100
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.A_RIGHT_CURSOR_COLOUR
+                // debugging
+                debug_dff.d = 48
             
             States.A_RIGHT_CURSOR_COLOUR:
                 asel = b0
@@ -772,6 +831,8 @@ module fsm #(
                 bwd = b11
                 brsel = b00
                 states.d = States.A_RIGHT_DIR_IDLE
+                // debugging
+                debug_dff.d = 49
             
 
             //Player B is placing
@@ -803,6 +864,8 @@ module fsm #(
                 else if (next_start_button){
                     states.d = States.GAME_IDLE
                 }
+                // debugging
+                debug_dff.d = 50
                 
 
             States.B_UP_DIR_IDLE:
@@ -825,6 +888,8 @@ module fsm #(
                 else {
                     states.d = States.B_INPUT_IDLE
                 }
+                // debugging
+                debug_dff.d = 51
             
             States.B_UP_COUNTP1:
                 alufn = ADD
@@ -835,12 +900,16 @@ module fsm #(
                 wdsel = b0000
                 wa = B_COUNT
                 states.d = States.B_UP_SET_PIXEL_B
+                // debugging
+                debug_dff.d = 52
             
             States.B_UP_SET_PIXEL_B:
                 we = b1 
                 wdsel = b0010
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_UP_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 53
             
             States.B_UP_COUNTM1:
                 alufn = b00001
@@ -851,12 +920,16 @@ module fsm #(
                 wdsel = b0000
                 wa = B_COUNT
                 states.d = States.B_UP_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 54
              
             States.B_UP_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_UP_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 55
             
             States.B_UP_CHECK_PIXEL:
                 alufn = CMPLT
@@ -869,6 +942,8 @@ module fsm #(
                 if(aluout[0]){
                     states.d = States.B_UP_DIR_IDLE
                 }
+                // debugging
+                debug_dff.d = 56
             
             States.B_UP_RESET_PIXEL:
                 asel = b0
@@ -879,6 +954,8 @@ module fsm #(
                 bwd = rd2
                 brsel = b00
                 states.d = States.B_UP_MOVE_CURSOR
+                // debugging
+                debug_dff.d = 57
             
             States.B_UP_MOVE_CURSOR:
                 if (ddr) {
@@ -897,12 +974,16 @@ module fsm #(
 
                     states.d = States.B_UP_STORE_PIXEL
                 }
+                // debugging
+                debug_dff.d = 58
             
             States.B_UP_STORE_PIXEL:
                 we = b1
                 wdsel = b0100
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_UP_CURSOR_COLOUR
+                // debugging
+                debug_dff.d = 59
             
             States.B_UP_CURSOR_COLOUR:
                 asel = b0
@@ -912,6 +993,8 @@ module fsm #(
                 bwd = b11
                 brsel = b00
                 states.d = States.B_UP_DIR_IDLE
+                // debugging
+                debug_dff.d = 60
             
             
             // DOWN BUTTON PRESSED
@@ -935,6 +1018,8 @@ module fsm #(
                 else {
                     states.d = States.B_INPUT_IDLE
                 }
+                // debugging
+                debug_dff.d = 61
             
             States.B_DOWN_COUNTP1:
                 alufn = ADD
@@ -945,12 +1030,16 @@ module fsm #(
                 wdsel = b0000
                 wa = B_COUNT
                 states.d = States.B_DOWN_SET_PIXEL_B
+                // debugging
+                debug_dff.d = 62
             
             States.B_DOWN_SET_PIXEL_B:
                 we = b1 
                 wdsel = b0010
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_DOWN_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 63
             
             States.B_DOWN_COUNTM1:
                 alufn = b00001
@@ -961,12 +1050,16 @@ module fsm #(
                 wdsel = b0000
                 wa = B_COUNT
                 states.d = States.B_DOWN_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 64
             
             States.B_DOWN_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_DOWN_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 65
             
             States.B_DOWN_CHECK_PIXEL:
                 alufn = CMPLT
@@ -979,6 +1072,8 @@ module fsm #(
                 if(aluout[0]){
                     states.d = States.B_DOWN_DIR_IDLE
                 }
+                // debugging
+                debug_dff.d = 66
             
             States.B_DOWN_RESET_PIXEL:
                 asel = b0
@@ -989,6 +1084,8 @@ module fsm #(
                 bwd = rd2
                 brsel = b00
                 states.d = States.B_DOWN_MOVE_CURSOR
+                // debugging
+                debug_dff.d = 67
             
             States.B_DOWN_MOVE_CURSOR:
                 if (ddr) {
@@ -1007,12 +1104,16 @@ module fsm #(
 
                     states.d = States.B_DOWN_STORE_PIXEL
                 }
+                // debugging
+                debug_dff.d = 68
             
             States.B_DOWN_STORE_PIXEL:
                 we = b1
                 wdsel = b0100
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_DOWN_CURSOR_COLOUR
+                // debugging
+                debug_dff.d = 69
             
             States.B_DOWN_CURSOR_COLOUR:
                 asel = b0
@@ -1022,6 +1123,8 @@ module fsm #(
                 bwd = b11
                 brsel = b00
                 states.d = States.B_DOWN_DIR_IDLE
+                // debugging
+                debug_dff.d = 70
             
             //Left button is pressed
             States.B_LEFT_DIR_IDLE:
@@ -1044,6 +1147,8 @@ module fsm #(
                 else {
                     states.d = States.B_INPUT_IDLE
                 }
+                // debugging
+                debug_dff.d = 71
             
             States.B_LEFT_COUNTP1:
                 alufn = ADD
@@ -1054,12 +1159,16 @@ module fsm #(
                 wdsel = b0000
                 wa = B_COUNT
                 states.d = States.B_LEFT_SET_PIXEL_B
+                // debugging
+                debug_dff.d = 72
             
             States.B_LEFT_SET_PIXEL_B:
                 we = b1 
                 wdsel = b0010
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_LEFT_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 73
             
             States.B_LEFT_COUNTM1:
                 alufn = b00001
@@ -1070,12 +1179,16 @@ module fsm #(
                 wdsel = b0000
                 wa = B_COUNT
                 states.d = States.B_LEFT_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 74
             
             States.B_LEFT_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_LEFT_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 75
             
             States.B_LEFT_CHECK_PIXEL:
                 asel = b0
@@ -1086,6 +1199,8 @@ module fsm #(
                 else {
                     states.d = States.B_LEFT_DIR_IDLE
                 }
+                // debugging
+                debug_dff.d = 76
             
             States.B_LEFT_RESET_PIXEL:
                 asel = b0
@@ -1096,6 +1211,8 @@ module fsm #(
                 bwd = rd2
                 brsel = b00
                 states.d = States.B_LEFT_MOVE_CURSOR
+                // debugging
+                debug_dff.d = 77
             
             States.B_LEFT_MOVE_CURSOR:
                 if (ddr) {
@@ -1114,6 +1231,8 @@ module fsm #(
 
                     states.d = States.B_LEFT_STORE_PIXEL
                 }
+                // debugging
+                debug_dff.d = 78
             
             States.B_LEFT_STORE_PIXEL:
                 we = b1
