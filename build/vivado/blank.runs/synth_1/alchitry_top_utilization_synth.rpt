@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Sat Apr  5 05:34:12 2025
+| Date         : Mon Apr  7 16:28:30 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb
 | Design       : alchitry_top
@@ -36,8 +36,8 @@ Table of Contents
 |   LUT as Memory            |   12 |     0 |          0 |      9600 |  0.13 |
 |     LUT as Distributed RAM |   12 |     0 |            |           |       |
 |     LUT as Shift Register  |    0 |     0 |            |           |       |
-| Slice Registers            |  552 |     0 |          0 |     41600 |  1.33 |
-|   Register as Flip Flop    |  552 |     0 |          0 |     41600 |  1.33 |
+| Slice Registers            |  549 |     0 |          0 |     41600 |  1.32 |
+|   Register as Flip Flop    |  549 |     0 |          0 |     41600 |  1.32 |
 |   Register as Latch        |    0 |     0 |          0 |     41600 |  0.00 |
 | F7 Muxes                   |   39 |     0 |          0 |     16300 |  0.24 |
 | F8 Muxes                   |    0 |     0 |          0 |      8150 |  0.00 |
@@ -62,7 +62,7 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 | 8     |          Yes |           - |          Set |
 | 0     |          Yes |           - |        Reset |
 | 11    |          Yes |         Set |            - |
-| 533   |          Yes |       Reset |            - |
+| 530   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -152,11 +152,11 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT3     | 1282 |                 LUT |
+| LUT3     | 1280 |                 LUT |
 | LUT6     |  962 |                 LUT |
-| FDRE     |  533 |        Flop & Latch |
+| FDRE     |  530 |        Flop & Latch |
 | CARRY4   |  367 |          CarryLogic |
-| LUT5     |  317 |                 LUT |
+| LUT5     |  318 |                 LUT |
 | LUT2     |  284 |                 LUT |
 | LUT4     |  271 |                 LUT |
 | LUT1     |   62 |                 LUT |
