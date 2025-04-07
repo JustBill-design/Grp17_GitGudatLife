@@ -166,7 +166,7 @@ module fsm #(
     
         // debugging
         debug_out = debug_dff.q
-        debug_dff.d = debug_dff.q
+        debug_dff.d = 0
 
         // default connections, all 0 except brsel=b10 ----------------------
         states.d = states.q
@@ -224,8 +224,6 @@ module fsm #(
                 wdsel = b0001
                 wa = TARGET_PIXEL_ADDRESS
                 states.d = States.ZERO_BRAM
-                // debugging
-                debug_dff.d = 1
 
             States.ZERO_BRAM:
                 alufn = b000000
@@ -239,8 +237,6 @@ module fsm #(
                 bwd = b00
                 brsel = b00
                 states.d = States.CHECK_ADDRESS_AT_MAX
-                // debugging
-                debug_dff.d = 2
 
             States.CHECK_ADDRESS_AT_MAX:
                 alufn = b110101
@@ -250,32 +246,24 @@ module fsm #(
                     1: states.d = States.ZERO_BRAM
                     0: states.d = States.SET_TIMER
                 }
-                // debugging
-                debug_dff.d = 3
             
             States.SET_TIMER:
                 we = b1
                 wdsel = b0110
                 wa = TIMER
                 states.d = States.RESET_PIXEL_VALUE
-                // debugging
-                debug_dff.d = 4
             
             States.RESET_PIXEL_VALUE:
                 we = b1
                 wdsel = b0001
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.RESET_PIXEL_ADDRESS
-                // debugging
-                debug_dff.d = 5
             
             States.RESET_PIXEL_ADDRESS:
                 we = b1
                 wdsel = b0111
                 wa = TARGET_PIXEL_ADDRESS
                 states.d = States.SET_SELECTOR_PIXEL_STATE
-                // debugging
-                debug_dff.d = 6
             
             States.SET_SELECTOR_PIXEL_STATE:
                 bwa = 2144
@@ -284,15 +272,12 @@ module fsm #(
                 brsel = b00
                 states.d = States.A_INPUT_IDLE
                 // debugging
-                debug_dff.d = 7
+                debug_dff.d = 1
 
             // Player A Turn
             States.A_INPUT_IDLE:
                 asel = b0
                 ra1 = TARGET_PIXEL_VALUE
-                // debugging
-                debug_dff.d = 8
-
                 if (move_up_button){
                     states.d = States.A_UP_DIR_IDLE
                 }
@@ -318,6 +303,8 @@ module fsm #(
                 else if (next_start_button){
                     states.d = States.B_INPUT_IDLE
                 }
+                // debugging
+                debug_dff.d = 2
                 
 
             States.A_UP_DIR_IDLE:
@@ -337,6 +324,8 @@ module fsm #(
                 else if (move_up_button){
                     states.d = States.A_UP_CHECK_PIXEL
                 }
+                // debugging
+                debug_dff.d = 3
             
             States.A_UP_COUNTP1:
                 alufn = ADD
@@ -347,12 +336,16 @@ module fsm #(
                 wdsel = b0000
                 wa = A_COUNT
                 states.d = States.A_UP_SET_PIXEL_A
+                // debugging
+                debug_dff.d = 4
             
             States.A_UP_SET_PIXEL_A:
                 we = b1 
                 wdsel = b0010
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.A_UP_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 5
             
             States.A_UP_COUNTM1:
                 alufn = b00001
@@ -363,12 +356,16 @@ module fsm #(
                 wdsel = b0000
                 wa = A_COUNT
                 states.d = States.A_UP_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 6
             
             States.A_UP_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.A_UP_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 7
 
             States.A_UP_CHECK_PIXEL:
                 alufn = CMPLT
@@ -381,6 +378,8 @@ module fsm #(
                 if(aluout[0]){
                     states.d = States.A_UP_DIR_IDLE
                 }
+                // debugging
+                debug_dff.d = 8
 
             States.A_UP_RESET_PIXEL:
                 asel = b0
@@ -391,6 +390,8 @@ module fsm #(
                 bwd = rd2
                 brsel = b00
                 states.d = States.A_UP_MOVE_CURSOR
+                // debugging
+                debug_dff.d = 9
             
             States.A_UP_MOVE_CURSOR:
                 if (ddr) {
@@ -408,12 +409,16 @@ module fsm #(
                     brsel = b01
                     states.d = States.A_UP_STORE_PIXEL
                 }
+                // debugging
+                debug_dff.d = 10
             
             States.A_UP_STORE_PIXEL:
                 we = b1
                 wdsel = b0100
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.A_UP_CURSOR_COLOUR
+                // debugging
+                debug_dff.d = 11
             
             States.A_UP_CURSOR_COLOUR:
                 asel = b0
@@ -423,6 +428,8 @@ module fsm #(
                 bwd = b11
                 brsel = b00
                 states.d = States.A_UP_DIR_IDLE
+                // debugging
+                debug_dff.d = 12
             
             
             //DOWN BUTTON PRESSED
