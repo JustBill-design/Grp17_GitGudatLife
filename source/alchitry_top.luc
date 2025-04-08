@@ -2,6 +2,7 @@ module alchitry_top (
     input clk,              // 100MHz clock
     input rst_n,            // reset button (active low)
     output led[8],          // 8 user controllable LEDs
+    output io_led[8],       // 8 debugging leds
     input usb_rx,           // USB->Serial input
     output usb_tx,          // USB->Serial output
 
@@ -109,6 +110,11 @@ module alchitry_top (
         buff2.d = buff2.q
         buff3.d = buff3.q
         buff4.d = buff4.q
+        
+        io_led[3:0] = cond_butt_dirs.out
+        io_led[5:4] = cond_butt_sel_desel.out
+        io_led[6] = cond_butt_next_play.out
+        io_led[7] = reset_cond.out
 
         // whole board reset
         reset_cond.in = ~butt_reset

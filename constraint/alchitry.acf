@@ -14,6 +14,15 @@ STANDARD(LVCMOS33) {
 
     pin usb_rx USB_RX
     pin usb_tx USB_TX
+    
+    pin io_led[0] A21
+    pin io_led[1] A20
+    pin io_led[2] A18
+    pin io_led[3] A17
+    pin io_led[4] A15
+    pin io_led[5] A14
+    pin io_led[6] A12
+    pin io_led[7] A11
 
     PULL(UP) {
         pin testpullup B30

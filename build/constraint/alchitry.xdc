@@ -37,6 +37,30 @@ set_property IOSTANDARD LVCMOS33 [get_ports {usb_rx}]
 set_property PACKAGE_PIN P16 [get_ports {usb_tx}]
 set_property IOSTANDARD LVCMOS33 [get_ports {usb_tx}]
 
+set_property PACKAGE_PIN G2 [get_ports {io_led[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {io_led[0]}]
+
+set_property PACKAGE_PIN G1 [get_ports {io_led[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {io_led[1]}]
+
+set_property PACKAGE_PIN H2 [get_ports {io_led[2]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {io_led[2]}]
+
+set_property PACKAGE_PIN H1 [get_ports {io_led[3]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {io_led[3]}]
+
+set_property PACKAGE_PIN K1 [get_ports {io_led[4]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {io_led[4]}]
+
+set_property PACKAGE_PIN J1 [get_ports {io_led[5]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {io_led[5]}]
+
+set_property PACKAGE_PIN L3 [get_ports {io_led[6]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {io_led[6]}]
+
+set_property PACKAGE_PIN L2 [get_ports {io_led[7]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {io_led[7]}]
+
 set_property PACKAGE_PIN D6 [get_ports {testpullup}]
 set_property IOSTANDARD LVCMOS33 [get_ports {testpullup}]
 set_property PULLUP true [get_ports {testpullup}]
