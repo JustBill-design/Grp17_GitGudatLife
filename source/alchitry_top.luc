@@ -53,8 +53,9 @@ module alchitry_top (
         edge_detector edge_next_play(#RISE(1),#FALL(0))
         
         // edge detecors for internal clocks
-        edge_detector timerclk(#RISE(0),#FALL(1))   // ticks once per second
-        edge_detector gameclk(#RISE(1),#FALL(0))    // ticks roughly 10 times per second
+        edge_detector timerclk(#RISE(0),#FALL(1))       // ticks once per second
+        edge_detector gameclk(#RISE(1),#FALL(0))        // ticks roughly 10 times per second
+        edge_detector med_inputclk(#RISE(1),#FALL(0))   // ticks roughly 5 times per second
         
 
         .rst(rst) {
@@ -117,8 +118,8 @@ module alchitry_top (
         usb_tx = usb_rx
         
         // button processing
-        cond_butt_dirs.in = ~butt_dirs
-        cond_butt_sel_desel.in = ~butt_sel_desel
+        cond_butt_dirs.in[3:0] = ~butt_dirs
+        cond_butt_sel_desel.in[1:0] = ~butt_sel_desel
         cond_butt_next_play.in = ~butt_next_play
         edge_next_play.in = cond_butt_next_play.out
 
@@ -136,8 +137,10 @@ module alchitry_top (
         // connect slow clocks
         timerclk.in = gamecounter.value[$clog2(CLK)-1]
         gameclk.in = gamecounter.value[$clog2(CLK/10)]
+        med_inputclk.in = gamecounter.value[$clog2(CLK/5)]
         sm.timerclk = timerclk.out
         sm.gameclk = gameclk.out
+        sm.med_inputclk = med_inputclk.out
 
         // buttons connections
         sm.next_start_button = edge_next_play.out
