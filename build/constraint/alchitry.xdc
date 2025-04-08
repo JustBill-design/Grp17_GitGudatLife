@@ -41,35 +41,35 @@ set_property PACKAGE_PIN D6 [get_ports {testpullup}]
 set_property IOSTANDARD LVCMOS33 [get_ports {testpullup}]
 set_property PULLUP true [get_ports {testpullup}]
 
-set_property PACKAGE_PIN R13 [get_ports {butt_dirs[0]}]
+set_property PACKAGE_PIN D4 [get_ports {butt_dirs[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {butt_dirs[0]}]
 set_property PULLUP true [get_ports {butt_dirs[0]}]
 
-set_property PACKAGE_PIN T13 [get_ports {butt_dirs[1]}]
+set_property PACKAGE_PIN C4 [get_ports {butt_dirs[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {butt_dirs[1]}]
 set_property PULLUP true [get_ports {butt_dirs[1]}]
 
-set_property PACKAGE_PIN P10 [get_ports {butt_dirs[2]}]
+set_property PACKAGE_PIN F4 [get_ports {butt_dirs[2]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {butt_dirs[2]}]
 set_property PULLUP true [get_ports {butt_dirs[2]}]
 
-set_property PACKAGE_PIN P11 [get_ports {butt_dirs[3]}]
+set_property PACKAGE_PIN F3 [get_ports {butt_dirs[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {butt_dirs[3]}]
 set_property PULLUP true [get_ports {butt_dirs[3]}]
 
-set_property PACKAGE_PIN R12 [get_ports {butt_sel_desel[0]}]
+set_property PACKAGE_PIN G5 [get_ports {butt_sel_desel[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {butt_sel_desel[0]}]
 set_property PULLUP true [get_ports {butt_sel_desel[0]}]
 
-set_property PACKAGE_PIN T12 [get_ports {butt_sel_desel[1]}]
+set_property PACKAGE_PIN G4 [get_ports {butt_sel_desel[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {butt_sel_desel[1]}]
 set_property PULLUP true [get_ports {butt_sel_desel[1]}]
 
-set_property PACKAGE_PIN N11 [get_ports {butt_reset}]
+set_property PACKAGE_PIN B4 [get_ports {butt_reset}]
 set_property IOSTANDARD LVCMOS33 [get_ports {butt_reset}]
 set_property PULLUP true [get_ports {butt_reset}]
 
-set_property PACKAGE_PIN N12 [get_ports {butt_next_play}]
+set_property PACKAGE_PIN A3 [get_ports {butt_next_play}]
 set_property IOSTANDARD LVCMOS33 [get_ports {butt_next_play}]
 set_property PULLUP true [get_ports {butt_next_play}]
 

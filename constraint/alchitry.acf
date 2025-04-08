@@ -19,16 +19,16 @@ STANDARD(LVCMOS33) {
         pin testpullup B30
 
         // UP, DOWN, LEFT, RIGHT
-        pin butt_dirs[0] C3
-        pin butt_dirs[1] C2
-        pin butt_dirs[2] C48
-        pin butt_dirs[3] C49
+        pin butt_dirs[0] B39
+        pin butt_dirs[1] B40
+        pin butt_dirs[2] B12
+        pin butt_dirs[3] B11
 
-        pin butt_sel_desel[0] C6
-        pin butt_sel_desel[1] C5
+        pin butt_sel_desel[0] B36
+        pin butt_sel_desel[1] B37
         
-        pin butt_reset C45
-        pin butt_next_play C46
+        pin butt_reset B15
+        pin butt_next_play B14
     }
     
     // seven segment pins
