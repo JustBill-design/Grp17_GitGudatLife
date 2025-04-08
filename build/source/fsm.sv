@@ -451,6 +451,7 @@ module fsm (
                 end else begin
                     D_states_d = 8'h3;
                 end
+                D_debug_dff_d = 8'hff;
             end
             8'h5: begin
                 alufn = 6'h0;
@@ -2125,6 +2126,9 @@ module fsm (
                 D_states_d = 8'h9e;
             end
         endcase
+        if (rst) begin
+            D_states_d = 8'ha1;
+        end
     end
     
     

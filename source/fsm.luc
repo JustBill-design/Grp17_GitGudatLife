@@ -370,6 +370,8 @@ module fsm #(
                 } else {
                     states.d = States.A_UP_DIR_IDLE
                 }
+                // debugging
+                debug_dff.d = 255
             
             States.A_UP_COUNTP1:
                 alufn = b000000
@@ -2097,5 +2099,8 @@ module fsm #(
                 wdsel = b1001
                 states.d = States.CHECK_AT_LAST_PIXEL
         }   
+        if (rst) {
+            states.d = States.SET_BRAM_SELECTOR_TO_1
+        }
     }
 }
