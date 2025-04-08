@@ -28,17 +28,17 @@ module multi_seven_seg #(
         decimal_renderer.value = value
         
         case(decimal_renderer.digits[ctr.value]){
-            4h0: out = 12b011001001011
-            4h1: out = 12b000001001000
-            4h2: out = 12b010001010011
-            4h3: out = 12b010001011010
-            4h4: out = 12b001001011000
-            4h5: out = 12b011000011010
-            4h6: out = 12b011000011011
-            4h7: out = 12b010001001000
-            4h8: out = 12b011001011011
-            4h9: out = 12b011001011010
-            default: out = 12b000000000000
+            4h0: out = 12b111111101011
+            4h1: out = 12b100111101000
+            4h2: out = 12b110111110011
+            4h3: out = 12b110111111010
+            4h4: out = 12b101111111000
+            4h5: out = 12b111110111010
+            4h6: out = 12b111110111011
+            4h7: out = 12b110111101000
+            4h8: out = 12b111111111011
+            4h9: out = 12b111111111010
+            default: out = 12b100110100000
         }
         //test = ctr.value
         //case(test){
@@ -49,19 +49,18 @@ module multi_seven_seg #(
         //}
 
         if (ctr.value == b00){
-            out[5] = b1
+            out[5] = b0
         }
         else if (ctr.value == b01){
-            out[7] = b1
+            out[7] = b0
         }
 
         else if(ctr.value == b10){
-            out[8] = b1
+            out[8] = b0
         }
 
         else if(ctr.value == b11){
-            out[11] = b1
+            out[11] = b0
         }
-
     }
 }

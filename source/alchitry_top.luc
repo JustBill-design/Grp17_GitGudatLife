@@ -33,7 +33,7 @@ module alchitry_top (
 ) {
     const CLK = 9_000_000
 
-    alu alum
+    alu alum(#SIZE(32))
     
     sig rst
     sig fifo_rst

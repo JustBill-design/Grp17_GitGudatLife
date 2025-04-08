@@ -1,5 +1,5 @@
 module alu #(
-    SIZE = 32 : SIZE > 1
+    SIZE ~ 32 : SIZE > 1
 )(
     input a[SIZE],
     input b[SIZE],

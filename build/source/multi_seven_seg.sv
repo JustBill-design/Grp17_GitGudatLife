@@ -14,17 +14,17 @@ module multi_seven_seg #(
         output reg [11:0] out
     );
     localparam DIGIT_BITS = $clog2(DIGITS);
-    localparam _MP_SIZE_501645146 = DIGIT_BITS;
-    localparam _MP_DIV_501645146 = DIV;
-    localparam _MP_TOP_501645146 = DIGITS - 1'h1;
-    localparam _MP_UP_501645146 = 1'h1;
-    logic [(_MP_SIZE_501645146)-1:0] M_ctr_value;
+    localparam _MP_SIZE_1060508841 = DIGIT_BITS;
+    localparam _MP_DIV_1060508841 = DIV;
+    localparam _MP_TOP_1060508841 = DIGITS - 1'h1;
+    localparam _MP_UP_1060508841 = 1'h1;
+    logic [(_MP_SIZE_1060508841)-1:0] M_ctr_value;
     
     counter #(
-        .SIZE(_MP_SIZE_501645146),
-        .DIV(_MP_DIV_501645146),
-        .TOP(_MP_TOP_501645146),
-        .UP(_MP_UP_501645146)
+        .SIZE(_MP_SIZE_1060508841),
+        .DIV(_MP_DIV_1060508841),
+        .TOP(_MP_TOP_1060508841),
+        .UP(_MP_UP_1060508841)
     ) ctr (
         .clk(clk),
         .rst(rst),
@@ -32,14 +32,14 @@ module multi_seven_seg #(
     );
     
     
-    localparam _MP_DIGITS_352642842 = 3'h4;
-    localparam _MP_LEADING_ZEROS_352642842 = 1'h1;
+    localparam _MP_DIGITS_5772540 = 3'h4;
+    localparam _MP_LEADING_ZEROS_5772540 = 1'h1;
     logic [13:0] M_decimal_renderer_value;
     logic [3:0][3:0] M_decimal_renderer_digits;
     
     bin_to_dec #(
-        .DIGITS(_MP_DIGITS_352642842),
-        .LEADING_ZEROS(_MP_LEADING_ZEROS_352642842)
+        .DIGITS(_MP_DIGITS_5772540),
+        .LEADING_ZEROS(_MP_LEADING_ZEROS_5772540)
     ) decimal_renderer (
         .value(M_decimal_renderer_value),
         .digits(M_decimal_renderer_digits)
@@ -52,50 +52,50 @@ module multi_seven_seg #(
         
         case (M_decimal_renderer_digits[M_ctr_value])
             4'h0: begin
-                out = 12'h64b;
+                out = 12'hfeb;
             end
             4'h1: begin
-                out = 12'h48;
+                out = 12'h9e8;
             end
             4'h2: begin
-                out = 12'h453;
+                out = 12'hdf3;
             end
             4'h3: begin
-                out = 12'h45a;
+                out = 12'hdfa;
             end
             4'h4: begin
-                out = 12'h258;
+                out = 12'hbf8;
             end
             4'h5: begin
-                out = 12'h61a;
+                out = 12'hfba;
             end
             4'h6: begin
-                out = 12'h61b;
+                out = 12'hfbb;
             end
             4'h7: begin
-                out = 12'h448;
+                out = 12'hde8;
             end
             4'h8: begin
-                out = 12'h65b;
+                out = 12'hffb;
             end
             4'h9: begin
-                out = 12'h65a;
+                out = 12'hffa;
             end
             default: begin
-                out = 12'h0;
+                out = 12'h9a0;
             end
         endcase
         if (M_ctr_value == 2'h0) begin
-            out[3'h5] = 1'h1;
+            out[3'h5] = 1'h0;
         end else begin
             if (M_ctr_value == 2'h1) begin
-                out[3'h7] = 1'h1;
+                out[3'h7] = 1'h0;
             end else begin
                 if (M_ctr_value == 2'h2) begin
-                    out[4'h8] = 1'h1;
+                    out[4'h8] = 1'h0;
                 end else begin
                     if (M_ctr_value == 2'h3) begin
-                        out[4'hb] = 1'h1;
+                        out[4'hb] = 1'h0;
                     end
                 end
             end
