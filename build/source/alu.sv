@@ -16,17 +16,17 @@ module alu #(
         output reg n,
         output reg illop
     );
-    localparam _MP_SIZE_632369593 = SIZE;
-    logic [(_MP_SIZE_632369593)-1:0] M_adder_a;
-    logic [(_MP_SIZE_632369593)-1:0] M_adder_b;
+    localparam _MP_SIZE_425727616 = SIZE;
+    logic [(_MP_SIZE_425727616)-1:0] M_adder_a;
+    logic [(_MP_SIZE_425727616)-1:0] M_adder_b;
     logic [5:0] M_adder_alufn_signal;
-    logic [(_MP_SIZE_632369593)-1:0] M_adder_out;
+    logic [(_MP_SIZE_425727616)-1:0] M_adder_out;
     logic M_adder_z;
     logic M_adder_v;
     logic M_adder_n;
     
     adder #(
-        .SIZE(_MP_SIZE_632369593)
+        .SIZE(_MP_SIZE_425727616)
     ) adder (
         .a(M_adder_a),
         .b(M_adder_b),
@@ -55,7 +55,7 @@ module alu #(
     );
     
     
-    localparam _MP_SIZE_1004352363 = 6'h20;
+    localparam _MP_SIZE_2088728331 = 6'h20;
     logic [31:0] M_boolean_a;
     logic [31:0] M_boolean_b;
     logic [5:0] M_boolean_alufn;
@@ -63,7 +63,7 @@ module alu #(
     logic M_boolean_illop;
     
     boolean #(
-        .SIZE(_MP_SIZE_1004352363)
+        .SIZE(_MP_SIZE_2088728331)
     ) boolean (
         .a(M_boolean_a),
         .b(M_boolean_b),
@@ -134,46 +134,33 @@ module alu #(
         n = 1'h0;
         illop = 1'h0;
         
-        case (alufn[3'h5:3'h4])
-            2'h0: begin
-                
-                case (alufn[2'h3:1'h0])
-                    4'h0: begin
-                        temp_out = M_adder_out;
-                        v = M_adder_v;
-                    end
-                    4'h1: begin
-                        temp_out = M_adder_out;
-                        v = M_adder_v;
-                    end
-                    4'h2: begin
-                        temp_out = M_multiplier_mul;
-                    end
-                    4'h3: begin
-                        temp_out = M_divider_d;
-                    end
-                    default: begin
-                        temp_out = 1'h0;
-                        illop = 1'h1;
-                    end
-                endcase
-                n = temp_out[SIZE - 1'h1];
+        case (alufn)
+            6'h0: begin
+                temp_out = a + b;
             end
-            2'h1: begin
-                temp_out = M_boolean_bool;
-                illop = M_boolean_illop;
+            6'h1: begin
+                temp_out = a - b;
             end
-            2'h2: begin
-                temp_out = M_shifter_shift;
-                illop = M_shifter_illop;
+            6'h2: begin
+                temp_out = a * b;
             end
-            2'h3: begin
-                temp_out = M_compare_cmp;
-                illop = M_compare_illop;
+            6'h18: begin
+                temp_out = a & b;
+            end
+            6'h1e: begin
+                temp_out = a | b;
+            end
+            6'h33: begin
+                temp_out = a == b;
+            end
+            6'h35: begin
+                temp_out = a < b;
+            end
+            6'h37: begin
+                temp_out = a <= b;
             end
             default: begin
                 temp_out = 1'h0;
-                illop = 1'h1;
             end
         endcase
         z = ~(|temp_out);
