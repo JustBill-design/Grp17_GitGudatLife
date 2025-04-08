@@ -2126,9 +2126,6 @@ module fsm (
                 D_states_d = 8'h9e;
             end
         endcase
-        if (rst) begin
-            D_states_d = 8'ha1;
-        end
     end
     
     
