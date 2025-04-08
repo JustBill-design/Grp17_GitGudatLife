@@ -1,0 +1,23 @@
+// A ripple-carry-adder combinational logic unit
+module rca #(
+    SIZE ~ 32 : SIZE > 1
+)(
+    input a[SIZE],
+    input b[SIZE],
+    input cin,
+    output s[SIZE]
+) {
+    
+    fa fa[SIZE]
+    
+    always {
+        
+        fa.a = a
+        fa.b = b
+        fa.cin[0] = cin
+        repeat(i, SIZE-1,1){
+            fa.cin[i] = fa.cout[i-1]
+        }
+        s = fa.s;
+    }
+}

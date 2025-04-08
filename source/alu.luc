@@ -10,12 +10,12 @@ module alu #(
     output n,           // signals negative output
     output illop        // signals illegal op code
 ) {
-    alu_adder adder
-    alu_compare compare
-    alu_boolean boolean
-    alu_shifter shifter
-    //alu_multiplier multiplier
-    //alu_divider divider
+    adder adder(#SIZE(SIZE))
+    compare compare()
+    boolean boolean()
+    shifter shifter()
+    multiplier multiplier()
+    divider divider()
     sig temp_out[SIZE]
     always {
         adder.a = a
@@ -35,11 +35,11 @@ module alu #(
         shifter.b = b
         shifter.alufn = alufn
         
-        //multiplier.a = a
-        //multiplier.b = b
+        multiplier.a = a
+        multiplier.b = b
         
-        //divider.a = a
-        //divider.b = b
+        divider.a = a
+        divider.b = b
         
         // flags default to 0
         z = 0
@@ -47,55 +47,41 @@ module alu #(
         n = 0
         illop = 0
         
-        // case (alufn[5:4]) {
-        //     b00:
-        //         case(alufn[3:0]) {
-        //             b0000:
-        //                 temp_out = adder.out
-        //                 v = adder.v
-        //             b0001:
-        //                 temp_out = adder.out
-        //                 v = adder.v
-        //             //b0010:
-        //             //    temp_out = multiplier.mul
-        //                 temp_out = a*b
-        //             //b0011:
-        //             //    temp_out = divider.d
-        //                 temp_out = a/b
-        //             default:
-        //                 temp_out = 0
-        //                 illop = 1
-        //         }
-        //         n = temp_out[SIZE-1]
+        case (alufn[5:4]) {
+            b00:
+                case(alufn[3:0]) {
+                    b0000:
+                        temp_out = adder.out
+                        v = adder.v
+                    b0001:
+                        temp_out = adder.out
+                        v = adder.v
+                    b0010:
+                        temp_out = multiplier.mul
+                    b0011:
+                        temp_out = divider.d
+                    default:
+                        temp_out = 0
+                        illop = 1
+                }
+                n = temp_out[SIZE-1]
 
-        //     b01:
-        //         temp_out = boolean.bool
-        //         illop = boolean.illop
+            b01:
+                temp_out = boolean.bool
+                illop = boolean.illop
 
-        //     b10:
-        //         temp_out = shifter.shift
-        //         // v = shifter.v
-        //         illop = shifter.illop
+            b10:
+                temp_out = shifter.shift
+                //v = shifter.v
+                illop = shifter.illop
 
-        //     b11:
-        //         temp_out = compare.cmp
-        //         illop = compare.illop
+            b11:
+                temp_out = compare.cmp
+                illop = compare.illop
 
-        //     default:
-        //         temp_out = 0
-        //         illop = 1
-        // }
-        
-        case(alufn) {
-            b000000: temp_out = a+b
-            b000001: temp_out = a-b
-            b000010: temp_out = a*b
-            b011000: temp_out = a & b
-            b011110: temp_out = a|b
-            b110011: temp_out = a == b
-            b110101: temp_out = a < b
-            b110111: temp_out = a <= b
-            default: temp_out = 0
+            default:
+                temp_out = 0
+                illop = 1
         }
 
         // z flag also triggers for boolean outputs, 1 for true
