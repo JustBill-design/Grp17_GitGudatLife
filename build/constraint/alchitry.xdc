@@ -65,19 +65,19 @@ set_property PACKAGE_PIN D6 [get_ports {testpullup}]
 set_property IOSTANDARD LVCMOS33 [get_ports {testpullup}]
 set_property PULLDOWN true [get_ports {testpullup}]
 
-set_property PACKAGE_PIN D4 [get_ports {butt_dirs[0]}]
+set_property PACKAGE_PIN T15 [get_ports {butt_dirs[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {butt_dirs[0]}]
 set_property PULLDOWN true [get_ports {butt_dirs[0]}]
 
-set_property PACKAGE_PIN C4 [get_ports {butt_dirs[1]}]
+set_property PACKAGE_PIN T14 [get_ports {butt_dirs[1]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {butt_dirs[1]}]
 set_property PULLDOWN true [get_ports {butt_dirs[1]}]
 
-set_property PACKAGE_PIN F4 [get_ports {butt_dirs[2]}]
+set_property PACKAGE_PIN R16 [get_ports {butt_dirs[2]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {butt_dirs[2]}]
 set_property PULLDOWN true [get_ports {butt_dirs[2]}]
 
-set_property PACKAGE_PIN F3 [get_ports {butt_dirs[3]}]
+set_property PACKAGE_PIN R15 [get_ports {butt_dirs[3]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {butt_dirs[3]}]
 set_property PULLDOWN true [get_ports {butt_dirs[3]}]
 

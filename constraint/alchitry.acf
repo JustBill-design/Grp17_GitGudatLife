@@ -28,10 +28,10 @@ STANDARD(LVCMOS33) {
         pin testpullup B30
 
         // UP, DOWN, LEFT, RIGHT
-        pin butt_dirs[0] B39
-        pin butt_dirs[1] B40
-        pin butt_dirs[2] B12
-        pin butt_dirs[3] B11
+        pin butt_dirs[0] D43
+        pin butt_dirs[1] D42
+        pin butt_dirs[2] D8
+        pin butt_dirs[3] D9
 
         pin butt_sel_desel[0] B36
         pin butt_sel_desel[1] B37
