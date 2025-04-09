@@ -427,12 +427,13 @@ module fsm #(
                 debug_dff.d = 15
 
             States.A_UP_RESET_PIXEL:
-                asel = b0
+
                 bsel = b0000
                 ra1 = TARGET_PIXEL_ADDRESS
                 ra2 = TARGET_PIXEL_VALUE
                 bwa = rd1
                 bwd = rd2
+                bwe = b1
                 brsel = b00
                 states.d = States.A_UP_MOVE_CURSOR
                 // debugging

@@ -11,7 +11,7 @@ set xdcSources [list "./constraint/alchitry.xdc" "./constraint/au_props.xdc" ]
 read_xdc $xdcSources
 set_property STEPS.WRITE_BITSTREAM.ARGS.BIN_FILE true [get_runs impl_1]
 update_compile_order -fileset sources_1
-launch_runs -runs synth_1 -jobs 24
+launch_runs -runs synth_1 -jobs 12
 wait_on_run synth_1
-launch_runs impl_1 -to_step write_bitstream -jobs 24
+launch_runs impl_1 -to_step write_bitstream -jobs 12
 wait_on_run impl_1

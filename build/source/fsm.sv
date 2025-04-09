@@ -502,12 +502,12 @@ module fsm (
                 D_debug_dff_d = 4'hf;
             end
             8'ha: begin
-                asel = 1'h0;
                 bsel = 4'h0;
                 ra1 = 3'h4;
                 ra2 = 3'h5;
                 bwa = rd1;
                 bwd = rd2;
+                bwe = 1'h1;
                 brsel = 2'h0;
                 D_states_d = 8'hb;
                 D_debug_dff_d = 5'h10;
