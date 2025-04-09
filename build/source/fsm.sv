@@ -609,10 +609,9 @@ module fsm (
                 asel = 1'h0;
                 bsel = 4'h9;
                 ra1 = 3'h4;
-                if (~aluout[1'h0]) begin
-                    D_states_d = 8'h15;
-                end
                 if (aluout[1'h0]) begin
+                    D_states_d = 8'h15;
+                end else begin
                     D_states_d = 8'he;
                 end
                 D_debug_dff_d = 5'h19;

@@ -547,10 +547,10 @@ module fsm #(
                 asel = b0
                 bsel = b1001
                 ra1 = TARGET_PIXEL_ADDRESS
-                if(~aluout[0]){
+                if(aluout[0]){
                     states.d = States.A_DOWN_RESET_PIXEL
                 }
-                if(aluout[0]){
+                else{
                     states.d = States.A_DOWN_DIR_IDLE
                 }
                 // debugging
