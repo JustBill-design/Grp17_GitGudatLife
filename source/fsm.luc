@@ -135,12 +135,14 @@ module fsm #(
     }
     
     .clk(clk) {
+        edge_detector accel_edge(#RISE(1),#FALL(0))
         .rst(rst) {
             dff states[$width(States)](#INIT(States.SET_BRAM_SELECTOR_TO_1))
             dff decrease_timer
             dff game_tick
-            dff clk_selector[2]     // select clock for inputclk
-            dff accel_timer[4]      // timer for acceleration
+            dff accel_selector[2]   // select clock for inputclk
+            dff accel_timer[4]      // timer for interval between acceleration
+            dff accel[4]            // bits selected for acceleration
 
             // debug
             dff debug_dff[8]
@@ -172,7 +174,7 @@ module fsm #(
         // debugging
         debug_out = debug_dff.q
         debug_dff.d = 0
-        debug_out[7:6] = clk_selector.q
+        debug_out[7:6] = accel_selector.q
 
         // default connections, all 0 except brsel=b10 ----------------------
         states.d = states.q
@@ -218,17 +220,22 @@ module fsm #(
         }
         
         // input acceleration selector
-        case (clk_selector.q) {
-            b00: inputclk = timerclk
-            b01: inputclk = med_inputclk
-            b10: inputclk = gameclk
-            default: inputclk = timerclk
+        case (accel_selector.q) {
+            b00: accel_edge.in = accel.q[3]     // default slow
+            b01: accel_edge.in = accel.q[2]     // medium
+            b10: accel_edge.in = accel.q[0]     // fast
+            default: accel_edge.in = accel.q[3]
         }
         case (accel_timer.q) {
-            b0011: clk_selector.d = b01
-            b1111: clk_selector.d = b10
+            b0010: accel_selector.d = b01
+            b1000: accel_selector.d = b10
+            default: accel_selector.d = accel_selector.q
         }
-        accel_timer.d = accel_timer.q
+        if (med_inputclk) {
+            accel.d = accel.q + 1
+        } else {
+            accel.d = accel.q
+        }
 
         
         case (states.q) {
@@ -367,16 +374,18 @@ module fsm #(
             
             States.A_UP_CLK:
                 if (move_up_button) {
-                    if (inputclk) {
+                    if (accel_edge.out) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
                         }
+                        accel.d = 0
                         states.d = States.A_UP_DIR_IDLE
                     }
                 } else {
                     accel_timer.d = 0
-                    clk_selector.d = 0
+                    accel_selector.d = 0
+                    accel.d = 0
                     states.d = States.A_UP_DIR_IDLE
                 }
                 // debugging
@@ -511,6 +520,25 @@ module fsm #(
                 // debugging
                 debug_dff.d = 20
             
+            States.A_DOWN_CLK:
+                if (move_down_button) {
+                    if (accel_edge.out) {
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
+                        }
+                        accel.d = 0
+                        states.d = States.A_DOWN_DIR_IDLE
+                    }
+                } else {
+                    accel_timer.d = 0
+                    accel_selector.d = 0
+                    accel.d = 0
+                    states.d = States.A_DOWN_DIR_IDLE
+                }
+                // debugging
+                debug_dff.d = 255
+
             States.A_DOWN_COUNTP1:
                 alufn = b000000
                 asel = b0
@@ -560,7 +588,7 @@ module fsm #(
                     states.d = States.A_DOWN_RESET_PIXEL
                 }
                 else if (~aluout[0]){
-                    states.d = States.A_DOWN_DIR_IDLE
+                    states.d = States.A_DOWN_CLK
                 }
                 // debugging
                 debug_dff.d = 25
@@ -614,7 +642,7 @@ module fsm #(
                 bwe = b1
                 bwd = b11
                 brsel = b00
-                states.d = States.A_DOWN_DIR_IDLE
+                states.d = States.A_DOWN_CLK
                 // debugging
                 debug_dff.d = 29
             
@@ -640,7 +668,25 @@ module fsm #(
                 }
                 // debugging
                 debug_dff.d = 30
-            
+            States.A_LEFT_CLK:
+                if (move_left_button) {
+                    if (accel_edge.out) {
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
+                        }
+                        accel.d = 0
+                        states.d = States.A_LEFT_DIR_IDLE
+                    }
+                } else {
+                    accel_timer.d = 0
+                    accel_selector.d = 0
+                    accel.d = 0
+                    states.d = States.A_LEFT_DIR_IDLE
+                }
+                // debugging
+                debug_dff.d = 255
+
             States.A_LEFT_COUNTP1:
                 alufn = b000000
                 asel = b0
@@ -685,7 +731,7 @@ module fsm #(
                 asel = b0
                 ra1 = TARGET_PIXEL_ADDRESS
                 if(~|rd1[5:0]){
-                    states.d = States.A_LEFT_DIR_IDLE
+                    states.d = States.A_LEFT_CLK
                 }
                 else {
                     states.d = States.A_LEFT_RESET_PIXEL
@@ -742,7 +788,7 @@ module fsm #(
                 bwe = b1
                 bwd = b11
                 brsel = b00
-                states.d = States.A_LEFT_DIR_IDLE
+                states.d = States.A_LEFT_CLK
                 // debugging
                 debug_dff.d = 39
 
@@ -770,7 +816,23 @@ module fsm #(
                 // debugging
                 debug_dff.d = 40
 
-            
+            States.A_RIGHT_CLK:
+                if (move_right_button) {
+                    if (accel_edge.out) {
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
+                        }
+                        accel.d = 0
+                        states.d = States.A_RIGHT_DIR_IDLE
+                    }
+                } else {
+                    accel_timer.d = 0
+                    accel_selector.d = 0
+                    accel.d = 0
+                    states.d = States.A_RIGHT_DIR_IDLE
+                }
+
             States.A_RIGHT_COUNTP1:
                 alufn = b000000
                 asel = b0
@@ -815,7 +877,7 @@ module fsm #(
                 ra1 = TARGET_PIXEL_ADDRESS
                 
                 if(&rd1[5:0]){
-                    states.d = States.A_RIGHT_DIR_IDLE
+                    states.d = States.A_RIGHT_CLK
                 }
                 else {
                     states.d = States.A_RIGHT_RESET_PIXEL
@@ -872,7 +934,7 @@ module fsm #(
                 bwe = b1
                 bwd = b11
                 brsel = b00
-                states.d = States.A_RIGHT_DIR_IDLE
+                states.d = States.A_RIGHT_CLK
                 // debugging
                 debug_dff.d = 49
             
@@ -931,7 +993,24 @@ module fsm #(
                 }
                 // debugging
                 debug_dff.d = 51
-            
+
+            States.B_UP_CLK:
+                if (move_up_button) {
+                    if (accel_edge.out) {
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
+                        }
+                        accel.d = 0
+                        states.d = States.B_UP_DIR_IDLE
+                    }
+                } else {
+                    accel_timer.d = 0
+                    accel_selector.d = 0
+                    accel.d = 0
+                    states.d = States.B_UP_DIR_IDLE
+                }
+
             States.B_UP_COUNTP1:
                 alufn = b000000
                 asel = b0
@@ -981,7 +1060,7 @@ module fsm #(
                     states.d = States.B_UP_RESET_PIXEL
                 }
                 if(aluout[0]){
-                    states.d = States.B_UP_DIR_IDLE
+                    states.d = States.B_UP_CLK
                 }
                 // debugging
                 debug_dff.d = 56
@@ -1035,7 +1114,7 @@ module fsm #(
                 bwe = b1
                 bwd = b11
                 brsel = b00
-                states.d = States.B_UP_DIR_IDLE
+                states.d = States.B_UP_CLK
                 // debugging
                 debug_dff.d = 60
             
@@ -1063,7 +1142,24 @@ module fsm #(
                 }
                 // debugging
                 debug_dff.d = 61
-            
+
+            States.B_DOWN_CLK:
+                if (move_down_button) {
+                    if (accel_edge.out) {
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
+                        }
+                        accel.d = 0
+                        states.d = States.B_DOWN_DIR_IDLE
+                    }
+                } else {
+                    accel_timer.d = 0
+                    accel_selector.d = 0
+                    accel.d = 0
+                    states.d = States.B_DOWN_DIR_IDLE
+                }
+
             States.B_DOWN_COUNTP1:
                 alufn = b000000
                 asel = b0
@@ -1113,7 +1209,7 @@ module fsm #(
                     states.d = States.B_DOWN_RESET_PIXEL
                 }
                 if(aluout[0]){
-                    states.d = States.B_DOWN_DIR_IDLE
+                    states.d = States.B_DOWN_CLK
                 }
                 // debugging
                 debug_dff.d = 66
@@ -1166,7 +1262,7 @@ module fsm #(
                 bwe = b1
                 bwd = b11
                 brsel = b00
-                states.d = States.B_DOWN_DIR_IDLE
+                states.d = States.B_DOWN_CLK
                 // debugging
                 debug_dff.d = 70
             
@@ -1192,7 +1288,24 @@ module fsm #(
                 }
                 // debugging
                 debug_dff.d = 71
-            
+
+            States.B_LEFT_CLK:
+                if (move_left_button) {
+                    if (accel_edge.out) {
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
+                        }
+                        accel.d = 0
+                        states.d = States.B_LEFT_DIR_IDLE
+                    }
+                } else {
+                    accel_timer.d = 0
+                    accel_selector.d = 0
+                    accel.d = 0
+                    states.d = States.B_LEFT_DIR_IDLE
+                }
+
             States.B_LEFT_COUNTP1:
                 alufn = ADD
                 asel = b0
@@ -1236,7 +1349,7 @@ module fsm #(
             States.B_LEFT_CHECK_PIXEL:
                 ra1 = TARGET_PIXEL_ADDRESS
                 if(~|rd1[5:0]){
-                    states.d = States.B_LEFT_DIR_IDLE
+                    states.d = States.B_LEFT_CLK
                 }
                 else {
                     states.d = States.B_LEFT_RESET_PIXEL
@@ -1290,7 +1403,7 @@ module fsm #(
                 bwe = b1
                 bwd = b11
                 brsel = b00
-                states.d = States.B_LEFT_DIR_IDLE
+                states.d = States.B_LEFT_CLK
             
         // B INPUT RIGHT DIRECTION ------------------------------------------------------
 
@@ -1314,7 +1427,24 @@ module fsm #(
                 else {
                     states.d = States.B_INPUT_IDLE
                 }
-            
+
+            States.B_RIGHT_CLK:
+                if (move_right_button) {
+                    if (accel_edge.out) {
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
+                        }
+                        accel.d = 0
+                        states.d = States.B_RIGHT_DIR_IDLE
+                    }
+                } else {
+                    accel_timer.d = 0
+                    accel_selector.d = 0
+                    accel.d = 0
+                    states.d = States.B_RIGHT_DIR_IDLE
+                }
+
             States.B_RIGHT_COUNTP1:
                 alufn = b000000
                 asel = b0
@@ -1350,7 +1480,7 @@ module fsm #(
             States.B_RIGHT_CHECK_PIXEL:
                 ra1 = TARGET_PIXEL_ADDRESS
                 if(&rd1[5:0]){
-                    states.d = States.B_RIGHT_DIR_IDLE
+                    states.d = States.B_RIGHT_CLK
                 }
                 else {
                     states.d = States.B_RIGHT_RESET_PIXEL
@@ -1399,7 +1529,7 @@ module fsm #(
                 bwe = b1
                 bwd = b11
                 brsel = b00
-                states.d = States.B_RIGHT_DIR_IDLE
+                states.d = States.B_RIGHT_CLK
             // Game Idle Stage
             States.GAME_IDLE:
                 if(decrease_timer.q){

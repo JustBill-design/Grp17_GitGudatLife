@@ -227,11 +227,27 @@ module fsm (
     localparam E_States_COMPUTE = 8'hab;
     localparam E_States_AUTO = 8'hac;
     localparam E_States_IDLE = 8'had;
+    localparam _MP_RISE_1288003770 = 1'h1;
+    localparam _MP_FALL_1288003770 = 1'h0;
+    logic M_accel_edge_in;
+    logic M_accel_edge_out;
+    
+    edge_detector #(
+        .RISE(_MP_RISE_1288003770),
+        .FALL(_MP_FALL_1288003770)
+    ) accel_edge (
+        .clk(clk),
+        .in(M_accel_edge_in),
+        .out(M_accel_edge_out)
+    );
+    
+    
     logic [7:0] D_states_d, D_states_q = 8'ha1;
     logic D_decrease_timer_d, D_decrease_timer_q = 0;
     logic D_game_tick_d, D_game_tick_q = 0;
-    logic [1:0] D_clk_selector_d, D_clk_selector_q = 0;
+    logic [1:0] D_accel_selector_d, D_accel_selector_q = 0;
     logic [3:0] D_accel_timer_d, D_accel_timer_q = 0;
+    logic [3:0] D_accel_d, D_accel_q = 0;
     logic [7:0] D_debug_dff_d, D_debug_dff_q = 0;
     localparam ADD = 6'h0;
     localparam SUB = 6'h1;
@@ -253,12 +269,13 @@ module fsm (
         D_states_d = D_states_q;
         D_decrease_timer_d = D_decrease_timer_q;
         D_game_tick_d = D_game_tick_q;
-        D_clk_selector_d = D_clk_selector_q;
+        D_accel_selector_d = D_accel_selector_q;
+        D_accel_d = D_accel_q;
         D_accel_timer_d = D_accel_timer_q;
         
         debug_out = D_debug_dff_q;
         D_debug_dff_d = 1'h0;
-        debug_out[3'h7:3'h6] = D_clk_selector_q;
+        debug_out[3'h7:3'h6] = D_accel_selector_q;
         D_states_d = D_states_q;
         brsel = 2'h2;
         bra = 1'h0;
@@ -292,30 +309,37 @@ module fsm (
             D_game_tick_d = 1'h1;
         end
         
-        case (D_clk_selector_q)
+        case (D_accel_selector_q)
             2'h0: begin
-                inputclk = timerclk;
+                M_accel_edge_in = D_accel_q[2'h3];
             end
             2'h1: begin
-                inputclk = med_inputclk;
+                M_accel_edge_in = D_accel_q[2'h2];
             end
             2'h2: begin
-                inputclk = gameclk;
+                M_accel_edge_in = D_accel_q[1'h0];
             end
             default: begin
-                inputclk = timerclk;
+                M_accel_edge_in = D_accel_q[2'h3];
             end
         endcase
         
         case (D_accel_timer_q)
-            4'h3: begin
-                D_clk_selector_d = 2'h1;
+            4'h2: begin
+                D_accel_selector_d = 2'h1;
             end
-            4'hf: begin
-                D_clk_selector_d = 2'h2;
+            4'h8: begin
+                D_accel_selector_d = 2'h2;
+            end
+            default: begin
+                D_accel_selector_d = D_accel_selector_q;
             end
         endcase
-        D_accel_timer_d = D_accel_timer_q;
+        if (med_inputclk) begin
+            D_accel_d = D_accel_q + 1'h1;
+        end else begin
+            D_accel_d = D_accel_q;
+        end
         
         case (D_states_q)
             8'ha1: begin
@@ -449,7 +473,7 @@ module fsm (
             end
             8'h4: begin
                 if (move_up_button) begin
-                    if (inputclk) begin
+                    if (M_accel_edge_out) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -459,11 +483,13 @@ module fsm (
                                 D_accel_timer_d = D_accel_timer_q + 1'h1;
                             end
                         endcase
+                        D_accel_d = 1'h0;
                         D_states_d = 8'h3;
                     end
                 end else begin
                     D_accel_timer_d = 1'h0;
-                    D_clk_selector_d = 1'h0;
+                    D_accel_selector_d = 1'h0;
+                    D_accel_d = 1'h0;
                     D_states_d = 8'h3;
                 end
                 D_debug_dff_d = 8'hff;
@@ -583,6 +609,29 @@ module fsm (
                 end
                 D_debug_dff_d = 5'h14;
             end
+            8'hf: begin
+                if (move_down_button) begin
+                    if (M_accel_edge_out) begin
+                        
+                        case (D_accel_timer_q)
+                            4'hf: begin
+                                D_accel_timer_d = D_accel_timer_q;
+                            end
+                            default: begin
+                                D_accel_timer_d = D_accel_timer_q + 1'h1;
+                            end
+                        endcase
+                        D_accel_d = 1'h0;
+                        D_states_d = 8'he;
+                    end
+                end else begin
+                    D_accel_timer_d = 1'h0;
+                    D_accel_selector_d = 1'h0;
+                    D_accel_d = 1'h0;
+                    D_states_d = 8'he;
+                end
+                D_debug_dff_d = 8'hff;
+            end
             8'h10: begin
                 alufn = 6'h0;
                 asel = 1'h0;
@@ -628,7 +677,7 @@ module fsm (
                     D_states_d = 8'h15;
                 end else begin
                     if (~aluout[1'h0]) begin
-                        D_states_d = 8'he;
+                        D_states_d = 8'hf;
                     end
                 end
                 D_debug_dff_d = 5'h19;
@@ -677,7 +726,7 @@ module fsm (
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
-                D_states_d = 8'he;
+                D_states_d = 8'hf;
                 D_debug_dff_d = 5'h1d;
             end
             8'h19: begin
@@ -700,6 +749,29 @@ module fsm (
                     end
                 end
                 D_debug_dff_d = 5'h1e;
+            end
+            8'h1a: begin
+                if (move_left_button) begin
+                    if (M_accel_edge_out) begin
+                        
+                        case (D_accel_timer_q)
+                            4'hf: begin
+                                D_accel_timer_d = D_accel_timer_q;
+                            end
+                            default: begin
+                                D_accel_timer_d = D_accel_timer_q + 1'h1;
+                            end
+                        endcase
+                        D_accel_d = 1'h0;
+                        D_states_d = 8'h19;
+                    end
+                end else begin
+                    D_accel_timer_d = 1'h0;
+                    D_accel_selector_d = 1'h0;
+                    D_accel_d = 1'h0;
+                    D_states_d = 8'h19;
+                end
+                D_debug_dff_d = 8'hff;
             end
             8'h1b: begin
                 alufn = 6'h0;
@@ -741,7 +813,7 @@ module fsm (
                 asel = 1'h0;
                 ra1 = 3'h4;
                 if (~(|rd1[3'h5:1'h0])) begin
-                    D_states_d = 8'h19;
+                    D_states_d = 8'h1a;
                 end else begin
                     D_states_d = 8'h20;
                 end
@@ -791,7 +863,7 @@ module fsm (
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
-                D_states_d = 8'h19;
+                D_states_d = 8'h1a;
                 D_debug_dff_d = 6'h27;
             end
             8'h24: begin
@@ -814,6 +886,28 @@ module fsm (
                     end
                 end
                 D_debug_dff_d = 6'h28;
+            end
+            8'h25: begin
+                if (move_right_button) begin
+                    if (M_accel_edge_out) begin
+                        
+                        case (D_accel_timer_q)
+                            4'hf: begin
+                                D_accel_timer_d = D_accel_timer_q;
+                            end
+                            default: begin
+                                D_accel_timer_d = D_accel_timer_q + 1'h1;
+                            end
+                        endcase
+                        D_accel_d = 1'h0;
+                        D_states_d = 8'h24;
+                    end
+                end else begin
+                    D_accel_timer_d = 1'h0;
+                    D_accel_selector_d = 1'h0;
+                    D_accel_d = 1'h0;
+                    D_states_d = 8'h24;
+                end
             end
             8'h26: begin
                 alufn = 6'h0;
@@ -854,7 +948,7 @@ module fsm (
             8'h2a: begin
                 ra1 = 3'h4;
                 if ((&rd1[3'h5:1'h0])) begin
-                    D_states_d = 8'h24;
+                    D_states_d = 8'h25;
                 end else begin
                     D_states_d = 8'h2b;
                 end
@@ -904,7 +998,7 @@ module fsm (
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
-                D_states_d = 8'h24;
+                D_states_d = 8'h25;
                 D_debug_dff_d = 6'h31;
             end
             8'h2f: begin
@@ -964,6 +1058,28 @@ module fsm (
                 end
                 D_debug_dff_d = 6'h33;
             end
+            8'h33: begin
+                if (move_up_button) begin
+                    if (M_accel_edge_out) begin
+                        
+                        case (D_accel_timer_q)
+                            4'hf: begin
+                                D_accel_timer_d = D_accel_timer_q;
+                            end
+                            default: begin
+                                D_accel_timer_d = D_accel_timer_q + 1'h1;
+                            end
+                        endcase
+                        D_accel_d = 1'h0;
+                        D_states_d = 8'h32;
+                    end
+                end else begin
+                    D_accel_timer_d = 1'h0;
+                    D_accel_selector_d = 1'h0;
+                    D_accel_d = 1'h0;
+                    D_states_d = 8'h32;
+                end
+            end
             8'h34: begin
                 alufn = 6'h0;
                 asel = 1'h0;
@@ -1009,7 +1125,7 @@ module fsm (
                     D_states_d = 8'h39;
                 end
                 if (aluout[1'h0]) begin
-                    D_states_d = 8'h32;
+                    D_states_d = 8'h33;
                 end
                 D_debug_dff_d = 6'h38;
             end
@@ -1057,7 +1173,7 @@ module fsm (
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
-                D_states_d = 8'h32;
+                D_states_d = 8'h33;
                 D_debug_dff_d = 6'h3c;
             end
             8'h3d: begin
@@ -1082,6 +1198,28 @@ module fsm (
                     end
                 end
                 D_debug_dff_d = 6'h3d;
+            end
+            8'h3e: begin
+                if (move_down_button) begin
+                    if (M_accel_edge_out) begin
+                        
+                        case (D_accel_timer_q)
+                            4'hf: begin
+                                D_accel_timer_d = D_accel_timer_q;
+                            end
+                            default: begin
+                                D_accel_timer_d = D_accel_timer_q + 1'h1;
+                            end
+                        endcase
+                        D_accel_d = 1'h0;
+                        D_states_d = 8'h3d;
+                    end
+                end else begin
+                    D_accel_timer_d = 1'h0;
+                    D_accel_selector_d = 1'h0;
+                    D_accel_d = 1'h0;
+                    D_states_d = 8'h3d;
+                end
             end
             8'h3f: begin
                 alufn = 6'h0;
@@ -1128,7 +1266,7 @@ module fsm (
                     D_states_d = 8'h44;
                 end
                 if (aluout[1'h0]) begin
-                    D_states_d = 8'h3d;
+                    D_states_d = 8'h3e;
                 end
                 D_debug_dff_d = 7'h42;
             end
@@ -1175,7 +1313,7 @@ module fsm (
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
-                D_states_d = 8'h3d;
+                D_states_d = 8'h3e;
                 D_debug_dff_d = 7'h46;
             end
             8'h48: begin
@@ -1198,6 +1336,28 @@ module fsm (
                     end
                 end
                 D_debug_dff_d = 7'h47;
+            end
+            8'h49: begin
+                if (move_left_button) begin
+                    if (M_accel_edge_out) begin
+                        
+                        case (D_accel_timer_q)
+                            4'hf: begin
+                                D_accel_timer_d = D_accel_timer_q;
+                            end
+                            default: begin
+                                D_accel_timer_d = D_accel_timer_q + 1'h1;
+                            end
+                        endcase
+                        D_accel_d = 1'h0;
+                        D_states_d = 8'h48;
+                    end
+                end else begin
+                    D_accel_timer_d = 1'h0;
+                    D_accel_selector_d = 1'h0;
+                    D_accel_d = 1'h0;
+                    D_states_d = 8'h48;
+                end
             end
             8'h4a: begin
                 alufn = 6'h0;
@@ -1238,7 +1398,7 @@ module fsm (
             8'h4e: begin
                 ra1 = 3'h4;
                 if (~(|rd1[3'h5:1'h0])) begin
-                    D_states_d = 8'h48;
+                    D_states_d = 8'h49;
                 end else begin
                     D_states_d = 8'h4f;
                 end
@@ -1286,7 +1446,7 @@ module fsm (
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
-                D_states_d = 8'h48;
+                D_states_d = 8'h49;
             end
             8'h53: begin
                 alufn = 6'h1;
@@ -1308,6 +1468,28 @@ module fsm (
                             D_states_d = 8'h2f;
                         end
                     end
+                end
+            end
+            8'h54: begin
+                if (move_right_button) begin
+                    if (M_accel_edge_out) begin
+                        
+                        case (D_accel_timer_q)
+                            4'hf: begin
+                                D_accel_timer_d = D_accel_timer_q;
+                            end
+                            default: begin
+                                D_accel_timer_d = D_accel_timer_q + 1'h1;
+                            end
+                        endcase
+                        D_accel_d = 1'h0;
+                        D_states_d = 8'h53;
+                    end
+                end else begin
+                    D_accel_timer_d = 1'h0;
+                    D_accel_selector_d = 1'h0;
+                    D_accel_d = 1'h0;
+                    D_states_d = 8'h53;
                 end
             end
             8'h55: begin
@@ -1345,7 +1527,7 @@ module fsm (
             8'h59: begin
                 ra1 = 3'h4;
                 if ((&rd1[3'h5:1'h0])) begin
-                    D_states_d = 8'h53;
+                    D_states_d = 8'h54;
                 end else begin
                     D_states_d = 8'h5a;
                 end
@@ -1391,7 +1573,7 @@ module fsm (
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
-                D_states_d = 8'h53;
+                D_states_d = 8'h54;
             end
             8'h5e: begin
                 if (D_decrease_timer_q) begin
@@ -2163,15 +2345,17 @@ module fsm (
             D_states_q <= 8'ha1;
             D_decrease_timer_q <= 0;
             D_game_tick_q <= 0;
-            D_clk_selector_q <= 0;
+            D_accel_selector_q <= 0;
             D_accel_timer_q <= 0;
+            D_accel_q <= 0;
             D_debug_dff_q <= 0;
         end else begin
             D_states_q <= D_states_d;
             D_decrease_timer_q <= D_decrease_timer_d;
             D_game_tick_q <= D_game_tick_d;
-            D_clk_selector_q <= D_clk_selector_d;
+            D_accel_selector_q <= D_accel_selector_d;
             D_accel_timer_q <= D_accel_timer_d;
+            D_accel_q <= D_accel_d;
             D_debug_dff_q <= D_debug_dff_d;
         end
     end
