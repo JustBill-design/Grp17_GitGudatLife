@@ -127,7 +127,7 @@ module alu #(
         }
 
         // z flag also triggers for boolean outputs, 1 for true
-        z = ~| temp_out
+        z = ~|temp_out
         n = temp_out[SIZE-1]
         out = temp_out
     }
