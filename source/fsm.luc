@@ -550,7 +550,7 @@ module fsm #(
                 if(aluout[0]){
                     states.d = States.A_DOWN_RESET_PIXEL
                 }
-                else{
+                else if (~aluout[0]){
                     states.d = States.A_DOWN_DIR_IDLE
                 }
                 // debugging
