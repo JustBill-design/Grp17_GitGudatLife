@@ -523,6 +523,7 @@ module fsm (
                     ra1 = 3'h4;
                     wdsel = 4'h0;
                     wa = 3'h4;
+                    bwe = 1'h1;
                     bra = aluout;
                     brsel = 2'h1;
                     D_states_d = 8'hc;

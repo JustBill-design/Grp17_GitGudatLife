@@ -451,6 +451,7 @@ module fsm #(
                     ra1 = TARGET_PIXEL_ADDRESS
                     wdsel = b0000
                     wa = TARGET_PIXEL_ADDRESS
+                    bwe = b1
                     bra = aluout
                     brsel = b01
                     states.d = States.A_UP_STORE_PIXEL
