@@ -258,6 +258,7 @@ module fsm (
         
         debug_out = D_debug_dff_q;
         D_debug_dff_d = 1'h0;
+        debug_out[3'h7:3'h6] = D_clk_selector_q;
         D_states_d = D_states_q;
         brsel = 2'h2;
         bra = 1'h0;

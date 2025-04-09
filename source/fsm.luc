@@ -172,6 +172,7 @@ module fsm #(
         // debugging
         debug_out = debug_dff.q
         debug_dff.d = 0
+        debug_out[7:6] = clk_selector.q
 
         // default connections, all 0 except brsel=b10 ----------------------
         states.d = states.q
