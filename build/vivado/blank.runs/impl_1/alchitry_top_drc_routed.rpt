@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Wed Apr  9 03:48:39 2025
+| Date         : Wed Apr  9 08:47:59 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_drc -file alchitry_top_drc_routed.rpt -pb alchitry_top_drc_routed.pb -rpx alchitry_top_drc_routed.rpx
 | Design       : alchitry_top
@@ -24,14 +24,15 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max checks: <unlimited>
-             Checks found: 12
-+--------+----------+------------------------+--------+
-| Rule   | Severity | Description            | Checks |
-+--------+----------+------------------------+--------+
-| DPIP-1 | Warning  | Input pipelining       | 6      |
-| DPOP-1 | Warning  | PREG Output pipelining | 3      |
-| DPOP-2 | Warning  | MREG Output pipelining | 3      |
-+--------+----------+------------------------+--------+
+             Checks found: 13
++----------+----------+----------------------------+--------+
+| Rule     | Severity | Description                | Checks |
++----------+----------+----------------------------+--------+
+| DPIP-1   | Warning  | Input pipelining           | 6      |
+| DPOP-1   | Warning  | PREG Output pipelining     | 3      |
+| DPOP-2   | Warning  | MREG Output pipelining     | 3      |
+| PDRC-138 | Warning  | SLICE_PairEqSame_D6D5_WARN | 1      |
++----------+----------+----------------------------+--------+
 
 2. REPORT DETAILS
 -----------------
@@ -93,6 +94,11 @@ Related violations: <none>
 DPOP-2#3 Warning
 MREG Output pipelining  
 DSP alum/temp_out0__1 multiplier stage alum/temp_out0__1/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+Related violations: <none>
+
+PDRC-138#1 Warning
+SLICE_PairEqSame_D6D5_WARN  
+Luts D6LUT and D5LUT in use in site SLICE_X51Y53 with different equations without A6 pin connected to Global Logic High.
 Related violations: <none>
 
 

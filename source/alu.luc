@@ -48,8 +48,9 @@ module alu #(
         illop = 0
 
         case(alufn) {
-            b000000: temp_out = a+b
-            b000001: temp_out = a-b
+            // b000000: temp_out = a+b
+            b000000: temp_out = adder.out
+            b000001: temp_out = adder.out
             b000010: temp_out = a*b
             b011000: temp_out = a & b
             b011110: temp_out = a|b
