@@ -17,7 +17,7 @@ module adder #(
         z = 0
         v = 0
         
-        if (alufn_signal[0] == 1) {
+        if (alufn_signal[0]) {
             rca.b = ~b
             msb = ~b[SIZE-1]
         } else {
