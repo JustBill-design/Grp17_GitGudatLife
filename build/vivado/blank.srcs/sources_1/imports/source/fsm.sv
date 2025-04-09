@@ -227,14 +227,14 @@ module fsm (
     localparam E_States_COMPUTE = 8'hab;
     localparam E_States_AUTO = 8'hac;
     localparam E_States_IDLE = 8'had;
-    localparam _MP_RISE_436780196 = 1'h1;
-    localparam _MP_FALL_436780196 = 1'h0;
+    localparam _MP_RISE_1648701789 = 1'h1;
+    localparam _MP_FALL_1648701789 = 1'h0;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_436780196),
-        .FALL(_MP_FALL_436780196)
+        .RISE(_MP_RISE_1648701789),
+        .FALL(_MP_FALL_1648701789)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),

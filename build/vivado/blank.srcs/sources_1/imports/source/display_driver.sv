@@ -22,7 +22,7 @@ module display_driver #(
         output reg [(ADDRESS_SIZE)-1:0] address,
         output reg [(ADDRESS_SIZE + $clog2(MATRIX_WIDTH))-1:0] raw_pixel_idx
     );
-    localparam DIV = $clog2(CLK_FREQ) - 4'hf;
+    localparam DIV = $clog2(CLK_FREQ) - 5'h12;
     logic [2:0] pixeldata;
     logic [1:0] D_state_d, D_state_q = 0;
     logic [(DIV)-1:0] D_sclk_counter_d, D_sclk_counter_q = 0;
