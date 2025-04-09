@@ -461,6 +461,8 @@ module fsm (
                         D_states_d = 8'h3;
                     end
                 end else begin
+                    D_accel_timer_d = 1'h0;
+                    D_clk_selector_d = 1'h0;
                     D_states_d = 8'h3;
                 end
                 D_debug_dff_d = 8'hff;

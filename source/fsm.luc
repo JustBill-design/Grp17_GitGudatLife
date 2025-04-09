@@ -374,6 +374,8 @@ module fsm #(
                         states.d = States.A_UP_DIR_IDLE
                     }
                 } else {
+                    accel_timer.d = 0
+                    clk_selector.d = 0
                     states.d = States.A_UP_DIR_IDLE
                 }
                 // debugging
