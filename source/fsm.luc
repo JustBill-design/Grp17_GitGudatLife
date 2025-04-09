@@ -427,12 +427,13 @@ module fsm #(
                 debug_dff.d = 15
 
             States.A_UP_RESET_PIXEL:
-                asel = b0
+
                 bsel = b0000
                 ra1 = TARGET_PIXEL_ADDRESS
                 ra2 = TARGET_PIXEL_VALUE
                 bwa = rd1
                 bwd = rd2
+                bwe = b1
                 brsel = b00
                 states.d = States.A_UP_MOVE_CURSOR
                 // debugging
@@ -450,6 +451,7 @@ module fsm #(
                     ra1 = TARGET_PIXEL_ADDRESS
                     wdsel = b0000
                     wa = TARGET_PIXEL_ADDRESS
+                    bwe = b1
                     bra = aluout
                     brsel = b01
                     states.d = States.A_UP_STORE_PIXEL
@@ -543,12 +545,12 @@ module fsm #(
             States.A_DOWN_CHECK_PIXEL:
                 alufn = b110101
                 asel = b0
-                bsel = b0111
+                bsel = b1010
                 ra1 = TARGET_PIXEL_ADDRESS
-                if(~aluout[0]){
+                if(aluout[0]){
                     states.d = States.A_DOWN_RESET_PIXEL
                 }
-                if(aluout[0]){
+                else if (~aluout[0]){
                     states.d = States.A_DOWN_DIR_IDLE
                 }
                 // debugging
@@ -561,6 +563,7 @@ module fsm #(
                 ra2 = TARGET_PIXEL_VALUE
                 bwa = rd1
                 bwd = rd2
+                bwe = b1
                 brsel = b00
                 states.d = States.A_DOWN_MOVE_CURSOR
                 // debugging
@@ -577,6 +580,7 @@ module fsm #(
                     we = b1
                     ra1 = TARGET_PIXEL_ADDRESS
                     wdsel = b0000
+                    bwe = b1
                     wa = TARGET_PIXEL_ADDRESS
                     bra = aluout
                     brsel = b01
@@ -688,6 +692,7 @@ module fsm #(
                 bwa = rd1
                 bwd = rd2
                 brsel = b00
+                bwe = b1
                 states.d = States.A_LEFT_MOVE_CURSOR
                 // debugging
                 debug_dff.d = 36
@@ -706,6 +711,7 @@ module fsm #(
                     wa = TARGET_PIXEL_ADDRESS
                     bra = aluout
                     brsel = b01
+                    bwe = b1
 
                     states.d = States.A_LEFT_STORE_PIXEL
                 }
@@ -816,6 +822,7 @@ module fsm #(
                 bwa = rd1
                 bwd = rd2
                 brsel = b00
+                bwe = b1
                 states.d = States.A_RIGHT_MOVE_CURSOR
                 // debugging
                 debug_dff.d = 46
@@ -834,6 +841,7 @@ module fsm #(
                     wa = TARGET_PIXEL_ADDRESS
                     bra = aluout
                     brsel = b01
+                    bwe = b1
 
                     states.d = States.A_RIGHT_STORE_PIXEL
                 }
@@ -977,6 +985,7 @@ module fsm #(
                 bwa = rd1
                 bwd = rd2
                 brsel = b00
+                bwe = b1
                 states.d = States.B_UP_MOVE_CURSOR
                 // debugging
                 debug_dff.d = 57
@@ -992,6 +1001,7 @@ module fsm #(
                     we = b1
                     ra1 = TARGET_PIXEL_ADDRESS
                     wdsel = b0000
+                    bwe = b1
                     wa = TARGET_PIXEL_ADDRESS
                     bra = aluout
                     brsel = b01
@@ -1107,6 +1117,7 @@ module fsm #(
                 bwa = rd1
                 bwd = rd2
                 brsel = b00
+                bwe = b1
                 states.d = States.B_DOWN_MOVE_CURSOR
                 // debugging
                 debug_dff.d = 67
@@ -1232,6 +1243,7 @@ module fsm #(
                 bwa = rd1
                 bwd = rd2
                 brsel = b00
+                bwe = b1
                 states.d = States.B_LEFT_MOVE_CURSOR
                 // debugging
                 debug_dff.d = 77
@@ -1343,6 +1355,7 @@ module fsm #(
                 bwa = rd1
                 bwd = rd2
                 brsel = b00
+                bwe = b1
                 states.d = States.B_RIGHT_MOVE_CURSOR
             
             States.B_RIGHT_MOVE_CURSOR:
@@ -1359,6 +1372,7 @@ module fsm #(
                     wa = TARGET_PIXEL_ADDRESS
                     bra = aluout
                     brsel = b01
+                    bwe = b1
 
                     states.d = States.B_RIGHT_STORE_PIXEL
                 }
