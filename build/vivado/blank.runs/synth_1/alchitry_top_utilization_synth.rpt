@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Wed Apr  9 15:53:17 2025
+| Date         : Wed Apr  9 16:15:38 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb
 | Design       : alchitry_top
@@ -31,8 +31,8 @@ Table of Contents
 +----------------------------+------+-------+------------+-----------+-------+
 |          Site Type         | Used | Fixed | Prohibited | Available | Util% |
 +----------------------------+------+-------+------------+-----------+-------+
-| Slice LUTs*                | 2535 |     0 |          0 |     20800 | 12.19 |
-|   LUT as Logic             | 2523 |     0 |          0 |     20800 | 12.13 |
+| Slice LUTs*                | 3580 |     0 |          0 |     20800 | 17.21 |
+|   LUT as Logic             | 3568 |     0 |          0 |     20800 | 17.15 |
 |   LUT as Memory            |   12 |     0 |          0 |      9600 |  0.13 |
 |     LUT as Distributed RAM |   12 |     0 |            |           |       |
 |     LUT as Shift Register  |    0 |     0 |            |           |       |
@@ -83,12 +83,11 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 3. DSP
 ------
 
-+----------------+------+-------+------------+-----------+-------+
-|    Site Type   | Used | Fixed | Prohibited | Available | Util% |
-+----------------+------+-------+------------+-----------+-------+
-| DSPs           |    3 |     0 |          0 |        90 |  3.33 |
-|   DSP48E1 only |    3 |       |            |           |       |
-+----------------+------+-------+------------+-----------+-------+
++-----------+------+-------+------------+-----------+-------+
+| Site Type | Used | Fixed | Prohibited | Available | Util% |
++-----------+------+-------+------------+-----------+-------+
+| DSPs      |    0 |     0 |          0 |        90 |  0.00 |
++-----------+------+-------+------------+-----------+-------+
 
 
 4. IO and GT Specific
@@ -153,13 +152,13 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
+| LUT6     | 1485 |                 LUT |
 | LUT3     | 1207 |                 LUT |
-| LUT6     |  741 |                 LUT |
+| LUT2     |  702 |                 LUT |
 | FDRE     |  543 |        Flop & Latch |
-| CARRY4   |  382 |          CarryLogic |
-| LUT4     |  291 |                 LUT |
-| LUT5     |  286 |                 LUT |
-| LUT2     |  270 |                 LUT |
+| LUT4     |  425 |                 LUT |
+| CARRY4   |  378 |          CarryLogic |
+| LUT5     |  322 |                 LUT |
 | OBUF     |   69 |                  IO |
 | LUT1     |   53 |                 LUT |
 | RAMD32   |   12 |  Distributed Memory |
@@ -167,7 +166,6 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 | MUXF7    |    8 |               MuxFx |
 | FDPE     |    8 |        Flop & Latch |
 | FDSE     |    6 |        Flop & Latch |
-| DSP48E1  |    3 |    Block Arithmetic |
 | RAMB18E1 |    2 |        Block Memory |
 | BUFG     |    1 |               Clock |
 +----------+------+---------------------+
