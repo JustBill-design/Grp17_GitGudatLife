@@ -114,6 +114,17 @@ module alu #(
                 temp_out = 0
                 illop = 1
         }
+        case (alufn) {
+            
+            b110011: temp_out = a == b
+            // b110011: temp_out = compare.cmp
+
+            b110101: temp_out = a < b
+            // b110101: temp_out = compare.cmp
+
+            b110111: temp_out = a <= b
+            // b110111: temp_out = compare.cmp
+        }
 
         // z flag also triggers for boolean outputs, 1 for true
         z = ~| temp_out
