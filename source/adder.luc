@@ -28,7 +28,7 @@ module adder #(
         rca.cin = alufn_signal[0]
         
         out = rca.s
-        z = ~| rca.s
+        z = ~|rca.s
         v = (a[SIZE-1] & msb & ~rca.s[SIZE-1]) | (~a[SIZE-1] & ~msb & rca.s[SIZE-1])
         n = rca.s[SIZE-1]
     }
