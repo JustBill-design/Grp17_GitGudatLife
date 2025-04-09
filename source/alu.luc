@@ -66,14 +66,14 @@ module alu #(
             // b011110: temp_out = a|b
             b011110: temp_out = boolean.bool
 
-            // b110011: temp_out = a == b
-            b110011: temp_out = compare.cmp
+            b110011: temp_out = a == b
+            // b110011: temp_out = compare.cmp
 
-            // b110101: temp_out = a < b
-            b110101: temp_out = compare.cmp
+            b110101: temp_out = a < b
+            // b110101: temp_out = compare.cmp
 
-            // b110111: temp_out = a <= b
-            b110111: temp_out = compare.cmp
+            b110111: temp_out = a <= b
+            // b110111: temp_out = compare.cmp
 
             default: temp_out = 0
         }
