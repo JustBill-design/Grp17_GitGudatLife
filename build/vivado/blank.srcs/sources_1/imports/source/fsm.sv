@@ -56,185 +56,187 @@ module fsm (
     localparam E_States_A_INPUT_IDLE = 8'h0;
     localparam E_States_A_SET_PIXEL_A = 8'h1;
     localparam E_States_A_SET_PIXEL_0 = 8'h2;
-    localparam E_States_A_UP_DIR_IDLE = 8'h3;
-    localparam E_States_A_UP_CLK = 8'h4;
-    localparam E_States_A_UP_COUNTP1 = 8'h5;
-    localparam E_States_A_UP_SET_PIXEL_A = 8'h6;
-    localparam E_States_A_UP_COUNTM1 = 8'h7;
-    localparam E_States_A_UP_SET_PIXEL_0 = 8'h8;
-    localparam E_States_A_UP_CHECK_PIXEL = 8'h9;
-    localparam E_States_A_UP_RESET_PIXEL = 8'ha;
-    localparam E_States_A_UP_MOVE_CURSOR = 8'hb;
-    localparam E_States_A_UP_STORE_PIXEL = 8'hc;
-    localparam E_States_A_UP_CURSOR_COLOUR = 8'hd;
-    localparam E_States_A_DOWN_DIR_IDLE = 8'he;
-    localparam E_States_A_DOWN_CLK = 8'hf;
-    localparam E_States_A_DOWN_COUNTP1 = 8'h10;
-    localparam E_States_A_DOWN_SET_PIXEL_A = 8'h11;
-    localparam E_States_A_DOWN_COUNTM1 = 8'h12;
-    localparam E_States_A_DOWN_SET_PIXEL_0 = 8'h13;
-    localparam E_States_A_DOWN_CHECK_PIXEL = 8'h14;
-    localparam E_States_A_DOWN_RESET_PIXEL = 8'h15;
-    localparam E_States_A_DOWN_MOVE_CURSOR = 8'h16;
-    localparam E_States_A_DOWN_STORE_PIXEL = 8'h17;
-    localparam E_States_A_DOWN_CURSOR_COLOUR = 8'h18;
-    localparam E_States_A_LEFT_DIR_IDLE = 8'h19;
-    localparam E_States_A_LEFT_CLK = 8'h1a;
-    localparam E_States_A_LEFT_COUNTP1 = 8'h1b;
-    localparam E_States_A_LEFT_SET_PIXEL_A = 8'h1c;
-    localparam E_States_A_LEFT_COUNTM1 = 8'h1d;
-    localparam E_States_A_LEFT_SET_PIXEL_0 = 8'h1e;
-    localparam E_States_A_LEFT_CHECK_PIXEL = 8'h1f;
-    localparam E_States_A_LEFT_RESET_PIXEL = 8'h20;
-    localparam E_States_A_LEFT_MOVE_CURSOR = 8'h21;
-    localparam E_States_A_LEFT_STORE_PIXEL = 8'h22;
-    localparam E_States_A_LEFT_CURSOR_COLOUR = 8'h23;
-    localparam E_States_A_RIGHT_DIR_IDLE = 8'h24;
-    localparam E_States_A_RIGHT_CLK = 8'h25;
-    localparam E_States_A_RIGHT_COUNTP1 = 8'h26;
-    localparam E_States_A_RIGHT_SET_PIXEL_A = 8'h27;
-    localparam E_States_A_RIGHT_COUNTM1 = 8'h28;
-    localparam E_States_A_RIGHT_SET_PIXEL_0 = 8'h29;
-    localparam E_States_A_RIGHT_CHECK_PIXEL = 8'h2a;
-    localparam E_States_A_RIGHT_RESET_PIXEL = 8'h2b;
-    localparam E_States_A_RIGHT_MOVE_CURSOR = 8'h2c;
-    localparam E_States_A_RIGHT_STORE_PIXEL = 8'h2d;
-    localparam E_States_A_RIGHT_CURSOR_COLOUR = 8'h2e;
-    localparam E_States_B_INPUT_IDLE = 8'h2f;
-    localparam E_States_B_SET_PIXEL_B = 8'h30;
-    localparam E_States_B_SET_PIXEL_0 = 8'h31;
-    localparam E_States_B_UP_DIR_IDLE = 8'h32;
-    localparam E_States_B_UP_CLK = 8'h33;
-    localparam E_States_B_UP_COUNTP1 = 8'h34;
-    localparam E_States_B_UP_SET_PIXEL_B = 8'h35;
-    localparam E_States_B_UP_COUNTM1 = 8'h36;
-    localparam E_States_B_UP_SET_PIXEL_0 = 8'h37;
-    localparam E_States_B_UP_CHECK_PIXEL = 8'h38;
-    localparam E_States_B_UP_RESET_PIXEL = 8'h39;
-    localparam E_States_B_UP_MOVE_CURSOR = 8'h3a;
-    localparam E_States_B_UP_STORE_PIXEL = 8'h3b;
-    localparam E_States_B_UP_CURSOR_COLOUR = 8'h3c;
-    localparam E_States_B_DOWN_DIR_IDLE = 8'h3d;
-    localparam E_States_B_DOWN_CLK = 8'h3e;
-    localparam E_States_B_DOWN_COUNTP1 = 8'h3f;
-    localparam E_States_B_DOWN_SET_PIXEL_B = 8'h40;
-    localparam E_States_B_DOWN_COUNTM1 = 8'h41;
-    localparam E_States_B_DOWN_SET_PIXEL_0 = 8'h42;
-    localparam E_States_B_DOWN_CHECK_PIXEL = 8'h43;
-    localparam E_States_B_DOWN_RESET_PIXEL = 8'h44;
-    localparam E_States_B_DOWN_MOVE_CURSOR = 8'h45;
-    localparam E_States_B_DOWN_STORE_PIXEL = 8'h46;
-    localparam E_States_B_DOWN_CURSOR_COLOUR = 8'h47;
-    localparam E_States_B_LEFT_DIR_IDLE = 8'h48;
-    localparam E_States_B_LEFT_CLK = 8'h49;
-    localparam E_States_B_LEFT_COUNTP1 = 8'h4a;
-    localparam E_States_B_LEFT_SET_PIXEL_B = 8'h4b;
-    localparam E_States_B_LEFT_COUNTM1 = 8'h4c;
-    localparam E_States_B_LEFT_SET_PIXEL_0 = 8'h4d;
-    localparam E_States_B_LEFT_CHECK_PIXEL = 8'h4e;
-    localparam E_States_B_LEFT_RESET_PIXEL = 8'h4f;
-    localparam E_States_B_LEFT_MOVE_CURSOR = 8'h50;
-    localparam E_States_B_LEFT_STORE_PIXEL = 8'h51;
-    localparam E_States_B_LEFT_CURSOR_COLOUR = 8'h52;
-    localparam E_States_B_RIGHT_DIR_IDLE = 8'h53;
-    localparam E_States_B_RIGHT_CLK = 8'h54;
-    localparam E_States_B_RIGHT_COUNTP1 = 8'h55;
-    localparam E_States_B_RIGHT_SET_PIXEL_B = 8'h56;
-    localparam E_States_B_RIGHT_COUNTM1 = 8'h57;
-    localparam E_States_B_RIGHT_SET_PIXEL_0 = 8'h58;
-    localparam E_States_B_RIGHT_CHECK_PIXEL = 8'h59;
-    localparam E_States_B_RIGHT_RESET_PIXEL = 8'h5a;
-    localparam E_States_B_RIGHT_MOVE_CURSOR = 8'h5b;
-    localparam E_States_B_RIGHT_STORE_PIXEL = 8'h5c;
-    localparam E_States_B_RIGHT_CURSOR_COLOUR = 8'h5d;
-    localparam E_States_GAME_IDLE = 8'h5e;
-    localparam E_States_TIMER_M1 = 8'h5f;
-    localparam E_States_END_GAME = 8'h60;
-    localparam E_States_GAME_IDLE_READ_CURR_PIXEL_VALUE = 8'h61;
-    localparam E_States_RESET_SR_POINTERS = 8'h62;
-    localparam E_States_SR_00_ALL_SR = 8'h63;
-    localparam E_States_SR_LOAD_TOP_MID = 8'h64;
-    localparam E_States_SR_LOAD_TOP_RIGHT = 8'h65;
-    localparam E_States_SR_LOAD_MID_MID = 8'h66;
-    localparam E_States_SR_LOAD_MID_RIGHT = 8'h67;
-    localparam E_States_SR_LOAD_BOT_MID = 8'h68;
-    localparam E_States_SR_LOAD_BOT_RIGHT = 8'h69;
-    localparam E_States_READ_BRAM = 8'h6a;
-    localparam E_States_RB_LOAD_TOP_RIGHT = 8'h6b;
-    localparam E_States_RB_LOAD_MID_RIGHT = 8'h6c;
-    localparam E_States_RB_LOAD_BOT_RIGHT = 8'h6d;
-    localparam E_States_READ_CURR_PIXEL_VALUE_00_ALL_SR = 8'h6e;
-    localparam E_States_READ_TOP_LEFT = 8'h6f;
-    localparam E_States_TOP_LEFT_ADD_A_NEIGHBOUR = 8'h70;
-    localparam E_States_TOP_LEFT_ADD_B_NEIGHBOUR = 8'h71;
-    localparam E_States_READ_TOP_MID = 8'h72;
-    localparam E_States_TOP_MID_ADD_A_NEIGHBOUR = 8'h73;
-    localparam E_States_TOP_MID_ADD_B_NEIGHBOUR = 8'h74;
-    localparam E_States_READ_TOP_RIGHT = 8'h75;
-    localparam E_States_TOP_RIGHT_ADD_A_NEIGHBOUR = 8'h76;
-    localparam E_States_TOP_RIGHT_ADD_B_NEIGHBOUR = 8'h77;
-    localparam E_States_READ_MID_LEFT = 8'h78;
-    localparam E_States_MID_LEFT_ADD_A_NEIGHBOUR = 8'h79;
-    localparam E_States_MID_LEFT_ADD_B_NEIGHBOUR = 8'h7a;
-    localparam E_States_READ_TARGET_PIXEL = 8'h7b;
-    localparam E_States_READ_MID_RIGHT = 8'h7c;
-    localparam E_States_MID_RIGHT_ADD_A_NEIGHBOUR = 8'h7d;
-    localparam E_States_MID_RIGHT_ADD_B_NEIGHBOUR = 8'h7e;
-    localparam E_States_READ_BOT_LEFT = 8'h7f;
-    localparam E_States_BOT_LEFT_ADD_A_NEIGHBOUR = 8'h80;
-    localparam E_States_BOT_LEFT_ADD_B_NEIGHBOUR = 8'h81;
-    localparam E_States_READ_BOT_MID = 8'h82;
-    localparam E_States_BOT_MID_ADD_A_NEIGHBOUR = 8'h83;
-    localparam E_States_BOT_MID_ADD_B_NEIGHBOUR = 8'h84;
-    localparam E_States_READ_BOT_RIGHT = 8'h85;
-    localparam E_States_BOT_RIGHT_ADD_A_NEIGHBOUR = 8'h86;
-    localparam E_States_BOT_RIGHT_ADD_B_NEIGHBOUR = 8'h87;
-    localparam E_States_SR_EMPTY_READ_1 = 8'h88;
-    localparam E_States_SR_EMPTY_READ_2 = 8'h89;
-    localparam E_States_CHECK_NEIGHBOURS = 8'h8a;
-    localparam E_States_B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS = 8'h8b;
-    localparam E_States_B00_CHECK_A_NEIGHBOUR_EQ_3 = 8'h8c;
-    localparam E_States_B00_CHECK_B_NEIGHBOUR_EQ_3 = 8'h8d;
-    localparam E_States_B00_A_COUNTP1 = 8'h8e;
-    localparam E_States_B00_B_COUNTP1 = 8'h8f;
-    localparam E_States_B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR = 8'h90;
-    localparam E_States_B10_CHECK_B_NEIGHBOUR_EQ_2 = 8'h91;
-    localparam E_States_B10_CHECK_B_NEIGHBOUR_EQ_3 = 8'h92;
-    localparam E_States_B10_B_COUNTM1 = 8'h93;
-    localparam E_States_B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR = 8'h94;
-    localparam E_States_B01_CHECK_A_NEIGHBOUR_EQ_2 = 8'h95;
-    localparam E_States_B01_CHECK_A_NEIGHBOUR_EQ_3 = 8'h96;
-    localparam E_States_B01_A_COUNTM1 = 8'h97;
-    localparam E_States_SET_A = 8'h98;
-    localparam E_States_SET_B = 8'h99;
-    localparam E_States_SET_00 = 8'h9a;
-    localparam E_States_RESET_A_NEIGHBOUR = 8'h9b;
-    localparam E_States_RESET_B_NEIGHBOUR = 8'h9c;
-    localparam E_States_MOVE_PIXEL_ADDRESS = 8'h9d;
-    localparam E_States_CHECK_AT_LAST_PIXEL = 8'h9e;
-    localparam E_States_SWITCH_BRAM = 8'h9f;
-    localparam E_States_SET_PIXEL_TO_BEGINNING = 8'ha0;
-    localparam E_States_SET_BRAM_SELECTOR_TO_1 = 8'ha1;
-    localparam E_States_SET_PIXEL_ADDRESS_TO_0 = 8'ha2;
-    localparam E_States_ZERO_BRAM = 8'ha3;
-    localparam E_States_CHECK_ADDRESS_AT_MAX = 8'ha4;
-    localparam E_States_SET_TIMER = 8'ha5;
-    localparam E_States_RESET_PIXEL_VALUE = 8'ha6;
-    localparam E_States_RESET_PIXEL_ADDRESS = 8'ha7;
-    localparam E_States_SET_SELECTOR_PIXEL_STATE = 8'ha8;
-    localparam E_States_SET_B_LOW = 8'ha9;
-    localparam E_States_SET_B_HIGH = 8'haa;
-    localparam E_States_COMPUTE = 8'hab;
-    localparam E_States_AUTO = 8'hac;
-    localparam E_States_IDLE = 8'had;
-    localparam _MP_RISE_1648701789 = 1'h1;
-    localparam _MP_FALL_1648701789 = 1'h0;
+    localparam E_States_A_COUNTP1 = 8'h3;
+    localparam E_States_A_COUNTM1 = 8'h4;
+    localparam E_States_A_UP_DIR_IDLE = 8'h5;
+    localparam E_States_A_UP_CLK = 8'h6;
+    localparam E_States_A_UP_COUNTP1 = 8'h7;
+    localparam E_States_A_UP_SET_PIXEL_A = 8'h8;
+    localparam E_States_A_UP_COUNTM1 = 8'h9;
+    localparam E_States_A_UP_SET_PIXEL_0 = 8'ha;
+    localparam E_States_A_UP_CHECK_PIXEL = 8'hb;
+    localparam E_States_A_UP_RESET_PIXEL = 8'hc;
+    localparam E_States_A_UP_MOVE_CURSOR = 8'hd;
+    localparam E_States_A_UP_STORE_PIXEL = 8'he;
+    localparam E_States_A_UP_CURSOR_COLOUR = 8'hf;
+    localparam E_States_A_DOWN_DIR_IDLE = 8'h10;
+    localparam E_States_A_DOWN_CLK = 8'h11;
+    localparam E_States_A_DOWN_COUNTP1 = 8'h12;
+    localparam E_States_A_DOWN_SET_PIXEL_A = 8'h13;
+    localparam E_States_A_DOWN_COUNTM1 = 8'h14;
+    localparam E_States_A_DOWN_SET_PIXEL_0 = 8'h15;
+    localparam E_States_A_DOWN_CHECK_PIXEL = 8'h16;
+    localparam E_States_A_DOWN_RESET_PIXEL = 8'h17;
+    localparam E_States_A_DOWN_MOVE_CURSOR = 8'h18;
+    localparam E_States_A_DOWN_STORE_PIXEL = 8'h19;
+    localparam E_States_A_DOWN_CURSOR_COLOUR = 8'h1a;
+    localparam E_States_A_LEFT_DIR_IDLE = 8'h1b;
+    localparam E_States_A_LEFT_CLK = 8'h1c;
+    localparam E_States_A_LEFT_COUNTP1 = 8'h1d;
+    localparam E_States_A_LEFT_SET_PIXEL_A = 8'h1e;
+    localparam E_States_A_LEFT_COUNTM1 = 8'h1f;
+    localparam E_States_A_LEFT_SET_PIXEL_0 = 8'h20;
+    localparam E_States_A_LEFT_CHECK_PIXEL = 8'h21;
+    localparam E_States_A_LEFT_RESET_PIXEL = 8'h22;
+    localparam E_States_A_LEFT_MOVE_CURSOR = 8'h23;
+    localparam E_States_A_LEFT_STORE_PIXEL = 8'h24;
+    localparam E_States_A_LEFT_CURSOR_COLOUR = 8'h25;
+    localparam E_States_A_RIGHT_DIR_IDLE = 8'h26;
+    localparam E_States_A_RIGHT_CLK = 8'h27;
+    localparam E_States_A_RIGHT_COUNTP1 = 8'h28;
+    localparam E_States_A_RIGHT_SET_PIXEL_A = 8'h29;
+    localparam E_States_A_RIGHT_COUNTM1 = 8'h2a;
+    localparam E_States_A_RIGHT_SET_PIXEL_0 = 8'h2b;
+    localparam E_States_A_RIGHT_CHECK_PIXEL = 8'h2c;
+    localparam E_States_A_RIGHT_RESET_PIXEL = 8'h2d;
+    localparam E_States_A_RIGHT_MOVE_CURSOR = 8'h2e;
+    localparam E_States_A_RIGHT_STORE_PIXEL = 8'h2f;
+    localparam E_States_A_RIGHT_CURSOR_COLOUR = 8'h30;
+    localparam E_States_B_INPUT_IDLE = 8'h31;
+    localparam E_States_B_SET_PIXEL_B = 8'h32;
+    localparam E_States_B_SET_PIXEL_0 = 8'h33;
+    localparam E_States_B_UP_DIR_IDLE = 8'h34;
+    localparam E_States_B_UP_CLK = 8'h35;
+    localparam E_States_B_UP_COUNTP1 = 8'h36;
+    localparam E_States_B_UP_SET_PIXEL_B = 8'h37;
+    localparam E_States_B_UP_COUNTM1 = 8'h38;
+    localparam E_States_B_UP_SET_PIXEL_0 = 8'h39;
+    localparam E_States_B_UP_CHECK_PIXEL = 8'h3a;
+    localparam E_States_B_UP_RESET_PIXEL = 8'h3b;
+    localparam E_States_B_UP_MOVE_CURSOR = 8'h3c;
+    localparam E_States_B_UP_STORE_PIXEL = 8'h3d;
+    localparam E_States_B_UP_CURSOR_COLOUR = 8'h3e;
+    localparam E_States_B_DOWN_DIR_IDLE = 8'h3f;
+    localparam E_States_B_DOWN_CLK = 8'h40;
+    localparam E_States_B_DOWN_COUNTP1 = 8'h41;
+    localparam E_States_B_DOWN_SET_PIXEL_B = 8'h42;
+    localparam E_States_B_DOWN_COUNTM1 = 8'h43;
+    localparam E_States_B_DOWN_SET_PIXEL_0 = 8'h44;
+    localparam E_States_B_DOWN_CHECK_PIXEL = 8'h45;
+    localparam E_States_B_DOWN_RESET_PIXEL = 8'h46;
+    localparam E_States_B_DOWN_MOVE_CURSOR = 8'h47;
+    localparam E_States_B_DOWN_STORE_PIXEL = 8'h48;
+    localparam E_States_B_DOWN_CURSOR_COLOUR = 8'h49;
+    localparam E_States_B_LEFT_DIR_IDLE = 8'h4a;
+    localparam E_States_B_LEFT_CLK = 8'h4b;
+    localparam E_States_B_LEFT_COUNTP1 = 8'h4c;
+    localparam E_States_B_LEFT_SET_PIXEL_B = 8'h4d;
+    localparam E_States_B_LEFT_COUNTM1 = 8'h4e;
+    localparam E_States_B_LEFT_SET_PIXEL_0 = 8'h4f;
+    localparam E_States_B_LEFT_CHECK_PIXEL = 8'h50;
+    localparam E_States_B_LEFT_RESET_PIXEL = 8'h51;
+    localparam E_States_B_LEFT_MOVE_CURSOR = 8'h52;
+    localparam E_States_B_LEFT_STORE_PIXEL = 8'h53;
+    localparam E_States_B_LEFT_CURSOR_COLOUR = 8'h54;
+    localparam E_States_B_RIGHT_DIR_IDLE = 8'h55;
+    localparam E_States_B_RIGHT_CLK = 8'h56;
+    localparam E_States_B_RIGHT_COUNTP1 = 8'h57;
+    localparam E_States_B_RIGHT_SET_PIXEL_B = 8'h58;
+    localparam E_States_B_RIGHT_COUNTM1 = 8'h59;
+    localparam E_States_B_RIGHT_SET_PIXEL_0 = 8'h5a;
+    localparam E_States_B_RIGHT_CHECK_PIXEL = 8'h5b;
+    localparam E_States_B_RIGHT_RESET_PIXEL = 8'h5c;
+    localparam E_States_B_RIGHT_MOVE_CURSOR = 8'h5d;
+    localparam E_States_B_RIGHT_STORE_PIXEL = 8'h5e;
+    localparam E_States_B_RIGHT_CURSOR_COLOUR = 8'h5f;
+    localparam E_States_GAME_IDLE = 8'h60;
+    localparam E_States_TIMER_M1 = 8'h61;
+    localparam E_States_END_GAME = 8'h62;
+    localparam E_States_GAME_IDLE_READ_CURR_PIXEL_VALUE = 8'h63;
+    localparam E_States_RESET_SR_POINTERS = 8'h64;
+    localparam E_States_SR_00_ALL_SR = 8'h65;
+    localparam E_States_SR_LOAD_TOP_MID = 8'h66;
+    localparam E_States_SR_LOAD_TOP_RIGHT = 8'h67;
+    localparam E_States_SR_LOAD_MID_MID = 8'h68;
+    localparam E_States_SR_LOAD_MID_RIGHT = 8'h69;
+    localparam E_States_SR_LOAD_BOT_MID = 8'h6a;
+    localparam E_States_SR_LOAD_BOT_RIGHT = 8'h6b;
+    localparam E_States_READ_BRAM = 8'h6c;
+    localparam E_States_RB_LOAD_TOP_RIGHT = 8'h6d;
+    localparam E_States_RB_LOAD_MID_RIGHT = 8'h6e;
+    localparam E_States_RB_LOAD_BOT_RIGHT = 8'h6f;
+    localparam E_States_READ_CURR_PIXEL_VALUE_00_ALL_SR = 8'h70;
+    localparam E_States_READ_TOP_LEFT = 8'h71;
+    localparam E_States_TOP_LEFT_ADD_A_NEIGHBOUR = 8'h72;
+    localparam E_States_TOP_LEFT_ADD_B_NEIGHBOUR = 8'h73;
+    localparam E_States_READ_TOP_MID = 8'h74;
+    localparam E_States_TOP_MID_ADD_A_NEIGHBOUR = 8'h75;
+    localparam E_States_TOP_MID_ADD_B_NEIGHBOUR = 8'h76;
+    localparam E_States_READ_TOP_RIGHT = 8'h77;
+    localparam E_States_TOP_RIGHT_ADD_A_NEIGHBOUR = 8'h78;
+    localparam E_States_TOP_RIGHT_ADD_B_NEIGHBOUR = 8'h79;
+    localparam E_States_READ_MID_LEFT = 8'h7a;
+    localparam E_States_MID_LEFT_ADD_A_NEIGHBOUR = 8'h7b;
+    localparam E_States_MID_LEFT_ADD_B_NEIGHBOUR = 8'h7c;
+    localparam E_States_READ_TARGET_PIXEL = 8'h7d;
+    localparam E_States_READ_MID_RIGHT = 8'h7e;
+    localparam E_States_MID_RIGHT_ADD_A_NEIGHBOUR = 8'h7f;
+    localparam E_States_MID_RIGHT_ADD_B_NEIGHBOUR = 8'h80;
+    localparam E_States_READ_BOT_LEFT = 8'h81;
+    localparam E_States_BOT_LEFT_ADD_A_NEIGHBOUR = 8'h82;
+    localparam E_States_BOT_LEFT_ADD_B_NEIGHBOUR = 8'h83;
+    localparam E_States_READ_BOT_MID = 8'h84;
+    localparam E_States_BOT_MID_ADD_A_NEIGHBOUR = 8'h85;
+    localparam E_States_BOT_MID_ADD_B_NEIGHBOUR = 8'h86;
+    localparam E_States_READ_BOT_RIGHT = 8'h87;
+    localparam E_States_BOT_RIGHT_ADD_A_NEIGHBOUR = 8'h88;
+    localparam E_States_BOT_RIGHT_ADD_B_NEIGHBOUR = 8'h89;
+    localparam E_States_SR_EMPTY_READ_1 = 8'h8a;
+    localparam E_States_SR_EMPTY_READ_2 = 8'h8b;
+    localparam E_States_CHECK_NEIGHBOURS = 8'h8c;
+    localparam E_States_B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS = 8'h8d;
+    localparam E_States_B00_CHECK_A_NEIGHBOUR_EQ_3 = 8'h8e;
+    localparam E_States_B00_CHECK_B_NEIGHBOUR_EQ_3 = 8'h8f;
+    localparam E_States_B00_A_COUNTP1 = 8'h90;
+    localparam E_States_B00_B_COUNTP1 = 8'h91;
+    localparam E_States_B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR = 8'h92;
+    localparam E_States_B10_CHECK_B_NEIGHBOUR_EQ_2 = 8'h93;
+    localparam E_States_B10_CHECK_B_NEIGHBOUR_EQ_3 = 8'h94;
+    localparam E_States_B10_B_COUNTM1 = 8'h95;
+    localparam E_States_B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR = 8'h96;
+    localparam E_States_B01_CHECK_A_NEIGHBOUR_EQ_2 = 8'h97;
+    localparam E_States_B01_CHECK_A_NEIGHBOUR_EQ_3 = 8'h98;
+    localparam E_States_B01_A_COUNTM1 = 8'h99;
+    localparam E_States_SET_A = 8'h9a;
+    localparam E_States_SET_B = 8'h9b;
+    localparam E_States_SET_00 = 8'h9c;
+    localparam E_States_RESET_A_NEIGHBOUR = 8'h9d;
+    localparam E_States_RESET_B_NEIGHBOUR = 8'h9e;
+    localparam E_States_MOVE_PIXEL_ADDRESS = 8'h9f;
+    localparam E_States_CHECK_AT_LAST_PIXEL = 8'ha0;
+    localparam E_States_SWITCH_BRAM = 8'ha1;
+    localparam E_States_SET_PIXEL_TO_BEGINNING = 8'ha2;
+    localparam E_States_SET_BRAM_SELECTOR_TO_1 = 8'ha3;
+    localparam E_States_SET_PIXEL_ADDRESS_TO_0 = 8'ha4;
+    localparam E_States_ZERO_BRAM = 8'ha5;
+    localparam E_States_CHECK_ADDRESS_AT_MAX = 8'ha6;
+    localparam E_States_SET_TIMER = 8'ha7;
+    localparam E_States_RESET_PIXEL_VALUE = 8'ha8;
+    localparam E_States_RESET_PIXEL_ADDRESS = 8'ha9;
+    localparam E_States_SET_SELECTOR_PIXEL_STATE = 8'haa;
+    localparam E_States_SET_B_LOW = 8'hab;
+    localparam E_States_SET_B_HIGH = 8'hac;
+    localparam E_States_COMPUTE = 8'had;
+    localparam E_States_AUTO = 8'hae;
+    localparam E_States_IDLE = 8'haf;
+    localparam _MP_RISE_427073153 = 1'h1;
+    localparam _MP_FALL_427073153 = 1'h0;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_1648701789),
-        .FALL(_MP_FALL_1648701789)
+        .RISE(_MP_RISE_427073153),
+        .FALL(_MP_FALL_427073153)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -242,7 +244,7 @@ module fsm (
     );
     
     
-    logic [7:0] D_states_d, D_states_q = 8'ha1;
+    logic [7:0] D_states_d, D_states_q = 8'ha3;
     logic D_decrease_timer_d, D_decrease_timer_q = 0;
     logic D_game_tick_d, D_game_tick_q = 0;
     logic [1:0] D_accel_selector_d, D_accel_selector_q = 0;
@@ -342,21 +344,21 @@ module fsm (
         end
         
         case (D_states_q)
-            8'ha1: begin
+            8'ha3: begin
                 we = 1'h1;
                 wdsel = 4'h2;
                 wa = 3'h7;
-                D_states_d = 8'ha2;
+                D_states_d = 8'ha4;
                 D_debug_dff_d = 1'h1;
             end
-            8'ha2: begin
+            8'ha4: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h4;
-                D_states_d = 8'ha3;
+                D_states_d = 8'ha5;
                 D_debug_dff_d = 2'h2;
             end
-            8'ha3: begin
+            8'ha5: begin
                 alufn = 6'h0;
                 bsel = 4'h1;
                 we = 1'h1;
@@ -367,46 +369,46 @@ module fsm (
                 bwe = 1'h1;
                 bwd = 2'h0;
                 brsel = 2'h0;
-                D_states_d = 8'ha4;
+                D_states_d = 8'ha6;
                 D_debug_dff_d = 2'h3;
             end
-            8'ha4: begin
+            8'ha6: begin
                 alufn = 6'h35;
                 bsel = 4'h8;
                 ra1 = 3'h4;
                 
                 case (aluout[1'h0])
                     1'h1: begin
-                        D_states_d = 8'ha3;
+                        D_states_d = 8'ha5;
                     end
                     1'h0: begin
-                        D_states_d = 8'ha5;
+                        D_states_d = 8'ha7;
                     end
                 endcase
                 D_debug_dff_d = 3'h4;
             end
-            8'ha5: begin
+            8'ha7: begin
                 we = 1'h1;
                 wdsel = 4'h6;
                 wa = 3'h6;
-                D_states_d = 8'ha6;
+                D_states_d = 8'ha8;
                 D_debug_dff_d = 3'h5;
             end
-            8'ha6: begin
+            8'ha8: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
-                D_states_d = 8'ha7;
+                D_states_d = 8'ha9;
                 D_debug_dff_d = 3'h6;
             end
-            8'ha7: begin
+            8'ha9: begin
                 we = 1'h1;
                 wdsel = 4'h7;
                 wa = 3'h4;
-                D_states_d = 8'ha8;
+                D_states_d = 8'haa;
                 D_debug_dff_d = 3'h7;
             end
-            8'ha8: begin
+            8'haa: begin
                 bwa = 12'h860;
                 bwe = 1'h1;
                 bwd = 2'h3;
@@ -418,29 +420,29 @@ module fsm (
                 asel = 1'h0;
                 ra1 = 3'h5;
                 if (move_up_button) begin
-                    D_states_d = 8'h3;
+                    D_states_d = 8'h5;
                 end else begin
                     if (move_down_button) begin
-                        D_states_d = 8'he;
+                        D_states_d = 8'h10;
                     end else begin
                         if (move_left_button) begin
-                            D_states_d = 8'h19;
+                            D_states_d = 8'h1b;
                         end else begin
                             if (move_right_button) begin
-                                D_states_d = 8'h24;
+                                D_states_d = 8'h26;
                             end else begin
                                 if (select_button) begin
                                     if (~(|rd1[1'h1:1'h0])) begin
-                                        D_states_d = 8'h1;
+                                        D_states_d = 8'h3;
                                     end
                                 end else begin
                                     if (deselect_button) begin
                                         if (rd1[1'h0]) begin
-                                            D_states_d = 8'h2;
+                                            D_states_d = 8'h4;
                                         end
                                     end else begin
                                         if (next_start_button) begin
-                                            D_states_d = 8'h2f;
+                                            D_states_d = 8'h31;
                                         end
                                     end
                                 end
@@ -451,19 +453,55 @@ module fsm (
                 D_debug_dff_d = 4'h9;
             end
             8'h3: begin
+                alufn = 6'h0;
+                asel = 1'h0;
+                bsel = 4'h1;
+                we = 1'h1;
+                ra1 = 2'h2;
+                wdsel = 4'h0;
+                wa = 2'h2;
+                D_states_d = 8'h1;
+                D_debug_dff_d = 4'hb;
+            end
+            8'h1: begin
+                we = 1'h1;
+                wdsel = 4'h2;
+                wa = 3'h5;
+                D_states_d = 8'h0;
+                D_debug_dff_d = 7'h50;
+            end
+            8'h4: begin
+                alufn = 6'h1;
+                asel = 1'h0;
+                bsel = 4'h1;
+                we = 1'h1;
+                ra1 = 2'h2;
+                wdsel = 4'h0;
+                wa = 2'h2;
+                D_states_d = 8'h2;
+                D_debug_dff_d = 4'hd;
+            end
+            8'h2: begin
+                we = 1'h1;
+                wdsel = 4'h1;
+                wa = 3'h5;
+                D_states_d = 8'h0;
+                D_debug_dff_d = 7'h51;
+            end
+            8'h5: begin
                 ra1 = 3'h5;
                 if (select_button) begin
                     if (~(|rd1[1'h1:1'h0])) begin
-                        D_states_d = 8'h5;
+                        D_states_d = 8'h7;
                     end
                 end else begin
                     if (deselect_button) begin
                         if (rd1[1'h0]) begin
-                            D_states_d = 8'h7;
+                            D_states_d = 8'h9;
                         end
                     end else begin
                         if (move_up_button) begin
-                            D_states_d = 8'h9;
+                            D_states_d = 8'hb;
                         end else begin
                             D_states_d = 8'h0;
                         end
@@ -471,7 +509,7 @@ module fsm (
                 end
                 D_debug_dff_d = 4'ha;
             end
-            8'h4: begin
+            8'h6: begin
                 if (move_up_button) begin
                     if (M_accel_edge_out) begin
                         
@@ -484,17 +522,17 @@ module fsm (
                             end
                         endcase
                         D_accel_d = 1'h0;
-                        D_states_d = 8'h3;
+                        D_states_d = 8'h5;
                     end
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
                     D_accel_d = 1'h0;
-                    D_states_d = 8'h3;
+                    D_states_d = 8'h5;
                 end
                 D_debug_dff_d = 8'hff;
             end
-            8'h5: begin
+            8'h7: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -502,17 +540,17 @@ module fsm (
                 ra1 = 2'h2;
                 wdsel = 4'h0;
                 wa = 2'h2;
-                D_states_d = 8'h6;
+                D_states_d = 8'h8;
                 D_debug_dff_d = 4'hb;
             end
-            8'h6: begin
+            8'h8: begin
                 we = 1'h1;
                 wdsel = 4'h2;
                 wa = 3'h5;
-                D_states_d = 8'h9;
+                D_states_d = 8'hb;
                 D_debug_dff_d = 4'hc;
             end
-            8'h7: begin
+            8'h9: begin
                 alufn = 6'h1;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -520,29 +558,29 @@ module fsm (
                 ra1 = 2'h2;
                 wdsel = 4'h0;
                 wa = 2'h2;
-                D_states_d = 8'h8;
+                D_states_d = 8'ha;
                 D_debug_dff_d = 4'hd;
             end
-            8'h8: begin
+            8'ha: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
-                D_states_d = 8'h9;
+                D_states_d = 8'hb;
                 D_debug_dff_d = 4'he;
             end
-            8'h9: begin
+            8'hb: begin
                 alufn = 6'h35;
                 bsel = 4'h6;
                 ra1 = 3'h4;
                 if (~aluout[1'h0]) begin
-                    D_states_d = 8'ha;
+                    D_states_d = 8'hc;
                 end
                 if (aluout[1'h0]) begin
-                    D_states_d = 8'h4;
+                    D_states_d = 8'h6;
                 end
                 D_debug_dff_d = 4'hf;
             end
-            8'ha: begin
+            8'hc: begin
                 bsel = 4'h0;
                 ra1 = 3'h4;
                 ra2 = 3'h5;
@@ -550,12 +588,12 @@ module fsm (
                 bwd = rd2;
                 bwe = 1'h1;
                 brsel = 2'h0;
-                D_states_d = 8'hb;
+                D_states_d = 8'hd;
                 D_debug_dff_d = 5'h10;
             end
-            8'hb: begin
+            8'hd: begin
                 if (ddr) begin
-                    D_states_d = 8'hb;
+                    D_states_d = 8'hd;
                 end else begin
                     alufn = 6'h1;
                     asel = 1'h0;
@@ -567,41 +605,41 @@ module fsm (
                     bwe = 1'h1;
                     bra = aluout;
                     brsel = 2'h1;
-                    D_states_d = 8'hc;
+                    D_states_d = 8'he;
                 end
                 D_debug_dff_d = 5'h11;
             end
-            8'hc: begin
+            8'he: begin
                 we = 1'h1;
                 wdsel = 4'h4;
                 wa = 3'h5;
-                D_states_d = 8'hd;
+                D_states_d = 8'hf;
                 D_debug_dff_d = 5'h12;
             end
-            8'hd: begin
+            8'hf: begin
                 asel = 1'h0;
                 ra1 = 3'h4;
                 bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
-                D_states_d = 8'h4;
+                D_states_d = 8'h6;
                 D_debug_dff_d = 5'h13;
             end
-            8'he: begin
+            8'h10: begin
                 ra1 = 3'h5;
                 if (select_button) begin
                     if (~(|rd1[1'h1:1'h0])) begin
-                        D_states_d = 8'h10;
+                        D_states_d = 8'h12;
                     end
                 end else begin
                     if (deselect_button) begin
                         if (rd1[1'h0]) begin
-                            D_states_d = 8'h12;
+                            D_states_d = 8'h14;
                         end
                     end else begin
                         if (move_down_button) begin
-                            D_states_d = 8'h14;
+                            D_states_d = 8'h16;
                         end else begin
                             D_states_d = 8'h0;
                         end
@@ -609,7 +647,7 @@ module fsm (
                 end
                 D_debug_dff_d = 5'h14;
             end
-            8'hf: begin
+            8'h11: begin
                 if (move_down_button) begin
                     if (M_accel_edge_out) begin
                         
@@ -622,17 +660,17 @@ module fsm (
                             end
                         endcase
                         D_accel_d = 1'h0;
-                        D_states_d = 8'he;
+                        D_states_d = 8'h10;
                     end
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
                     D_accel_d = 1'h0;
-                    D_states_d = 8'he;
+                    D_states_d = 8'h10;
                 end
                 D_debug_dff_d = 8'hff;
             end
-            8'h10: begin
+            8'h12: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -640,17 +678,17 @@ module fsm (
                 ra1 = 2'h2;
                 wdsel = 4'h0;
                 wa = 2'h2;
-                D_states_d = 8'h11;
+                D_states_d = 8'h13;
                 D_debug_dff_d = 5'h15;
             end
-            8'h11: begin
+            8'h13: begin
                 we = 1'h1;
                 wdsel = 4'h2;
                 wa = 3'h5;
-                D_states_d = 8'h14;
+                D_states_d = 8'h16;
                 D_debug_dff_d = 5'h16;
             end
-            8'h12: begin
+            8'h14: begin
                 alufn = 5'h1;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -658,31 +696,31 @@ module fsm (
                 ra1 = 2'h2;
                 wdsel = 4'h0;
                 wa = 2'h2;
-                D_states_d = 8'h13;
+                D_states_d = 8'h15;
                 D_debug_dff_d = 5'h17;
             end
-            8'h13: begin
+            8'h15: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
-                D_states_d = 8'h14;
+                D_states_d = 8'h16;
                 D_debug_dff_d = 5'h18;
             end
-            8'h14: begin
+            8'h16: begin
                 alufn = 6'h35;
                 asel = 1'h0;
                 bsel = 4'ha;
                 ra1 = 3'h4;
                 if (aluout[1'h0]) begin
-                    D_states_d = 8'h15;
+                    D_states_d = 8'h17;
                 end else begin
                     if (~aluout[1'h0]) begin
-                        D_states_d = 8'hf;
+                        D_states_d = 8'h11;
                     end
                 end
                 D_debug_dff_d = 5'h19;
             end
-            8'h15: begin
+            8'h17: begin
                 asel = 1'h0;
                 bsel = 4'h0;
                 ra1 = 3'h4;
@@ -691,12 +729,12 @@ module fsm (
                 bwd = rd2;
                 bwe = 1'h1;
                 brsel = 2'h0;
-                D_states_d = 8'h16;
+                D_states_d = 8'h18;
                 D_debug_dff_d = 5'h1a;
             end
-            8'h16: begin
+            8'h18: begin
                 if (ddr) begin
-                    D_states_d = 8'h16;
+                    D_states_d = 8'h18;
                 end else begin
                     alufn = 6'h0;
                     asel = 1'h0;
@@ -708,41 +746,41 @@ module fsm (
                     wa = 3'h4;
                     bra = aluout;
                     brsel = 2'h1;
-                    D_states_d = 8'h17;
+                    D_states_d = 8'h19;
                 end
                 D_debug_dff_d = 5'h1b;
             end
-            8'h17: begin
+            8'h19: begin
                 we = 1'h1;
                 wdsel = 4'h4;
                 wa = 3'h5;
-                D_states_d = 8'h18;
+                D_states_d = 8'h1a;
                 D_debug_dff_d = 5'h1c;
             end
-            8'h18: begin
+            8'h1a: begin
                 asel = 1'h0;
                 ra1 = 3'h4;
                 bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
-                D_states_d = 8'hf;
+                D_states_d = 8'h11;
                 D_debug_dff_d = 5'h1d;
             end
-            8'h19: begin
+            8'h1b: begin
                 ra1 = 3'h5;
                 if (select_button) begin
                     if (~(|rd1[1'h1:1'h0])) begin
-                        D_states_d = 8'h1b;
+                        D_states_d = 8'h1d;
                     end
                 end else begin
                     if (deselect_button) begin
                         if (rd1[1'h0]) begin
-                            D_states_d = 8'h1d;
+                            D_states_d = 8'h1f;
                         end
                     end else begin
                         if (move_left_button) begin
-                            D_states_d = 8'h1f;
+                            D_states_d = 8'h21;
                         end else begin
                             D_states_d = 8'h0;
                         end
@@ -750,7 +788,7 @@ module fsm (
                 end
                 D_debug_dff_d = 5'h1e;
             end
-            8'h1a: begin
+            8'h1c: begin
                 if (move_left_button) begin
                     if (M_accel_edge_out) begin
                         
@@ -763,17 +801,17 @@ module fsm (
                             end
                         endcase
                         D_accel_d = 1'h0;
-                        D_states_d = 8'h19;
+                        D_states_d = 8'h1b;
                     end
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
                     D_accel_d = 1'h0;
-                    D_states_d = 8'h19;
+                    D_states_d = 8'h1b;
                 end
                 D_debug_dff_d = 8'hff;
             end
-            8'h1b: begin
+            8'h1d: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -781,17 +819,17 @@ module fsm (
                 ra1 = 2'h2;
                 wdsel = 4'h0;
                 wa = 2'h2;
-                D_states_d = 8'h1c;
+                D_states_d = 8'h1e;
                 D_debug_dff_d = 5'h1f;
             end
-            8'h1c: begin
+            8'h1e: begin
                 we = 1'h1;
                 wdsel = 4'h2;
                 wa = 3'h5;
-                D_states_d = 8'h1f;
+                D_states_d = 8'h21;
                 D_debug_dff_d = 6'h20;
             end
-            8'h1d: begin
+            8'h1f: begin
                 alufn = 6'h1;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -799,27 +837,27 @@ module fsm (
                 ra1 = 2'h2;
                 wdsel = 4'h0;
                 wa = 2'h2;
-                D_states_d = 8'h1e;
+                D_states_d = 8'h20;
                 D_debug_dff_d = 6'h21;
             end
-            8'h1e: begin
+            8'h20: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
-                D_states_d = 8'h1f;
+                D_states_d = 8'h21;
                 D_debug_dff_d = 6'h22;
             end
-            8'h1f: begin
+            8'h21: begin
                 asel = 1'h0;
                 ra1 = 3'h4;
                 if (~(|rd1[3'h5:1'h0])) begin
-                    D_states_d = 8'h1a;
+                    D_states_d = 8'h1c;
                 end else begin
-                    D_states_d = 8'h20;
+                    D_states_d = 8'h22;
                 end
                 D_debug_dff_d = 6'h23;
             end
-            8'h20: begin
+            8'h22: begin
                 asel = 1'h0;
                 bsel = 4'h0;
                 ra1 = 3'h4;
@@ -828,12 +866,12 @@ module fsm (
                 bwd = rd2;
                 brsel = 2'h0;
                 bwe = 1'h1;
-                D_states_d = 8'h21;
+                D_states_d = 8'h23;
                 D_debug_dff_d = 6'h24;
             end
-            8'h21: begin
+            8'h23: begin
                 if (ddr) begin
-                    D_states_d = 8'h21;
+                    D_states_d = 8'h23;
                 end else begin
                     alufn = 6'h1;
                     asel = 1'h0;
@@ -845,41 +883,41 @@ module fsm (
                     bra = aluout;
                     brsel = 2'h1;
                     bwe = 1'h1;
-                    D_states_d = 8'h22;
+                    D_states_d = 8'h24;
                 end
                 D_debug_dff_d = 6'h25;
             end
-            8'h22: begin
+            8'h24: begin
                 we = 1'h1;
                 wdsel = 4'h4;
                 wa = 3'h5;
-                D_states_d = 8'h23;
+                D_states_d = 8'h25;
                 D_debug_dff_d = 6'h26;
             end
-            8'h23: begin
+            8'h25: begin
                 asel = 1'h0;
                 ra1 = 3'h4;
                 bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
-                D_states_d = 8'h1a;
+                D_states_d = 8'h1c;
                 D_debug_dff_d = 6'h27;
             end
-            8'h24: begin
+            8'h26: begin
                 ra1 = 3'h5;
                 if (select_button) begin
                     if (~(|rd1[1'h1:1'h0])) begin
-                        D_states_d = 8'h26;
+                        D_states_d = 8'h28;
                     end
                 end else begin
                     if (deselect_button) begin
                         if (rd1[1'h0]) begin
-                            D_states_d = 8'h28;
+                            D_states_d = 8'h2a;
                         end
                     end else begin
                         if (move_right_button) begin
-                            D_states_d = 8'h2a;
+                            D_states_d = 8'h2c;
                         end else begin
                             D_states_d = 8'h0;
                         end
@@ -887,7 +925,7 @@ module fsm (
                 end
                 D_debug_dff_d = 6'h28;
             end
-            8'h25: begin
+            8'h27: begin
                 if (move_right_button) begin
                     if (M_accel_edge_out) begin
                         
@@ -900,16 +938,16 @@ module fsm (
                             end
                         endcase
                         D_accel_d = 1'h0;
-                        D_states_d = 8'h24;
+                        D_states_d = 8'h26;
                     end
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
                     D_accel_d = 1'h0;
-                    D_states_d = 8'h24;
+                    D_states_d = 8'h26;
                 end
             end
-            8'h26: begin
+            8'h28: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -917,17 +955,17 @@ module fsm (
                 ra1 = 2'h2;
                 wdsel = 4'h0;
                 wa = 2'h2;
-                D_states_d = 8'h27;
+                D_states_d = 8'h29;
                 D_debug_dff_d = 6'h29;
             end
-            8'h27: begin
+            8'h29: begin
                 we = 1'h1;
                 wdsel = 4'h2;
                 wa = 3'h5;
-                D_states_d = 8'h2a;
+                D_states_d = 8'h2c;
                 D_debug_dff_d = 6'h2a;
             end
-            8'h28: begin
+            8'h2a: begin
                 alufn = 6'h1;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -935,26 +973,26 @@ module fsm (
                 ra1 = 2'h2;
                 wdsel = 4'h0;
                 wa = 2'h2;
-                D_states_d = 8'h29;
+                D_states_d = 8'h2b;
                 D_debug_dff_d = 6'h2b;
             end
-            8'h29: begin
+            8'h2b: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
-                D_states_d = 8'h2a;
+                D_states_d = 8'h2c;
                 D_debug_dff_d = 6'h2c;
             end
-            8'h2a: begin
+            8'h2c: begin
                 ra1 = 3'h4;
                 if ((&rd1[3'h5:1'h0])) begin
-                    D_states_d = 8'h25;
+                    D_states_d = 8'h27;
                 end else begin
-                    D_states_d = 8'h2b;
+                    D_states_d = 8'h2d;
                 end
                 D_debug_dff_d = 6'h2d;
             end
-            8'h2b: begin
+            8'h2d: begin
                 asel = 1'h0;
                 bsel = 4'h0;
                 ra1 = 3'h4;
@@ -963,12 +1001,12 @@ module fsm (
                 bwd = rd2;
                 brsel = 2'h0;
                 bwe = 1'h1;
-                D_states_d = 8'h2c;
+                D_states_d = 8'h2e;
                 D_debug_dff_d = 6'h2e;
             end
-            8'h2c: begin
+            8'h2e: begin
                 if (ddr) begin
-                    D_states_d = 8'h2c;
+                    D_states_d = 8'h2e;
                 end else begin
                     alufn = 6'h0;
                     asel = 1'h0;
@@ -980,54 +1018,54 @@ module fsm (
                     bra = aluout;
                     brsel = 2'h1;
                     bwe = 1'h1;
-                    D_states_d = 8'h2d;
+                    D_states_d = 8'h2f;
                 end
                 D_debug_dff_d = 6'h2f;
             end
-            8'h2d: begin
+            8'h2f: begin
                 we = 1'h1;
                 wdsel = 4'h4;
                 wa = 3'h5;
-                D_states_d = 8'h2e;
+                D_states_d = 8'h30;
                 D_debug_dff_d = 6'h30;
             end
-            8'h2e: begin
+            8'h30: begin
                 asel = 1'h0;
                 ra1 = 3'h4;
                 bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
-                D_states_d = 8'h25;
+                D_states_d = 8'h27;
                 D_debug_dff_d = 6'h31;
             end
-            8'h2f: begin
+            8'h31: begin
                 asel = 1'h0;
                 ra1 = 3'h5;
                 if (move_up_button) begin
-                    D_states_d = 8'h32;
+                    D_states_d = 8'h34;
                 end else begin
                     if (move_down_button) begin
-                        D_states_d = 8'h3d;
+                        D_states_d = 8'h3f;
                     end else begin
                         if (move_left_button) begin
-                            D_states_d = 8'h48;
+                            D_states_d = 8'h4a;
                         end else begin
                             if (move_right_button) begin
-                                D_states_d = 8'h53;
+                                D_states_d = 8'h55;
                             end else begin
                                 if (select_button) begin
                                     if (~(|rd1[1'h1:1'h0])) begin
-                                        D_states_d = 8'h30;
+                                        D_states_d = 8'h32;
                                     end
                                 end else begin
                                     if (deselect_button) begin
                                         if (rd1[1'h1]) begin
-                                            D_states_d = 8'h31;
+                                            D_states_d = 8'h33;
                                         end
                                     end else begin
                                         if (next_start_button) begin
-                                            D_states_d = 8'h5e;
+                                            D_states_d = 8'h60;
                                         end
                                     end
                                 end
@@ -1037,28 +1075,28 @@ module fsm (
                 end
                 D_debug_dff_d = 6'h32;
             end
-            8'h32: begin
+            8'h34: begin
                 ra1 = 3'h5;
                 if (select_button) begin
                     if (~(|rd1[1'h1:1'h0])) begin
-                        D_states_d = 8'h34;
+                        D_states_d = 8'h36;
                     end
                 end else begin
                     if (deselect_button) begin
                         if (rd1[1'h1]) begin
-                            D_states_d = 8'h36;
+                            D_states_d = 8'h38;
                         end
                     end else begin
                         if (move_up_button) begin
-                            D_states_d = 8'h38;
+                            D_states_d = 8'h3a;
                         end else begin
-                            D_states_d = 8'h2f;
+                            D_states_d = 8'h31;
                         end
                     end
                 end
                 D_debug_dff_d = 6'h33;
             end
-            8'h33: begin
+            8'h35: begin
                 if (move_up_button) begin
                     if (M_accel_edge_out) begin
                         
@@ -1071,16 +1109,16 @@ module fsm (
                             end
                         endcase
                         D_accel_d = 1'h0;
-                        D_states_d = 8'h32;
+                        D_states_d = 8'h34;
                     end
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
                     D_accel_d = 1'h0;
-                    D_states_d = 8'h32;
+                    D_states_d = 8'h34;
                 end
             end
-            8'h34: begin
+            8'h36: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -1088,17 +1126,17 @@ module fsm (
                 ra1 = 2'h3;
                 wdsel = 4'h0;
                 wa = 2'h3;
-                D_states_d = 8'h35;
+                D_states_d = 8'h37;
                 D_debug_dff_d = 6'h34;
             end
-            8'h35: begin
+            8'h37: begin
                 we = 1'h1;
                 wdsel = 4'h2;
                 wa = 3'h5;
-                D_states_d = 8'h38;
+                D_states_d = 8'h3a;
                 D_debug_dff_d = 6'h35;
             end
-            8'h36: begin
+            8'h38: begin
                 alufn = 6'h1;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -1106,30 +1144,30 @@ module fsm (
                 ra1 = 2'h3;
                 wdsel = 4'h0;
                 wa = 2'h3;
-                D_states_d = 8'h37;
+                D_states_d = 8'h39;
                 D_debug_dff_d = 6'h36;
             end
-            8'h37: begin
+            8'h39: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
-                D_states_d = 8'h38;
+                D_states_d = 8'h3a;
                 D_debug_dff_d = 6'h37;
             end
-            8'h38: begin
+            8'h3a: begin
                 alufn = 6'h35;
                 asel = 1'h0;
                 bsel = 4'h6;
                 ra1 = 3'h4;
                 if (~aluout[1'h0]) begin
-                    D_states_d = 8'h39;
+                    D_states_d = 8'h3b;
                 end
                 if (aluout[1'h0]) begin
-                    D_states_d = 8'h33;
+                    D_states_d = 8'h35;
                 end
                 D_debug_dff_d = 6'h38;
             end
-            8'h39: begin
+            8'h3b: begin
                 asel = 1'h0;
                 bsel = 4'h0;
                 ra1 = 3'h4;
@@ -1138,12 +1176,12 @@ module fsm (
                 bwd = rd2;
                 brsel = 2'h0;
                 bwe = 1'h1;
-                D_states_d = 8'h3a;
+                D_states_d = 8'h3c;
                 D_debug_dff_d = 6'h39;
             end
-            8'h3a: begin
+            8'h3c: begin
                 if (ddr) begin
-                    D_states_d = 8'h3a;
+                    D_states_d = 8'h3c;
                 end else begin
                     alufn = 6'h1;
                     asel = 1'h0;
@@ -1155,51 +1193,51 @@ module fsm (
                     wa = 3'h4;
                     bra = aluout;
                     brsel = 2'h1;
-                    D_states_d = 8'h3b;
+                    D_states_d = 8'h3d;
                 end
                 D_debug_dff_d = 6'h3a;
             end
-            8'h3b: begin
+            8'h3d: begin
                 we = 1'h1;
                 wdsel = 4'h4;
                 wa = 3'h5;
-                D_states_d = 8'h3c;
+                D_states_d = 8'h3e;
                 D_debug_dff_d = 6'h3b;
             end
-            8'h3c: begin
+            8'h3e: begin
                 asel = 1'h0;
                 ra1 = 3'h4;
                 bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
-                D_states_d = 8'h33;
+                D_states_d = 8'h35;
                 D_debug_dff_d = 6'h3c;
             end
-            8'h3d: begin
+            8'h3f: begin
                 alufn = 6'h1;
                 asel = 1'h0;
                 ra1 = 3'h5;
                 if (select_button) begin
                     if (~(|rd1[1'h1:1'h0])) begin
-                        D_states_d = 8'h3f;
+                        D_states_d = 8'h41;
                     end
                 end else begin
                     if (deselect_button) begin
                         if (rd1[1'h1]) begin
-                            D_states_d = 8'h41;
+                            D_states_d = 8'h43;
                         end
                     end else begin
                         if (move_down_button) begin
-                            D_states_d = 8'h43;
+                            D_states_d = 8'h45;
                         end else begin
-                            D_states_d = 8'h2f;
+                            D_states_d = 8'h31;
                         end
                     end
                 end
                 D_debug_dff_d = 6'h3d;
             end
-            8'h3e: begin
+            8'h40: begin
                 if (move_down_button) begin
                     if (M_accel_edge_out) begin
                         
@@ -1212,16 +1250,16 @@ module fsm (
                             end
                         endcase
                         D_accel_d = 1'h0;
-                        D_states_d = 8'h3d;
+                        D_states_d = 8'h3f;
                     end
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
                     D_accel_d = 1'h0;
-                    D_states_d = 8'h3d;
+                    D_states_d = 8'h3f;
                 end
             end
-            8'h3f: begin
+            8'h41: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -1229,17 +1267,17 @@ module fsm (
                 ra1 = 2'h3;
                 wdsel = 4'h0;
                 wa = 2'h3;
-                D_states_d = 8'h40;
+                D_states_d = 8'h42;
                 D_debug_dff_d = 6'h3e;
             end
-            8'h40: begin
+            8'h42: begin
                 we = 1'h1;
                 wdsel = 4'h2;
                 wa = 3'h5;
-                D_states_d = 8'h43;
+                D_states_d = 8'h45;
                 D_debug_dff_d = 6'h3f;
             end
-            8'h41: begin
+            8'h43: begin
                 alufn = 6'h1;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -1247,30 +1285,30 @@ module fsm (
                 ra1 = 2'h3;
                 wdsel = 4'h0;
                 wa = 2'h3;
-                D_states_d = 8'h42;
+                D_states_d = 8'h44;
                 D_debug_dff_d = 7'h40;
             end
-            8'h42: begin
+            8'h44: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
-                D_states_d = 8'h43;
+                D_states_d = 8'h45;
                 D_debug_dff_d = 7'h41;
             end
-            8'h43: begin
+            8'h45: begin
                 alufn = 6'h35;
                 asel = 1'h0;
                 bsel = 4'h7;
                 ra1 = 3'h4;
                 if (~aluout[1'h0]) begin
-                    D_states_d = 8'h44;
+                    D_states_d = 8'h46;
                 end
                 if (aluout[1'h0]) begin
-                    D_states_d = 8'h3e;
+                    D_states_d = 8'h40;
                 end
                 D_debug_dff_d = 7'h42;
             end
-            8'h44: begin
+            8'h46: begin
                 asel = 1'h0;
                 bsel = 4'h0;
                 ra1 = 3'h4;
@@ -1279,12 +1317,12 @@ module fsm (
                 bwd = rd2;
                 brsel = 2'h0;
                 bwe = 1'h1;
-                D_states_d = 8'h45;
+                D_states_d = 8'h47;
                 D_debug_dff_d = 7'h43;
             end
-            8'h45: begin
+            8'h47: begin
                 if (ddr) begin
-                    D_states_d = 8'h45;
+                    D_states_d = 8'h47;
                 end else begin
                     alufn = 6'h0;
                     asel = 1'h0;
@@ -1295,49 +1333,49 @@ module fsm (
                     wa = 3'h4;
                     bra = aluout;
                     brsel = 2'h1;
-                    D_states_d = 8'h46;
+                    D_states_d = 8'h48;
                 end
                 D_debug_dff_d = 7'h44;
             end
-            8'h46: begin
+            8'h48: begin
                 we = 1'h1;
                 wdsel = 4'h4;
                 wa = 3'h5;
-                D_states_d = 8'h47;
+                D_states_d = 8'h49;
                 D_debug_dff_d = 7'h45;
             end
-            8'h47: begin
+            8'h49: begin
                 asel = 1'h0;
                 ra1 = 3'h4;
                 bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
-                D_states_d = 8'h3e;
+                D_states_d = 8'h40;
                 D_debug_dff_d = 7'h46;
             end
-            8'h48: begin
+            8'h4a: begin
                 ra1 = 3'h5;
                 if (select_button) begin
                     if (~(|rd1[1'h1:1'h0])) begin
-                        D_states_d = 8'h4a;
+                        D_states_d = 8'h4c;
                     end
                 end else begin
                     if (deselect_button) begin
                         if (rd1[1'h1]) begin
-                            D_states_d = 8'h4c;
+                            D_states_d = 8'h4e;
                         end
                     end else begin
                         if (move_left_button) begin
-                            D_states_d = 8'h4e;
+                            D_states_d = 8'h50;
                         end else begin
-                            D_states_d = 8'h2f;
+                            D_states_d = 8'h31;
                         end
                     end
                 end
                 D_debug_dff_d = 7'h47;
             end
-            8'h49: begin
+            8'h4b: begin
                 if (move_left_button) begin
                     if (M_accel_edge_out) begin
                         
@@ -1350,16 +1388,16 @@ module fsm (
                             end
                         endcase
                         D_accel_d = 1'h0;
-                        D_states_d = 8'h48;
+                        D_states_d = 8'h4a;
                     end
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
                     D_accel_d = 1'h0;
-                    D_states_d = 8'h48;
+                    D_states_d = 8'h4a;
                 end
             end
-            8'h4a: begin
+            8'h4c: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -1367,17 +1405,17 @@ module fsm (
                 ra1 = 2'h3;
                 wdsel = 4'h0;
                 wa = 2'h3;
-                D_states_d = 8'h4b;
+                D_states_d = 8'h4d;
                 D_debug_dff_d = 7'h48;
             end
-            8'h4b: begin
+            8'h4d: begin
                 we = 1'h1;
                 wdsel = 4'h2;
                 wa = 3'h5;
-                D_states_d = 8'h4e;
+                D_states_d = 8'h50;
                 D_debug_dff_d = 7'h49;
             end
-            8'h4c: begin
+            8'h4e: begin
                 alufn = 6'h1;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -1385,26 +1423,26 @@ module fsm (
                 ra1 = 2'h3;
                 wdsel = 4'h0;
                 wa = 2'h3;
-                D_states_d = 8'h4d;
+                D_states_d = 8'h4f;
                 D_debug_dff_d = 7'h4a;
             end
-            8'h4d: begin
+            8'h4f: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
-                D_states_d = 8'h4e;
+                D_states_d = 8'h50;
                 D_debug_dff_d = 7'h4b;
             end
-            8'h4e: begin
+            8'h50: begin
                 ra1 = 3'h4;
                 if (~(|rd1[3'h5:1'h0])) begin
-                    D_states_d = 8'h49;
+                    D_states_d = 8'h4b;
                 end else begin
-                    D_states_d = 8'h4f;
+                    D_states_d = 8'h51;
                 end
                 D_debug_dff_d = 7'h4c;
             end
-            8'h4f: begin
+            8'h51: begin
                 asel = 1'h0;
                 bsel = 4'h0;
                 ra1 = 3'h4;
@@ -1413,12 +1451,12 @@ module fsm (
                 bwd = rd2;
                 brsel = 2'h0;
                 bwe = 1'h1;
-                D_states_d = 8'h50;
+                D_states_d = 8'h52;
                 D_debug_dff_d = 7'h4d;
             end
-            8'h50: begin
+            8'h52: begin
                 if (ddr) begin
-                    D_states_d = 8'h50;
+                    D_states_d = 8'h52;
                 end else begin
                     alufn = 6'h1;
                     asel = 1'h0;
@@ -1429,48 +1467,48 @@ module fsm (
                     wa = 3'h4;
                     bra = aluout;
                     brsel = 2'h1;
-                    D_states_d = 8'h51;
+                    D_states_d = 8'h53;
                 end
                 D_debug_dff_d = 7'h4e;
             end
-            8'h51: begin
+            8'h53: begin
                 we = 1'h1;
                 wdsel = 4'h4;
                 wa = 3'h5;
-                D_states_d = 8'h52;
+                D_states_d = 8'h54;
             end
-            8'h52: begin
+            8'h54: begin
                 asel = 1'h0;
                 ra1 = 3'h4;
                 bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
-                D_states_d = 8'h49;
+                D_states_d = 8'h4b;
             end
-            8'h53: begin
+            8'h55: begin
                 alufn = 6'h1;
                 asel = 1'h0;
                 ra1 = 3'h5;
                 if (select_button) begin
                     if (~(|rd1[1'h1:1'h0])) begin
-                        D_states_d = 8'h55;
+                        D_states_d = 8'h57;
                     end
                 end else begin
                     if (deselect_button) begin
                         if (rd1[1'h1]) begin
-                            D_states_d = 8'h57;
+                            D_states_d = 8'h59;
                         end
                     end else begin
                         if (move_right_button) begin
-                            D_states_d = 8'h59;
+                            D_states_d = 8'h5b;
                         end else begin
-                            D_states_d = 8'h2f;
+                            D_states_d = 8'h31;
                         end
                     end
                 end
             end
-            8'h54: begin
+            8'h56: begin
                 if (move_right_button) begin
                     if (M_accel_edge_out) begin
                         
@@ -1483,33 +1521,17 @@ module fsm (
                             end
                         endcase
                         D_accel_d = 1'h0;
-                        D_states_d = 8'h53;
+                        D_states_d = 8'h55;
                     end
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
                     D_accel_d = 1'h0;
-                    D_states_d = 8'h53;
+                    D_states_d = 8'h55;
                 end
             end
-            8'h55: begin
-                alufn = 6'h0;
-                asel = 1'h0;
-                bsel = 4'h1;
-                we = 1'h1;
-                ra1 = 2'h3;
-                wdsel = 4'h0;
-                wa = 2'h3;
-                D_states_d = 8'h56;
-            end
-            8'h56: begin
-                we = 1'h1;
-                wdsel = 4'h2;
-                wa = 3'h5;
-                D_states_d = 8'h59;
-            end
             8'h57: begin
-                alufn = 6'h1;
+                alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
                 we = 1'h1;
@@ -1520,19 +1542,35 @@ module fsm (
             end
             8'h58: begin
                 we = 1'h1;
-                wdsel = 4'h1;
+                wdsel = 4'h2;
                 wa = 3'h5;
-                D_states_d = 8'h59;
+                D_states_d = 8'h5b;
             end
             8'h59: begin
-                ra1 = 3'h4;
-                if ((&rd1[3'h5:1'h0])) begin
-                    D_states_d = 8'h54;
-                end else begin
-                    D_states_d = 8'h5a;
-                end
+                alufn = 6'h1;
+                asel = 1'h0;
+                bsel = 4'h1;
+                we = 1'h1;
+                ra1 = 2'h3;
+                wdsel = 4'h0;
+                wa = 2'h3;
+                D_states_d = 8'h5a;
             end
             8'h5a: begin
+                we = 1'h1;
+                wdsel = 4'h1;
+                wa = 3'h5;
+                D_states_d = 8'h5b;
+            end
+            8'h5b: begin
+                ra1 = 3'h4;
+                if ((&rd1[3'h5:1'h0])) begin
+                    D_states_d = 8'h56;
+                end else begin
+                    D_states_d = 8'h5c;
+                end
+            end
+            8'h5c: begin
                 asel = 1'h0;
                 bsel = 4'h0;
                 ra1 = 3'h4;
@@ -1541,11 +1579,11 @@ module fsm (
                 bwd = rd2;
                 brsel = 2'h0;
                 bwe = 1'h1;
-                D_states_d = 8'h5b;
+                D_states_d = 8'h5d;
             end
-            8'h5b: begin
+            8'h5d: begin
                 if (ddr) begin
-                    D_states_d = 8'h5b;
+                    D_states_d = 8'h5d;
                 end else begin
                     alufn = 6'h0;
                     asel = 1'h0;
@@ -1557,50 +1595,50 @@ module fsm (
                     bra = aluout;
                     brsel = 2'h1;
                     bwe = 1'h1;
-                    D_states_d = 8'h5c;
+                    D_states_d = 8'h5e;
                 end
             end
-            8'h5c: begin
+            8'h5e: begin
                 we = 1'h1;
                 wdsel = 4'h4;
                 wa = 3'h5;
-                D_states_d = 8'h5d;
+                D_states_d = 8'h5f;
             end
-            8'h5d: begin
+            8'h5f: begin
                 asel = 1'h0;
                 ra1 = 3'h4;
                 bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
-                D_states_d = 8'h54;
+                D_states_d = 8'h56;
             end
-            8'h5e: begin
+            8'h60: begin
                 if (D_decrease_timer_q) begin
                     D_decrease_timer_d = 1'h0;
-                    D_states_d = 8'h5f;
+                    D_states_d = 8'h61;
                 end else begin
                     if (~(|timer)) begin
-                        D_states_d = 8'h60;
+                        D_states_d = 8'h62;
                     end else begin
                         if (~(|pac)) begin
-                            D_states_d = 8'h60;
+                            D_states_d = 8'h62;
                         end else begin
                             if (~(|pbc)) begin
-                                D_states_d = 8'h60;
+                                D_states_d = 8'h62;
                             end else begin
                                 if (D_game_tick_q) begin
                                     D_game_tick_d = 1'h0;
-                                    D_states_d = 8'h61;
+                                    D_states_d = 8'h63;
                                 end else begin
-                                    D_states_d = 8'h5e;
+                                    D_states_d = 8'h60;
                                 end
                             end
                         end
                     end
                 end
             end
-            8'h5f: begin
+            8'h61: begin
                 alufn = 6'h1;
                 asel = 3'h6;
                 bsel = 4'h1;
@@ -1608,30 +1646,30 @@ module fsm (
                 wdsel = 4'h0;
                 wa = 3'h6;
             end
-            8'h60: begin
+            8'h62: begin
                 if (next_start_button) begin
-                    D_states_d = 8'ha1;
+                    D_states_d = 8'ha3;
                 end
             end
-            8'h61: begin
+            8'h63: begin
                 ra1 = 3'h4;
                 if ((&rd1[3'h5:1'h0])) begin
-                    D_states_d = 8'h6e;
+                    D_states_d = 8'h70;
                 end else begin
                     if (~(|rd1[3'h5:1'h0])) begin
-                        D_states_d = 8'h62;
+                        D_states_d = 8'h64;
                     end else begin
-                        D_states_d = 8'h6a;
+                        D_states_d = 8'h6c;
                     end
                 end
             end
-            8'h62: begin
+            8'h64: begin
                 srst = 1'h1;
-                D_states_d = 8'h63;
+                D_states_d = 8'h65;
             end
-            8'h63: begin
+            8'h65: begin
                 if (ddr) begin
-                    D_states_d = 8'h63;
+                    D_states_d = 8'h65;
                 end else begin
                     alufn = 6'h1;
                     asel = 1'h0;
@@ -1647,12 +1685,12 @@ module fsm (
                     swd3 = 2'h0;
                     swe3 = 1'h1;
                     sre3 = 1'h0;
-                    D_states_d = 8'h64;
+                    D_states_d = 8'h66;
                 end
             end
-            8'h64: begin
+            8'h66: begin
                 if (ddr) begin
-                    D_states_d = 8'h64;
+                    D_states_d = 8'h66;
                 end else begin
                     alufn = 6'h1;
                     asel = 1'h0;
@@ -1663,38 +1701,6 @@ module fsm (
                     swd1 = brd;
                     swe1 = 1'h1;
                     sre1 = 1'h0;
-                    D_states_d = 8'h66;
-                end
-            end
-            8'h66: begin
-                if (ddr) begin
-                    D_states_d = 8'h66;
-                end else begin
-                    alufn = 6'h0;
-                    asel = 1'h0;
-                    bsel = 4'h1;
-                    ra1 = 3'h4;
-                    bra = aluout;
-                    bwe = 1'h0;
-                    swd2 = brd;
-                    swe2 = 1'h1;
-                    sre2 = 1'h0;
-                    D_states_d = 8'h67;
-                end
-            end
-            8'h67: begin
-                if (ddr) begin
-                    D_states_d = 8'h67;
-                end else begin
-                    alufn = 6'h0;
-                    asel = 1'h0;
-                    bsel = 4'h4;
-                    ra1 = 3'h4;
-                    bra = aluout;
-                    bwe = 1'h0;
-                    swd2 = brd;
-                    swe2 = 1'h1;
-                    sre2 = 1'h0;
                     D_states_d = 8'h68;
                 end
             end
@@ -1704,6 +1710,38 @@ module fsm (
                 end else begin
                     alufn = 6'h0;
                     asel = 1'h0;
+                    bsel = 4'h1;
+                    ra1 = 3'h4;
+                    bra = aluout;
+                    bwe = 1'h0;
+                    swd2 = brd;
+                    swe2 = 1'h1;
+                    sre2 = 1'h0;
+                    D_states_d = 8'h69;
+                end
+            end
+            8'h69: begin
+                if (ddr) begin
+                    D_states_d = 8'h69;
+                end else begin
+                    alufn = 6'h0;
+                    asel = 1'h0;
+                    bsel = 4'h4;
+                    ra1 = 3'h4;
+                    bra = aluout;
+                    bwe = 1'h0;
+                    swd2 = brd;
+                    swe2 = 1'h1;
+                    sre2 = 1'h0;
+                    D_states_d = 8'h6a;
+                end
+            end
+            8'h6a: begin
+                if (ddr) begin
+                    D_states_d = 8'h6a;
+                end else begin
+                    alufn = 6'h0;
+                    asel = 1'h0;
                     bsel = 4'h5;
                     ra1 = 3'h4;
                     bra = aluout;
@@ -1711,54 +1749,24 @@ module fsm (
                     swd3 = brd;
                     swe3 = 1'h1;
                     sre3 = 1'h0;
-                    D_states_d = 8'h69;
+                    D_states_d = 8'h6b;
                 end
             end
-            8'h69: begin
+            8'h6b: begin
                 swd3 = brd;
                 swe3 = 1'h1;
                 sre3 = 1'h0;
-                D_states_d = 8'h6f;
+                D_states_d = 8'h71;
             end
-            8'h6a: begin
+            8'h6c: begin
                 if (ddr) begin
-                    D_states_d = 8'h6a;
+                    D_states_d = 8'h6c;
                 end else begin
                     alufn = 6'h1;
                     asel = 1'h0;
                     bsel = 4'h4;
                     ra1 = 3'h4;
                     bra = aluout;
-                    D_states_d = 8'h6b;
-                end
-            end
-            8'h6b: begin
-                if (ddr) begin
-                    D_states_d = 8'h6b;
-                end else begin
-                    alufn = 6'h0;
-                    asel = 1'h0;
-                    bsel = 4'h1;
-                    ra1 = 3'h4;
-                    bra = aluout;
-                    swd1 = brd;
-                    swe1 = 1'h1;
-                    sre1 = 1'h0;
-                    D_states_d = 8'h6c;
-                end
-            end
-            8'h6c: begin
-                if (ddr) begin
-                    D_states_d = 8'h6c;
-                end else begin
-                    alufn = 6'h0;
-                    asel = 1'h0;
-                    bsel = 4'h1;
-                    ra1 = 3'h4;
-                    bra = aluout;
-                    swd1 = brd;
-                    swe1 = 1'h1;
-                    sre1 = 1'h0;
                     D_states_d = 8'h6d;
                 end
             end
@@ -1766,38 +1774,68 @@ module fsm (
                 if (ddr) begin
                     D_states_d = 8'h6d;
                 end else begin
-                    swd3 = brd;
-                    swe3 = 1'h1;
-                    sre3 = 1'h0;
-                    D_states_d = 8'h6f;
+                    alufn = 6'h0;
+                    asel = 1'h0;
+                    bsel = 4'h1;
+                    ra1 = 3'h4;
+                    bra = aluout;
+                    swd1 = brd;
+                    swe1 = 1'h1;
+                    sre1 = 1'h0;
+                    D_states_d = 8'h6e;
                 end
             end
             8'h6e: begin
                 if (ddr) begin
                     D_states_d = 8'h6e;
                 end else begin
-                    swd3 = brd;
-                    swe3 = 1'h1;
-                    sre3 = 1'h0;
+                    alufn = 6'h0;
+                    asel = 1'h0;
+                    bsel = 4'h1;
+                    ra1 = 3'h4;
+                    bra = aluout;
+                    swd1 = brd;
+                    swe1 = 1'h1;
+                    sre1 = 1'h0;
                     D_states_d = 8'h6f;
                 end
             end
             8'h6f: begin
+                if (ddr) begin
+                    D_states_d = 8'h6f;
+                end else begin
+                    swd3 = brd;
+                    swe3 = 1'h1;
+                    sre3 = 1'h0;
+                    D_states_d = 8'h71;
+                end
+            end
+            8'h70: begin
+                if (ddr) begin
+                    D_states_d = 8'h70;
+                end else begin
+                    swd3 = brd;
+                    swe3 = 1'h1;
+                    sre3 = 1'h0;
+                    D_states_d = 8'h71;
+                end
+            end
+            8'h71: begin
                 sre1 = 1'h1;
                 
                 case (srd1)
                     2'h1: begin
-                        D_states_d = 8'h70;
+                        D_states_d = 8'h72;
                     end
                     2'h2: begin
-                        D_states_d = 8'h71;
+                        D_states_d = 8'h73;
                     end
                     2'h0: begin
-                        D_states_d = 8'h72;
+                        D_states_d = 8'h74;
                     end
                 endcase
             end
-            8'h70: begin
+            8'h72: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -1805,114 +1843,114 @@ module fsm (
                 ra1 = 1'h0;
                 wdsel = 4'h0;
                 wa = 1'h0;
-                D_states_d = 8'h72;
-            end
-            8'h71: begin
-                alufn = 6'h0;
-                asel = 1'h0;
-                bsel = 4'h1;
-                we = 1'h1;
-                ra1 = 1'h1;
-                wdsel = 4'h0;
-                wa = 1'h1;
-                D_states_d = 8'h72;
-            end
-            8'h72: begin
-                sre1 = 1'h1;
-                
-                case (srd1)
-                    2'h1: begin
-                        D_states_d = 8'h73;
-                    end
-                    2'h2: begin
-                        D_states_d = 8'h74;
-                    end
-                    2'h0: begin
-                        D_states_d = 8'h75;
-                    end
-                endcase
+                D_states_d = 8'h74;
             end
             8'h73: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
                 we = 1'h1;
-                ra1 = 1'h0;
-                wdsel = 4'h0;
-                wa = 1'h0;
-                D_states_d = 8'h72;
-            end
-            8'h74: begin
-                alufn = 6'h0;
-                asel = 1'h0;
-                bsel = 4'h1;
-                we = 1'h1;
                 ra1 = 1'h1;
                 wdsel = 4'h0;
                 wa = 1'h1;
-                D_states_d = 8'h72;
+                D_states_d = 8'h74;
             end
-            8'h75: begin
+            8'h74: begin
                 sre1 = 1'h1;
                 
                 case (srd1)
                     2'h1: begin
-                        D_states_d = 8'h76;
+                        D_states_d = 8'h75;
                     end
                     2'h2: begin
-                        D_states_d = 8'h77;
+                        D_states_d = 8'h76;
                     end
                     2'h0: begin
-                        D_states_d = 8'h78;
+                        D_states_d = 8'h77;
                     end
                 endcase
+            end
+            8'h75: begin
+                alufn = 6'h0;
+                asel = 1'h0;
+                bsel = 4'h1;
+                we = 1'h1;
+                ra1 = 1'h0;
+                wdsel = 4'h0;
+                wa = 1'h0;
+                D_states_d = 8'h74;
             end
             8'h76: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
                 we = 1'h1;
-                ra1 = 1'h0;
+                ra1 = 1'h1;
                 wdsel = 4'h0;
-                wa = 1'h0;
-                D_states_d = 8'h75;
+                wa = 1'h1;
+                D_states_d = 8'h74;
             end
             8'h77: begin
+                sre1 = 1'h1;
+                
+                case (srd1)
+                    2'h1: begin
+                        D_states_d = 8'h78;
+                    end
+                    2'h2: begin
+                        D_states_d = 8'h79;
+                    end
+                    2'h0: begin
+                        D_states_d = 8'h7a;
+                    end
+                endcase
+            end
+            8'h78: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
                 we = 1'h1;
-                ra1 = 1'h1;
+                ra1 = 1'h0;
                 wdsel = 4'h0;
-                wa = 1'h1;
-                D_states_d = 8'h75;
-            end
-            8'h78: begin
-                sre2 = 1'h1;
-                
-                case (srd2)
-                    2'h1: begin
-                        D_states_d = 8'h79;
-                    end
-                    2'h2: begin
-                        D_states_d = 8'h7a;
-                    end
-                    2'h0: begin
-                        D_states_d = 8'h7b;
-                    end
-                endcase
+                wa = 1'h0;
+                D_states_d = 8'h77;
             end
             8'h79: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
                 we = 1'h1;
+                ra1 = 1'h1;
+                wdsel = 4'h0;
+                wa = 1'h1;
+                D_states_d = 8'h77;
+            end
+            8'h7a: begin
+                sre2 = 1'h1;
+                
+                case (srd2)
+                    2'h1: begin
+                        D_states_d = 8'h7b;
+                    end
+                    2'h2: begin
+                        D_states_d = 8'h7c;
+                    end
+                    2'h0: begin
+                        D_states_d = 8'h7d;
+                    end
+                endcase
+            end
+            8'h7b: begin
+                alufn = 6'h0;
+                asel = 1'h0;
+                bsel = 4'h1;
+                we = 1'h1;
                 ra1 = 1'h0;
                 wdsel = 4'h0;
                 wa = 1'h0;
-                D_states_d = 8'h7b;
+                D_states_d = 8'h7d;
             end
-            8'h7a: begin
+            8'h7c: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -1920,30 +1958,30 @@ module fsm (
                 ra1 = 1'h1;
                 wdsel = 4'h0;
                 wa = 1'h1;
-                D_states_d = 8'h7b;
+                D_states_d = 8'h7d;
             end
-            8'h7b: begin
+            8'h7d: begin
                 we = 1'h1;
                 wdsel = 3'h5;
                 wa = 3'h5;
                 sre2 = 1'h1;
             end
-            8'h7c: begin
+            8'h7e: begin
                 sre2 = 1'h1;
                 
                 case (srd2)
                     2'h1: begin
-                        D_states_d = 8'h7d;
+                        D_states_d = 8'h7f;
                     end
                     2'h2: begin
-                        D_states_d = 8'h7e;
+                        D_states_d = 8'h80;
                     end
                     2'h0: begin
-                        D_states_d = 8'h7f;
+                        D_states_d = 8'h81;
                     end
                 endcase
             end
-            8'h7d: begin
+            8'h7f: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -1951,114 +1989,114 @@ module fsm (
                 ra1 = 1'h0;
                 wdsel = 4'h0;
                 wa = 1'h0;
-                D_states_d = 8'h7c;
-            end
-            8'h7e: begin
-                alufn = 6'h0;
-                asel = 1'h0;
-                bsel = 4'h1;
-                we = 1'h1;
-                ra1 = 1'h1;
-                wdsel = 4'h0;
-                wa = 1'h1;
-                D_states_d = 8'h7c;
-            end
-            8'h7f: begin
-                sre3 = 1'h1;
-                
-                case (srd3)
-                    2'h1: begin
-                        D_states_d = 8'h80;
-                    end
-                    2'h2: begin
-                        D_states_d = 8'h81;
-                    end
-                    2'h0: begin
-                        D_states_d = 8'h82;
-                    end
-                endcase
+                D_states_d = 8'h7e;
             end
             8'h80: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
                 we = 1'h1;
-                ra1 = 1'h0;
-                wdsel = 4'h0;
-                wa = 1'h0;
-                D_states_d = 8'h82;
-            end
-            8'h81: begin
-                alufn = 6'h0;
-                asel = 1'h0;
-                bsel = 4'h1;
-                we = 1'h1;
                 ra1 = 1'h1;
                 wdsel = 4'h0;
                 wa = 1'h1;
-                D_states_d = 8'h82;
+                D_states_d = 8'h7e;
             end
-            8'h82: begin
+            8'h81: begin
                 sre3 = 1'h1;
                 
                 case (srd3)
                     2'h1: begin
-                        D_states_d = 8'h83;
+                        D_states_d = 8'h82;
                     end
                     2'h2: begin
-                        D_states_d = 8'h84;
+                        D_states_d = 8'h83;
                     end
                     2'h0: begin
-                        D_states_d = 8'h85;
+                        D_states_d = 8'h84;
                     end
                 endcase
+            end
+            8'h82: begin
+                alufn = 6'h0;
+                asel = 1'h0;
+                bsel = 4'h1;
+                we = 1'h1;
+                ra1 = 1'h0;
+                wdsel = 4'h0;
+                wa = 1'h0;
+                D_states_d = 8'h84;
             end
             8'h83: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
                 we = 1'h1;
-                ra1 = 1'h0;
-                wdsel = 4'h0;
-                wa = 1'h0;
-                D_states_d = 8'h82;
-            end
-            8'h84: begin
-                alufn = 6'h0;
-                asel = 1'h0;
-                bsel = 4'h1;
-                we = 1'h1;
                 ra1 = 1'h1;
                 wdsel = 4'h0;
                 wa = 1'h1;
-                D_states_d = 8'h82;
+                D_states_d = 8'h84;
             end
-            8'h85: begin
+            8'h84: begin
                 sre3 = 1'h1;
                 
                 case (srd3)
                     2'h1: begin
-                        D_states_d = 8'h86;
+                        D_states_d = 8'h85;
                     end
                     2'h2: begin
-                        D_states_d = 8'h87;
+                        D_states_d = 8'h86;
                     end
                     2'h0: begin
-                        D_states_d = 8'h88;
+                        D_states_d = 8'h87;
                     end
                 endcase
+            end
+            8'h85: begin
+                alufn = 6'h0;
+                asel = 1'h0;
+                bsel = 4'h1;
+                we = 1'h1;
+                ra1 = 1'h0;
+                wdsel = 4'h0;
+                wa = 1'h0;
+                D_states_d = 8'h84;
             end
             8'h86: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
                 we = 1'h1;
+                ra1 = 1'h1;
+                wdsel = 4'h0;
+                wa = 1'h1;
+                D_states_d = 8'h84;
+            end
+            8'h87: begin
+                sre3 = 1'h1;
+                
+                case (srd3)
+                    2'h1: begin
+                        D_states_d = 8'h88;
+                    end
+                    2'h2: begin
+                        D_states_d = 8'h89;
+                    end
+                    2'h0: begin
+                        D_states_d = 8'h8a;
+                    end
+                endcase
+            end
+            8'h88: begin
+                alufn = 6'h0;
+                asel = 1'h0;
+                bsel = 4'h1;
+                we = 1'h1;
                 ra1 = 1'h0;
                 wdsel = 4'h0;
                 wa = 1'h0;
-                D_states_d = 8'h88;
+                D_states_d = 8'h8a;
             end
-            8'h87: begin
+            8'h89: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -2066,36 +2104,36 @@ module fsm (
                 ra1 = 1'h1;
                 wdsel = 4'h0;
                 wa = 1'h1;
-                D_states_d = 8'h88;
-            end
-            8'h88: begin
-                sre1 = 1'h1;
-                sre2 = 1'h1;
-                sre3 = 1'h1;
-                D_states_d = 8'h89;
-            end
-            8'h89: begin
-                sre1 = 1'h1;
-                sre2 = 1'h1;
-                sre3 = 1'h1;
                 D_states_d = 8'h8a;
             end
             8'h8a: begin
+                sre1 = 1'h1;
+                sre2 = 1'h1;
+                sre3 = 1'h1;
+                D_states_d = 8'h8b;
+            end
+            8'h8b: begin
+                sre1 = 1'h1;
+                sre2 = 1'h1;
+                sre3 = 1'h1;
+                D_states_d = 8'h8c;
+            end
+            8'h8c: begin
                 ra1 = 3'h5;
                 
                 case (rd1)
                     2'h0: begin
-                        D_states_d = 8'h8b;
+                        D_states_d = 8'h8d;
                     end
                     2'h2: begin
-                        D_states_d = 8'h90;
+                        D_states_d = 8'h92;
                     end
                     2'h1: begin
-                        D_states_d = 8'h94;
+                        D_states_d = 8'h96;
                     end
                 endcase
             end
-            8'h8b: begin
+            8'h8d: begin
                 alufn = 6'h35;
                 asel = 1'h0;
                 bsel = 4'h0;
@@ -2104,14 +2142,14 @@ module fsm (
                 
                 case (aluout)
                     1'h0: begin
-                        D_states_d = 8'h8c;
+                        D_states_d = 8'h8e;
                     end
                     1'h1: begin
-                        D_states_d = 8'h9a;
+                        D_states_d = 8'h9c;
                     end
                 endcase
             end
-            8'h8c: begin
+            8'h8e: begin
                 alufn = 6'h33;
                 asel = 1'h0;
                 bsel = 4'h3;
@@ -2119,22 +2157,7 @@ module fsm (
                 
                 case (aluout)
                     1'h0: begin
-                        D_states_d = 8'h8e;
-                    end
-                    1'h1: begin
-                        D_states_d = 8'h8d;
-                    end
-                endcase
-            end
-            8'h8d: begin
-                alufn = 6'h33;
-                asel = 1'h0;
-                bsel = 4'h3;
-                ra1 = 1'h1;
-                
-                case (aluout)
-                    1'h0: begin
-                        D_states_d = 8'h9a;
+                        D_states_d = 8'h90;
                     end
                     1'h1: begin
                         D_states_d = 8'h8f;
@@ -2142,6 +2165,21 @@ module fsm (
                 endcase
             end
             8'h8f: begin
+                alufn = 6'h33;
+                asel = 1'h0;
+                bsel = 4'h3;
+                ra1 = 1'h1;
+                
+                case (aluout)
+                    1'h0: begin
+                        D_states_d = 8'h9c;
+                    end
+                    1'h1: begin
+                        D_states_d = 8'h91;
+                    end
+                endcase
+            end
+            8'h91: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -2149,9 +2187,9 @@ module fsm (
                 ra1 = 2'h3;
                 wdsel = 4'h0;
                 wa = 2'h3;
-                D_states_d = 8'h99;
+                D_states_d = 8'h9b;
             end
-            8'h8e: begin
+            8'h90: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -2159,9 +2197,9 @@ module fsm (
                 ra1 = 2'h2;
                 wdsel = 4'h0;
                 wa = 2'h2;
-                D_states_d = 8'h98;
+                D_states_d = 8'h9a;
             end
-            8'h90: begin
+            8'h92: begin
                 alufn = 6'h35;
                 asel = 1'h0;
                 bsel = 4'h0;
@@ -2170,14 +2208,14 @@ module fsm (
                 
                 case (aluout)
                     1'h1: begin
-                        D_states_d = 8'h91;
+                        D_states_d = 8'h93;
                     end
                     1'h0: begin
-                        D_states_d = 8'h93;
+                        D_states_d = 8'h95;
                     end
                 endcase
             end
-            8'h91: begin
+            8'h93: begin
                 alufn = 6'h33;
                 asel = 1'h0;
                 bsel = 4'h2;
@@ -2185,14 +2223,14 @@ module fsm (
                 
                 case (aluout)
                     1'h0: begin
-                        D_states_d = 8'h92;
+                        D_states_d = 8'h94;
                     end
                     1'h1: begin
-                        D_states_d = 8'h99;
+                        D_states_d = 8'h9b;
                     end
                 endcase
             end
-            8'h92: begin
+            8'h94: begin
                 alufn = 6'h33;
                 asel = 1'h0;
                 bsel = 4'h3;
@@ -2200,14 +2238,14 @@ module fsm (
                 
                 case (aluout)
                     1'h0: begin
-                        D_states_d = 8'h93;
+                        D_states_d = 8'h95;
                     end
                     1'h1: begin
-                        D_states_d = 8'h99;
+                        D_states_d = 8'h9b;
                     end
                 endcase
             end
-            8'h93: begin
+            8'h95: begin
                 alufn = 6'h1;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -2215,9 +2253,9 @@ module fsm (
                 ra1 = 2'h3;
                 wdsel = 4'h0;
                 wa = 2'h3;
-                D_states_d = 8'h9a;
+                D_states_d = 8'h9c;
             end
-            8'h94: begin
+            8'h96: begin
                 alufn = 6'h35;
                 asel = 1'h0;
                 bsel = 4'h0;
@@ -2226,14 +2264,14 @@ module fsm (
                 
                 case (aluout)
                     1'h1: begin
-                        D_states_d = 8'h95;
+                        D_states_d = 8'h97;
                     end
                     1'h0: begin
-                        D_states_d = 8'h97;
+                        D_states_d = 8'h99;
                     end
                 endcase
             end
-            8'h95: begin
+            8'h97: begin
                 alufn = 6'h33;
                 asel = 1'h0;
                 bsel = 4'h2;
@@ -2241,14 +2279,14 @@ module fsm (
                 
                 case (aluout)
                     1'h0: begin
-                        D_states_d = 8'h97;
+                        D_states_d = 8'h99;
                     end
                     1'h1: begin
-                        D_states_d = 8'h98;
+                        D_states_d = 8'h9a;
                     end
                 endcase
             end
-            8'h97: begin
+            8'h99: begin
                 alufn = 6'h1;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -2256,42 +2294,42 @@ module fsm (
                 ra1 = 2'h2;
                 wdsel = 4'h0;
                 wa = 2'h2;
-                D_states_d = 8'h9a;
-            end
-            8'h98: begin
-                ra1 = 3'h4;
-                bwa = rd1;
-                bwe = 1'h1;
-                bwd = 2'h1;
-                D_states_d = 8'h9b;
-            end
-            8'h99: begin
-                ra1 = 3'h4;
-                bwa = rd1;
-                bwe = 1'h1;
-                bwd = 2'h2;
-                D_states_d = 8'h9b;
+                D_states_d = 8'h9c;
             end
             8'h9a: begin
                 ra1 = 3'h4;
                 bwa = rd1;
                 bwe = 1'h1;
-                bwd = 2'h0;
-                D_states_d = 8'h9b;
+                bwd = 2'h1;
+                D_states_d = 8'h9d;
             end
             8'h9b: begin
-                we = 1'h1;
-                wa = 1'h0;
-                wdsel = 4'h1;
-                D_states_d = 8'h9c;
+                ra1 = 3'h4;
+                bwa = rd1;
+                bwe = 1'h1;
+                bwd = 2'h2;
+                D_states_d = 8'h9d;
             end
             8'h9c: begin
-                we = 1'h1;
-                wa = 1'h1;
-                wdsel = 4'h1;
+                ra1 = 3'h4;
+                bwa = rd1;
+                bwe = 1'h1;
+                bwd = 2'h0;
                 D_states_d = 8'h9d;
             end
             8'h9d: begin
+                we = 1'h1;
+                wa = 1'h0;
+                wdsel = 4'h1;
+                D_states_d = 8'h9e;
+            end
+            8'h9e: begin
+                we = 1'h1;
+                wa = 1'h1;
+                wdsel = 4'h1;
+                D_states_d = 8'h9f;
+            end
+            8'h9f: begin
                 alufn = 6'h0;
                 asel = 1'h0;
                 bsel = 4'h1;
@@ -2299,9 +2337,9 @@ module fsm (
                 ra1 = 3'h4;
                 wdsel = 4'h0;
                 wa = 3'h4;
-                D_states_d = 8'h9e;
+                D_states_d = 8'ha0;
             end
-            8'h9e: begin
+            8'ha0: begin
                 alufn = 6'h35;
                 asel = 1'h0;
                 bsel = 4'h9;
@@ -2309,16 +2347,16 @@ module fsm (
                 
                 case (aluout)
                     1'h0: begin
-                        D_states_d = 8'h9f;
+                        D_states_d = 8'ha1;
                     end
                     1'h1: begin
-                        D_states_d = 8'h5e;
+                        D_states_d = 8'h60;
                     end
                 endcase
             end
-            8'h9f: begin
+            8'ha1: begin
                 if (ddr) begin
-                    D_states_d = 8'h9f;
+                    D_states_d = 8'ha1;
                 end else begin
                     alufn = 6'h16;
                     asel = 1'h0;
@@ -2327,14 +2365,14 @@ module fsm (
                     wa = 3'h7;
                     ra1 = 3'h7;
                     wdsel = 4'h0;
-                    D_states_d = 8'ha0;
+                    D_states_d = 8'ha2;
                 end
             end
-            8'ha0: begin
+            8'ha2: begin
                 we = 1'h1;
                 wa = 3'h4;
                 wdsel = 4'h9;
-                D_states_d = 8'h9e;
+                D_states_d = 8'ha0;
             end
         endcase
     end
@@ -2342,7 +2380,7 @@ module fsm (
     
     always @(posedge (clk)) begin
         if ((rst) == 1'b1) begin
-            D_states_q <= 8'ha1;
+            D_states_q <= 8'ha3;
             D_decrease_timer_q <= 0;
             D_game_tick_q <= 0;
             D_accel_selector_q <= 0;
