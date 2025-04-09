@@ -545,7 +545,7 @@ module fsm #(
             States.A_DOWN_CHECK_PIXEL:
                 alufn = b110101
                 asel = b0
-                bsel = b1001
+                bsel = b1010
                 ra1 = TARGET_PIXEL_ADDRESS
                 if(aluout[0]){
                     states.d = States.A_DOWN_RESET_PIXEL

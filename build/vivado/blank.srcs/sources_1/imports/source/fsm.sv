@@ -607,12 +607,14 @@ module fsm (
             8'h14: begin
                 alufn = 6'h35;
                 asel = 1'h0;
-                bsel = 4'h9;
+                bsel = 4'ha;
                 ra1 = 3'h4;
                 if (aluout[1'h0]) begin
                     D_states_d = 8'h15;
                 end else begin
-                    D_states_d = 8'he;
+                    if (~aluout[1'h0]) begin
+                        D_states_d = 8'he;
+                    end
                 end
                 D_debug_dff_d = 5'h19;
             end
