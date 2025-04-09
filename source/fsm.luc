@@ -227,7 +227,7 @@ module fsm #(
             default: accel_edge.in = accel.q[3]
         }
         case (accel_timer.q) {
-            b0010: accel_selector.d = b01
+            b0001: accel_selector.d = b01
             b1000: accel_selector.d = b10
             default: accel_selector.d = accel_selector.q
         }
