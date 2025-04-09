@@ -230,7 +230,8 @@ module fsm (
     logic [7:0] D_states_d, D_states_q = 8'ha1;
     logic D_decrease_timer_d, D_decrease_timer_q = 0;
     logic D_game_tick_d, D_game_tick_q = 0;
-    logic [1:0] D_pointer_accel_d, D_pointer_accel_q = 0;
+    logic [1:0] D_clk_selector_d, D_clk_selector_q = 0;
+    logic [3:0] D_accel_timer_d, D_accel_timer_q = 0;
     logic [7:0] D_debug_dff_d, D_debug_dff_q = 0;
     localparam ADD = 6'h0;
     localparam SUB = 6'h1;
@@ -252,7 +253,8 @@ module fsm (
         D_states_d = D_states_q;
         D_decrease_timer_d = D_decrease_timer_q;
         D_game_tick_d = D_game_tick_q;
-        D_pointer_accel_d = D_pointer_accel_q;
+        D_clk_selector_d = D_clk_selector_q;
+        D_accel_timer_d = D_accel_timer_q;
         
         debug_out = D_debug_dff_q;
         D_debug_dff_d = 1'h0;
@@ -289,20 +291,30 @@ module fsm (
             D_game_tick_d = 1'h1;
         end
         
-        case (D_pointer_accel_q)
+        case (D_clk_selector_q)
             2'h0: begin
                 inputclk = timerclk;
             end
             2'h1: begin
                 inputclk = med_inputclk;
             end
-            2'h3: begin
+            2'h2: begin
                 inputclk = gameclk;
             end
             default: begin
                 inputclk = timerclk;
             end
         endcase
+        
+        case (D_accel_timer_q)
+            4'h3: begin
+                D_clk_selector_d = 2'h1;
+            end
+            4'hf: begin
+                D_clk_selector_d = 2'h2;
+            end
+        endcase
+        D_accel_timer_d = D_accel_timer_q;
         
         case (D_states_q)
             8'ha1: begin
@@ -438,12 +450,12 @@ module fsm (
                 if (move_up_button) begin
                     if (inputclk) begin
                         
-                        case (D_pointer_accel_q)
-                            2'h0: begin
-                                D_pointer_accel_d = 2'h1;
+                        case (D_accel_timer_q)
+                            4'hf: begin
+                                D_accel_timer_d = D_accel_timer_q;
                             end
-                            2'h1: begin
-                                D_pointer_accel_d = 2'h2;
+                            default: begin
+                                D_accel_timer_d = D_accel_timer_q + 1'h1;
                             end
                         endcase
                         D_states_d = 8'h3;
@@ -2148,13 +2160,15 @@ module fsm (
             D_states_q <= 8'ha1;
             D_decrease_timer_q <= 0;
             D_game_tick_q <= 0;
-            D_pointer_accel_q <= 0;
+            D_clk_selector_q <= 0;
+            D_accel_timer_q <= 0;
             D_debug_dff_q <= 0;
         end else begin
             D_states_q <= D_states_d;
             D_decrease_timer_q <= D_decrease_timer_d;
             D_game_tick_q <= D_game_tick_d;
-            D_pointer_accel_q <= D_pointer_accel_d;
+            D_clk_selector_q <= D_clk_selector_d;
+            D_accel_timer_q <= D_accel_timer_d;
             D_debug_dff_q <= D_debug_dff_d;
         end
     end

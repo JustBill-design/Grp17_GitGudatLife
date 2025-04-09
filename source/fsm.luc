@@ -139,7 +139,8 @@ module fsm #(
             dff states[$width(States)](#INIT(States.SET_BRAM_SELECTOR_TO_1))
             dff decrease_timer
             dff game_tick
-            dff pointer_accel[2]
+            dff clk_selector[2]     // select clock for inputclk
+            dff accel_timer[4]      // timer for acceleration
 
             // debug
             dff debug_dff[8]
@@ -216,12 +217,17 @@ module fsm #(
         }
         
         // input acceleration selector
-        case (pointer_accel.q) {
+        case (clk_selector.q) {
             b00: inputclk = timerclk
             b01: inputclk = med_inputclk
-            b11: inputclk = gameclk
+            b10: inputclk = gameclk
             default: inputclk = timerclk
         }
+        case (accel_timer.q) {
+            b0011: clk_selector.d = b01
+            b1111: clk_selector.d = b10
+        }
+        accel_timer.d = accel_timer.q
 
         
         case (states.q) {
@@ -361,9 +367,9 @@ module fsm #(
             States.A_UP_CLK:
                 if (move_up_button) {
                     if (inputclk) {
-                        case (pointer_accel.q) {
-                            b00: pointer_accel.d = b01
-                            b01: pointer_accel.d = b10
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
                         }
                         states.d = States.A_UP_DIR_IDLE
                     }
