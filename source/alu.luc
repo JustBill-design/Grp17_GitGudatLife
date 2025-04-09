@@ -54,10 +54,10 @@ module alu #(
             // b000001: temp_out = a-b
             b000001: temp_out = adder.out
 
-            // b000010: temp_out = a*b
-            b000010: temp_out = multiplier.mul
+            b000010: temp_out = a*b
+            // b000010: temp_out = multiplier.mul
 
-            // b000011: temp_out = a/b
+            b000011: temp_out = a/b
             // b000011: temp_out = divider.d
 
             // b011000: temp_out = a & b
