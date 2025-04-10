@@ -87,7 +87,7 @@ module fsm #(
         A_LEFT_DIR_IDLE, A_LEFT_CLK, A_LEFT_COUNTP1, A_LEFT_SET_PIXEL_A, A_LEFT_COUNTM1, A_LEFT_SET_PIXEL_0, A_LEFT_CHECK_PIXEL, A_LEFT_RESET_PIXEL, A_LEFT_MOVE_CURSOR, A_LEFT_STORE_PIXEL, A_LEFT_CURSOR_COLOUR, 
         A_RIGHT_DIR_IDLE, A_RIGHT_CLK, A_RIGHT_COUNTP1, A_RIGHT_SET_PIXEL_A, A_RIGHT_COUNTM1, A_RIGHT_SET_PIXEL_0, A_RIGHT_CHECK_PIXEL, A_RIGHT_RESET_PIXEL, A_RIGHT_MOVE_CURSOR, A_RIGHT_STORE_PIXEL, A_RIGHT_CURSOR_COLOUR, 
         
-        B_INPUT_IDLE, B_SET_PIXEL_B, B_SET_PIXEL_0, 
+        B_INPUT_IDLE, B_SET_PIXEL_B, B_SET_PIXEL_0, B_COUNTP1, B_COUNTM1,
         
         B_UP_DIR_IDLE, B_UP_CLK, B_UP_COUNTP1, B_UP_SET_PIXEL_B, B_UP_COUNTM1, B_UP_SET_PIXEL_0, B_UP_CHECK_PIXEL, B_UP_RESET_PIXEL, B_UP_MOVE_CURSOR, B_UP_STORE_PIXEL, B_UP_CURSOR_COLOUR, 
         B_DOWN_DIR_IDLE, B_DOWN_CLK, B_DOWN_COUNTP1, B_DOWN_SET_PIXEL_B, B_DOWN_COUNTM1, B_DOWN_SET_PIXEL_0, B_DOWN_CHECK_PIXEL, B_DOWN_RESET_PIXEL, B_DOWN_MOVE_CURSOR, B_DOWN_STORE_PIXEL, B_DOWN_CURSOR_COLOUR, 
@@ -174,7 +174,6 @@ module fsm #(
         // debugging
         debug_out = debug_dff.q
         debug_dff.d = 0
-        debug_out[7:6] = accel_selector.q
 
         // default connections, all 0 except brsel=b10 ----------------------
         states.d = states.q
@@ -1019,7 +1018,46 @@ module fsm #(
                 }
                 // debugging
                 debug_dff.d = 50
-                
+
+            States.B_COUNTP1:
+                alufn = b000000
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = A_COUNT
+                wdsel = b0000
+                wa = A_COUNT
+                states.d = States.B_SET_PIXEL_B
+                // debugging
+                debug_dff.d = 11
+
+            States.B_SET_PIXEL_B:
+                we = b1 
+                wdsel = b0011
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_INPUT_IDLE
+                // debugging
+                debug_dff.d = 80     
+            
+            States.B_COUNTM1:
+                alufn = b000001
+                asel = b0
+                bsel = b0001
+                we = b1
+                ra1 = A_COUNT
+                wdsel = b0000
+                wa = A_COUNT
+                states.d = States.B_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 13
+
+            States.B_SET_PIXEL_0:
+                we = b1
+                wdsel = b0001
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_INPUT_IDLE
+                // debugging
+                debug_dff.d = 81                
         // B INPUT UP DIRECTION ------------------------------------------------------
 
             States.B_UP_DIR_IDLE:
