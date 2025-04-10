@@ -8,7 +8,7 @@
   **** SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
   **** IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
   **** SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
-  **** Start of session at: Fri Apr 11 03:31:45 2025
+  **** Start of session at: Fri Apr 11 03:41:23 2025
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 
@@ -20,9 +20,9 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t
 INFO: [Device 21-403] Loading part xc7a35tftg256-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 63100
+INFO: [Synth 8-7075] Helper process launched with PID 55244
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 949.668 ; gain = 467.992
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 948.238 ; gain = 464.949
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'alchitry_top' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:7]
 INFO: [Synth 8-6157] synthesizing module 'button_conditioner' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/button_conditioner.sv:7]
@@ -137,24 +137,24 @@ INFO: [Synth 8-6157] synthesizing module 'counter' [C:/Users/yourmum/Downloads/f
 	Parameter UP bound to: 1'b1 
 INFO: [Synth 8-6155] done synthesizing module 'counter' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv:7]
 INFO: [Synth 8-6157] synthesizing module 'fsm' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:7]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:1908]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:1946]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:1984]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2022]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2067]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2105]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2143]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2181]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2233]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2253]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2269]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2285]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2324]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2340]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2356]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2384]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2400]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2476]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:1887]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:1925]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:1963]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2001]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2046]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2084]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2122]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2160]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2212]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2232]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2248]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2264]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2303]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2319]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2335]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2363]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2379]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2455]
 INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:347]
 INFO: [Synth 8-6155] done synthesizing module 'fsm' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:7]
 INFO: [Synth 8-6157] synthesizing module 'bram' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bram.sv:7]
@@ -199,6 +199,8 @@ INFO: [Synth 8-6157] synthesizing module 'simple_dual_port_ram' [C:/Users/yourmu
 INFO: [Synth 8-6155] done synthesizing module 'simple_dual_port_ram' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/simple_dual_port_ram.v:47]
 INFO: [Synth 8-6155] done synthesizing module 'fifo' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fifo.sv:7]
 INFO: [Synth 8-6155] done synthesizing module 'alchitry_top' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:7]
+WARNING: [Synth 8-6014] Unused sequential element D_decrease_timer_q_reg was removed.  [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2494]
+WARNING: [Synth 8-6014] Unused sequential element D_game_tick_q_reg was removed.  [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2495]
 WARNING: [Synth 8-6014] Unused sequential element D_buff1_q_reg was removed.  [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:749]
 WARNING: [Synth 8-6014] Unused sequential element D_buff2_q_reg was removed.  [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:750]
 WARNING: [Synth 8-6014] Unused sequential element D_buff3_q_reg was removed.  [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:751]
@@ -206,66 +208,119 @@ WARNING: [Synth 8-6014] Unused sequential element D_buff4_q_reg was removed.  [C
 WARNING: [Synth 8-3917] design alchitry_top has port matgnd[1] driven by constant 0
 WARNING: [Synth 8-3917] design alchitry_top has port matgnd[0] driven by constant 0
 WARNING: [Synth 8-7129] Port rst in module bram is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[31] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[30] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[29] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[28] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[27] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[26] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[25] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[24] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[23] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[22] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[21] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[20] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[19] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[18] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[17] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[16] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[15] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[14] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[13] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[12] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[11] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[10] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[9] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[8] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[7] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[6] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[5] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[4] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[3] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[2] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[1] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pac[0] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[31] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[30] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[29] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[28] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[27] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[26] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[25] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[24] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[23] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[22] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[21] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[20] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[19] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[18] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[17] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[16] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[15] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[14] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[13] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[12] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[11] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[10] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[9] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[8] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[7] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[6] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[5] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[4] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[3] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[2] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[1] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port pbc[0] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[31] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[30] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[29] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[28] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[27] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[26] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[25] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[24] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[23] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[22] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[21] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[20] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[19] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[18] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[17] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[16] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[15] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[14] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[13] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[12] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[11] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[10] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[9] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[8] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[7] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[6] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[5] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[4] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[3] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[2] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[1] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timer[0] in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port timerclk in module fsm is either unconnected or has no load
+WARNING: [Synth 8-7129] Port gameclk in module fsm is either unconnected or has no load
 WARNING: [Synth 8-7129] Port rd2[31] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[30] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[29] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[28] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[27] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[26] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[25] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[24] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[23] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[22] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[21] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[20] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[19] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[18] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[17] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[16] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[15] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[14] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[13] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[12] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[11] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[10] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[9] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[8] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[7] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[6] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[5] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[4] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[3] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[2] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn[5] in module shifter is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn[4] in module shifter is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn[3] in module shifter is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn[2] in module shifter is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn[5] in module boolean is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn[4] in module boolean is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn[0] in module boolean is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn[5] in module compare is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn[4] in module compare is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn[3] in module compare is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn[0] in module compare is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn_signal[5] in module adder is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn_signal[4] in module adder is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn_signal[3] in module adder is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn_signal[2] in module adder is either unconnected or has no load
-WARNING: [Synth 8-7129] Port alufn_signal[1] in module adder is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rst_n in module alchitry_top is either unconnected or has no load
+INFO: [Common 17-14] Message 'Synth 8-7129' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1110.852 ; gain = 629.176
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1107.391 ; gain = 624.102
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1110.852 ; gain = 629.176
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1107.391 ; gain = 624.102
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1110.852 ; gain = 629.176
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1107.391 ; gain = 624.102
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.037 . Memory (MB): peak = 1110.852 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.042 . Memory (MB): peak = 1107.391 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -278,30 +333,30 @@ Parsing XDC File [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constrain
 Finished Parsing XDC File [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/au_props.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1202.445 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1204.625 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.008 . Memory (MB): peak = 1202.445 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1204.625 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1202.445 ; gain = 720.770
+Finished Constraint Validation : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1204.625 ; gain = 721.336
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tftg256-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1202.445 ; gain = 720.770
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1204.625 ; gain = 721.336
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1202.445 ; gain = 720.770
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1204.625 ; gain = 721.336
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'D_states_q_reg' in module 'fsm'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 1202.445 ; gain = 720.770
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 1204.625 ; gain = 721.336
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -329,7 +384,7 @@ Detailed RTL Component Info :
 	                4 Bit    Registers := 4     
 	                3 Bit    Registers := 9     
 	                2 Bit    Registers := 18    
-	                1 Bit    Registers := 9     
+	                1 Bit    Registers := 7     
 +---RAMs : 
 	               8K Bit	(4224 X 2 bit)          RAMs := 2     
 	                8 Bit	(4 X 2 bit)          RAMs := 3     
@@ -347,7 +402,7 @@ Detailed RTL Component Info :
 	   3 Input    8 Bit        Muxes := 9     
 	   4 Input    8 Bit        Muxes := 9     
 	   4 Input    7 Bit        Muxes := 1     
-	   2 Input    7 Bit        Muxes := 49    
+	   2 Input    7 Bit        Muxes := 45    
 	 172 Input    6 Bit        Muxes := 1     
 	   2 Input    6 Bit        Muxes := 27    
 	   2 Input    5 Bit        Muxes := 8     
@@ -360,11 +415,11 @@ Detailed RTL Component Info :
 	   3 Input    2 Bit        Muxes := 1     
 	   2 Input    2 Bit        Muxes := 2     
 	 172 Input    2 Bit        Muxes := 6     
-	   2 Input    1 Bit        Muxes := 539   
+	   2 Input    1 Bit        Muxes := 525   
 	   4 Input    1 Bit        Muxes := 10    
 	   5 Input    1 Bit        Muxes := 1     
 	   3 Input    1 Bit        Muxes := 1     
-	 172 Input    1 Bit        Muxes := 17    
+	 172 Input    1 Bit        Muxes := 13    
 ---------------------------------------------------------------------------------
 Finished RTL Component Statistics 
 ---------------------------------------------------------------------------------
@@ -383,41 +438,8 @@ Start Cross Boundary and Area Optimization
 WARNING: [Synth 8-7080] Parallel synthesis criteria is not met
 WARNING: [Synth 8-3917] design alchitry_top has port matgnd[1] driven by constant 0
 WARNING: [Synth 8-3917] design alchitry_top has port matgnd[0] driven by constant 0
-WARNING: [Synth 8-7129] Port rst in module bram is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[31] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[30] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[29] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[28] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[27] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[26] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[25] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[24] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[23] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[22] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[21] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[20] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[19] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[18] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[17] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[16] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[15] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[14] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[13] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[12] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[11] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[10] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[9] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[8] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[7] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[6] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[5] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[4] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[3] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rd2[2] in module fsm is either unconnected or has no load
-WARNING: [Synth 8-7129] Port rst_n in module alchitry_top is either unconnected or has no load
-WARNING: [Synth 8-7129] Port testpullup in module alchitry_top is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:22 ; elapsed = 00:00:23 . Memory (MB): peak = 1409.004 ; gain = 927.328
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1349.609 ; gain = 866.320
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -450,13 +472,13 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:25 ; elapsed = 00:00:26 . Memory (MB): peak = 1409.004 ; gain = 927.328
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1349.609 ; gain = 866.320
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 1456.852 ; gain = 975.176
+Finished Timing Optimization : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 1406.008 ; gain = 922.719
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -489,7 +511,7 @@ Start Technology Mapping
 INFO: [Synth 8-7052] The timing for the instance brams/bram1/ram_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance brams/bram2/ram_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1488.223 ; gain = 1006.547
+Finished Technology Mapping : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1459.445 ; gain = 976.156
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -507,37 +529,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 1588.773 ; gain = 1107.098
+Finished IO Insertion : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1552.551 ; gain = 1069.262
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:33 ; elapsed = 00:00:34 . Memory (MB): peak = 1588.773 ; gain = 1107.098
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1552.551 ; gain = 1069.262
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1588.773 ; gain = 1107.098
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1552.551 ; gain = 1069.262
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1588.773 ; gain = 1107.098
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1552.551 ; gain = 1069.262
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1589.832 ; gain = 1108.156
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1554.500 ; gain = 1071.211
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1589.832 ; gain = 1108.156
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1554.500 ; gain = 1071.211
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -556,44 +578,43 @@ Report Cell Usage:
 |1     |BUFG     |     1|
 |2     |CARRY4   |    83|
 |3     |LUT1     |    22|
-|4     |LUT2     |   331|
-|5     |LUT3     |   262|
-|6     |LUT4     |   291|
-|7     |LUT5     |   394|
-|8     |LUT6     |  1015|
-|9     |MUXF7    |    50|
-|10    |MUXF8    |     1|
-|11    |RAM16X1D |     6|
-|12    |RAMB18E1 |     2|
-|13    |FDPE     |     8|
-|14    |FDRE     |   544|
-|15    |FDSE     |    14|
-|16    |IBUF     |    10|
-|17    |OBUF     |    69|
+|4     |LUT2     |   270|
+|5     |LUT3     |   279|
+|6     |LUT4     |   286|
+|7     |LUT5     |   310|
+|8     |LUT6     |  1041|
+|9     |MUXF7    |    32|
+|10    |RAM16X1D |     6|
+|11    |RAMB18E1 |     2|
+|12    |FDPE     |     8|
+|13    |FDRE     |   531|
+|14    |FDSE     |     9|
+|15    |IBUF     |    10|
+|16    |OBUF     |    69|
 +------+---------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1589.832 ; gain = 1108.156
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1554.500 ; gain = 1071.211
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 36 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:28 ; elapsed = 00:00:33 . Memory (MB): peak = 1589.832 ; gain = 1016.562
-Synthesis Optimization Complete : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1589.832 ; gain = 1108.156
+Synthesis finished with 0 errors, 0 critical warnings and 134 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:28 ; elapsed = 00:00:34 . Memory (MB): peak = 1554.500 ; gain = 973.977
+Synthesis Optimization Complete : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1554.500 ; gain = 1071.211
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.013 . Memory (MB): peak = 1599.016 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 142 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.013 . Memory (MB): peak = 1563.719 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 123 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1602.719 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1567.406 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 6 instances were transformed.
   RAM16X1D => RAM32X1D (RAMD32(x2)): 6 instances
 
-Synth Design complete | Checksum: ab047ab9
+Synth Design complete | Checksum: 9ccaeda4
 INFO: [Common 17-83] Releasing license: Synthesis
-132 Infos, 90 Warnings, 0 Critical Warnings and 0 Errors encountered.
+133 Infos, 111 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:36 ; elapsed = 00:00:38 . Memory (MB): peak = 1602.719 ; gain = 1316.246
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1602.719 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:35 ; elapsed = 00:00:38 . Memory (MB): peak = 1567.406 ; gain = 1281.805
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1567.406 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/synth_1/alchitry_top.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Fri Apr 11 03:32:25 2025...
+INFO: [Common 17-206] Exiting Vivado at Fri Apr 11 03:42:03 2025...
