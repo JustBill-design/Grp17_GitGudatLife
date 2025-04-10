@@ -231,14 +231,14 @@ module fsm (
     localparam E_States_COMPUTE = 8'haf;
     localparam E_States_AUTO = 8'hb0;
     localparam E_States_IDLE = 8'hb1;
-    localparam _MP_RISE_1864259129 = 1'h1;
-    localparam _MP_FALL_1864259129 = 1'h0;
+    localparam _MP_RISE_128437662 = 1'h1;
+    localparam _MP_FALL_128437662 = 1'h0;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_1864259129),
-        .FALL(_MP_FALL_1864259129)
+        .RISE(_MP_RISE_128437662),
+        .FALL(_MP_FALL_128437662)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -331,7 +331,7 @@ module fsm (
             4'h1: begin
                 D_accel_selector_d = 2'h1;
             end
-            4'h8: begin
+            4'h4: begin
                 D_accel_selector_d = 2'h2;
             end
             default: begin
@@ -421,15 +421,19 @@ module fsm (
                 asel = 1'h0;
                 ra1 = 3'h5;
                 if (move_up_button) begin
+                    D_accel_d = 1'h0;
                     D_states_d = 8'h5;
                 end else begin
                     if (move_down_button) begin
+                        D_accel_d = 1'h0;
                         D_states_d = 8'h10;
                     end else begin
                         if (move_left_button) begin
+                            D_accel_d = 1'h0;
                             D_states_d = 8'h1b;
                         end else begin
                             if (move_right_button) begin
+                                D_accel_d = 1'h0;
                                 D_states_d = 8'h26;
                             end else begin
                                 if (select_button) begin
@@ -532,7 +536,6 @@ module fsm (
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
-                    D_accel_d = 1'h0;
                     D_states_d = 8'h5;
                 end
                 D_debug_dff_d = 8'hff;
@@ -674,7 +677,6 @@ module fsm (
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
-                    D_accel_d = 1'h0;
                     D_states_d = 8'h10;
                 end
                 D_debug_dff_d = 8'hff;
@@ -817,7 +819,6 @@ module fsm (
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
-                    D_accel_d = 1'h0;
                     D_states_d = 8'h1b;
                 end
                 D_debug_dff_d = 8'hff;
@@ -958,7 +959,6 @@ module fsm (
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
-                    D_accel_d = 1'h0;
                     D_states_d = 8'h26;
                 end
             end
@@ -1058,15 +1058,19 @@ module fsm (
                 asel = 1'h0;
                 ra1 = 3'h5;
                 if (move_up_button) begin
+                    D_accel_d = 1'h0;
                     D_states_d = 8'h36;
                 end else begin
                     if (move_down_button) begin
+                        D_accel_d = 1'h0;
                         D_states_d = 8'h41;
                     end else begin
                         if (move_left_button) begin
+                            D_accel_d = 1'h0;
                             D_states_d = 8'h4c;
                         end else begin
                             if (move_right_button) begin
+                                D_accel_d = 1'h0;
                                 D_states_d = 8'h57;
                             end else begin
                                 if (select_button) begin
@@ -1075,7 +1079,13 @@ module fsm (
                                     end
                                 end else begin
                                     if (deselect_button) begin
-                                        D_states_d = 8'h62;
+                                        if (rd1[1'h1]) begin
+                                            D_states_d = 8'h33;
+                                        end
+                                    end else begin
+                                        if (next_start_button) begin
+                                            D_states_d = 8'h62;
+                                        end
                                     end
                                 end
                             end
@@ -1163,7 +1173,6 @@ module fsm (
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
-                    D_accel_d = 1'h0;
                     D_states_d = 8'h36;
                 end
             end
@@ -1306,7 +1315,6 @@ module fsm (
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
-                    D_accel_d = 1'h0;
                     D_states_d = 8'h41;
                 end
             end
@@ -1447,7 +1455,6 @@ module fsm (
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
-                    D_accel_d = 1'h0;
                     D_states_d = 8'h4c;
                 end
             end
@@ -1585,7 +1592,6 @@ module fsm (
                 end else begin
                     D_accel_timer_d = 1'h0;
                     D_accel_selector_d = 1'h0;
-                    D_accel_d = 1'h0;
                     D_states_d = 8'h57;
                 end
                 D_debug_dff_d = 7'h51;

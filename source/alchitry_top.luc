@@ -118,7 +118,6 @@ module alchitry_top (
         io_led[5:4] = cond_butt_sel_desel.out
         io_led[6] = cond_butt_next_play.out
         io_led[7] = reset_cond.out
-        io_led[7] = gameclk.out
 
         // whole board reset
         reset_cond.in = butt_reset
@@ -146,7 +145,7 @@ module alchitry_top (
         
         // connect slow clocks
         timerclk.in = gamecounter.value[$clog2(CLK)-1]
-        gameclk.in = gamecounter.value[$clog2(CLK/3)]
+        gameclk.in = gamecounter.value[$clog2(CLK/10)]
         med_inputclk.in = gamecounter.value[$clog2(CLK/5)]
         sm.timerclk = timerclk.out
         sm.gameclk = gameclk.out

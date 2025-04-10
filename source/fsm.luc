@@ -227,7 +227,7 @@ module fsm #(
         }
         case (accel_timer.q) {
             b0001: accel_selector.d = b01
-            b1000: accel_selector.d = b10
+            b0100: accel_selector.d = b10
             default: accel_selector.d = accel_selector.q
         }
         if (med_inputclk) {
@@ -322,15 +322,19 @@ module fsm #(
                 asel = b0
                 ra1 = TARGET_PIXEL_VALUE
                 if (move_up_button){
+                    accel.d = 0
                     states.d = States.A_UP_DIR_IDLE
                 }
                 else if (move_down_button){
+                    accel.d = 0
                     states.d = States.A_DOWN_DIR_IDLE
                 }
                 else if (move_left_button){
+                    accel.d = 0
                     states.d = States.A_LEFT_DIR_IDLE
                 }
                 else if (move_right_button){
+                    accel.d = 0
                     states.d = States.A_RIGHT_DIR_IDLE
                 }
                 else if (select_button){
@@ -428,7 +432,6 @@ module fsm #(
                 } else {
                     accel_timer.d = 0
                     accel_selector.d = 0
-                    accel.d = 0
                     states.d = States.A_UP_DIR_IDLE
                 }
                 // debugging
@@ -579,7 +582,6 @@ module fsm #(
                 } else {
                     accel_timer.d = 0
                     accel_selector.d = 0
-                    accel.d = 0
                     states.d = States.A_DOWN_DIR_IDLE
                 }
                 // debugging
@@ -729,7 +731,6 @@ module fsm #(
                 } else {
                     accel_timer.d = 0
                     accel_selector.d = 0
-                    accel.d = 0
                     states.d = States.A_LEFT_DIR_IDLE
                 }
                 // debugging
@@ -879,7 +880,6 @@ module fsm #(
                 } else {
                     accel_timer.d = 0
                     accel_selector.d = 0
-                    accel.d = 0
                     states.d = States.A_RIGHT_DIR_IDLE
                 }
 
@@ -992,15 +992,19 @@ module fsm #(
                 asel = b0
                 ra1 = TARGET_PIXEL_VALUE
                 if (move_up_button){
+                    accel.d = 0
                     states.d = States.B_UP_DIR_IDLE
                 }
                 else if (move_down_button){
+                    accel.d = 0
                     states.d = States.B_DOWN_DIR_IDLE
                 }
                 else if (move_left_button){
+                    accel.d = 0
                     states.d = States.B_LEFT_DIR_IDLE
                 }
                 else if (move_right_button){
+                    accel.d = 0
                     states.d = States.B_RIGHT_DIR_IDLE
                 }
                 else if (select_button){
@@ -1008,12 +1012,12 @@ module fsm #(
                         states.d = States.B_SET_PIXEL_B
                     }
                 }
-                //else if (deselect_button){
-                //    if (rd1[1]){
-                //        states.d = States.B_SET_PIXEL_0
-                //    }
-                //}
-                else if (deselect_button){ //TODO replace with start button
+                else if (deselect_button){
+                    if (rd1[1]){
+                        states.d = States.B_SET_PIXEL_0
+                    }
+                }
+                else if (next_start_button){
                     states.d = States.GAME_IDLE
                 }
                 // debugging
@@ -1097,7 +1101,6 @@ module fsm #(
                 } else {
                     accel_timer.d = 0
                     accel_selector.d = 0
-                    accel.d = 0
                     states.d = States.B_UP_DIR_IDLE
                 }
 
@@ -1247,7 +1250,6 @@ module fsm #(
                 } else {
                     accel_timer.d = 0
                     accel_selector.d = 0
-                    accel.d = 0
                     states.d = States.B_DOWN_DIR_IDLE
                 }
 
@@ -1395,7 +1397,6 @@ module fsm #(
                 } else {
                     accel_timer.d = 0
                     accel_selector.d = 0
-                    accel.d = 0
                     states.d = States.B_LEFT_DIR_IDLE
                 }
 
@@ -1538,7 +1539,6 @@ module fsm #(
                 } else {
                     accel_timer.d = 0
                     accel_selector.d = 0
-                    accel.d = 0
                     states.d = States.B_RIGHT_DIR_IDLE
                 }
                 debug_dff.d = 81
