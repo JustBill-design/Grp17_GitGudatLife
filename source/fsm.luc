@@ -393,20 +393,19 @@ module fsm #(
 
             States.A_UP_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
-                if (select_button){
-                    if(~|rd1[1:0]){
-                        states.d = States.A_UP_COUNTP1
+                if (move_up_button){
+                    if (select_button){
+                        if(~|rd1[1:0]){
+                            states.d = States.A_UP_COUNTP1
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[0]){
+                            states.d = States.A_UP_COUNTM1
+                        }
+                    } else {
+                        states.d = States.A_UP_CHECK_PIXEL
                     }
-                }
-                else if (deselect_button){
-                    if (rd1[0]){
-                        states.d = States.A_UP_COUNTM1
-                    }
-                }
-                else if (move_up_button){
-                    states.d = States.A_UP_CHECK_PIXEL
-                }
-                else {
+                } else {
                     states.d = States.A_INPUT_IDLE
                 }
                 // debugging
@@ -1005,9 +1004,9 @@ module fsm #(
                         states.d = States.B_SET_PIXEL_0
                     }
                 }
-                else if (next_start_button){
-                    states.d = States.GAME_IDLE
-                }
+                //else if (next_start_button){
+                    //states.d = States.GAME_IDLE
+                //}
                 // debugging
                 debug_dff.d = 50
                 

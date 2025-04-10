@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Wed Apr  9 22:48:29 2025
+| Date             : Thu Apr 10 22:12:08 2025
 | Host             : PC running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
@@ -33,7 +33,7 @@ Table of Contents
 | Total On-Chip Power (W)  | 0.081        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.009        |
+| Dynamic (W)              | 0.010        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 4.9          |
 | Max Ambient (C)          | 84.6         |
@@ -53,14 +53,14 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |    <0.001 |        3 |       --- |             --- |
-| Slice Logic              |     0.002 |     2907 |       --- |             --- |
-|   LUT as Logic           |     0.002 |     1687 |     20800 |            8.11 |
+| Slice Logic              |     0.002 |     3043 |       --- |             --- |
+|   LUT as Logic           |     0.002 |     1798 |     20800 |            8.64 |
 |   CARRY4                 |    <0.001 |       90 |      8150 |            1.10 |
-|   Register               |    <0.001 |      564 |     41600 |            1.36 |
-|   F7/F8 Muxes            |    <0.001 |       49 |     32600 |            0.15 |
+|   Register               |    <0.001 |      569 |     41600 |            1.37 |
+|   F7/F8 Muxes            |    <0.001 |       44 |     32600 |            0.13 |
 |   LUT as Distributed RAM |    <0.001 |        6 |      9600 |            0.06 |
 |   Others                 |     0.000 |       76 |       --- |             --- |
-| Signals                  |     0.002 |     2522 |       --- |             --- |
+| Signals                  |     0.002 |     2673 |       --- |             --- |
 | Block RAM                |    <0.001 |        1 |        50 |            2.00 |
 | I/O                      |     0.005 |       79 |       170 |           46.47 |
 | Static Power             |     0.072 |          |           |                 |
@@ -143,9 +143,9 @@ Table of Contents
 +--------------+-----------+
 | Name         | Power (W) |
 +--------------+-----------+
-| alchitry_top |     0.009 |
+| alchitry_top |     0.010 |
 |   L_reg      |     0.001 |
-|   sm         |     0.002 |
+|   sm         |     0.003 |
 +--------------+-----------+
 
 
