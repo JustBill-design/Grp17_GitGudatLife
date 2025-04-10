@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Fri Apr 11 02:38:12 2025
+| Date         : Fri Apr 11 02:54:11 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_drc -file alchitry_top_drc_opted.rpt -pb alchitry_top_drc_opted.pb -rpx alchitry_top_drc_opted.rpx
 | Design       : alchitry_top
@@ -24,12 +24,18 @@ Table of Contents
       Design limits: <entire design considered>
            Ruledeck: default
              Max checks: <unlimited>
-             Checks found: 0
-+------+----------+-------------+--------+
-| Rule | Severity | Description | Checks |
-+------+----------+-------------+--------+
-+------+----------+-------------+--------+
+             Checks found: 1
++-----------+----------+----------------------------+--------+
+| Rule      | Severity | Description                | Checks |
++-----------+----------+----------------------------+--------+
+| REQP-1840 | Warning  | RAMB18 async control check | 1      |
++-----------+----------+----------------------------+--------+
 
 2. REPORT DETAILS
 -----------------
+REQP-1840#1 Warning
+RAMB18 async control check  
+The RAMB18E1 sm/D_debug_dff_q_reg has an input control pin sm/D_debug_dff_q_reg/RSTRAMARSTRAM (net: sm/io_led_OBUF[5]) which is driven by a register (reset_cond/D_stage_q_reg[3]) that has an active asychronous set or reset. This may cause corruption of the memory contents and/or read values when the set/reset is asserted and is not analyzed by the default static timing analysis. It is suggested to eliminate the use of a set/reset to registers driving this RAMB pin or else use a synchronous reset in which the assertion of the reset is timed by default.
+Related violations: <none>
+
 
