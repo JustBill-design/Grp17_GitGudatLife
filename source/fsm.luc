@@ -317,7 +317,8 @@ module fsm #(
                 // debugging
                 debug_dff.d = 8
 
-            // Player A Turn
+        // A INPUT -------------------------------------------------------
+
             States.A_INPUT_IDLE:
                 asel = b0
                 ra1 = TARGET_PIXEL_VALUE
@@ -544,20 +545,23 @@ module fsm #(
 
             States.A_DOWN_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
-                if (select_button){
-                    if(~|rd1[1:0]){
-                        states.d = States.A_DOWN_COUNTP1
+                if (move_up_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.A_DOWN_COUNTP1
+                        } else {
+                            states.d = States.A_DOWN_CHECK_PIXEL
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[0]) {
+                            states.d = States.A_DOWN_COUNTM1
+                        } else {
+                            states.d = States.A_DOWN_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.A_DOWN_CHECK_PIXEL
                     }
-                }
-                else if (deselect_button){
-                    if (rd1[0]){
-                        states.d = States.A_DOWN_COUNTM1
-                    }
-                }
-                else if (move_down_button){
-                    states.d = States.A_DOWN_CHECK_PIXEL
-                }
-                else {
+                } else {
                     states.d = States.A_INPUT_IDLE
                 }
                 // debugging
@@ -712,20 +716,24 @@ module fsm #(
                 // debugging
                 debug_dff.d = 30
             States.A_LEFT_CLK:
-                if (move_left_button) {
-                    if (accel_edge.out) {
-                        case (accel_timer.q) {
-                            b1111: accel_timer.d = accel_timer.q
-                            default: accel_timer.d = accel_timer.q + 1
+                if (move_up_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.A_LEFT_COUNTP1
+                        } else {
+                            states.d = States.A_LEFT_CHECK_PIXEL
                         }
-                        accel.d = 0
-                        states.d = States.A_LEFT_DIR_IDLE
+                    } else if (deselect_button) {
+                        if (rd1[0]) {
+                            states.d = States.A_LEFT_COUNTM1
+                        } else {
+                            states.d = States.A_LEFT_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.A_LEFT_CHECK_PIXEL
                     }
                 } else {
-                    accel_timer.d = 0
-                    accel_selector.d = 0
-                    accel.d = 0
-                    states.d = States.A_LEFT_DIR_IDLE
+                    states.d = States.A_INPUT_IDLE
                 }
                 // debugging
                 debug_dff.d = 255
@@ -839,20 +847,23 @@ module fsm #(
 
             States.A_RIGHT_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
-                if (select_button){
-                    if(~|rd1[1:0]){
-                        states.d = States.A_RIGHT_COUNTP1
+                if (move_up_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.A_RIGHT_COUNTP1
+                        } else {
+                            states.d = States.A_RIGHT_CHECK_PIXEL
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[0]) {
+                            states.d = States.A_RIGHT_COUNTM1
+                        } else {
+                            states.d = States.A_RIGHT_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.A_RIGHT_CHECK_PIXEL
                     }
-                }
-                else if (deselect_button){
-                    if (rd1[0]){
-                        states.d = States.A_RIGHT_COUNTM1
-                    }
-                }
-                else if (move_right_button){
-                    states.d = States.A_RIGHT_CHECK_PIXEL
-                }
-                else {
+                } else {
                     states.d = States.A_INPUT_IDLE
                 }
                 
@@ -981,8 +992,8 @@ module fsm #(
                 // debugging
                 debug_dff.d = 49
             
+            // A INPUT ------------------------------------------------------------------
 
-            //Player B is placing
             States.B_INPUT_IDLE:
                 asel = b0
                 ra1 = TARGET_PIXEL_VALUE
@@ -1018,20 +1029,23 @@ module fsm #(
 
             States.B_UP_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
-                if (select_button){
-                    if(~|rd1[1:0]){
-                        states.d = States.B_UP_COUNTP1
+                if (move_up_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.B_UP_COUNTP1
+                        } else {
+                            states.d = States.B_UP_CHECK_PIXEL
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[1]) {
+                            states.d = States.B_UP_COUNTM1
+                        } else {
+                            states.d = States.B_UP_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.B_UP_CHECK_PIXEL
                     }
-                }
-                else if (deselect_button){
-                    if (rd1[1]){
-                        states.d = States.B_UP_COUNTM1
-                    }
-                }
-                else if (move_up_button){
-                    states.d = States.B_UP_CHECK_PIXEL
-                }
-                else {
+                } else {
                     states.d = States.B_INPUT_IDLE
                 }
                 // debugging
@@ -1068,7 +1082,7 @@ module fsm #(
             
             States.B_UP_SET_PIXEL_B:
                 we = b1 
-                wdsel = b0010
+                wdsel = b0011
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_UP_CHECK_PIXEL
                 // debugging
@@ -1167,20 +1181,23 @@ module fsm #(
                 alufn = b000001
                 asel = b0
                 ra1 = TARGET_PIXEL_VALUE
-                if (select_button){
-                    if(~|rd1[1:0]){
-                        states.d = States.B_DOWN_COUNTP1
+                if (move_up_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.B_DOWN_COUNTP1
+                        } else {
+                            states.d = States.B_DOWN_CHECK_PIXEL
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[1]) {
+                            states.d = States.B_DOWN_COUNTM1
+                        } else {
+                            states.d = States.B_DOWN_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.B_DOWN_CHECK_PIXEL
                     }
-                }
-                else if (deselect_button){
-                    if (rd1[1]){
-                        states.d = States.B_DOWN_COUNTM1
-                    }
-                }
-                else if (move_down_button){
-                    states.d = States.B_DOWN_CHECK_PIXEL
-                }
-                else {
+                } else {
                     states.d = States.B_INPUT_IDLE
                 }
                 // debugging
@@ -1217,7 +1234,7 @@ module fsm #(
             
             States.B_DOWN_SET_PIXEL_B:
                 we = b1 
-                wdsel = b0010
+                wdsel = b0011
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_DOWN_CHECK_PIXEL
                 // debugging
@@ -1246,7 +1263,7 @@ module fsm #(
             States.B_DOWN_CHECK_PIXEL:
                 alufn = b110101
                 asel = b0
-                bsel = b0111
+                bsel = b1010
                 ra1 = TARGET_PIXEL_ADDRESS
                 if(~aluout[0]){
                     states.d = States.B_DOWN_RESET_PIXEL
@@ -1313,20 +1330,23 @@ module fsm #(
 
             States.B_LEFT_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
-                if (select_button){
-                    if(~|rd1[1:0]){
-                        states.d = States.B_LEFT_COUNTP1
+                if (move_up_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.B_LEFT_COUNTP1
+                        } else {
+                            states.d = States.B_LEFT_CHECK_PIXEL
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[1]) {
+                            states.d = States.B_LEFT_COUNTM1
+                        } else {
+                            states.d = States.B_LEFT_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.B_LEFT_CHECK_PIXEL
                     }
-                }
-                else if (deselect_button){
-                    if (rd1[1]){
-                        states.d = States.B_LEFT_COUNTM1
-                    }
-                }
-                else if (move_left_button){
-                    states.d = States.B_LEFT_CHECK_PIXEL
-                }
-                else {
+                } else {
                     states.d = States.B_INPUT_IDLE
                 }
                 // debugging
@@ -1363,7 +1383,7 @@ module fsm #(
             
             States.B_LEFT_SET_PIXEL_B:
                 we = b1 
-                wdsel = b0010
+                wdsel = b0011
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_LEFT_CHECK_PIXEL
                 // debugging
@@ -1438,6 +1458,7 @@ module fsm #(
                 wdsel = b0100
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_LEFT_CURSOR_COLOUR
+                debug_dff.d = 79
             
             States.B_LEFT_CURSOR_COLOUR:
                 asel = b0
@@ -1447,29 +1468,33 @@ module fsm #(
                 bwd = b11
                 brsel = b00
                 states.d = States.B_LEFT_CLK
+                debug_dff.d = 80
             
         // B INPUT RIGHT DIRECTION ------------------------------------------------------
 
             States.B_RIGHT_DIR_IDLE:
-                alufn = b000001
-                asel = b0
                 ra1 = TARGET_PIXEL_VALUE
-                if (select_button){
-                    if(~|rd1[1:0]){
-                        states.d = States.B_RIGHT_COUNTP1
+                if (move_up_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.B_RIGHT_COUNTP1
+                        } else {
+                            states.d = States.B_RIGHT_CHECK_PIXEL
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[1]) {
+                            states.d = States.B_RIGHT_COUNTM1
+                        } else {
+                            states.d = States.B_RIGHT_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.B_RIGHT_CHECK_PIXEL
                     }
-                }
-                else if (deselect_button){
-                    if (rd1[1]){
-                        states.d = States.B_RIGHT_COUNTM1
-                    }
-                }
-                else if (move_right_button){
-                    states.d = States.B_RIGHT_CHECK_PIXEL
-                }
-                else {
+                } else {
                     states.d = States.B_INPUT_IDLE
                 }
+                debug_dff.d = 80
+                
 
             States.B_RIGHT_CLK:
                 if (move_right_button) {
@@ -1487,6 +1512,7 @@ module fsm #(
                     accel.d = 0
                     states.d = States.B_RIGHT_DIR_IDLE
                 }
+                debug_dff.d = 81
 
             States.B_RIGHT_COUNTP1:
                 alufn = b000000
@@ -1497,13 +1523,15 @@ module fsm #(
                 wdsel = b0000
                 wa = B_COUNT
                 states.d = States.B_RIGHT_SET_PIXEL_B
+                debug_dff.d = 82
             
             States.B_RIGHT_SET_PIXEL_B:
                 we = b1 
-                wdsel = b0010
+                wdsel = b0011
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_RIGHT_CHECK_PIXEL
-            
+                
+
             States.B_RIGHT_COUNTM1:
                 alufn = b000001
                 asel = b0
