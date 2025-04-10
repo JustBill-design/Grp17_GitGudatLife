@@ -61,6 +61,8 @@ module alchitry_top (
         edge_detector gameclk(#RISE(1),#FALL(0))        // ticks roughly 10 times per second
         edge_detector med_inputclk(#RISE(1),#FALL(0))   // ticks roughly 5 times per second
         
+        // debug
+        edge_detector edge_up(#RISE(1),#FALL(0))
 
         .rst(rst) {
         
@@ -91,7 +93,7 @@ module alchitry_top (
             dff buff1[2]
             dff buff2[2]
             dff buff3[2]
-            dff buff4[2]
+            dff buff4[4]
 
             // dff pixeldata[2](#INIT(b00))
             // dff bramtest_8points[3]
@@ -113,11 +115,16 @@ module alchitry_top (
         buff2.d = buff2.q
         buff3.d = buff3.q
         buff4.d = buff4.q
+        edge_up.in = cond_butt_dirs.out[0]
+        if (edge_up.out) {
+            buff4.d = buff4.q + 1
+        }
         
         io_led[3:0] = cond_butt_dirs.out
         io_led[5:4] = cond_butt_sel_desel.out
         io_led[6] = cond_butt_next_play.out
         io_led[7] = reset_cond.out
+        io_led[7:4] = buff4.q
 
         // whole board reset
         reset_cond.in = butt_reset

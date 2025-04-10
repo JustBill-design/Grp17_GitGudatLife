@@ -13,12 +13,12 @@ module button_conditioner #(
         input wire in,
         output reg out
     );
-    localparam _MP_DEPTH_80362419 = NUM_SYNC;
+    localparam _MP_DEPTH_205159426 = NUM_SYNC;
     logic M_sync_in;
     logic M_sync_out;
     
     pipeline #(
-        .DEPTH(_MP_DEPTH_80362419)
+        .DEPTH(_MP_DEPTH_205159426)
     ) sync (
         .clk(clk),
         .in(M_sync_in),
