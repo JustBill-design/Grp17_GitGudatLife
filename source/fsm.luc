@@ -2019,6 +2019,7 @@ module fsm #(
                 wdsel = b101
                 wa = TARGET_PIXEL_VALUE
                 sre2 = b1
+                states.d = States.READ_MID_RIGHT
                 debug_dff.d = 118
 
             // Reading mid right pixel for neighbours
