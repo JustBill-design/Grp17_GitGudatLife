@@ -15,14 +15,14 @@ module adder #(
         output reg v,
         output reg n
     );
-    localparam _MP_SIZE_1326929416 = SIZE;
-    logic [(_MP_SIZE_1326929416)-1:0] M_rca_a;
-    logic [(_MP_SIZE_1326929416)-1:0] M_rca_b;
+    localparam _MP_SIZE_672522805 = SIZE;
+    logic [(_MP_SIZE_672522805)-1:0] M_rca_a;
+    logic [(_MP_SIZE_672522805)-1:0] M_rca_b;
     logic M_rca_cin;
-    logic [(_MP_SIZE_1326929416)-1:0] M_rca_s;
+    logic [(_MP_SIZE_672522805)-1:0] M_rca_s;
     
     rca #(
-        .SIZE(_MP_SIZE_1326929416)
+        .SIZE(_MP_SIZE_672522805)
     ) rca (
         .a(M_rca_a),
         .b(M_rca_b),

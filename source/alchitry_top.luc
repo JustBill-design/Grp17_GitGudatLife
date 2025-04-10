@@ -127,16 +127,16 @@ module alchitry_top (
         io_led[3:0] = buff4.q
 
         // whole board reset
-        reset_cond.in = ~butt_reset
+        reset_cond.in = butt_reset
         rst = reset_cond.out
         // default board led and usb connection
         led = 8h00
         usb_tx = usb_rx
         
         // button processing
-        cond_butt_dirs.in[3:0] = ~butt_dirs[3:0]
-        cond_butt_sel_desel.in[1:0] = ~butt_sel_desel[1:0]
-        cond_butt_next_play.in = ~butt_next_play
+        cond_butt_dirs.in[3:0] = butt_dirs[3:0]
+        cond_butt_sel_desel.in[1:0] = butt_sel_desel[1:0]
+        cond_butt_next_play.in = butt_next_play
         edge_next_play.in = cond_butt_next_play.out
 
         // matrix and display driver connections
