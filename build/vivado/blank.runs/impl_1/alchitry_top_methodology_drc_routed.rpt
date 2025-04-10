@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Fri Apr 11 02:54:27 2025
+| Date         : Fri Apr 11 03:14:26 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_methodology -file alchitry_top_methodology_drc_routed.rpt -pb alchitry_top_methodology_drc_routed.pb -rpx alchitry_top_methodology_drc_routed.rpx
 | Design       : alchitry_top
@@ -23,12 +23,12 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 78
+             Checks found: 77
 +-----------+----------+--------------------------------------------+--------+
 | Rule      | Severity | Description                                | Checks |
 +-----------+----------+--------------------------------------------+--------+
 | LUTAR-1   | Warning  | LUT drives async reset alert               | 1      |
-| SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 3      |
+| SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 2      |
 | TIMING-18 | Warning  | Missing input or output delay              | 74     |
 +-----------+----------+--------------------------------------------+--------+
 
@@ -48,11 +48,6 @@ Related violations: <none>
 SYNTH-6#2 Warning
 Timing of a RAM block might be sub-optimal  
 The timing for the instance brams/bram2/ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
-Related violations: <none>
-
-SYNTH-6#3 Warning
-Timing of a RAM block might be sub-optimal  
-The timing for the instance sm/D_debug_dff_q_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 TIMING-18#1 Warning
