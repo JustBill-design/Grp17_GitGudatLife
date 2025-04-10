@@ -45,9 +45,9 @@ module alchitry_top (
         reset_conditioner fifo_reset_cond   // reset for shift registers
 
         // button conditioners
-        button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}),#MIN_DELAY(4x{{200}}),#NUM_SYNC(4x{{3}}))
-        button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}),#MIN_DELAY(2x{{200}}),#NUM_SYNC(2x{{3}}))
-        button_conditioner cond_butt_next_play(#CLK_FREQ(CLK),#MIN_DELAY(200),#NUM_SYNC(3))
+        button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}),#MIN_DELAY(4x{{800}}),#NUM_SYNC(4x{{3}}))
+        button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}),#MIN_DELAY(2x{{800}}),#NUM_SYNC(2x{{3}}))
+        button_conditioner cond_butt_next_play(#CLK_FREQ(CLK),#MIN_DELAY(800),#NUM_SYNC(3))
         // button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}))
         // button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}))
         // button_conditioner cond_butt_next_play(#CLK_FREQ(CLK))
@@ -124,7 +124,7 @@ module alchitry_top (
         io_led[5:4] = cond_butt_sel_desel.out
         io_led[6] = cond_butt_next_play.out
         io_led[7] = reset_cond.out
-        io_led[7:4] = buff4.q
+        io_led[3:0] = buff4.q
 
         // whole board reset
         reset_cond.in = ~butt_reset
