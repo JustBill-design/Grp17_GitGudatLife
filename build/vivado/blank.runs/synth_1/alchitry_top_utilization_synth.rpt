@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Thu Apr 10 22:32:29 2025
+| Date         : Thu Apr 10 22:43:36 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb
 | Design       : alchitry_top
@@ -31,13 +31,13 @@ Table of Contents
 +----------------------------+------+-------+------------+-----------+-------+
 |          Site Type         | Used | Fixed | Prohibited | Available | Util% |
 +----------------------------+------+-------+------------+-----------+-------+
-| Slice LUTs*                | 1914 |     0 |          0 |     20800 |  9.20 |
-|   LUT as Logic             | 1902 |     0 |          0 |     20800 |  9.14 |
+| Slice LUTs*                | 1744 |     0 |          0 |     20800 |  8.38 |
+|   LUT as Logic             | 1732 |     0 |          0 |     20800 |  8.33 |
 |   LUT as Memory            |   12 |     0 |          0 |      9600 |  0.13 |
 |     LUT as Distributed RAM |   12 |     0 |            |           |       |
 |     LUT as Shift Register  |    0 |     0 |            |           |       |
-| Slice Registers            |  569 |     0 |          0 |     41600 |  1.37 |
-|   Register as Flip Flop    |  569 |     0 |          0 |     41600 |  1.37 |
+| Slice Registers            |  563 |     0 |          0 |     41600 |  1.35 |
+|   Register as Flip Flop    |  563 |     0 |          0 |     41600 |  1.35 |
 |   Register as Latch        |    0 |     0 |          0 |     41600 |  0.00 |
 | F7 Muxes                   |   51 |     0 |          0 |     16300 |  0.31 |
 | F8 Muxes                   |    0 |     0 |          0 |      8150 |  0.00 |
@@ -61,7 +61,7 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 | 0     |          Yes |           - |            - |
 | 8     |          Yes |           - |          Set |
 | 0     |          Yes |           - |        Reset |
-| 15    |          Yes |         Set |            - |
+| 9     |          Yes |         Set |            - |
 | 546   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
@@ -152,19 +152,19 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT6     | 1019 |                 LUT |
+| LUT6     |  898 |                 LUT |
 | FDRE     |  546 |        Flop & Latch |
-| LUT5     |  381 |                 LUT |
-| LUT2     |  319 |                 LUT |
-| LUT4     |  309 |                 LUT |
-| LUT3     |  264 |                 LUT |
+| LUT5     |  358 |                 LUT |
+| LUT4     |  298 |                 LUT |
+| LUT2     |  296 |                 LUT |
+| LUT3     |  257 |                 LUT |
 | CARRY4   |   90 |          CarryLogic |
 | OBUF     |   69 |                  IO |
 | MUXF7    |   51 |               MuxFx |
 | LUT1     |   22 |                 LUT |
-| FDSE     |   15 |        Flop & Latch |
 | RAMD32   |   12 |  Distributed Memory |
 | IBUF     |   10 |                  IO |
+| FDSE     |    9 |        Flop & Latch |
 | FDPE     |    8 |        Flop & Latch |
 | RAMB18E1 |    2 |        Block Memory |
 | BUFG     |    1 |               Clock |

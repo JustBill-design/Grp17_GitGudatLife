@@ -394,13 +394,17 @@ module fsm #(
             States.A_UP_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
                 if (move_up_button){
-                    if (~|rd1[1:0]){
-                        if(select_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
                             states.d = States.A_UP_COUNTP1
+                        } else {
+                            states.d = States.A_UP_CHECK_PIXEL
                         }
-                    } else if (rd1[0]) {
-                        if (deselect_button){
+                    } else if (deselect_button) {
+                        if (rd1[0]) {
                             states.d = States.A_UP_COUNTM1
+                        } else {
+                            states.d = States.A_UP_CHECK_PIXEL
                         }
                     } else {
                         states.d = States.A_UP_CHECK_PIXEL

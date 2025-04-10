@@ -229,14 +229,14 @@ module fsm (
     localparam E_States_COMPUTE = 8'had;
     localparam E_States_AUTO = 8'hae;
     localparam E_States_IDLE = 8'haf;
-    localparam _MP_RISE_977270371 = 1'h1;
-    localparam _MP_FALL_977270371 = 1'h0;
+    localparam _MP_RISE_1851794996 = 1'h1;
+    localparam _MP_FALL_1851794996 = 1'h0;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_977270371),
-        .FALL(_MP_FALL_977270371)
+        .RISE(_MP_RISE_1851794996),
+        .FALL(_MP_FALL_1851794996)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -491,14 +491,18 @@ module fsm (
             8'h5: begin
                 ra1 = 3'h5;
                 if (move_up_button) begin
-                    if (~(|rd1[1'h1:1'h0])) begin
-                        if (select_button) begin
+                    if (select_button) begin
+                        if (~(|rd1[1'h1:1'h0])) begin
                             D_states_d = 8'h7;
+                        end else begin
+                            D_states_d = 8'hb;
                         end
                     end else begin
-                        if (rd1[1'h0]) begin
-                            if (deselect_button) begin
+                        if (deselect_button) begin
+                            if (rd1[1'h0]) begin
                                 D_states_d = 8'h9;
+                            end else begin
+                                D_states_d = 8'hb;
                             end
                         end else begin
                             D_states_d = 8'hb;
