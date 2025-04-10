@@ -229,14 +229,14 @@ module fsm (
     localparam E_States_COMPUTE = 8'had;
     localparam E_States_AUTO = 8'hae;
     localparam E_States_IDLE = 8'haf;
-    localparam _MP_RISE_1551674203 = 1'h1;
-    localparam _MP_FALL_1551674203 = 1'h0;
+    localparam _MP_RISE_789100198 = 1'h1;
+    localparam _MP_FALL_789100198 = 1'h0;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_1551674203),
-        .FALL(_MP_FALL_1551674203)
+        .RISE(_MP_RISE_789100198),
+        .FALL(_MP_FALL_789100198)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -632,7 +632,7 @@ module fsm (
             end
             8'h10: begin
                 ra1 = 3'h5;
-                if (move_up_button) begin
+                if (move_down_button) begin
                     if (select_button) begin
                         if (~(|rd1[1'h1:1'h0])) begin
                             D_states_d = 8'h12;
@@ -697,7 +697,7 @@ module fsm (
                 D_debug_dff_d = 5'h16;
             end
             8'h14: begin
-                alufn = 5'h1;
+                alufn = 6'h1;
                 asel = 1'h0;
                 bsel = 4'h1;
                 we = 1'h1;
@@ -777,22 +777,26 @@ module fsm (
             end
             8'h1b: begin
                 ra1 = 3'h5;
-                if (select_button) begin
-                    if (~(|rd1[1'h1:1'h0])) begin
-                        D_states_d = 8'h1d;
-                    end
-                end else begin
-                    if (deselect_button) begin
-                        if (rd1[1'h0]) begin
-                            D_states_d = 8'h1f;
+                if (move_left_button) begin
+                    if (select_button) begin
+                        if (~(|rd1[1'h1:1'h0])) begin
+                            D_states_d = 8'h1d;
+                        end else begin
+                            D_states_d = 8'h21;
                         end
                     end else begin
-                        if (move_left_button) begin
-                            D_states_d = 8'h21;
+                        if (deselect_button) begin
+                            if (rd1[1'h0]) begin
+                                D_states_d = 8'h1f;
+                            end else begin
+                                D_states_d = 8'h21;
+                            end
                         end else begin
-                            D_states_d = 8'h0;
+                            D_states_d = 8'h21;
                         end
                     end
+                end else begin
+                    D_states_d = 8'h0;
                 end
                 D_debug_dff_d = 5'h1e;
             end
@@ -915,7 +919,7 @@ module fsm (
             end
             8'h26: begin
                 ra1 = 3'h5;
-                if (move_up_button) begin
+                if (move_right_button) begin
                     if (select_button) begin
                         if (~(|rd1[1'h1:1'h0])) begin
                             D_states_d = 8'h28;
@@ -1073,9 +1077,7 @@ module fsm (
                                     end
                                 end else begin
                                     if (deselect_button) begin
-                                        if (rd1[1'h1]) begin
-                                            D_states_d = 8'h33;
-                                        end
+                                        D_states_d = 8'h60;
                                     end
                                 end
                             end
@@ -1231,7 +1233,7 @@ module fsm (
                 alufn = 6'h1;
                 asel = 1'h0;
                 ra1 = 3'h5;
-                if (move_up_button) begin
+                if (move_down_button) begin
                     if (select_button) begin
                         if (~(|rd1[1'h1:1'h0])) begin
                             D_states_d = 8'h41;
@@ -1373,7 +1375,7 @@ module fsm (
             end
             8'h4a: begin
                 ra1 = 3'h5;
-                if (move_up_button) begin
+                if (move_left_button) begin
                     if (select_button) begin
                         if (~(|rd1[1'h1:1'h0])) begin
                             D_states_d = 8'h4c;
@@ -1511,7 +1513,7 @@ module fsm (
             end
             8'h55: begin
                 ra1 = 3'h5;
-                if (move_up_button) begin
+                if (move_right_button) begin
                     if (select_button) begin
                         if (~(|rd1[1'h1:1'h0])) begin
                             D_states_d = 8'h57;
@@ -1573,6 +1575,7 @@ module fsm (
                 wdsel = 4'h3;
                 wa = 3'h5;
                 D_states_d = 8'h5b;
+                D_debug_dff_d = 7'h53;
             end
             8'h59: begin
                 alufn = 6'h1;
@@ -1583,12 +1586,14 @@ module fsm (
                 wdsel = 4'h0;
                 wa = 2'h3;
                 D_states_d = 8'h5a;
+                D_debug_dff_d = 7'h54;
             end
             8'h5a: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h5;
                 D_states_d = 8'h5b;
+                D_debug_dff_d = 7'h55;
             end
             8'h5b: begin
                 ra1 = 3'h4;
@@ -1597,6 +1602,7 @@ module fsm (
                 end else begin
                     D_states_d = 8'h5c;
                 end
+                D_debug_dff_d = 7'h56;
             end
             8'h5c: begin
                 asel = 1'h0;
@@ -1608,6 +1614,7 @@ module fsm (
                 brsel = 2'h0;
                 bwe = 1'h1;
                 D_states_d = 8'h5d;
+                D_debug_dff_d = 7'h57;
             end
             8'h5d: begin
                 if (ddr) begin
@@ -1625,12 +1632,14 @@ module fsm (
                     bwe = 1'h1;
                     D_states_d = 8'h5e;
                 end
+                D_debug_dff_d = 7'h58;
             end
             8'h5e: begin
                 we = 1'h1;
                 wdsel = 4'h4;
                 wa = 3'h5;
                 D_states_d = 8'h5f;
+                D_debug_dff_d = 7'h59;
             end
             8'h5f: begin
                 asel = 1'h0;
@@ -1640,6 +1649,7 @@ module fsm (
                 bwd = 2'h3;
                 brsel = 2'h0;
                 D_states_d = 8'h56;
+                D_debug_dff_d = 7'h5a;
             end
             8'h60: begin
                 if (D_decrease_timer_q) begin
@@ -1665,6 +1675,7 @@ module fsm (
                         end
                     end
                 end
+                D_debug_dff_d = 7'h5b;
             end
             8'h61: begin
                 alufn = 6'h1;
@@ -1678,6 +1689,7 @@ module fsm (
                 if (next_start_button) begin
                     D_states_d = 8'ha3;
                 end
+                D_debug_dff_d = 7'h5c;
             end
             8'h63: begin
                 ra1 = 3'h4;
@@ -1690,10 +1702,12 @@ module fsm (
                         D_states_d = 8'h6c;
                     end
                 end
+                D_debug_dff_d = 7'h5d;
             end
             8'h64: begin
                 srst = 1'h1;
                 D_states_d = 8'h65;
+                D_debug_dff_d = 7'h5e;
             end
             8'h65: begin
                 if (ddr) begin

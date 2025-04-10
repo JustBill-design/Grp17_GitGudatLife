@@ -545,7 +545,7 @@ module fsm #(
 
             States.A_DOWN_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
-                if (move_up_button){
+                if (move_down_button){
                     if (select_button){
                         if (~|rd1[1:0]) {
                             states.d = States.A_DOWN_COUNTP1
@@ -607,7 +607,7 @@ module fsm #(
                 debug_dff.d = 22
             
             States.A_DOWN_COUNTM1:
-                alufn = b00001
+                alufn = b000001
                 asel = b0
                 bsel = b0001
                 we = b1
@@ -697,20 +697,23 @@ module fsm #(
 
             States.A_LEFT_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
-                if (select_button){
-                    if(~|rd1[1:0]){
-                        states.d = States.A_LEFT_COUNTP1
+                if (move_left_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.A_LEFT_COUNTP1
+                        } else {
+                            states.d = States.A_LEFT_CHECK_PIXEL
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[0]) {
+                            states.d = States.A_LEFT_COUNTM1
+                        } else {
+                            states.d = States.A_LEFT_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.A_LEFT_CHECK_PIXEL
                     }
-                }
-                else if (deselect_button){
-                    if (rd1[0]){
-                        states.d = States.A_LEFT_COUNTM1
-                    }
-                }
-                else if (move_left_button){
-                    states.d = States.A_LEFT_CHECK_PIXEL
-                }
-                else {
+                } else {
                     states.d = States.A_INPUT_IDLE
                 }
                 // debugging
@@ -847,7 +850,7 @@ module fsm #(
 
             States.A_RIGHT_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
-                if (move_up_button){
+                if (move_right_button){
                     if (select_button){
                         if (~|rd1[1:0]) {
                             states.d = States.A_RIGHT_COUNTP1
@@ -992,7 +995,7 @@ module fsm #(
                 // debugging
                 debug_dff.d = 49
             
-            // A INPUT ------------------------------------------------------------------
+        // B INPUT ------------------------------------------------------------------
 
             States.B_INPUT_IDLE:
                 asel = b0
@@ -1014,14 +1017,14 @@ module fsm #(
                         states.d = States.B_SET_PIXEL_B
                     }
                 }
-                else if (deselect_button){
-                    if (rd1[1]){
-                        states.d = States.B_SET_PIXEL_0
-                    }
-                }
-                //else if (next_start_button){
-                    //states.d = States.GAME_IDLE
+                //else if (deselect_button){
+                //    if (rd1[1]){
+                //        states.d = States.B_SET_PIXEL_0
+                //    }
                 //}
+                else if (deselect_button){ //TODO replace with start button
+                    states.d = States.GAME_IDLE
+                }
                 // debugging
                 debug_dff.d = 50
                 
@@ -1181,7 +1184,7 @@ module fsm #(
                 alufn = b000001
                 asel = b0
                 ra1 = TARGET_PIXEL_VALUE
-                if (move_up_button){
+                if (move_down_button){
                     if (select_button){
                         if (~|rd1[1:0]) {
                             states.d = States.B_DOWN_COUNTP1
@@ -1330,7 +1333,7 @@ module fsm #(
 
             States.B_LEFT_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
-                if (move_up_button){
+                if (move_left_button){
                     if (select_button){
                         if (~|rd1[1:0]) {
                             states.d = States.B_LEFT_COUNTP1
@@ -1474,7 +1477,7 @@ module fsm #(
 
             States.B_RIGHT_DIR_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
-                if (move_up_button){
+                if (move_right_button){
                     if (select_button){
                         if (~|rd1[1:0]) {
                             states.d = States.B_RIGHT_COUNTP1
@@ -1530,7 +1533,7 @@ module fsm #(
                 wdsel = b0011
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_RIGHT_CHECK_PIXEL
-                
+                debug_dff.d = 83
 
             States.B_RIGHT_COUNTM1:
                 alufn = b000001
@@ -1541,12 +1544,14 @@ module fsm #(
                 wdsel = b0000
                 wa = B_COUNT
                 states.d = States.B_RIGHT_SET_PIXEL_0
+                debug_dff.d = 84
             
             States.B_RIGHT_SET_PIXEL_0:
                 we = b1
                 wdsel = b0001
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_RIGHT_CHECK_PIXEL
+                debug_dff.d = 85
             
             States.B_RIGHT_CHECK_PIXEL:
                 ra1 = TARGET_PIXEL_ADDRESS
@@ -1556,6 +1561,7 @@ module fsm #(
                 else {
                     states.d = States.B_RIGHT_RESET_PIXEL
                 }
+                debug_dff.d = 86
             
             States.B_RIGHT_RESET_PIXEL:
                 asel = b0
@@ -1567,6 +1573,7 @@ module fsm #(
                 brsel = b00
                 bwe = b1
                 states.d = States.B_RIGHT_MOVE_CURSOR
+                debug_dff.d = 87
             
             States.B_RIGHT_MOVE_CURSOR:
                 if (ddr) {
@@ -1586,12 +1593,14 @@ module fsm #(
 
                     states.d = States.B_RIGHT_STORE_PIXEL
                 }
+                debug_dff.d = 88
             
             States.B_RIGHT_STORE_PIXEL:
                 we = b1
                 wdsel = b0100
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_RIGHT_CURSOR_COLOUR
+                debug_dff.d = 89
             
             States.B_RIGHT_CURSOR_COLOUR:
                 asel = b0
@@ -1601,6 +1610,7 @@ module fsm #(
                 bwd = b11
                 brsel = b00
                 states.d = States.B_RIGHT_CLK
+                debug_dff.d = 90
             // Game Idle Stage
             States.GAME_IDLE:
                 if(decrease_timer.q){
@@ -1623,6 +1633,7 @@ module fsm #(
                 else {
                     states.d = States.GAME_IDLE
                 }
+                debug_dff.d = 91
             
             States.TIMER_M1:
                 alufn = b000001
@@ -1636,6 +1647,7 @@ module fsm #(
                 if (next_start_button) {
                     states.d = States.SET_BRAM_SELECTOR_TO_1
                 }
+                debug_dff.d = 92
                 
             States.GAME_IDLE_READ_CURR_PIXEL_VALUE:
                 ra1 = TARGET_PIXEL_ADDRESS
@@ -1648,12 +1660,13 @@ module fsm #(
                 else {
                     states.d = States.READ_BRAM
                 }
+                debug_dff.d = 93
             // Reading BRAM and loading SR
             // First in the row
             States.RESET_SR_POINTERS:
                 srst = 1
                 states.d = States.SR_00_ALL_SR
-
+                debug_dff.d = 94
             States.SR_00_ALL_SR:
                 if (ddr) {
                     states.d = States.SR_00_ALL_SR
