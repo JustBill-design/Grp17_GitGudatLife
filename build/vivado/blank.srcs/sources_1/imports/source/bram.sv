@@ -20,16 +20,16 @@ module bram #(
         input wire [(WIDTH)-1:0] bwd,
         output reg [(WIDTH)-1:0] brd
     );
-    localparam _MP_WIDTH_1815340037 = WIDTH;
-    localparam _MP_ENTRIES_1815340037 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_1815340037)-1) - (0) + 1))-1:0] M_bram1_address;
-    logic [(((_MP_WIDTH_1815340037-1) - (0) + 1))-1:0] M_bram1_read_data;
-    logic [(((_MP_WIDTH_1815340037-1) - (0) + 1))-1:0] M_bram1_write_data;
+    localparam _MP_WIDTH_1767450971 = WIDTH;
+    localparam _MP_ENTRIES_1767450971 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_1767450971)-1) - (0) + 1))-1:0] M_bram1_address;
+    logic [(((_MP_WIDTH_1767450971-1) - (0) + 1))-1:0] M_bram1_read_data;
+    logic [(((_MP_WIDTH_1767450971-1) - (0) + 1))-1:0] M_bram1_write_data;
     logic M_bram1_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_1815340037),
-        .ENTRIES(_MP_ENTRIES_1815340037)
+        .WIDTH(_MP_WIDTH_1767450971),
+        .ENTRIES(_MP_ENTRIES_1767450971)
     ) bram1 (
         .clk(clk),
         .address(M_bram1_address),
@@ -39,16 +39,16 @@ module bram #(
     );
     
     
-    localparam _MP_WIDTH_1994039948 = WIDTH;
-    localparam _MP_ENTRIES_1994039948 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_1994039948)-1) - (0) + 1))-1:0] M_bram2_address;
-    logic [(((_MP_WIDTH_1994039948-1) - (0) + 1))-1:0] M_bram2_read_data;
-    logic [(((_MP_WIDTH_1994039948-1) - (0) + 1))-1:0] M_bram2_write_data;
+    localparam _MP_WIDTH_856026263 = WIDTH;
+    localparam _MP_ENTRIES_856026263 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_856026263)-1) - (0) + 1))-1:0] M_bram2_address;
+    logic [(((_MP_WIDTH_856026263-1) - (0) + 1))-1:0] M_bram2_read_data;
+    logic [(((_MP_WIDTH_856026263-1) - (0) + 1))-1:0] M_bram2_write_data;
     logic M_bram2_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_1994039948),
-        .ENTRIES(_MP_ENTRIES_1994039948)
+        .WIDTH(_MP_WIDTH_856026263),
+        .ENTRIES(_MP_ENTRIES_856026263)
     ) bram2 (
         .clk(clk),
         .address(M_bram2_address),
