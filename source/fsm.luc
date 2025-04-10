@@ -1604,26 +1604,26 @@ module fsm #(
         // GAME LOGIC ------------------------------------------------------------------
             // Game Idle Stage
             States.GAME_IDLE:
-                if(decrease_timer.q){
-                    decrease_timer.d = 0
-                    states.d = States.TIMER_M1
-                }
-                else if (~|timer){
-                    states.d = States.END_GAME
-                }
-                else if (~|pac){
-                    states.d = States.END_GAME
-                }
-                else if (~|pbc){
-                    states.d = States.END_GAME
-                }
-                else if (game_tick.q) {
-                    game_tick.d = 0
-                    states.d = States.GAME_IDLE_READ_CURR_PIXEL_VALUE
-                }
-                else {
-                    states.d = States.GAME_IDLE
-                }
+                //if(decrease_timer.q){
+                //    decrease_timer.d = 0
+                //    states.d = States.TIMER_M1
+                //}
+                //else if (~|timer){
+                //    states.d = States.END_GAME
+                //}
+                //else if (~|pac){
+                //    states.d = States.END_GAME
+                //}
+                //else if (~|pbc){
+                //    states.d = States.END_GAME
+                //}
+                //else if (game_tick.q) {
+                //    game_tick.d = 0
+                //    states.d = States.GAME_IDLE_READ_CURR_PIXEL_VALUE
+                //}
+                //else {
+                //    states.d = States.GAME_IDLE
+                //}
                 debug_dff.d = 91
             
             States.TIMER_M1:
