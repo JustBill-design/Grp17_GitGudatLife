@@ -24,7 +24,7 @@ STANDARD(LVCMOS33) {
     pin io_led[6] A12
     pin io_led[7] A11
 
-    PULL(DOWN) {
+    PULL(UP) {
         pin testpullup B30
 
         // UP, DOWN, LEFT, RIGHT
