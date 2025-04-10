@@ -229,14 +229,14 @@ module fsm (
     localparam E_States_COMPUTE = 8'had;
     localparam E_States_AUTO = 8'hae;
     localparam E_States_IDLE = 8'haf;
-    localparam _MP_RISE_325721078 = 1'h1;
-    localparam _MP_FALL_325721078 = 1'h0;
+    localparam _MP_RISE_2115817915 = 1'h1;
+    localparam _MP_FALL_2115817915 = 1'h0;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_325721078),
-        .FALL(_MP_FALL_325721078)
+        .RISE(_MP_RISE_2115817915),
+        .FALL(_MP_FALL_2115817915)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -1646,29 +1646,6 @@ module fsm (
                 D_debug_dff_d = 7'h5a;
             end
             8'h60: begin
-                if (D_decrease_timer_q) begin
-                    D_decrease_timer_d = 1'h0;
-                    D_states_d = 8'h61;
-                end else begin
-                    if (~(|timer)) begin
-                        D_states_d = 8'h62;
-                    end else begin
-                        if (~(|pac)) begin
-                            D_states_d = 8'h62;
-                        end else begin
-                            if (~(|pbc)) begin
-                                D_states_d = 8'h62;
-                            end else begin
-                                if (D_game_tick_q) begin
-                                    D_game_tick_d = 1'h0;
-                                    D_states_d = 8'h63;
-                                end else begin
-                                    D_states_d = 8'h60;
-                                end
-                            end
-                        end
-                    end
-                end
                 D_debug_dff_d = 7'h5b;
             end
             8'h61: begin
