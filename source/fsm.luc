@@ -93,7 +93,7 @@ module fsm #(
         B_DOWN_DIR_IDLE, B_DOWN_CLK, B_DOWN_COUNTP1, B_DOWN_SET_PIXEL_B, B_DOWN_COUNTM1, B_DOWN_SET_PIXEL_0, B_DOWN_CHECK_PIXEL, B_DOWN_RESET_PIXEL, B_DOWN_MOVE_CURSOR, B_DOWN_STORE_PIXEL, B_DOWN_CURSOR_COLOUR, 
         B_LEFT_DIR_IDLE, B_LEFT_CLK, B_LEFT_COUNTP1, B_LEFT_SET_PIXEL_B, B_LEFT_COUNTM1, B_LEFT_SET_PIXEL_0, B_LEFT_CHECK_PIXEL, B_LEFT_RESET_PIXEL, B_LEFT_MOVE_CURSOR, B_LEFT_STORE_PIXEL, B_LEFT_CURSOR_COLOUR, 
         B_RIGHT_DIR_IDLE, B_RIGHT_CLK, B_RIGHT_COUNTP1, B_RIGHT_SET_PIXEL_B, B_RIGHT_COUNTM1, B_RIGHT_SET_PIXEL_0, B_RIGHT_CHECK_PIXEL, B_RIGHT_RESET_PIXEL, B_RIGHT_MOVE_CURSOR, B_RIGHT_STORE_PIXEL, B_RIGHT_CURSOR_COLOUR,        
-        GAME_IDLE, TIMER_M1, END_GAME, 
+        REMOVE_CURSOR,RESET_PIXEL_TO_0, GAME_IDLE, TIMER_M1, END_GAME, 
         
         GAME_IDLE_READ_CURR_PIXEL_VALUE, 
         
@@ -1018,7 +1018,7 @@ module fsm #(
                 //     }
                 // }
                 else if (deselect_button){ // TODO: set back to next_start_button
-                    states.d = States.GAME_IDLE
+                    states.d = States.REMOVE_CURSOR
                 }
                 // debugging
                 debug_dff.d = 50
@@ -1640,6 +1640,28 @@ module fsm #(
                 debug_dff.d = 90
 
         // GAME LOGIC ------------------------------------------------------------------
+
+            States.REMOVE_CURSOR:
+                asel = b0
+                bsel = b0000
+                ra1 = TARGET_PIXEL_ADDRESS
+                ra2 = TARGET_PIXEL_VALUE
+                bwa = rd1
+                bwd = rd2
+                brsel = b00
+                bwe = b1
+                states.d = States.RESET_PIXEL_TO_0
+                // debugging
+                debug_dff.d = 155
+
+            States.RESET_PIXEL_TO_0:
+                we = b1
+                wdsel = b0001
+                wa = TARGET_PIXEL_ADDRESS
+                states.d = States.GAME_IDLE
+                // debugging
+                debug_dff.d = 156
+
             // Game Idle Stage
             States.GAME_IDLE:
                 if(decrease_timer.q){
@@ -1647,10 +1669,10 @@ module fsm #(
                     states.d = States.TIMER_M1
                 }
                 else if (~|timer){
-                    states.d = States.END_GAME
+                    //states.d = States.END_GAME
                 }
                 else if (~|pac){
-                    states.d = States.END_GAME
+                    //states.d = States.END_GAME
                 }
                 else if (~|pbc){
                     states.d = States.END_GAME
@@ -1677,8 +1699,7 @@ module fsm #(
                 }
                 debug_dff.d = 92
                 
-            States.GAME_IDLE_READ_CURR_PIXEL_VALUE:
-                ra1 = TARGET_PIXEL_ADDRESS
+            States.GAME_IDLE_READ_CURR_PIXEL_VALUE: //TODO Some logic error here idk what, maybe looping issue or target pixel value not reset properly
                 if (&rd1[5:0]){
                     states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
                 }
@@ -1695,6 +1716,7 @@ module fsm #(
                 srst = 1
                 states.d = States.SR_00_ALL_SR
                 debug_dff.d = 94
+
             States.SR_00_ALL_SR:
                 if (ddr) {
                     states.d = States.SR_00_ALL_SR
@@ -1702,7 +1724,8 @@ module fsm #(
                 else {
                     alufn = b000001
                     asel = b0
-                    bsel = b0100 
+                    bsel = b0100
+                    ra1 = TARGET_PIXEL_ADDRESS
                     bra = aluout
                     bwe = b0
                     swd1 = b00
@@ -1726,7 +1749,7 @@ module fsm #(
                 else {
                     alufn = b000001
                     asel  = b0
-                    bsel = b0101 
+                    bsel = b0101
                     ra1 = TARGET_PIXEL_ADDRESS
                     bra = aluout
                     bwe = b0
@@ -2185,7 +2208,7 @@ module fsm #(
                     b10:
                         states.d = States.B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR
                     b01:
-                        states.d = States.B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR
+                       states.d = States.B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR
                 }
                 debug_dff.d = 133
 
@@ -2349,6 +2372,7 @@ module fsm #(
                 bwa = rd1
                 bwe = b1
                 bwd = b01
+
                 states.d = States.RESET_A_NEIGHBOUR
                 debug_dff.d = 146
             
