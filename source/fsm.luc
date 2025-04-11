@@ -2367,7 +2367,7 @@ module fsm #(
                 debug_dff.d = 145
             // Setting pixel as A B or 00
 
-            States.SET_A:
+            States.SET_A: // yeyetaut1
                 ra1 = TARGET_PIXEL_ADDRESS
                 bwa = rd1
                 bwe = b1
