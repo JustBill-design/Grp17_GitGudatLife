@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/synth_1/alchitry_top.tcl"
+  variable script "C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.runs/synth_1/alchitry_top.tcl"
   variable category "vivado_synth"
 }
 
@@ -55,6 +55,20 @@ if {$::dispatch::connected} {
   }
 }
 
+proc create_report { reportName command } {
+  set status "."
+  append status $reportName ".fail"
+  if { [file exists $status] } {
+    eval file delete [glob $status]
+  }
+  send_msg_id runtcl-4 info "Executing : $command"
+  set retval [eval catch { $command } msg]
+  if { $retval != 0 } {
+    set fp [open $status w]
+    close $fp
+    send_msg_id runtcl-5 warning "$msg"
+  }
+}
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a35tftg256-1
@@ -62,44 +76,44 @@ create_project -in_memory -part xc7a35tftg256-1
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.cache/wt [current_project]
-set_property parent.project_path C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.xpr [current_project]
+set_property webtalk.parent_dir {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.cache/wt} [current_project]
+set_property parent.project_path {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.xpr} [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib -sv {
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/adder.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bin_to_dec.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/boolean.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bram.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/button_conditioner.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/compare.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/display_driver.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/divider.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/edge_detector.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fa.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fifo.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/multi_seven_seg.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/multiplier.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/mux_2.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/pipeline.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/rca.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/regfile.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/reset_conditioner.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/shifter.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/adder.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bin_to_dec.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/boolean.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bram.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/button_conditioner.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/compare.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/display_driver.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/divider.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/edge_detector.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fa.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fifo.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/multi_seven_seg.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/multiplier.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/mux_2.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/pipeline.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/rca.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/regfile.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/reset_conditioner.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/shifter.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv}
 }
 read_verilog -library xil_defaultlib {
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/simple_dual_port_ram.v
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/simple_ram.v
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/simple_dual_port_ram.v}
+  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/simple_ram.v}
 }
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
@@ -110,11 +124,11 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/alchitry.xdc
-set_property used_in_implementation false [get_files C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/alchitry.xdc]
+read_xdc {{C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/constraint/alchitry.xdc}}
+set_property used_in_implementation false [get_files {{C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/constraint/alchitry.xdc}}]
 
-read_xdc C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/au_props.xdc
-set_property used_in_implementation false [get_files C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/au_props.xdc]
+read_xdc {{C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/constraint/au_props.xdc}}
+set_property used_in_implementation false [get_files {{C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/constraint/au_props.xdc}}]
 
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
@@ -133,7 +147,7 @@ set_param constraints.enableBinaryConstraints false
 write_checkpoint -force -noxdef alchitry_top.dcp
 OPTRACE "write_checkpoint" END { }
 OPTRACE "synth reports" START { REPORT }
-generate_parallel_reports -reports { "report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb"  } 
+create_report "synth_1_synth_report_utilization_0" "report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb"
 OPTRACE "synth reports" END { }
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]
