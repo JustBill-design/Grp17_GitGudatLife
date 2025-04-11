@@ -233,14 +233,14 @@ module fsm (
     localparam E_States_COMPUTE = 8'hb1;
     localparam E_States_AUTO = 8'hb2;
     localparam E_States_IDLE = 8'hb3;
-    localparam _MP_RISE_418621893 = 1'h1;
-    localparam _MP_FALL_418621893 = 1'h0;
+    localparam _MP_RISE_855306808 = 1'h1;
+    localparam _MP_FALL_855306808 = 1'h0;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_418621893),
-        .FALL(_MP_FALL_418621893)
+        .RISE(_MP_RISE_855306808),
+        .FALL(_MP_FALL_855306808)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -2443,12 +2443,27 @@ module fsm (
                 D_debug_dff_d = 8'h91;
             end
             8'h9e: begin
+                ra1 = 3'h4;
+                bwa = rd1;
+                bwe = 1'h1;
+                bwd = 2'h1;
+                D_states_d = 8'ha1;
                 D_debug_dff_d = 8'h92;
             end
             8'h9f: begin
+                ra1 = 3'h4;
+                bwa = rd1;
+                bwe = 1'h1;
+                bwd = 2'h2;
+                D_states_d = 8'ha1;
                 D_debug_dff_d = 8'h93;
             end
             8'ha0: begin
+                ra1 = 3'h4;
+                bwa = rd1;
+                bwe = 1'h1;
+                bwd = 2'h0;
+                D_states_d = 8'ha1;
                 D_debug_dff_d = 8'h94;
             end
             8'ha1: begin

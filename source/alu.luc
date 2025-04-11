@@ -124,6 +124,8 @@ module alu #(
 
             b110111: temp_out = a <= b
             // b110111: temp_out = compare.cmp
+            
+            b010110: temp_out = a ^ b
         }
 
         // z flag also triggers for boolean outputs, 1 for true
