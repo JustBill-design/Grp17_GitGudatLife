@@ -54,18 +54,18 @@ STANDARD(LVCMOS33) {
     pin aseg[10] C11
     pin aseg[11] C8
 
-    pin bseg[0] C33
-    pin bseg[1] C36
-    pin bseg[2] C39
-    pin bseg[3] C42
-    pin bseg[4] C45
-    pin bseg[5] C48
-    pin bseg[6] C34
-    pin bseg[7] C37
-    pin bseg[8] C40
-    pin bseg[9] C43
-    pin bseg[10] C46
-    pin bseg[11] C49
+    pin bseg[0] C27
+    pin bseg[1] C30
+    pin bseg[2] C33
+    pin bseg[3] C36
+    pin bseg[4] C39
+    pin bseg[5] C42
+    pin bseg[6] C28
+    pin bseg[7] C31
+    pin bseg[8] C34
+    pin bseg[9] C37
+    pin bseg[10] C40
+    pin bseg[11] C43
 
     pin timerseg[0] B28
     pin timerseg[1] B31
