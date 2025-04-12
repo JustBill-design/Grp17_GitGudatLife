@@ -11,39 +11,39 @@ module bin_to_dec #(
         input wire [($clog2((64'(4'ha) ** (DIGITS))))-1:0] value,
         output reg [(DIGITS)-1:0][3:0] digits
     );
-    logic [31:0] R_401280ff_j;
-    logic [31:0] RR_401280ff_j;
-    logic [31:0] R_2d86aeb2_i;
-    logic [31:0] RR_2d86aeb2_i;
-    logic [($bits(value))-1:0] L_37ab47f0_remainder;
-    logic L_37ab47f0_blank;
-    logic [($bits(value))-1:0] L_5e124bab_scale;
-    logic [($bits(value))-1:0] L_4d90f899_sub_value;
+    logic [31:0] R_5909e8da_j;
+    logic [31:0] RR_5909e8da_j;
+    logic [31:0] R_4eb2e23d_i;
+    logic [31:0] RR_4eb2e23d_i;
+    logic [($bits(value))-1:0] L_773a44f3_remainder;
+    logic L_773a44f3_blank;
+    logic [($bits(value))-1:0] L_706a9ea5_scale;
+    logic [($bits(value))-1:0] L_5dff4866_sub_value;
     always @* begin
         digits = {DIGITS{{{4'hb}}}};
-        L_37ab47f0_remainder = value;
-        L_37ab47f0_blank = !LEADING_ZEROS;
+        L_773a44f3_remainder = value;
+        L_773a44f3_blank = !LEADING_ZEROS;
         if (value < (64'(4'ha) ** (DIGITS))) begin
-            for (RR_401280ff_j = 0; RR_401280ff_j < DIGITS; RR_401280ff_j = RR_401280ff_j + 1) begin
-        R_401280ff_j = (DIGITS - 1'h1) + RR_401280ff_j * (-2'sh1);
-                L_5e124bab_scale = (64'(4'ha) ** (R_401280ff_j));
-                if (L_37ab47f0_remainder < L_5e124bab_scale) begin
-                    if (R_401280ff_j != 1'h0 && L_37ab47f0_blank) begin
-                        digits[R_401280ff_j] = 4'ha;
+            for (RR_5909e8da_j = 0; RR_5909e8da_j < DIGITS; RR_5909e8da_j = RR_5909e8da_j + 1) begin
+        R_5909e8da_j = (DIGITS - 1'h1) + RR_5909e8da_j * (-2'sh1);
+                L_706a9ea5_scale = (64'(4'ha) ** (R_5909e8da_j));
+                if (L_773a44f3_remainder < L_706a9ea5_scale) begin
+                    if (R_5909e8da_j != 1'h0 && L_773a44f3_blank) begin
+                        digits[R_5909e8da_j] = 4'ha;
                     end else begin
-                        digits[R_401280ff_j] = 1'h0;
+                        digits[R_5909e8da_j] = 1'h0;
                     end
                 end else begin
-                    L_37ab47f0_blank = 1'h0;
-                    L_4d90f899_sub_value = 1'h0;
-                    for (RR_2d86aeb2_i = 0; RR_2d86aeb2_i < 4'h9; RR_2d86aeb2_i = RR_2d86aeb2_i + 1) begin
-            R_2d86aeb2_i = (4'h9) + RR_2d86aeb2_i * (-2'sh1);
-                        if (L_37ab47f0_remainder < (R_2d86aeb2_i + 1'h1) * L_5e124bab_scale) begin
-                            digits[R_401280ff_j] = R_2d86aeb2_i;
-                            L_4d90f899_sub_value = R_2d86aeb2_i * L_5e124bab_scale;
+                    L_773a44f3_blank = 1'h0;
+                    L_5dff4866_sub_value = 1'h0;
+                    for (RR_4eb2e23d_i = 0; RR_4eb2e23d_i < 4'h9; RR_4eb2e23d_i = RR_4eb2e23d_i + 1) begin
+            R_4eb2e23d_i = (4'h9) + RR_4eb2e23d_i * (-2'sh1);
+                        if (L_773a44f3_remainder < (R_4eb2e23d_i + 1'h1) * L_706a9ea5_scale) begin
+                            digits[R_5909e8da_j] = R_4eb2e23d_i;
+                            L_5dff4866_sub_value = R_4eb2e23d_i * L_706a9ea5_scale;
                         end
                     end
-                    L_37ab47f0_remainder = L_37ab47f0_remainder - L_4d90f899_sub_value;
+                    L_773a44f3_remainder = L_773a44f3_remainder - L_5dff4866_sub_value;
                 end
             end
         end
