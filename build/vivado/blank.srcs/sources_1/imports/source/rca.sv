@@ -12,24 +12,24 @@ module rca #(
         input wire cin,
         output reg [(SIZE)-1:0] s
     );
-    logic [31:0] R_528cdf10_i;
-    logic [31:0] RR_528cdf10_i;
+    logic [31:0] R_4a949e9b_i;
+    logic [31:0] RR_4a949e9b_i;
     logic [(SIZE)-1:0] M_fa_a;
     logic [(SIZE)-1:0] M_fa_b;
     logic [(SIZE)-1:0] M_fa_cin;
     logic [(SIZE)-1:0] M_fa_s;
     logic [(SIZE)-1:0] M_fa_cout;
     
-    genvar idx_0_167630307;
+    genvar idx_0_33734006;
     
     generate
-        for (idx_0_167630307 = 0; idx_0_167630307 < SIZE; idx_0_167630307 = idx_0_167630307 + 1) begin: forLoop_idx_0_167630307
+        for (idx_0_33734006 = 0; idx_0_33734006 < SIZE; idx_0_33734006 = idx_0_33734006 + 1) begin: forLoop_idx_0_33734006
             fa fa (
-                .a(M_fa_a[idx_0_167630307]),
-                .b(M_fa_b[idx_0_167630307]),
-                .cin(M_fa_cin[idx_0_167630307]),
-                .s(M_fa_s[idx_0_167630307]),
-                .cout(M_fa_cout[idx_0_167630307])
+                .a(M_fa_a[idx_0_33734006]),
+                .b(M_fa_b[idx_0_33734006]),
+                .cin(M_fa_cin[idx_0_33734006]),
+                .s(M_fa_s[idx_0_33734006]),
+                .cout(M_fa_cout[idx_0_33734006])
             );
         end
     endgenerate
@@ -39,9 +39,9 @@ module rca #(
         M_fa_a = a;
         M_fa_b = b;
         M_fa_cin[1'h0] = cin;
-        for (RR_528cdf10_i = 0; RR_528cdf10_i < SIZE - 1'h1; RR_528cdf10_i = RR_528cdf10_i + 1) begin
-      R_528cdf10_i = (1'h1) + RR_528cdf10_i * (1);
-            M_fa_cin[R_528cdf10_i] = M_fa_cout[R_528cdf10_i - 1'h1];
+        for (RR_4a949e9b_i = 0; RR_4a949e9b_i < SIZE - 1'h1; RR_4a949e9b_i = RR_4a949e9b_i + 1) begin
+      R_4a949e9b_i = (1'h1) + RR_4a949e9b_i * (1);
+            M_fa_cin[R_4a949e9b_i] = M_fa_cout[R_4a949e9b_i - 1'h1];
         end
         s = M_fa_s;
     end

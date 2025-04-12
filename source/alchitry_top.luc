@@ -58,7 +58,7 @@ module alchitry_top (
         edge_detector edge_next_play(#RISE(1),#FALL(0))
         
         // edge detecors for internal clocks
-        edge_detector timerclk(#RISE(0),#FALL(1))       // ticks once per second
+        edge_detector timerclk(#RISE(1),#FALL(0))       // ticks once per second
         edge_detector gameclk(#RISE(1),#FALL(0))        // ticks roughly 10 times per second
         edge_detector med_inputclk(#RISE(1),#FALL(0))   // ticks roughly 5 times per second
         
