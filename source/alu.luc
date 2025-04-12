@@ -176,8 +176,8 @@ module alu #(
             //     out_sig = a | b 
             6h16: // BITWISE XOR
                 out_sig = a ^ b 
-            // 6h1A: // "A"
-            //     out_sig = a
+            6h1A: // "A"
+                out_sig = a
             // 6h20: // SHL 
             //     out_sig = a << b[4:0]
             // 6h21: // SHR 

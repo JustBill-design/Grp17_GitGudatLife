@@ -37,6 +37,9 @@ module alu #(
             6'h16: begin
                 out_sig = a ^ b;
             end
+            6'h1a: begin
+                out_sig = a;
+            end
             6'h33: begin
                 out_sig = a == b;
             end

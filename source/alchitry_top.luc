@@ -246,9 +246,9 @@ module alchitry_top (
         sr2.wput = sm.swe2
         sr3.wput = sm.swe3
         // write data
-        sr1.din = sm.swd1
-        sr2.din = sm.swd2
-        sr3.din = sm.swd3
+        sr1.din = brams.brd
+        sr2.din = brams.brd
+        sr3.din = brams.brd
         // read enable
         sr1.rget = sm.sre1
         sr2.rget = sm.sre2
@@ -264,10 +264,9 @@ module alchitry_top (
         brams.ro = display.reading
         
         // BRAM and FSM connections
-        sm.brd = brams.brd
         brams.brsel = sm.brsel
-        brams.bra = sm.bra
-        brams.bwa = sm.bwa
+        brams.bra = alum.out
+        brams.bwa = reg.rd1
         brams.bwe = sm.bwe
         brams.bwd = sm.bwd
         

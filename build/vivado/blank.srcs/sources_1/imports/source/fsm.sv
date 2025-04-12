@@ -22,10 +22,7 @@ module fsm (
         input wire med_inputclk,
         input wire [12:0] aluout,
         output reg [5:0] alufn,
-        input wire [1:0] brd,
         output reg [1:0] brsel,
-        output reg [12:0] bra,
-        output reg [12:0] bwa,
         output reg bwe,
         output reg [1:0] bwd,
         input wire ddr,
@@ -233,14 +230,14 @@ module fsm (
     localparam E_States_COMPUTE = 8'hb1;
     localparam E_States_AUTO = 8'hb2;
     localparam E_States_IDLE = 8'hb3;
-    localparam _MP_RISE_924150888 = 1'h1;
-    localparam _MP_FALL_924150888 = 1'h0;
+    localparam _MP_RISE_2027425689 = 1'h1;
+    localparam _MP_FALL_2027425689 = 1'h0;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_924150888),
-        .FALL(_MP_FALL_924150888)
+        .RISE(_MP_RISE_2027425689),
+        .FALL(_MP_FALL_2027425689)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -288,8 +285,6 @@ module fsm (
         D_rst_delay_d = rst;
         D_states_d = D_states_q;
         brsel = 2'h2;
-        bra = 1'h0;
-        bwa = 1'h0;
         bwe = 1'h0;
         bwd = 1'h0;
         ra1 = 1'h0;
@@ -374,7 +369,6 @@ module fsm (
                 ra1 = 3'h4;
                 wdsel = 4'h0;
                 wa = 3'h4;
-                bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h0;
                 brsel = 2'h0;
@@ -418,7 +412,7 @@ module fsm (
                 D_debug_dff_d = 3'h7;
             end
             8'hae: begin
-                bwa = 12'h860;
+                ra1 = 3'h4;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
@@ -598,7 +592,6 @@ module fsm (
                 bsel = 4'h0;
                 ra1 = 3'h4;
                 ra2 = 3'h5;
-                bwa = rd1;
                 bwd = rd2;
                 bwe = 1'h1;
                 brsel = 2'h0;
@@ -615,7 +608,6 @@ module fsm (
                     ra1 = 3'h4;
                     wdsel = 4'h0;
                     wa = 3'h4;
-                    bra = aluout;
                     brsel = 2'h1;
                     D_states_d = 8'he;
                 end
@@ -630,7 +622,6 @@ module fsm (
             end
             8'hf: begin
                 ra1 = 3'h4;
-                bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
@@ -737,7 +728,6 @@ module fsm (
                 bsel = 4'h0;
                 ra1 = 3'h4;
                 ra2 = 3'h5;
-                bwa = rd1;
                 bwd = rd2;
                 bwe = 1'h1;
                 brsel = 2'h0;
@@ -756,7 +746,6 @@ module fsm (
                     wdsel = 4'h0;
                     bwe = 1'h1;
                     wa = 3'h4;
-                    bra = aluout;
                     brsel = 2'h1;
                     D_states_d = 8'h19;
                 end
@@ -772,7 +761,6 @@ module fsm (
             8'h1a: begin
                 asel = 1'h0;
                 ra1 = 3'h4;
-                bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
@@ -877,7 +865,6 @@ module fsm (
                 bsel = 4'h0;
                 ra1 = 3'h4;
                 ra2 = 3'h5;
-                bwa = rd1;
                 bwd = rd2;
                 brsel = 2'h0;
                 bwe = 1'h1;
@@ -895,7 +882,6 @@ module fsm (
                     ra1 = 3'h4;
                     wdsel = 4'h0;
                     wa = 3'h4;
-                    bra = aluout;
                     brsel = 2'h1;
                     bwe = 1'h1;
                     D_states_d = 8'h24;
@@ -912,7 +898,6 @@ module fsm (
             8'h25: begin
                 asel = 1'h0;
                 ra1 = 3'h4;
-                bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
@@ -1015,7 +1000,6 @@ module fsm (
                 bsel = 4'h0;
                 ra1 = 3'h4;
                 ra2 = 3'h5;
-                bwa = rd1;
                 bwd = rd2;
                 brsel = 2'h0;
                 bwe = 1'h1;
@@ -1033,7 +1017,6 @@ module fsm (
                     ra1 = 3'h4;
                     wdsel = 4'h0;
                     wa = 3'h4;
-                    bra = aluout;
                     brsel = 2'h1;
                     bwe = 1'h1;
                     D_states_d = 8'h2f;
@@ -1050,7 +1033,6 @@ module fsm (
             8'h30: begin
                 asel = 1'h0;
                 ra1 = 3'h4;
-                bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
@@ -1224,7 +1206,6 @@ module fsm (
                 bsel = 4'h0;
                 ra1 = 3'h4;
                 ra2 = 3'h5;
-                bwa = rd1;
                 bwd = rd2;
                 bwe = 1'h1;
                 brsel = 2'h0;
@@ -1241,7 +1222,6 @@ module fsm (
                     ra1 = 3'h4;
                     wdsel = 4'h0;
                     wa = 3'h4;
-                    bra = aluout;
                     brsel = 2'h1;
                     D_states_d = 8'h3f;
                 end
@@ -1256,7 +1236,6 @@ module fsm (
             end
             8'h40: begin
                 ra1 = 3'h4;
-                bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
@@ -1362,7 +1341,6 @@ module fsm (
                 bsel = 4'h0;
                 ra1 = 3'h4;
                 ra2 = 3'h5;
-                bwa = rd1;
                 bwd = rd2;
                 brsel = 2'h0;
                 bwe = 1'h1;
@@ -1380,7 +1358,6 @@ module fsm (
                     ra1 = 3'h4;
                     wdsel = 4'h0;
                     wa = 3'h4;
-                    bra = aluout;
                     brsel = 2'h1;
                     D_states_d = 8'h4a;
                 end
@@ -1396,7 +1373,6 @@ module fsm (
             8'h4b: begin
                 asel = 1'h0;
                 ra1 = 3'h4;
-                bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
@@ -1499,7 +1475,6 @@ module fsm (
                 bsel = 4'h0;
                 ra1 = 3'h4;
                 ra2 = 3'h5;
-                bwa = rd1;
                 bwd = rd2;
                 brsel = 2'h0;
                 bwe = 1'h1;
@@ -1517,7 +1492,6 @@ module fsm (
                     ra1 = 3'h4;
                     wdsel = 4'h0;
                     wa = 3'h4;
-                    bra = aluout;
                     brsel = 2'h1;
                     D_states_d = 8'h55;
                 end
@@ -1533,7 +1507,6 @@ module fsm (
             8'h56: begin
                 asel = 1'h0;
                 ra1 = 3'h4;
-                bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
@@ -1637,7 +1610,6 @@ module fsm (
                 bsel = 4'h0;
                 ra1 = 3'h4;
                 ra2 = 3'h5;
-                bwa = rd1;
                 bwd = rd2;
                 brsel = 2'h0;
                 bwe = 1'h1;
@@ -1655,7 +1627,6 @@ module fsm (
                     ra1 = 3'h4;
                     wdsel = 4'h0;
                     wa = 3'h4;
-                    bra = aluout;
                     brsel = 2'h1;
                     bwe = 1'h1;
                     D_states_d = 8'h60;
@@ -1672,7 +1643,6 @@ module fsm (
             8'h61: begin
                 asel = 1'h0;
                 ra1 = 3'h4;
-                bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h3;
                 brsel = 2'h0;
@@ -1684,7 +1654,6 @@ module fsm (
                 bsel = 4'h0;
                 ra1 = 3'h4;
                 ra2 = 3'h5;
-                bwa = rd1;
                 bwd = rd2;
                 brsel = 2'h0;
                 bwe = 1'h1;
@@ -1763,7 +1732,6 @@ module fsm (
                     asel = 1'h0;
                     bsel = 4'h4;
                     ra1 = 3'h4;
-                    bra = aluout;
                     bwe = 1'h0;
                     swd1 = 2'h0;
                     swe1 = 1'h1;
@@ -1783,9 +1751,7 @@ module fsm (
                     asel = 1'h0;
                     bsel = 4'h5;
                     ra1 = 3'h4;
-                    bra = aluout;
                     bwe = 1'h0;
-                    swd1 = brd;
                     swe1 = 1'h1;
                     sre1 = 1'h0;
                     D_states_d = 8'h6b;
@@ -1797,9 +1763,8 @@ module fsm (
                     D_states_d = 8'h6b;
                 end else begin
                     ra1 = 3'h4;
-                    bra = rd1;
+                    alufn = 6'h1a;
                     bwe = 1'h0;
-                    swd1 = brd;
                     swe1 = 1'h1;
                     sre1 = 1'h0;
                     D_states_d = 8'h6c;
@@ -1814,9 +1779,7 @@ module fsm (
                     asel = 1'h0;
                     bsel = 4'h1;
                     ra1 = 3'h4;
-                    bra = aluout;
                     bwe = 1'h0;
-                    swd2 = brd;
                     swe2 = 1'h1;
                     sre2 = 1'h0;
                     D_states_d = 8'h6d;
@@ -1831,9 +1794,7 @@ module fsm (
                     asel = 1'h0;
                     bsel = 4'h4;
                     ra1 = 3'h4;
-                    bra = aluout;
                     bwe = 1'h0;
-                    swd2 = brd;
                     swe2 = 1'h1;
                     sre2 = 1'h0;
                     D_states_d = 8'h6e;
@@ -1848,9 +1809,7 @@ module fsm (
                     asel = 1'h0;
                     bsel = 4'h5;
                     ra1 = 3'h4;
-                    bra = aluout;
                     bwe = 1'h0;
-                    swd3 = brd;
                     swe3 = 1'h1;
                     sre3 = 1'h0;
                     D_states_d = 8'h6f;
@@ -1858,7 +1817,6 @@ module fsm (
                 end
             end
             8'h6f: begin
-                swd3 = brd;
                 swe3 = 1'h1;
                 sre3 = 1'h0;
                 D_states_d = 8'h75;
@@ -1872,7 +1830,6 @@ module fsm (
                     asel = 1'h0;
                     bsel = 4'h4;
                     ra1 = 3'h4;
-                    bra = aluout;
                     D_states_d = 8'h71;
                 end
                 D_debug_dff_d = 7'h65;
@@ -1885,8 +1842,6 @@ module fsm (
                     asel = 1'h0;
                     bsel = 4'h1;
                     ra1 = 3'h4;
-                    bra = aluout;
-                    swd1 = brd;
                     swe1 = 1'h1;
                     sre1 = 1'h0;
                     D_states_d = 8'h72;
@@ -1901,9 +1856,7 @@ module fsm (
                     asel = 1'h0;
                     bsel = 4'h5;
                     ra1 = 3'h4;
-                    bra = aluout;
                     bwe = 1'h0;
-                    swd2 = brd;
                     swe2 = 1'h1;
                     sre2 = 1'h0;
                     D_states_d = 8'h73;
@@ -1914,7 +1867,6 @@ module fsm (
                 if (ddr) begin
                     D_states_d = 8'h73;
                 end else begin
-                    swd3 = brd;
                     swe3 = 1'h1;
                     sre3 = 1'h0;
                     D_states_d = 8'h75;
@@ -1925,13 +1877,10 @@ module fsm (
                 if (ddr) begin
                     D_states_d = 8'h74;
                 end else begin
-                    swd1 = brd;
                     swe1 = 1'h1;
                     sre1 = 1'h0;
-                    swd2 = brd;
                     swe2 = 1'h1;
                     sre2 = 1'h0;
-                    swd3 = brd;
                     swe3 = 1'h1;
                     sre3 = 1'h0;
                     D_states_d = 8'h75;
@@ -2473,7 +2422,6 @@ module fsm (
             end
             8'h9e: begin
                 ra1 = 3'h4;
-                bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h1;
                 D_states_d = 8'ha1;
@@ -2481,7 +2429,6 @@ module fsm (
             end
             8'h9f: begin
                 ra1 = 3'h4;
-                bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h2;
                 D_states_d = 8'ha1;
@@ -2489,7 +2436,6 @@ module fsm (
             end
             8'ha0: begin
                 ra1 = 3'h4;
-                bwa = rd1;
                 bwe = 1'h1;
                 bwd = 2'h0;
                 D_states_d = 8'ha1;

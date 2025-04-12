@@ -32,10 +32,7 @@ module fsm #(
     output alufn[6],        // alu function
 
     // BRAM
-    input brd[2],           // bram read data
     output brsel[2],        // bram selector override
-    output bra[13],         // bram read address
-    output bwa[13],         // bram write address
     output bwe,             // bram write enable
     output bwd[2],          // bram write data
     input ddr,              // display driver read override
@@ -189,8 +186,6 @@ module fsm #(
         states.d = states.q
 
         brsel = b10
-        bra = 0
-        bwa = 0
         bwe = 0
         bwd = 0
 
@@ -275,7 +270,6 @@ module fsm #(
                 ra1 = TARGET_PIXEL_ADDRESS
                 wdsel = b0000
                 wa = TARGET_PIXEL_ADDRESS
-                bwa = rd1
                 bwe = b1
                 bwd = b00
                 brsel = b00
@@ -319,7 +313,7 @@ module fsm #(
                 debug_dff.d = 7
             
             States.SET_SELECTOR_PIXEL_STATE:
-                bwa = 2144
+                ra1 = TARGET_PIXEL_ADDRESS
                 bwe = b1
                 bwd = b11
                 brsel = b00
@@ -503,7 +497,6 @@ module fsm #(
                 bsel = b0000
                 ra1 = TARGET_PIXEL_ADDRESS
                 ra2 = TARGET_PIXEL_VALUE
-                bwa = rd1
                 bwd = rd2
                 bwe = b1
                 brsel = b00
@@ -522,7 +515,6 @@ module fsm #(
                     ra1 = TARGET_PIXEL_ADDRESS
                     wdsel = b0000
                     wa = TARGET_PIXEL_ADDRESS
-                    bra = aluout
                     brsel = b01
                     states.d = States.A_UP_STORE_PIXEL
                 }
@@ -539,7 +531,6 @@ module fsm #(
             
             States.A_UP_CURSOR_COLOUR:
                 ra1 = TARGET_PIXEL_ADDRESS
-                bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
@@ -650,7 +641,6 @@ module fsm #(
                 bsel = b0000
                 ra1 = TARGET_PIXEL_ADDRESS
                 ra2 = TARGET_PIXEL_VALUE
-                bwa = rd1
                 bwd = rd2
                 bwe = b1
                 brsel = b00
@@ -671,7 +661,6 @@ module fsm #(
                     wdsel = b0000
                     bwe = b1
                     wa = TARGET_PIXEL_ADDRESS
-                    bra = aluout
                     brsel = b01
 
                     states.d = States.A_DOWN_STORE_PIXEL
@@ -690,7 +679,6 @@ module fsm #(
             States.A_DOWN_CURSOR_COLOUR:
                 asel = b0
                 ra1 = TARGET_PIXEL_ADDRESS
-                bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
@@ -797,7 +785,6 @@ module fsm #(
                 bsel = b0000
                 ra1 = TARGET_PIXEL_ADDRESS
                 ra2 = TARGET_PIXEL_VALUE
-                bwa = rd1
                 bwd = rd2
                 brsel = b00
                 bwe = b1
@@ -817,7 +804,6 @@ module fsm #(
                     ra1 = TARGET_PIXEL_ADDRESS
                     wdsel = b0000
                     wa = TARGET_PIXEL_ADDRESS
-                    bra = aluout
                     brsel = b01
                     bwe = b1
 
@@ -837,7 +823,6 @@ module fsm #(
             States.A_LEFT_CURSOR_COLOUR:
                 asel = b0
                 ra1 = TARGET_PIXEL_ADDRESS
-                bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
@@ -943,7 +928,6 @@ module fsm #(
                 bsel = b0000
                 ra1 = TARGET_PIXEL_ADDRESS
                 ra2 = TARGET_PIXEL_VALUE
-                bwa = rd1
                 bwd = rd2
                 brsel = b00
                 bwe = b1
@@ -963,7 +947,6 @@ module fsm #(
                     ra1 = TARGET_PIXEL_ADDRESS
                     wdsel = b0000
                     wa = TARGET_PIXEL_ADDRESS
-                    bra = aluout
                     brsel = b01
                     bwe = b1
 
@@ -983,7 +966,6 @@ module fsm #(
             States.A_RIGHT_CURSOR_COLOUR:
                 asel = b0
                 ra1 = TARGET_PIXEL_ADDRESS
-                bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
@@ -1166,7 +1148,6 @@ module fsm #(
                 bsel = b0000
                 ra1 = TARGET_PIXEL_ADDRESS
                 ra2 = TARGET_PIXEL_VALUE
-                bwa = rd1
                 bwd = rd2
                 bwe = b1
                 brsel = b00
@@ -1185,7 +1166,6 @@ module fsm #(
                     ra1 = TARGET_PIXEL_ADDRESS
                     wdsel = b0000
                     wa = TARGET_PIXEL_ADDRESS
-                    bra = aluout
                     brsel = b01
                     states.d = States.B_UP_STORE_PIXEL
                 }
@@ -1202,7 +1182,6 @@ module fsm #(
             
             States.B_UP_CURSOR_COLOUR:
                 ra1 = TARGET_PIXEL_ADDRESS
-                bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
@@ -1310,7 +1289,6 @@ module fsm #(
                 bsel = b0000
                 ra1 = TARGET_PIXEL_ADDRESS
                 ra2 = TARGET_PIXEL_VALUE
-                bwa = rd1
                 bwd = rd2
                 brsel = b00
                 bwe = b1
@@ -1330,7 +1308,6 @@ module fsm #(
                     ra1 = TARGET_PIXEL_ADDRESS
                     wdsel = b0000
                     wa = TARGET_PIXEL_ADDRESS
-                    bra = aluout
                     brsel = b01
 
                     states.d = States.B_DOWN_STORE_PIXEL
@@ -1349,7 +1326,6 @@ module fsm #(
             States.B_DOWN_CURSOR_COLOUR:
                 asel = b0
                 ra1 = TARGET_PIXEL_ADDRESS
-                bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
@@ -1454,7 +1430,6 @@ module fsm #(
                 bsel = b0000
                 ra1 = TARGET_PIXEL_ADDRESS
                 ra2 = TARGET_PIXEL_VALUE
-                bwa = rd1
                 bwd = rd2
                 brsel = b00
                 bwe = b1
@@ -1474,7 +1449,6 @@ module fsm #(
                     ra1 = TARGET_PIXEL_ADDRESS
                     wdsel = b0000
                     wa = TARGET_PIXEL_ADDRESS
-                    bra = aluout
                     brsel = b01
 
                     states.d = States.B_LEFT_STORE_PIXEL
@@ -1492,7 +1466,6 @@ module fsm #(
             States.B_LEFT_CURSOR_COLOUR:
                 asel = b0
                 ra1 = TARGET_PIXEL_ADDRESS
-                bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
@@ -1592,7 +1565,6 @@ module fsm #(
                 bsel = b0000
                 ra1 = TARGET_PIXEL_ADDRESS
                 ra2 = TARGET_PIXEL_VALUE
-                bwa = rd1
                 bwd = rd2
                 brsel = b00
                 bwe = b1
@@ -1612,7 +1584,6 @@ module fsm #(
                     ra1 = TARGET_PIXEL_ADDRESS
                     wdsel = b0000
                     wa = TARGET_PIXEL_ADDRESS
-                    bra = aluout
                     brsel = b01
                     bwe = b1
 
@@ -1631,7 +1602,6 @@ module fsm #(
             States.B_RIGHT_CURSOR_COLOUR:
                 asel = b0
                 ra1 = TARGET_PIXEL_ADDRESS
-                bwa = rd1
                 bwe = b1
                 bwd = b11
                 brsel = b00
@@ -1645,7 +1615,6 @@ module fsm #(
                 bsel = b0000
                 ra1 = TARGET_PIXEL_ADDRESS
                 ra2 = TARGET_PIXEL_VALUE
-                bwa = rd1
                 bwd = rd2
                 brsel = b00
                 bwe = b1
@@ -1726,7 +1695,6 @@ module fsm #(
                     bsel = b0100
                     ra1 = TARGET_PIXEL_ADDRESS
 
-                    bra = aluout
                     bwe = b0
 
                     // zeroing SRs
@@ -1750,10 +1718,8 @@ module fsm #(
                     asel  = b0
                     bsel = b0101
                     ra1 = TARGET_PIXEL_ADDRESS
-                    bra = aluout
                     bwe = b0
 
-                    swd1 = brd
                     swe1 = b1
                     sre1 = b0
 
@@ -1767,10 +1733,9 @@ module fsm #(
                 }
                 else {
                     ra1 = TARGET_PIXEL_ADDRESS
-                    bra = rd1
+                    alufn = b011010
                     bwe = b0
 
-                    swd1 = brd
                     swe1 = b1
                     sre1 = b0
 
@@ -1787,10 +1752,8 @@ module fsm #(
                     asel  = b0
                     bsel = b0001
                     ra1 = TARGET_PIXEL_ADDRESS
-                    bra = aluout
                     bwe = b0
 
-                    swd2 = brd
                     swe2 = b1
                     sre2 = b0
 
@@ -1807,10 +1770,8 @@ module fsm #(
                     asel  = b0
                     bsel = b0100
                     ra1 = TARGET_PIXEL_ADDRESS
-                    bra = aluout
                     bwe = b0
 
-                    swd2 = brd
                     swe2 = b1
                     sre2 = b0
 
@@ -1827,10 +1788,8 @@ module fsm #(
                     asel  = b0
                     bsel = b0101
                     ra1 = TARGET_PIXEL_ADDRESS
-                    bra = aluout
                     bwe = b0
 
-                    swd3 = brd
                     swe3 = b1
                     sre3 = b0
 
@@ -1839,7 +1798,6 @@ module fsm #(
                 }
 
             States.SR_LOAD_BOT_RIGHT:
-                swd3 = brd
                 swe3 = b1
                 sre3 = b0
                 states.d = States.READ_TOP_LEFT
@@ -1854,7 +1812,6 @@ module fsm #(
                     asel = b0
                     bsel = b0100
                     ra1 = TARGET_PIXEL_ADDRESS
-                    bra = aluout
 
                     states.d = States.RB_LOAD_TOP_RIGHT
                 }
@@ -1869,8 +1826,6 @@ module fsm #(
                     asel = b0
                     bsel = b0001
                     ra1 = TARGET_PIXEL_ADDRESS
-                    bra = aluout
-                    swd1 = brd
                     swe1 = b1
                     sre1 = b0
 
@@ -1887,10 +1842,8 @@ module fsm #(
                     asel = b0
                     bsel = b0101
                     ra1 = TARGET_PIXEL_ADDRESS
-                    bra = aluout
                     bwe = b0
 
-                    swd2 = brd
                     swe2 = b1
                     sre2 = b0
 
@@ -1902,7 +1855,6 @@ module fsm #(
                     states.d = States.RB_LOAD_BOT_RIGHT
                 }
                 else {
-                    swd3 = brd
                     swe3 = b1
                     sre3 = b0
 
@@ -1915,15 +1867,12 @@ module fsm #(
                     states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
                 }
                 else {
-                    swd1 = brd
                     swe1 = b1
                     sre1 = b0
 
-                    swd2 = brd
                     swe2 = b1
                     sre2 = b0
 
-                    swd3 = brd
                     swe3 = b1
                     sre3 = b0
 
@@ -2418,7 +2367,6 @@ module fsm #(
 
             States.SET_A: // yeyetaut1
                 ra1 = TARGET_PIXEL_ADDRESS
-                bwa = rd1
                 bwe = b1
                 bwd = b01
 
@@ -2427,7 +2375,6 @@ module fsm #(
             
             States.SET_B:
                 ra1 = TARGET_PIXEL_ADDRESS
-                bwa = rd1
                 bwe = b1
                 bwd = b10
                 states.d = States.RESET_A_NEIGHBOUR
@@ -2435,7 +2382,6 @@ module fsm #(
             
             States.SET_00:
                 ra1 = TARGET_PIXEL_ADDRESS
-                bwa = rd1
                 bwe = b1
                 bwd = b00
                 states.d = States.RESET_A_NEIGHBOUR

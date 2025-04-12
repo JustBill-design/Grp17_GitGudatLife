@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Sun Apr 13 03:55:46 2025
+| Date             : Sun Apr 13 04:33:46 2025
 | Host             : PC running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.144        |
+| Total On-Chip Power (W)  | 0.153        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.072        |
+| Dynamic (W)              | 0.081        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 4.9          |
 | Max Ambient (C)          | 84.3         |
@@ -53,19 +53,19 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |     0.004 |        3 |       --- |             --- |
-| Slice Logic              |     0.009 |     2237 |       --- |             --- |
-|   LUT as Logic           |     0.008 |     1459 |     20800 |            7.01 |
+| Slice Logic              |     0.012 |     2413 |       --- |             --- |
+|   LUT as Logic           |     0.011 |     1567 |     20800 |            7.53 |
 |   CARRY4                 |    <0.001 |       56 |      8150 |            0.69 |
-|   Register               |    <0.001 |      399 |     41600 |            0.96 |
-|   F7/F8 Muxes            |    <0.001 |       15 |     32600 |            0.05 |
-|   LUT as Shift Register  |    <0.001 |        7 |      9600 |            0.07 |
+|   Register               |    <0.001 |      409 |     41600 |            0.98 |
 |   LUT as Distributed RAM |    <0.001 |        6 |      9600 |            0.06 |
+|   F7/F8 Muxes            |    <0.001 |       36 |     32600 |            0.11 |
+|   LUT as Shift Register  |    <0.001 |        7 |      9600 |            0.07 |
 |   Others                 |     0.000 |       65 |       --- |             --- |
-| Signals                  |     0.012 |     1941 |       --- |             --- |
+| Signals                  |     0.016 |     2066 |       --- |             --- |
 | Block RAM                |     0.002 |        1 |        50 |            2.00 |
-| I/O                      |     0.046 |       79 |       170 |           46.47 |
+| I/O                      |     0.048 |       79 |       170 |           46.47 |
 | Static Power             |     0.072 |          |           |                 |
-| Total                    |     0.144 |          |           |                 |
+| Total                    |     0.153 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -75,7 +75,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.036 |       0.026 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.043 |       0.034 |      0.010 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.014 |       0.002 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.014 |       0.013 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -144,12 +144,12 @@ Table of Contents
 +--------------+-----------+
 | Name         | Power (W) |
 +--------------+-----------+
-| alchitry_top |     0.072 |
+| alchitry_top |     0.081 |
 |   L_reg      |     0.003 |
 |   brams      |     0.002 |
 |     bram1    |     0.001 |
 |     bram2    |     0.001 |
-|   sm         |     0.017 |
+|   sm         |     0.023 |
 +--------------+-----------+
 
 
