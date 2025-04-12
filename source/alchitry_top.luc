@@ -31,7 +31,7 @@ module alchitry_top (
     // input testpullup        // default high?
 
 ) {
-    const CLK = 10_000_000
+    const CLK = 30_000_000
 
     alu alum(#SIZE(32))
     
@@ -40,9 +40,9 @@ module alchitry_top (
     sig clk_10
     
 
-    reset_conditioner reset_cond(.clk(clk))        // whole board reset
-    .clk(clk_10) {
+    .clk(clk) {
     
+        reset_conditioner reset_cond        // whole board reset
         reset_conditioner fifo_reset_cond   // reset for shift registers
 
         // button conditioners
