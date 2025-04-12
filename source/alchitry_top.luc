@@ -25,10 +25,10 @@ module alchitry_top (
     // seven segment leds
     output aseg[12],      // counter for player A
     output bseg[12],      // counter for player B
-    output timerseg[12],       // game timer
+    output timerseg[12]   // game timer
 
     // testing
-    input testpullup        // default high?
+    // input testpullup        // default high?
 
 ) {
     const CLK = 10_000_000
@@ -51,7 +51,8 @@ module alchitry_top (
         // button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}))
         // button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}))
         // button_conditioner cond_butt_next_play(#CLK_FREQ(CLK))
-        button_conditioner butt_cond(#CLK_FREQ(CLK))            // CAN REMOVE WITH BUTTON TESTER
+
+        // button_conditioner butt_cond(#CLK_FREQ(CLK))            // CAN REMOVE WITH BUTTON TESTER
         
         // edge detector for next/play button
         edge_detector edge_next_play(#RISE(1),#FALL(0))
@@ -168,10 +169,10 @@ module alchitry_top (
         sm.deselect_button = cond_butt_sel_desel.out[1]
 
         // seven segment // ~ if not cathode/anode
-        aseg_driver.value = reg.an
+        aseg_driver.value = reg.pac
         bseg_driver.value = reg.pbc
         timerseg_driver.value = reg.timer
-        aseg = ~aseg_driver.out
+        aseg = aseg_driver.out
         bseg = bseg_driver.out
         timerseg = timerseg_driver.out
         
@@ -396,8 +397,9 @@ module alchitry_top (
 
 
         // button tester
-        butt_cond.in = testpullup
-        led[0] = butt_cond.out
+        // butt_cond.in = testpullup
+        // led[0] = butt_cond.out
+
         // debugging
         led[7:0] = sm.debug_out
     }

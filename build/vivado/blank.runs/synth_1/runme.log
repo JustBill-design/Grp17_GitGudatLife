@@ -3,18 +3,16 @@
     with args -log alchitry_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source alchitry_top.tcl
 
 
-ECHO is off.
-ECHO is off.
 
-****** Vivado v2023.2 (64-bit)
-  **** SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
-  **** IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
-  **** SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
+****** Vivado v2024.2 (64-bit)
+  **** SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
+  **** IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
+  **** SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
+  **** Start of session at: Sat Apr 12 17:53:29 2025
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
-    ** Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 
 source alchitry_top.tcl -notrace
-create_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 456.305 ; gain = 183.141
 Command: synth_design -top alchitry_top -part xc7a35tftg256-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
@@ -22,184 +20,176 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t
 INFO: [Device 21-403] Loading part xc7a35tftg256-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 44416
+INFO: [Synth 8-7075] Helper process launched with PID 32624
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1289.484 ; gain = 439.328
+Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 949.688 ; gain = 467.738
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-6157] synthesizing module 'alchitry_top' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'button_conditioner' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/button_conditioner.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'alchitry_top' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'button_conditioner' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/button_conditioner.sv:7]
 	Parameter CLK_FREQ bound to: 24'b100110001001011010000000 
 	Parameter MIN_DELAY bound to: 8'b11001000 
 	Parameter NUM_SYNC bound to: 5'b11110 
-INFO: [Synth 8-6157] synthesizing module 'pipeline' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/pipeline.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'pipeline' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/pipeline.sv:7]
 	Parameter DEPTH bound to: 5'b11110 
-INFO: [Synth 8-6155] done synthesizing module 'pipeline' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/pipeline.sv:7]
-INFO: [Synth 8-6155] done synthesizing module 'button_conditioner' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/button_conditioner.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'alu' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'pipeline' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/pipeline.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'button_conditioner' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/button_conditioner.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'alu' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv:7]
 	Parameter SIZE bound to: 6'b100000 
-INFO: [Synth 8-6157] synthesizing module 'adder' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/adder.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'adder' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/adder.sv:7]
 	Parameter SIZE bound to: 6'b100000 
-INFO: [Synth 8-6157] synthesizing module 'rca' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/rca.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'rca' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/rca.sv:7]
 	Parameter SIZE bound to: 6'b100000 
-INFO: [Synth 8-6157] synthesizing module 'fa' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fa.sv:7]
-INFO: [Synth 8-6155] done synthesizing module 'fa' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fa.sv:7]
-INFO: [Synth 8-6155] done synthesizing module 'rca' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/rca.sv:7]
-INFO: [Synth 8-6155] done synthesizing module 'adder' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/adder.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'compare' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/compare.sv:7]
-INFO: [Synth 8-6155] done synthesizing module 'compare' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/compare.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'boolean' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/boolean.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'fa' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fa.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'fa' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fa.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'rca' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/rca.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'adder' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/adder.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'compare' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/compare.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'compare' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/compare.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'boolean' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/boolean.sv:7]
 	Parameter SIZE bound to: 6'b100000 
-INFO: [Synth 8-6155] done synthesizing module 'boolean' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/boolean.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'shifter' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'x_bit_left_shifter' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'boolean' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/boolean.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'shifter' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_left_shifter' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
 	Parameter SHIFT bound to: 5'b00001 
-INFO: [Synth 8-6157] synthesizing module 'mux_2' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/mux_2.sv:7]
-INFO: [Synth 8-226] default block is never used [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/mux_2.sv:14]
-INFO: [Synth 8-6155] done synthesizing module 'mux_2' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/mux_2.sv:7]
-INFO: [Synth 8-6155] done synthesizing module 'x_bit_left_shifter' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'x_bit_left_shifter__parameterized0' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'mux_2' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/mux_2.sv:7]
+INFO: [Synth 8-226] default block is never used [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/mux_2.sv:14]
+INFO: [Synth 8-6155] done synthesizing module 'mux_2' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/mux_2.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_left_shifter' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_left_shifter__parameterized0' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
 	Parameter SHIFT bound to: 5'b00010 
-INFO: [Synth 8-6155] done synthesizing module 'x_bit_left_shifter__parameterized0' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'x_bit_left_shifter__parameterized1' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_left_shifter__parameterized0' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_left_shifter__parameterized1' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
 	Parameter SHIFT bound to: 5'b00100 
-INFO: [Synth 8-6155] done synthesizing module 'x_bit_left_shifter__parameterized1' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'x_bit_left_shifter__parameterized2' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_left_shifter__parameterized1' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_left_shifter__parameterized2' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
 	Parameter SHIFT bound to: 5'b01000 
-INFO: [Synth 8-6155] done synthesizing module 'x_bit_left_shifter__parameterized2' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'x_bit_left_shifter__parameterized3' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_left_shifter__parameterized2' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_left_shifter__parameterized3' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
 	Parameter SHIFT bound to: 5'b10000 
-INFO: [Synth 8-6155] done synthesizing module 'x_bit_left_shifter__parameterized3' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'x_bit_right_shifter' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_left_shifter__parameterized3' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_right_shifter' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
 	Parameter SHIFT bound to: 5'b00001 
-INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_shifter' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'x_bit_right_shifter__parameterized0' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_shifter' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_right_shifter__parameterized0' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
 	Parameter SHIFT bound to: 5'b00010 
-INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_shifter__parameterized0' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'x_bit_right_shifter__parameterized1' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_shifter__parameterized0' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_right_shifter__parameterized1' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
 	Parameter SHIFT bound to: 5'b00100 
-INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_shifter__parameterized1' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'x_bit_right_shifter__parameterized2' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_shifter__parameterized1' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_right_shifter__parameterized2' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
 	Parameter SHIFT bound to: 5'b01000 
-INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_shifter__parameterized2' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'x_bit_right_shifter__parameterized3' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_shifter__parameterized2' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_right_shifter__parameterized3' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
 	Parameter SHIFT bound to: 5'b10000 
-INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_shifter__parameterized3' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'x_bit_right_ari_shifter' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_shifter__parameterized3' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_right_ari_shifter' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
 	Parameter SHIFT bound to: 5'b00001 
-INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_ari_shifter' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'x_bit_right_ari_shifter__parameterized0' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_ari_shifter' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_right_ari_shifter__parameterized0' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
 	Parameter SHIFT bound to: 5'b00010 
-INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_ari_shifter__parameterized0' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'x_bit_right_ari_shifter__parameterized1' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_ari_shifter__parameterized0' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_right_ari_shifter__parameterized1' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
 	Parameter SHIFT bound to: 5'b00100 
-INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_ari_shifter__parameterized1' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'x_bit_right_ari_shifter__parameterized2' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_ari_shifter__parameterized1' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_right_ari_shifter__parameterized2' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
 	Parameter SHIFT bound to: 5'b01000 
-INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_ari_shifter__parameterized2' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'x_bit_right_ari_shifter__parameterized3' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_ari_shifter__parameterized2' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'x_bit_right_ari_shifter__parameterized3' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
 	Parameter SHIFT bound to: 5'b10000 
-INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_ari_shifter__parameterized3' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
-INFO: [Synth 8-6155] done synthesizing module 'shifter' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/shifter.sv:7]
-INFO: [Synth 8-226] default block is never used [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv:111]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv:148]
-INFO: [Synth 8-6155] done synthesizing module 'alu' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'reset_conditioner' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/reset_conditioner.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_ari_shifter__parameterized3' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'shifter' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/shifter.sv:7]
+INFO: [Synth 8-226] default block is never used [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv:111]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv:148]
+INFO: [Synth 8-6155] done synthesizing module 'alu' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'reset_conditioner' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/reset_conditioner.sv:7]
 	Parameter STAGES bound to: 3'b100 
-INFO: [Synth 8-6155] done synthesizing module 'reset_conditioner' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/reset_conditioner.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'button_conditioner__parameterized0' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/button_conditioner.sv:7]
-	Parameter CLK_FREQ bound to: 24'b100110001001011010000000 
-	Parameter MIN_DELAY bound to: 5'b10100 
-	Parameter NUM_SYNC bound to: 2'b10 
-INFO: [Synth 8-6157] synthesizing module 'pipeline__parameterized0' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/pipeline.sv:7]
-	Parameter DEPTH bound to: 2'b10 
-INFO: [Synth 8-6155] done synthesizing module 'pipeline__parameterized0' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/pipeline.sv:7]
-INFO: [Synth 8-6155] done synthesizing module 'button_conditioner__parameterized0' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/button_conditioner.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'edge_detector' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/edge_detector.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'reset_conditioner' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/reset_conditioner.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'edge_detector' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/edge_detector.sv:7]
 	Parameter RISE bound to: 1'b1 
 	Parameter FALL bound to: 1'b0 
-INFO: [Synth 8-6155] done synthesizing module 'edge_detector' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/edge_detector.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'edge_detector__parameterized0' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/edge_detector.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'edge_detector' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/edge_detector.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'edge_detector__parameterized0' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/edge_detector.sv:7]
 	Parameter RISE bound to: 1'b0 
 	Parameter FALL bound to: 1'b1 
-INFO: [Synth 8-6155] done synthesizing module 'edge_detector__parameterized0' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/edge_detector.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'display_driver' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/display_driver.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'edge_detector__parameterized0' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/edge_detector.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'display_driver' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/display_driver.sv:7]
 	Parameter ADDRESS_SIZE bound to: 3'b101 
 	Parameter MATRIX_WIDTH bound to: 7'b1000000 
 	Parameter CLK_FREQ bound to: 24'b100110001001011010000000 
-INFO: [Synth 8-226] default block is never used [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/display_driver.sv:66]
-INFO: [Synth 8-6155] done synthesizing module 'display_driver' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/display_driver.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'counter' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv:7]
+INFO: [Synth 8-226] default block is never used [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/display_driver.sv:66]
+INFO: [Synth 8-6155] done synthesizing module 'display_driver' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/display_driver.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'counter' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv:7]
 	Parameter SIZE bound to: 5'b11000 
 	Parameter DIV bound to: 1'b0 
 	Parameter TOP bound to: 24'b100110001001011010000000 
 	Parameter UP bound to: 1'b1 
-INFO: [Synth 8-6155] done synthesizing module 'counter' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'fsm' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:7]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:1952]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:1990]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2028]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2066]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2112]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2150]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2188]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2226]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2278]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2298]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2314]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2330]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2369]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2385]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2401]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2429]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2445]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2461]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:349]
-INFO: [Synth 8-6155] done synthesizing module 'fsm' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'bram' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bram.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'counter' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'fsm' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:7]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:1949]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:1987]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2025]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2063]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2109]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2147]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2185]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2223]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2275]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2295]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2311]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2327]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2366]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2382]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2398]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2426]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2442]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2458]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:349]
+INFO: [Synth 8-6155] done synthesizing module 'fsm' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'bram' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bram.sv:7]
 	Parameter WIDTH bound to: 2'b10 
 	Parameter ENTRIES bound to: 13'b1000010000000 
-INFO: [Synth 8-6157] synthesizing module 'simple_ram' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/simple_ram.v:50]
+INFO: [Synth 8-6157] synthesizing module 'simple_ram' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/simple_ram.v:50]
 	Parameter WIDTH bound to: 2'b10 
 	Parameter ENTRIES bound to: 13'b1000010000000 
-INFO: [Synth 8-6155] done synthesizing module 'simple_ram' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/simple_ram.v:50]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bram.sv:66]
-INFO: [Synth 8-6155] done synthesizing module 'bram' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bram.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'regfile' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/regfile.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'simple_ram' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/simple_ram.v:50]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bram.sv:66]
+INFO: [Synth 8-6155] done synthesizing module 'bram' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bram.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'regfile' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/regfile.sv:7]
 	Parameter WIDTH bound to: 6'b100000 
 	Parameter ENTRIES bound to: 4'b1000 
-INFO: [Synth 8-6155] done synthesizing module 'regfile' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/regfile.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'multi_seven_seg' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/multi_seven_seg.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'regfile' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/regfile.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'multi_seven_seg' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/multi_seven_seg.sv:7]
 	Parameter DIGITS bound to: 3'b100 
 	Parameter DIV bound to: 5'b10000 
-INFO: [Synth 8-6157] synthesizing module 'counter__parameterized0' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'counter__parameterized0' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv:7]
 	Parameter SIZE bound to: 2 - type: integer 
 	Parameter DIV bound to: 5'b10000 
 	Parameter TOP bound to: 3'b011 
 	Parameter UP bound to: 1'b1 
-INFO: [Synth 8-6155] done synthesizing module 'counter__parameterized0' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'bin_to_dec' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bin_to_dec.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'counter__parameterized0' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'bin_to_dec' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bin_to_dec.sv:7]
 	Parameter DIGITS bound to: 3'b100 
 	Parameter LEADING_ZEROS bound to: 1'b1 
-INFO: [Synth 8-6155] done synthesizing module 'bin_to_dec' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bin_to_dec.sv:7]
-INFO: [Synth 8-6155] done synthesizing module 'multi_seven_seg' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/multi_seven_seg.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'counter__parameterized1' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'bin_to_dec' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bin_to_dec.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'multi_seven_seg' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/multi_seven_seg.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'counter__parameterized1' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv:7]
 	Parameter SIZE bound to: 4'b1101 
 	Parameter DIV bound to: 1'b0 
 	Parameter TOP bound to: 13'b1000001111111 
 	Parameter UP bound to: 1'b1 
-INFO: [Synth 8-6155] done synthesizing module 'counter__parameterized1' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'fifo' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fifo.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'counter__parameterized1' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv:7]
+INFO: [Synth 8-6157] synthesizing module 'fifo' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fifo.sv:7]
 	Parameter WIDTH bound to: 2'b10 
 	Parameter ENTRIES bound to: 3'b100 
-INFO: [Synth 8-6157] synthesizing module 'simple_dual_port_ram' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/simple_dual_port_ram.v:47]
+INFO: [Synth 8-6157] synthesizing module 'simple_dual_port_ram' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/simple_dual_port_ram.v:47]
 	Parameter WIDTH bound to: 2'b10 
 	Parameter ENTRIES bound to: 3'b100 
-INFO: [Synth 8-6155] done synthesizing module 'simple_dual_port_ram' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/simple_dual_port_ram.v:47]
-INFO: [Synth 8-6155] done synthesizing module 'fifo' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fifo.sv:7]
-INFO: [Synth 8-6155] done synthesizing module 'alchitry_top' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:7]
-WARNING: [Synth 8-6014] Unused sequential element D_buff1_q_reg was removed.  [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:770]
-WARNING: [Synth 8-6014] Unused sequential element D_buff2_q_reg was removed.  [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:771]
-WARNING: [Synth 8-6014] Unused sequential element D_buff3_q_reg was removed.  [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:772]
+INFO: [Synth 8-6155] done synthesizing module 'simple_dual_port_ram' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/simple_dual_port_ram.v:47]
+INFO: [Synth 8-6155] done synthesizing module 'fifo' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fifo.sv:7]
+INFO: [Synth 8-6155] done synthesizing module 'alchitry_top' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:7]
+WARNING: [Synth 8-6014] Unused sequential element D_buff1_q_reg was removed.  [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:750]
+WARNING: [Synth 8-6014] Unused sequential element D_buff2_q_reg was removed.  [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:751]
+WARNING: [Synth 8-6014] Unused sequential element D_buff3_q_reg was removed.  [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:752]
 WARNING: [Synth 8-3917] design alchitry_top has port matgnd[1] driven by constant 0
 WARNING: [Synth 8-3917] design alchitry_top has port matgnd[0] driven by constant 0
 WARNING: [Synth 8-7129] Port rst in module bram is either unconnected or has no load
@@ -251,55 +241,54 @@ WARNING: [Synth 8-7129] Port alufn_signal[2] in module adder is either unconnect
 WARNING: [Synth 8-7129] Port alufn_signal[1] in module adder is either unconnected or has no load
 WARNING: [Synth 8-7129] Port rst_n in module alchitry_top is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1440.133 ; gain = 589.977
+Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1097.145 ; gain = 615.195
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1440.133 ; gain = 589.977
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1097.145 ; gain = 615.195
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1440.133 ; gain = 589.977
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1097.145 ; gain = 615.195
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.071 . Memory (MB): peak = 1440.133 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.031 . Memory (MB): peak = 1097.145 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/constraint/alchitry.xdc]
-Finished Parsing XDC File [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/constraint/alchitry.xdc]
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/constraint/alchitry.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/alchitry_top_propImpl.xdc].
+Parsing XDC File [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/alchitry.xdc]
+Finished Parsing XDC File [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/alchitry.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/alchitry.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/alchitry_top_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/alchitry_top_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
-Parsing XDC File [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/constraint/au_props.xdc]
-Finished Parsing XDC File [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/constraint/au_props.xdc]
+Parsing XDC File [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/au_props.xdc]
+Finished Parsing XDC File [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/au_props.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1546.008 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1188.078 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Access is denied.
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.013 . Memory (MB): peak = 1546.008 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1188.078 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1546.008 ; gain = 695.852
+Finished Constraint Validation : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1188.078 ; gain = 706.129
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tftg256-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1546.008 ; gain = 695.852
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1188.078 ; gain = 706.129
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1546.008 ; gain = 695.852
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1188.078 ; gain = 706.129
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'D_states_q_reg' in module 'fsm'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 1546.008 ; gain = 695.852
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1188.078 ; gain = 706.129
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -327,7 +316,7 @@ Detailed RTL Component Info :
 	                7 Bit    Registers := 1     
 	                4 Bit    Registers := 5     
 	                3 Bit    Registers := 2     
-	                2 Bit    Registers := 18    
+	                2 Bit    Registers := 17    
 	                1 Bit    Registers := 10    
 +---RAMs : 
 	               8K Bit	(4224 X 2 bit)          RAMs := 2     
@@ -335,44 +324,33 @@ Detailed RTL Component Info :
 +---Muxes : 
 	   2 Input   32 Bit        Muxes := 3     
 	   4 Input   32 Bit        Muxes := 2     
-	   5 Input   32 Bit        Muxes := 1     
-	  10 Input   14 Bit        Muxes := 3     
 	   2 Input   14 Bit        Muxes := 9     
 	   5 Input   13 Bit        Muxes := 1     
 	   2 Input   13 Bit        Muxes := 5     
 	 176 Input   13 Bit        Muxes := 2     
 	   4 Input   12 Bit        Muxes := 3     
 	   2 Input   11 Bit        Muxes := 1     
-	  10 Input   10 Bit        Muxes := 3     
 	   2 Input    8 Bit        Muxes := 3     
 	 176 Input    8 Bit        Muxes := 2     
 	   3 Input    8 Bit        Muxes := 9     
 	   4 Input    8 Bit        Muxes := 9     
 	   4 Input    7 Bit        Muxes := 1     
 	   2 Input    7 Bit        Muxes := 50    
-	  10 Input    7 Bit        Muxes := 3     
 	 176 Input    6 Bit        Muxes := 1     
 	   2 Input    6 Bit        Muxes := 27    
 	   2 Input    5 Bit        Muxes := 8     
 	   2 Input    4 Bit        Muxes := 15    
 	 176 Input    4 Bit        Muxes := 4     
-	  11 Input    4 Bit        Muxes := 3     
-	  12 Input    4 Bit        Muxes := 9     
 	   4 Input    4 Bit        Muxes := 3     
-	   5 Input    3 Bit        Muxes := 1     
 	   4 Input    3 Bit        Muxes := 1     
 	   2 Input    3 Bit        Muxes := 2     
 	 176 Input    3 Bit        Muxes := 3     
-	   9 Input    2 Bit        Muxes := 1     
-	  10 Input    2 Bit        Muxes := 1     
 	   2 Input    2 Bit        Muxes := 3     
 	   3 Input    2 Bit        Muxes := 1     
 	 176 Input    2 Bit        Muxes := 6     
 	   2 Input    1 Bit        Muxes := 540   
 	   4 Input    1 Bit        Muxes := 10    
 	   5 Input    1 Bit        Muxes := 2     
-	   6 Input    1 Bit        Muxes := 1     
-	  10 Input    1 Bit        Muxes := 1     
 	   3 Input    1 Bit        Muxes := 1     
 	 176 Input    1 Bit        Muxes := 17    
 ---------------------------------------------------------------------------------
@@ -425,9 +403,8 @@ WARNING: [Synth 8-7129] Port rd2[4] in module fsm is either unconnected or has n
 WARNING: [Synth 8-7129] Port rd2[3] in module fsm is either unconnected or has no load
 WARNING: [Synth 8-7129] Port rd2[2] in module fsm is either unconnected or has no load
 WARNING: [Synth 8-7129] Port rst_n in module alchitry_top is either unconnected or has no load
-WARNING: [Synth 8-7129] Port testpullup in module alchitry_top is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:35 ; elapsed = 00:00:36 . Memory (MB): peak = 1546.008 ; gain = 695.852
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:21 ; elapsed = 00:00:23 . Memory (MB): peak = 1382.363 ; gain = 900.414
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -460,13 +437,13 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:39 ; elapsed = 00:00:40 . Memory (MB): peak = 1546.008 ; gain = 695.852
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:24 ; elapsed = 00:00:26 . Memory (MB): peak = 1382.363 ; gain = 900.414
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:50 ; elapsed = 00:00:51 . Memory (MB): peak = 1592.090 ; gain = 741.934
+Finished Timing Optimization : Time (s): cpu = 00:00:30 ; elapsed = 00:00:32 . Memory (MB): peak = 1473.992 ; gain = 992.043
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -499,7 +476,7 @@ Start Technology Mapping
 INFO: [Synth 8-7052] The timing for the instance brams/bram1/ram_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance brams/bram2/ram_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:51 ; elapsed = 00:00:53 . Memory (MB): peak = 1592.309 ; gain = 742.152
+Finished Technology Mapping : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1475.941 ; gain = 993.992
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -517,50 +494,50 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:55 ; elapsed = 00:00:56 . Memory (MB): peak = 1605.117 ; gain = 754.961
+Finished IO Insertion : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1582.047 ; gain = 1100.098
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:55 ; elapsed = 00:00:56 . Memory (MB): peak = 1605.117 ; gain = 754.961
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1582.047 ; gain = 1100.098
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:55 ; elapsed = 00:00:56 . Memory (MB): peak = 1605.117 ; gain = 754.961
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1582.047 ; gain = 1100.098
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:55 ; elapsed = 00:00:56 . Memory (MB): peak = 1605.117 ; gain = 754.961
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1582.047 ; gain = 1100.098
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:55 ; elapsed = 00:00:57 . Memory (MB): peak = 1605.129 ; gain = 754.973
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1584.031 ; gain = 1102.082
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:55 ; elapsed = 00:00:57 . Memory (MB): peak = 1605.129 ; gain = 754.973
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1584.031 ; gain = 1102.082
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
 Static Shift Register Report:
-+-------------+----------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
-|Module Name  | RTL Name                                                             | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
-+-------------+----------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
-|alchitry_top | cond_butt_next_play/sync/D_pipe_q_reg[29]                            | 30     | 1     | NO           | YES                | YES               | 0      | 1       | 
-|alchitry_top | forLoop_idx_0_313565453[0].cond_butt_sel_desel/sync/D_pipe_q_reg[29] | 30     | 2     | NO           | YES                | YES               | 0      | 2       | 
-|alchitry_top | forLoop_idx_0_803055412[0].cond_butt_dirs/sync/D_pipe_q_reg[29]      | 30     | 4     | NO           | YES                | YES               | 0      | 4       | 
-+-------------+----------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
++-------------+-----------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name  | RTL Name                                                              | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++-------------+-----------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|alchitry_top | cond_butt_next_play/sync/D_pipe_q_reg[29]                             | 30     | 1     | NO           | NO                 | YES               | 0      | 1       | 
+|alchitry_top | forLoop_idx_0_1625332553[0].cond_butt_sel_desel/sync/D_pipe_q_reg[29] | 30     | 2     | NO           | NO                 | YES               | 0      | 2       | 
+|alchitry_top | forLoop_idx_0_52124955[0].cond_butt_dirs/sync/D_pipe_q_reg[29]        | 30     | 4     | NO           | NO                 | YES               | 0      | 4       | 
++-------------+-----------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
 
 ---------------------------------------------------------------------------------
 Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -580,47 +557,46 @@ Report Cell Usage:
 |      |Cell     |Count |
 +------+---------+------+
 |1     |BUFG     |     1|
-|2     |CARRY4   |    73|
-|3     |LUT1     |    24|
-|4     |LUT2     |   267|
-|5     |LUT3     |   221|
-|6     |LUT4     |   278|
-|7     |LUT5     |   306|
-|8     |LUT6     |  1048|
+|2     |CARRY4   |    83|
+|3     |LUT1     |    32|
+|4     |LUT2     |   303|
+|5     |LUT3     |   262|
+|6     |LUT4     |   318|
+|7     |LUT5     |   339|
+|8     |LUT6     |  1113|
 |9     |MUXF7    |    50|
 |10    |RAM16X1D |     6|
 |11    |RAMB18E1 |     2|
 |12    |SRLC32E  |     7|
 |13    |FDPE     |     8|
-|14    |FDRE     |   538|
+|14    |FDRE     |   530|
 |15    |FDSE     |    19|
 |16    |IBUF     |    10|
 |17    |OBUF     |    69|
 +------+---------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:55 ; elapsed = 00:00:57 . Memory (MB): peak = 1605.129 ; gain = 754.973
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1584.031 ; gain = 1102.082
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 36 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:46 ; elapsed = 00:00:54 . Memory (MB): peak = 1605.129 ; gain = 649.098
-Synthesis Optimization Complete : Time (s): cpu = 00:00:55 ; elapsed = 00:00:57 . Memory (MB): peak = 1605.129 ; gain = 754.973
+Synthesis finished with 0 errors, 0 critical warnings and 35 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:29 ; elapsed = 00:00:34 . Memory (MB): peak = 1584.031 ; gain = 1011.148
+Synthesis Optimization Complete : Time (s): cpu = 00:00:33 ; elapsed = 00:00:35 . Memory (MB): peak = 1584.031 ; gain = 1102.082
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 1617.148 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 131 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.013 . Memory (MB): peak = 1593.168 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 141 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1622.832 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1596.879 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 6 instances were transformed.
   RAM16X1D => RAM32X1D (RAMD32(x2)): 6 instances
 
-Access is denied.
-Synth Design complete | Checksum: e06b2739
+Synth Design complete | Checksum: b3522127
 INFO: [Common 17-83] Releasing license: Synthesis
-128 Infos, 89 Warnings, 0 Critical Warnings and 0 Errors encountered.
+124 Infos, 88 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:59 ; elapsed = 00:01:01 . Memory (MB): peak = 1622.832 ; gain = 1166.527
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1622.832 ; gain = 0.000
-INFO: [Common 17-1381] The checkpoint 'C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.runs/synth_1/alchitry_top.dcp' has been generated.
-INFO: [runtcl-4] Executing : report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sat Apr 12 15:39:32 2025...
+synth_design: Time (s): cpu = 00:00:35 ; elapsed = 00:00:38 . Memory (MB): peak = 1596.879 ; gain = 1310.344
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1596.879 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/synth_1/alchitry_top.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sat Apr 12 17:54:08 2025...

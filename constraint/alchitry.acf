@@ -25,19 +25,19 @@ STANDARD(LVCMOS33) {
     pin io_led[7] A11
 
     PULL(UP) {
-        pin testpullup B30
+        // pin testpullup B30
 
         // UP, DOWN, LEFT, RIGHT
-        pin butt_dirs[0] D43
-        pin butt_dirs[1] D42
-        pin butt_dirs[2] D8
-        pin butt_dirs[3] D9
+        pin butt_dirs[0] B48
+        pin butt_dirs[1] B49
+        pin butt_dirs[2] B3
+        pin butt_dirs[3] B2
 
-        pin butt_sel_desel[0] B36
-        pin butt_sel_desel[1] B37
+        pin butt_sel_desel[0] B45
+        pin butt_sel_desel[1] B46
         
-        pin butt_reset B15
-        pin butt_next_play B14
+        pin butt_reset B6
+        pin butt_next_play B5
     }
     
     // seven segment pins
@@ -67,42 +67,42 @@ STANDARD(LVCMOS33) {
     pin bseg[10] C40
     pin bseg[11] C43
 
-    pin timerseg[0] B2
-    pin timerseg[1] B3
-    pin timerseg[2] B49
-    pin timerseg[3] B48
-    pin timerseg[4] B5
-    pin timerseg[5] B6
-    pin timerseg[6] B46
-    pin timerseg[7] B45
-    pin timerseg[8] B8
-    pin timerseg[9] B9
-    pin timerseg[10] B43
+    pin timerseg[0] B28
+    pin timerseg[1] B31
+    pin timerseg[2] B34
+    pin timerseg[3] B37
+    pin timerseg[4] B40
+    pin timerseg[5] B43
+    pin timerseg[6] B27
+    pin timerseg[7] B30
+    pin timerseg[8] B33
+    pin timerseg[9] B36
+    pin timerseg[10] B39
     pin timerseg[11] B42
         
     // ABCDE
-    pin mataddr[0] A36
-    pin mataddr[1] A37
-    pin mataddr[2] A33
-    pin mataddr[3] A34
-    pin mataddr[4] A40
+    pin mataddr[0] A40
+    pin mataddr[1] A39
+    pin mataddr[2] A43
+    pin mataddr[3] A42
+    pin mataddr[4] A36
     
     // R1G1B1
-    pin mattop[2] A48
-    pin mattop[1] A49
-    pin mattop[0] A45
+    pin mattop[2] A28
+    pin mattop[1] A27
+    pin mattop[0] A31
     
     // R2G2B2
-    pin matbot[2] A42
-    pin matbot[1] A43
-    pin matbot[0] A39
+    pin matbot[2] A34
+    pin matbot[1] A33
+    pin matbot[0] A37
     
     // Matrix Control
-    pin matclk A30
-    pin matoe A27
-    pin matlat A31
+    pin matclk A46
+    pin matoe A49
+    pin matlat A45
     
     // Matrix Ground
-    pin matgnd[0] A46
-    pin matgnd[1] A28
+    pin matgnd[0] A30
+    pin matgnd[1] A48
 }

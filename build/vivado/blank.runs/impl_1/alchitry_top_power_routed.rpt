@@ -1,8 +1,8 @@
-Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-| Tool Version     : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
-| Date             : Sat Apr 12 15:40:34 2025
-| Host             : LAPTOP-6R0BMEKF running 64-bit major release  (build 9200)
+| Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
+| Date             : Sat Apr 12 17:54:46 2025
+| Host             : PC running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
 | Device           : xc7a35tftg256-1
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.080        |
+| Total On-Chip Power (W)  | 0.081        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.008        |
+| Dynamic (W)              | 0.009        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 4.9          |
 | Max Ambient (C)          | 84.6         |
@@ -53,19 +53,19 @@ Table of Contents
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
 | Clocks                   |    <0.001 |        3 |       --- |             --- |
-| Slice Logic              |     0.002 |     2931 |       --- |             --- |
-|   LUT as Logic           |     0.001 |     1739 |     20800 |            8.36 |
-|   CARRY4                 |    <0.001 |       73 |      8150 |            0.90 |
-|   Register               |    <0.001 |      566 |     41600 |            1.36 |
+| Slice Logic              |     0.002 |     3155 |       --- |             --- |
+|   LUT as Logic           |     0.002 |     1904 |     20800 |            9.15 |
+|   CARRY4                 |    <0.001 |       83 |      8150 |            1.02 |
+|   Register               |    <0.001 |      558 |     41600 |            1.34 |
 |   F7/F8 Muxes            |    <0.001 |       50 |     32600 |            0.15 |
 |   LUT as Shift Register  |    <0.001 |        7 |      9600 |            0.07 |
 |   LUT as Distributed RAM |    <0.001 |        6 |      9600 |            0.06 |
-|   Others                 |     0.000 |       79 |       --- |             --- |
-| Signals                  |     0.002 |     2546 |       --- |             --- |
+|   Others                 |     0.000 |       78 |       --- |             --- |
+| Signals                  |     0.002 |     2752 |       --- |             --- |
 | Block RAM                |    <0.001 |        1 |        50 |            2.00 |
-| I/O                      |     0.004 |       79 |       170 |           46.47 |
+| I/O                      |     0.005 |       79 |       170 |           46.47 |
 | Static Power             |     0.072 |          |           |                 |
-| Total                    |     0.080 |          |           |                 |
+| Total                    |     0.081 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -144,7 +144,7 @@ Table of Contents
 +--------------+-----------+
 | Name         | Power (W) |
 +--------------+-----------+
-| alchitry_top |     0.008 |
+| alchitry_top |     0.009 |
 |   L_reg      |     0.001 |
 |   sm         |     0.002 |
 +--------------+-----------+

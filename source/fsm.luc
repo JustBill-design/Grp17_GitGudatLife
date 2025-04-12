@@ -1061,7 +1061,8 @@ module fsm #(
                 wa = TARGET_PIXEL_VALUE
                 states.d = States.B_INPUT_IDLE
                 // debugging
-                debug_dff.d = 81                
+                debug_dff.d = 81
+                
         // B INPUT UP DIRECTION ------------------------------------------------------
 
             States.B_UP_DIR_IDLE:
@@ -1729,17 +1730,14 @@ module fsm #(
 
                     bra = aluout
                     bwe = b0
+
+                    // zeroing SRs
                     swd1 = b00
                     swe1 = b1
-                    sre1 = b0
-
                     swd2 = b00
                     swe2 = b1
-                    sre2 = b0
-
                     swd3 = b00
                     swe3 = b1
-                    sre3 = b0
 
                     states.d = States.SR_LOAD_TOP_MID
                     debug_dff.d = 95
