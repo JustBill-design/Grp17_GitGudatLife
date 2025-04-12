@@ -28,44 +28,44 @@ STANDARD(LVCMOS33) {
         // pin testpullup B30
 
         // UP, DOWN, LEFT, RIGHT
-        pin butt_dirs[0] B48
-        pin butt_dirs[1] B49
-        pin butt_dirs[2] B3
-        pin butt_dirs[3] B2
+        pin butt_dirs[0] C28
+        pin butt_dirs[1] C27
+        pin butt_dirs[2] C23
+        pin butt_dirs[3] C24
 
-        pin butt_sel_desel[0] B45
-        pin butt_sel_desel[1] B46
+        pin butt_sel_desel[0] C31
+        pin butt_sel_desel[1] C30
         
-        pin butt_reset B6
-        pin butt_next_play B5
+        pin butt_reset C20
+        pin butt_next_play C21
     }
     
     // seven segment pins
-    pin aseg[0] C24
-    pin aseg[1] C21
-    pin aseg[2] C18
-    pin aseg[3] C15
-    pin aseg[4] C12
-    pin aseg[5] C9
-    pin aseg[6] C23                                                              
-    pin aseg[7] C20
-    pin aseg[8] C17
-    pin aseg[9] C14
-    pin aseg[10] C11
-    pin aseg[11] C8
+    pin aseg[0] C18
+    pin aseg[1] C15
+    pin aseg[2] C12
+    pin aseg[3] C9
+    pin aseg[4] C6
+    pin aseg[5] C3
+    pin aseg[6] C17
+    pin aseg[7] C14
+    pin aseg[8] C11
+    pin aseg[9] C8
+    pin aseg[10] C5
+    pin aseg[11] C2
 
-    pin bseg[0] C27
-    pin bseg[1] C30
-    pin bseg[2] C33
-    pin bseg[3] C36
-    pin bseg[4] C39
-    pin bseg[5] C42
-    pin bseg[6] C28
-    pin bseg[7] C31
-    pin bseg[8] C34
-    pin bseg[9] C37
-    pin bseg[10] C40
-    pin bseg[11] C43
+    pin bseg[0] C33
+    pin bseg[1] C36
+    pin bseg[2] C39
+    pin bseg[3] C42
+    pin bseg[4] C45
+    pin bseg[5] C48
+    pin bseg[6] C34
+    pin bseg[7] C37
+    pin bseg[8] C40
+    pin bseg[9] C43
+    pin bseg[10] C46
+    pin bseg[11] C49
 
     pin timerseg[0] B28
     pin timerseg[1] B31
