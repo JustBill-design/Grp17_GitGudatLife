@@ -93,13 +93,11 @@ read_verilog -library xil_defaultlib -sv {
   {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/compare.sv}
   {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv}
   {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/display_driver.sv}
-  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/divider.sv}
   {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/edge_detector.sv}
   {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fa.sv}
   {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fifo.sv}
   {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv}
   {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/multi_seven_seg.sv}
-  {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/multiplier.sv}
   {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/mux_2.sv}
   {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/pipeline.sv}
   {C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/rca.sv}

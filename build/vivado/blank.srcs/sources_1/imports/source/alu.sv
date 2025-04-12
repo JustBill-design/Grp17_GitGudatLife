@@ -16,17 +16,17 @@ module alu #(
         output reg n,
         output reg illop
     );
-    localparam _MP_SIZE_392962906 = SIZE;
-    logic [(_MP_SIZE_392962906)-1:0] M_adder_a;
-    logic [(_MP_SIZE_392962906)-1:0] M_adder_b;
+    localparam _MP_SIZE_2052645536 = SIZE;
+    logic [(_MP_SIZE_2052645536)-1:0] M_adder_a;
+    logic [(_MP_SIZE_2052645536)-1:0] M_adder_b;
     logic [5:0] M_adder_alufn_signal;
-    logic [(_MP_SIZE_392962906)-1:0] M_adder_out;
+    logic [(_MP_SIZE_2052645536)-1:0] M_adder_out;
     logic M_adder_z;
     logic M_adder_v;
     logic M_adder_n;
     
     adder #(
-        .SIZE(_MP_SIZE_392962906)
+        .SIZE(_MP_SIZE_2052645536)
     ) adder (
         .a(M_adder_a),
         .b(M_adder_b),
@@ -55,7 +55,7 @@ module alu #(
     );
     
     
-    localparam _MP_SIZE_296379573 = 6'h20;
+    localparam _MP_SIZE_241365864 = 6'h20;
     logic [31:0] M_boolean_a;
     logic [31:0] M_boolean_b;
     logic [5:0] M_boolean_alufn;
@@ -63,7 +63,7 @@ module alu #(
     logic M_boolean_illop;
     
     boolean #(
-        .SIZE(_MP_SIZE_296379573)
+        .SIZE(_MP_SIZE_241365864)
     ) boolean (
         .a(M_boolean_a),
         .b(M_boolean_b),
@@ -88,28 +88,6 @@ module alu #(
     );
     
     
-    logic [31:0] M_multiplier_a;
-    logic [31:0] M_multiplier_b;
-    logic [31:0] M_multiplier_mul;
-    
-    multiplier multiplier (
-        .a(M_multiplier_a),
-        .b(M_multiplier_b),
-        .mul(M_multiplier_mul)
-    );
-    
-    
-    logic [31:0] M_divider_a;
-    logic [31:0] M_divider_b;
-    logic [31:0] M_divider_d;
-    
-    divider divider (
-        .a(M_divider_a),
-        .b(M_divider_b),
-        .d(M_divider_d)
-    );
-    
-    
     logic [(SIZE)-1:0] temp_out;
     always @* begin
         M_adder_a = a;
@@ -125,10 +103,6 @@ module alu #(
         M_shifter_a = a;
         M_shifter_b = b;
         M_shifter_alufn = alufn;
-        M_multiplier_a = a;
-        M_multiplier_b = b;
-        M_divider_a = a;
-        M_divider_b = b;
         z = 1'h0;
         v = 1'h0;
         n = 1'h0;

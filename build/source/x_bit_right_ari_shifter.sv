@@ -12,20 +12,20 @@ module x_bit_right_ari_shifter #(
         input wire pad,
         output reg [31:0] out
     );
-    logic [31:0] R_2136479a_i;
-    logic [31:0] RR_2136479a_i;
+    logic [31:0] R_226c8bb3_i;
+    logic [31:0] RR_226c8bb3_i;
     logic [31:0] M_mux_32_s0;
     logic [31:0][1:0] M_mux_32_in;
     logic [31:0] M_mux_32_out;
     
-    genvar idx_0_1138705945;
+    genvar idx_0_139491111;
     
     generate
-        for (idx_0_1138705945 = 0; idx_0_1138705945 < 32; idx_0_1138705945 = idx_0_1138705945 + 1) begin: forLoop_idx_0_1138705945
+        for (idx_0_139491111 = 0; idx_0_139491111 < 32; idx_0_139491111 = idx_0_139491111 + 1) begin: forLoop_idx_0_139491111
             mux_2 mux_32 (
-                .s0(M_mux_32_s0[idx_0_1138705945]),
-                .in(M_mux_32_in[idx_0_1138705945]),
-                .out(M_mux_32_out[idx_0_1138705945])
+                .s0(M_mux_32_s0[idx_0_139491111]),
+                .in(M_mux_32_in[idx_0_139491111]),
+                .out(M_mux_32_out[idx_0_139491111])
             );
         end
     endgenerate
@@ -35,10 +35,10 @@ module x_bit_right_ari_shifter #(
     always @* begin
         shifted_bits = {{SHIFT{pad}}, a[5'h1f:SHIFT]};
         M_mux_32_s0 = {6'h20{shift}};
-        for (RR_2136479a_i = 0; RR_2136479a_i < 6'h20; RR_2136479a_i = RR_2136479a_i + 1) begin
-      R_2136479a_i = (0) + RR_2136479a_i * (1);
-            M_mux_32_in[R_2136479a_i][1'h0] = a[R_2136479a_i];
-            M_mux_32_in[R_2136479a_i][1'h1] = shifted_bits[R_2136479a_i];
+        for (RR_226c8bb3_i = 0; RR_226c8bb3_i < 6'h20; RR_226c8bb3_i = RR_226c8bb3_i + 1) begin
+      R_226c8bb3_i = (0) + RR_226c8bb3_i * (1);
+            M_mux_32_in[R_226c8bb3_i][1'h0] = a[R_226c8bb3_i];
+            M_mux_32_in[R_226c8bb3_i][1'h1] = shifted_bits[R_226c8bb3_i];
         end
         out = M_mux_32_out;
     end

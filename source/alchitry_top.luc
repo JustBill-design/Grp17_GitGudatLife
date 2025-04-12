@@ -168,10 +168,10 @@ module alchitry_top (
         sm.deselect_button = cond_butt_sel_desel.out[1]
 
         // seven segment // ~ if not cathode/anode
-        aseg_driver.value = reg.pac
+        aseg_driver.value = reg.an
         bseg_driver.value = reg.pbc
         timerseg_driver.value = reg.timer
-        aseg = aseg_driver.out
+        aseg = ~aseg_driver.out
         bseg = bseg_driver.out
         timerseg = timerseg_driver.out
         

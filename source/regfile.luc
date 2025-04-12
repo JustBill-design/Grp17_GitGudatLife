@@ -15,7 +15,8 @@ module regfile #(
     output pac[WIDTH],              // player B cell count
     output pbc[WIDTH],              // player A cell count
     output timer[WIDTH],            // timer countdown, seconds
-    output bram_selector            // bram selector
+    output bram_selector,            // bram selector
+    output an
 ) {
 
     dff registers[ENTRIES][WIDTH](.clk(clk),.rst(rst))
@@ -25,10 +26,11 @@ module regfile #(
         // always read 
         rd1 = registers.q[ra1]
         rd2 = registers.q[ra2]
-        pac = registers.q[0]
+        pac = registers.q[2]
         pbc = registers.q[3]
         timer = registers.q[6]
         bram_selector = registers.q[7][0]   // LSB
+        an = registers.q[0]
 
         // check if write_en and its not R31 
         if (we){
