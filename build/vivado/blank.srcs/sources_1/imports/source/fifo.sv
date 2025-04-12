@@ -21,19 +21,19 @@ module fifo #(
     logic [(ADDR_SIZE)-1:0] D_waddr_d, D_waddr_q = 0;
     logic [(ADDR_SIZE)-1:0] D_waddr_delay_d, D_waddr_delay_q = 0;
     logic [(ADDR_SIZE)-1:0] D_raddr_d, D_raddr_q = 0;
-    localparam _MP_WIDTH_2045068662 = WIDTH;
-    localparam _MP_ENTRIES_2045068662 = ENTRIES;
+    localparam _MP_WIDTH_646655666 = WIDTH;
+    localparam _MP_ENTRIES_646655666 = ENTRIES;
     logic M_ram_wclk;
-    logic [((($clog2(_MP_ENTRIES_2045068662)-1) - (0) + 1))-1:0] M_ram_waddr;
-    logic [(((_MP_WIDTH_2045068662-1) - (0) + 1))-1:0] M_ram_write_data;
+    logic [((($clog2(_MP_ENTRIES_646655666)-1) - (0) + 1))-1:0] M_ram_waddr;
+    logic [(((_MP_WIDTH_646655666-1) - (0) + 1))-1:0] M_ram_write_data;
     logic M_ram_write_enable;
     logic M_ram_rclk;
-    logic [((($clog2(_MP_ENTRIES_2045068662)-1) - (0) + 1))-1:0] M_ram_raddr;
-    logic [(((_MP_WIDTH_2045068662-1) - (0) + 1))-1:0] M_ram_read_data;
+    logic [((($clog2(_MP_ENTRIES_646655666)-1) - (0) + 1))-1:0] M_ram_raddr;
+    logic [(((_MP_WIDTH_646655666-1) - (0) + 1))-1:0] M_ram_read_data;
     
     simple_dual_port_ram #(
-        .WIDTH(_MP_WIDTH_2045068662),
-        .ENTRIES(_MP_ENTRIES_2045068662)
+        .WIDTH(_MP_WIDTH_646655666),
+        .ENTRIES(_MP_ENTRIES_646655666)
     ) ram (
         .wclk(M_ram_wclk),
         .waddr(M_ram_waddr),

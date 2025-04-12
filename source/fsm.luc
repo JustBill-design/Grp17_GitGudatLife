@@ -1656,7 +1656,7 @@ module fsm #(
 
             States.RESET_PIXEL_TO_0:
                 we = b1
-                wdsel = b0001
+                wdsel = b0100
                 wa = TARGET_PIXEL_ADDRESS
                 states.d = States.GAME_IDLE
                 // debugging
@@ -1726,14 +1726,17 @@ module fsm #(
                     asel = b0
                     bsel = b0100
                     ra1 = TARGET_PIXEL_ADDRESS
+
                     bra = aluout
                     bwe = b0
                     swd1 = b00
                     swe1 = b1
                     sre1 = b0
+
                     swd2 = b00
                     swe2 = b1
                     sre2 = b0
+
                     swd3 = b00
                     swe3 = b1
                     sre3 = b0
@@ -1753,11 +1756,12 @@ module fsm #(
                     ra1 = TARGET_PIXEL_ADDRESS
                     bra = aluout
                     bwe = b0
+
                     swd1 = brd
                     swe1 = b1
                     sre1 = b0
 
-                    states.d = States.SR_LOAD_MID_MID
+                    states.d = States.SR_LOAD_TOP_RIGHT
                     debug_dff.d = 96
                 }
 
@@ -1769,9 +1773,10 @@ module fsm #(
                     ra1 = TARGET_PIXEL_ADDRESS
                     bra = rd1
                     bwe = b0
-                    swd2 = brd
-                    swe2 = b1
-                    sre2 = b0
+
+                    swd1 = brd
+                    swe1 = b1
+                    sre1 = b0
 
                     states.d = States.SR_LOAD_MID_MID
                     debug_dff.d = 158
@@ -1788,6 +1793,7 @@ module fsm #(
                     ra1 = TARGET_PIXEL_ADDRESS
                     bra = aluout
                     bwe = b0
+
                     swd2 = brd
                     swe2 = b1
                     sre2 = b0
@@ -1807,6 +1813,7 @@ module fsm #(
                     ra1 = TARGET_PIXEL_ADDRESS
                     bra = aluout
                     bwe = b0
+
                     swd2 = brd
                     swe2 = b1
                     sre2 = b0
@@ -1814,6 +1821,7 @@ module fsm #(
                     states.d = States.SR_LOAD_BOT_MID
                     debug_dff.d = 98
                 }
+
             States.SR_LOAD_BOT_MID:
                 if (ddr) {
                     states.d = States.SR_LOAD_BOT_MID
@@ -1825,6 +1833,7 @@ module fsm #(
                     ra1 = TARGET_PIXEL_ADDRESS
                     bra = aluout
                     bwe = b0
+
                     swd3 = brd
                     swe3 = b1
                     sre3 = b0
@@ -1832,6 +1841,7 @@ module fsm #(
                     states.d = States.SR_LOAD_BOT_RIGHT
                     debug_dff.d = 99
                 }
+
             States.SR_LOAD_BOT_RIGHT:
                 swd3 = brd
                 swe3 = b1
@@ -1879,12 +1889,14 @@ module fsm #(
                 else {
                     alufn = b000000
                     asel = b0
-                    bsel = b0001
+                    bsel = b0101
                     ra1 = TARGET_PIXEL_ADDRESS
                     bra = aluout
-                    swd1 = brd
-                    swe1 = b1
-                    sre1 = b0
+                    bwe = b0
+
+                    swd2 = brd
+                    swe2 = b1
+                    sre2 = b0
 
                     states.d = States.RB_LOAD_BOT_RIGHT
                     debug_dff.d = 103
@@ -1907,6 +1919,14 @@ module fsm #(
                     states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
                 }
                 else {
+                    swd1 = brd
+                    swe1 = b1
+                    sre1 = b0
+
+                    swd2 = brd
+                    swe2 = b1
+                    sre2 = b0
+
                     swd3 = brd
                     swe3 = b1
                     sre3 = b0
@@ -1943,11 +1963,12 @@ module fsm #(
                 asel = b0
                 bsel = b0001
                 we = b1
-                ra1 = B_NEIGHBOUR_ADDRESS
+                ra1 = b001
                 wdsel = b0000
-                wa = B_NEIGHBOUR_ADDRESS
+                wa = b001
                 states.d = States.READ_TOP_MID
                 debug_dff.d = 108
+            
             
             // Reading top mid pixel for neighbours
             States.READ_TOP_MID:
@@ -2084,7 +2105,7 @@ module fsm #(
                 ra1 = A_NEIGHBOUR_ADDRESS
                 wdsel = b0000
                 wa = A_NEIGHBOUR_ADDRESS
-                states.d = States.READ_MID_RIGHT
+                states.d = States.READ_BOT_LEFT
                 debug_dff.d = 120
             
             States.MID_RIGHT_ADD_B_NEIGHBOUR:
@@ -2095,7 +2116,7 @@ module fsm #(
                 ra1 = B_NEIGHBOUR_ADDRESS
                 wdsel = b0000
                 wa = B_NEIGHBOUR_ADDRESS
-                states.d = States.READ_MID_RIGHT
+                states.d = States.READ_BOT_LEFT
                 debug_dff.d = 121
             
             // Reading bot left pixel for neighbours
@@ -2154,7 +2175,7 @@ module fsm #(
                 ra1 = A_NEIGHBOUR_ADDRESS
                 wdsel = b0000
                 wa = A_NEIGHBOUR_ADDRESS
-                states.d = States.READ_BOT_MID
+                states.d = States.READ_BOT_RIGHT
                 debug_dff.d = 126
             
             States.BOT_MID_ADD_B_NEIGHBOUR:
@@ -2165,7 +2186,7 @@ module fsm #(
                 ra1 = B_NEIGHBOUR_ADDRESS
                 wdsel = b0000
                 wa = B_NEIGHBOUR_ADDRESS
-                states.d = States.READ_BOT_MID
+                states.d = States.READ_BOT_RIGHT
                 debug_dff.d = 127
             
             // Reading bot right pixel for neighbours
@@ -2232,7 +2253,7 @@ module fsm #(
 
             //current -pixel is game state
             States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS:
-                alufn = b110101
+                alufn = b110011
                 asel = b0
                 bsel = b0000
                 ra1 = A_NEIGHBOUR_ADDRESS
@@ -2251,9 +2272,9 @@ module fsm #(
                 bsel = b0011
                 ra1 = A_NEIGHBOUR_ADDRESS
                 case(aluout){
-                    b0:
-                        states.d = States.B00_A_COUNTP1
                     b1:
+                        states.d = States.B00_A_COUNTP1
+                    b0:
                         states.d = States.B00_CHECK_B_NEIGHBOUR_EQ_3
                 }
                 debug_dff.d = 135
@@ -2367,12 +2388,26 @@ module fsm #(
                 ra1 = A_NEIGHBOUR_ADDRESS
                 case(aluout){
                     b0:
-                        states.d = States.B01_A_COUNTM1
+                        states.d = States.B01_CHECK_A_NEIGHBOUR_EQ_3
                     b1:
                         states.d = States.SET_A
                 }
                 debug_dff.d = 144
             
+
+            States.B01_CHECK_A_NEIGHBOUR_EQ_3:
+                alufn = b110011
+                asel = b0
+                bsel = b0011
+                ra1 = A_NEIGHBOUR_ADDRESS
+                case(aluout){
+                    b0:
+                        states.d = States.B01_A_COUNTM1
+                    b1:
+                        states.d = States.SET_A
+                }
+                debug_dff.d = 144
+
             States.B01_A_COUNTM1:
                 alufn = b000001
                 asel = b0
@@ -2455,7 +2490,7 @@ module fsm #(
                     states.d = States.SWITCH_BRAM
                 }
                 else {
-                    alufn = b000001
+                    alufn = b010110
                     asel = b0
                     bsel = b0001
                     we = b1

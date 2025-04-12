@@ -28,7 +28,7 @@ module regfile #(
         
         rd1 = D_registers_q[ra1];
         rd2 = D_registers_q[ra2];
-        pac = D_registers_q[2'h2];
+        pac = D_registers_q[1'h0];
         pbc = D_registers_q[2'h3];
         timer = D_registers_q[3'h6];
         bram_selector = D_registers_q[3'h7][1'h0];
