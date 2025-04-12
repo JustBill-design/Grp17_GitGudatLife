@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Sun Apr 13 00:50:08 2025
+| Date         : Sun Apr 13 01:01:27 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_methodology -file alchitry_top_methodology_drc_routed.rpt -pb alchitry_top_methodology_drc_routed.pb -rpx alchitry_top_methodology_drc_routed.rpx
 | Design       : alchitry_top
@@ -23,13 +23,14 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 585
+             Checks found: 589
 +-----------+------------------+--------------------------------------------+--------+
 | Rule      | Severity         | Description                                | Checks |
 +-----------+------------------+--------------------------------------------+--------+
-| TIMING-17 | Critical Warning | Non-clocked sequential cell                | 582    |
+| TIMING-17 | Critical Warning | Non-clocked sequential cell                | 577    |
 | LUTAR-1   | Warning          | LUT drives async reset alert               | 1      |
 | SYNTH-6   | Warning          | Timing of a RAM block might be sub-optimal | 2      |
+| TIMING-18 | Warning          | Missing input or output delay              | 9      |
 +-----------+------------------+--------------------------------------------+--------+
 
 2. REPORT DETAILS
@@ -1836,422 +1837,422 @@ Related violations: <none>
 
 TIMING-17#361 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[0].cond_butt_dirs/D_ctr_q_reg[0]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[0].cond_butt_dirs/D_ctr_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#362 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[0].cond_butt_dirs/D_ctr_q_reg[10]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[0].cond_butt_dirs/D_ctr_q_reg[10]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#363 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[0].cond_butt_dirs/D_ctr_q_reg[11]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[0].cond_butt_dirs/D_ctr_q_reg[11]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#364 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[0].cond_butt_dirs/D_ctr_q_reg[1]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[0].cond_butt_dirs/D_ctr_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#365 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[0].cond_butt_dirs/D_ctr_q_reg[2]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[0].cond_butt_dirs/D_ctr_q_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#366 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[0].cond_butt_dirs/D_ctr_q_reg[3]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[0].cond_butt_dirs/D_ctr_q_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#367 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[0].cond_butt_dirs/D_ctr_q_reg[4]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[0].cond_butt_dirs/D_ctr_q_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#368 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[0].cond_butt_dirs/D_ctr_q_reg[5]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[0].cond_butt_dirs/D_ctr_q_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#369 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[0].cond_butt_dirs/D_ctr_q_reg[6]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[0].cond_butt_dirs/D_ctr_q_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#370 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[0].cond_butt_dirs/D_ctr_q_reg[7]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[0].cond_butt_dirs/D_ctr_q_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#371 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[0].cond_butt_dirs/D_ctr_q_reg[8]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[0].cond_butt_dirs/D_ctr_q_reg[8]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#372 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[0].cond_butt_dirs/D_ctr_q_reg[9]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[0].cond_butt_dirs/D_ctr_q_reg[9]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#373 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[0].cond_butt_dirs/sync/D_pipe_q_reg[28]_srl29/CLK is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[0].cond_butt_dirs/sync/D_pipe_q_reg[28]_srl29/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#374 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[0].cond_butt_dirs/sync/D_pipe_q_reg[29]__0/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[0].cond_butt_dirs/sync/D_pipe_q_reg[29]__0/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#375 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[1].cond_butt_dirs/D_ctr_q_reg[0]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[1].cond_butt_dirs/D_ctr_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#376 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[1].cond_butt_dirs/D_ctr_q_reg[10]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[1].cond_butt_dirs/D_ctr_q_reg[10]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#377 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[1].cond_butt_dirs/D_ctr_q_reg[11]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[1].cond_butt_dirs/D_ctr_q_reg[11]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#378 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[1].cond_butt_dirs/D_ctr_q_reg[1]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[1].cond_butt_dirs/D_ctr_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#379 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[1].cond_butt_dirs/D_ctr_q_reg[2]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[1].cond_butt_dirs/D_ctr_q_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#380 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[1].cond_butt_dirs/D_ctr_q_reg[3]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[1].cond_butt_dirs/D_ctr_q_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#381 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[1].cond_butt_dirs/D_ctr_q_reg[4]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[1].cond_butt_dirs/D_ctr_q_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#382 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[1].cond_butt_dirs/D_ctr_q_reg[5]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[1].cond_butt_dirs/D_ctr_q_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#383 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[1].cond_butt_dirs/D_ctr_q_reg[6]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[1].cond_butt_dirs/D_ctr_q_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#384 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[1].cond_butt_dirs/D_ctr_q_reg[7]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[1].cond_butt_dirs/D_ctr_q_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#385 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[1].cond_butt_dirs/D_ctr_q_reg[8]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[1].cond_butt_dirs/D_ctr_q_reg[8]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#386 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[1].cond_butt_dirs/D_ctr_q_reg[9]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[1].cond_butt_dirs/D_ctr_q_reg[9]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#387 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[1].cond_butt_dirs/sync/D_pipe_q_reg[28]_srl29/CLK is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[1].cond_butt_dirs/sync/D_pipe_q_reg[28]_srl29/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#388 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[1].cond_butt_dirs/sync/D_pipe_q_reg[29]__0/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[1].cond_butt_dirs/sync/D_pipe_q_reg[29]__0/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#389 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[2].cond_butt_dirs/D_ctr_q_reg[0]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[2].cond_butt_dirs/D_ctr_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#390 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[2].cond_butt_dirs/D_ctr_q_reg[10]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[2].cond_butt_dirs/D_ctr_q_reg[10]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#391 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[2].cond_butt_dirs/D_ctr_q_reg[11]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[2].cond_butt_dirs/D_ctr_q_reg[11]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#392 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[2].cond_butt_dirs/D_ctr_q_reg[1]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[2].cond_butt_dirs/D_ctr_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#393 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[2].cond_butt_dirs/D_ctr_q_reg[2]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[2].cond_butt_dirs/D_ctr_q_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#394 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[2].cond_butt_dirs/D_ctr_q_reg[3]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[2].cond_butt_dirs/D_ctr_q_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#395 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[2].cond_butt_dirs/D_ctr_q_reg[4]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[2].cond_butt_dirs/D_ctr_q_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#396 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[2].cond_butt_dirs/D_ctr_q_reg[5]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[2].cond_butt_dirs/D_ctr_q_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#397 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[2].cond_butt_dirs/D_ctr_q_reg[6]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[2].cond_butt_dirs/D_ctr_q_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#398 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[2].cond_butt_dirs/D_ctr_q_reg[7]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[2].cond_butt_dirs/D_ctr_q_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#399 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[2].cond_butt_dirs/D_ctr_q_reg[8]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[2].cond_butt_dirs/D_ctr_q_reg[8]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#400 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[2].cond_butt_dirs/D_ctr_q_reg[9]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[2].cond_butt_dirs/D_ctr_q_reg[9]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#401 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[2].cond_butt_dirs/sync/D_pipe_q_reg[28]_srl29/CLK is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[2].cond_butt_dirs/sync/D_pipe_q_reg[28]_srl29/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#402 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[2].cond_butt_dirs/sync/D_pipe_q_reg[29]__0/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[2].cond_butt_dirs/sync/D_pipe_q_reg[29]__0/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#403 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[3].cond_butt_dirs/D_ctr_q_reg[0]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[3].cond_butt_dirs/D_ctr_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#404 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[3].cond_butt_dirs/D_ctr_q_reg[10]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[3].cond_butt_dirs/D_ctr_q_reg[10]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#405 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[3].cond_butt_dirs/D_ctr_q_reg[11]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[3].cond_butt_dirs/D_ctr_q_reg[11]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#406 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[3].cond_butt_dirs/D_ctr_q_reg[1]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[3].cond_butt_dirs/D_ctr_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#407 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[3].cond_butt_dirs/D_ctr_q_reg[2]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[3].cond_butt_dirs/D_ctr_q_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#408 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[3].cond_butt_dirs/D_ctr_q_reg[3]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[3].cond_butt_dirs/D_ctr_q_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#409 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[3].cond_butt_dirs/D_ctr_q_reg[4]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[3].cond_butt_dirs/D_ctr_q_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#410 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[3].cond_butt_dirs/D_ctr_q_reg[5]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[3].cond_butt_dirs/D_ctr_q_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#411 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[3].cond_butt_dirs/D_ctr_q_reg[6]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[3].cond_butt_dirs/D_ctr_q_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#412 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[3].cond_butt_dirs/D_ctr_q_reg[7]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[3].cond_butt_dirs/D_ctr_q_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#413 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[3].cond_butt_dirs/D_ctr_q_reg[8]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[3].cond_butt_dirs/D_ctr_q_reg[8]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#414 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[3].cond_butt_dirs/D_ctr_q_reg[9]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[3].cond_butt_dirs/D_ctr_q_reg[9]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#415 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[3].cond_butt_dirs/sync/D_pipe_q_reg[28]_srl29/CLK is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[3].cond_butt_dirs/sync/D_pipe_q_reg[28]_srl29/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#416 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_1891585290[3].cond_butt_dirs/sync/D_pipe_q_reg[29]__0/C is not reached by a timing clock
+The clock pin forLoop_idx_0_482488197[3].cond_butt_dirs/sync/D_pipe_q_reg[29]__0/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#417 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[0].cond_butt_sel_desel/D_ctr_q_reg[0]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[0].cond_butt_sel_desel/D_ctr_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#418 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[0].cond_butt_sel_desel/D_ctr_q_reg[10]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[0].cond_butt_sel_desel/D_ctr_q_reg[10]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#419 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[0].cond_butt_sel_desel/D_ctr_q_reg[11]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[0].cond_butt_sel_desel/D_ctr_q_reg[11]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#420 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[0].cond_butt_sel_desel/D_ctr_q_reg[1]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[0].cond_butt_sel_desel/D_ctr_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#421 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[0].cond_butt_sel_desel/D_ctr_q_reg[2]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[0].cond_butt_sel_desel/D_ctr_q_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#422 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[0].cond_butt_sel_desel/D_ctr_q_reg[3]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[0].cond_butt_sel_desel/D_ctr_q_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#423 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[0].cond_butt_sel_desel/D_ctr_q_reg[4]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[0].cond_butt_sel_desel/D_ctr_q_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#424 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[0].cond_butt_sel_desel/D_ctr_q_reg[5]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[0].cond_butt_sel_desel/D_ctr_q_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#425 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[0].cond_butt_sel_desel/D_ctr_q_reg[6]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[0].cond_butt_sel_desel/D_ctr_q_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#426 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[0].cond_butt_sel_desel/D_ctr_q_reg[7]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[0].cond_butt_sel_desel/D_ctr_q_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#427 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[0].cond_butt_sel_desel/D_ctr_q_reg[8]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[0].cond_butt_sel_desel/D_ctr_q_reg[8]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#428 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[0].cond_butt_sel_desel/D_ctr_q_reg[9]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[0].cond_butt_sel_desel/D_ctr_q_reg[9]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#429 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[0].cond_butt_sel_desel/sync/D_pipe_q_reg[28]_srl29/CLK is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[0].cond_butt_sel_desel/sync/D_pipe_q_reg[28]_srl29/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#430 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[0].cond_butt_sel_desel/sync/D_pipe_q_reg[29]__0/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[0].cond_butt_sel_desel/sync/D_pipe_q_reg[29]__0/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#431 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[1].cond_butt_sel_desel/D_ctr_q_reg[0]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[1].cond_butt_sel_desel/D_ctr_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#432 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[1].cond_butt_sel_desel/D_ctr_q_reg[10]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[1].cond_butt_sel_desel/D_ctr_q_reg[10]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#433 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[1].cond_butt_sel_desel/D_ctr_q_reg[11]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[1].cond_butt_sel_desel/D_ctr_q_reg[11]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#434 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[1].cond_butt_sel_desel/D_ctr_q_reg[1]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[1].cond_butt_sel_desel/D_ctr_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#435 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[1].cond_butt_sel_desel/D_ctr_q_reg[2]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[1].cond_butt_sel_desel/D_ctr_q_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#436 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[1].cond_butt_sel_desel/D_ctr_q_reg[3]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[1].cond_butt_sel_desel/D_ctr_q_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#437 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[1].cond_butt_sel_desel/D_ctr_q_reg[4]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[1].cond_butt_sel_desel/D_ctr_q_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#438 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[1].cond_butt_sel_desel/D_ctr_q_reg[5]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[1].cond_butt_sel_desel/D_ctr_q_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#439 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[1].cond_butt_sel_desel/D_ctr_q_reg[6]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[1].cond_butt_sel_desel/D_ctr_q_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#440 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[1].cond_butt_sel_desel/D_ctr_q_reg[7]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[1].cond_butt_sel_desel/D_ctr_q_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#441 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[1].cond_butt_sel_desel/D_ctr_q_reg[8]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[1].cond_butt_sel_desel/D_ctr_q_reg[8]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#442 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[1].cond_butt_sel_desel/D_ctr_q_reg[9]/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[1].cond_butt_sel_desel/D_ctr_q_reg[9]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#443 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[1].cond_butt_sel_desel/sync/D_pipe_q_reg[28]_srl29/CLK is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[1].cond_butt_sel_desel/sync/D_pipe_q_reg[28]_srl29/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#444 Critical Warning
 Non-clocked sequential cell  
-The clock pin forLoop_idx_0_861646877[1].cond_butt_sel_desel/sync/D_pipe_q_reg[29]__0/C is not reached by a timing clock
+The clock pin forLoop_idx_0_862998166[1].cond_butt_sel_desel/sync/D_pipe_q_reg[29]__0/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#445 Critical Warning
@@ -2386,560 +2387,535 @@ Related violations: <none>
 
 TIMING-17#471 Critical Warning
 Non-clocked sequential cell  
-The clock pin reset_cond/D_stage_q_reg[0]/C is not reached by a timing clock
+The clock pin slow_counter/D_ctr_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#472 Critical Warning
 Non-clocked sequential cell  
-The clock pin reset_cond/D_stage_q_reg[1]/C is not reached by a timing clock
+The clock pin slow_counter/D_ctr_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#473 Critical Warning
 Non-clocked sequential cell  
-The clock pin reset_cond/D_stage_q_reg[2]/C is not reached by a timing clock
+The clock pin slow_counter/D_ctr_q_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#474 Critical Warning
 Non-clocked sequential cell  
-The clock pin reset_cond/D_stage_q_reg[3]/C is not reached by a timing clock
+The clock pin slow_counter/D_ctr_q_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#475 Critical Warning
 Non-clocked sequential cell  
-The clock pin reset_cond/D_stage_q_reg[3]_lopt_replica/C is not reached by a timing clock
+The clock pin sm/D_accel_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#476 Critical Warning
 Non-clocked sequential cell  
-The clock pin slow_counter/D_ctr_q_reg[0]/C is not reached by a timing clock
+The clock pin sm/D_accel_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#477 Critical Warning
 Non-clocked sequential cell  
-The clock pin slow_counter/D_ctr_q_reg[1]/C is not reached by a timing clock
+The clock pin sm/D_accel_q_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#478 Critical Warning
 Non-clocked sequential cell  
-The clock pin slow_counter/D_ctr_q_reg[2]/C is not reached by a timing clock
+The clock pin sm/D_accel_q_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#479 Critical Warning
 Non-clocked sequential cell  
-The clock pin slow_counter/D_ctr_q_reg[3]/C is not reached by a timing clock
+The clock pin sm/D_accel_selector_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#480 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_accel_q_reg[0]/C is not reached by a timing clock
+The clock pin sm/D_accel_selector_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#481 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_accel_q_reg[1]/C is not reached by a timing clock
+The clock pin sm/D_accel_timer_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#482 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_accel_q_reg[2]/C is not reached by a timing clock
+The clock pin sm/D_accel_timer_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#483 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_accel_q_reg[3]/C is not reached by a timing clock
+The clock pin sm/D_accel_timer_q_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#484 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_accel_selector_q_reg[0]/C is not reached by a timing clock
+The clock pin sm/D_accel_timer_q_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#485 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_accel_selector_q_reg[1]/C is not reached by a timing clock
+The clock pin sm/D_debug_dff_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#486 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_accel_timer_q_reg[0]/C is not reached by a timing clock
+The clock pin sm/D_debug_dff_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#487 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_accel_timer_q_reg[1]/C is not reached by a timing clock
+The clock pin sm/D_debug_dff_q_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#488 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_accel_timer_q_reg[2]/C is not reached by a timing clock
+The clock pin sm/D_debug_dff_q_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#489 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_accel_timer_q_reg[3]/C is not reached by a timing clock
+The clock pin sm/D_debug_dff_q_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#490 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_debug_dff_q_reg[0]/C is not reached by a timing clock
+The clock pin sm/D_debug_dff_q_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#491 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_debug_dff_q_reg[1]/C is not reached by a timing clock
+The clock pin sm/D_debug_dff_q_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#492 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_debug_dff_q_reg[2]/C is not reached by a timing clock
+The clock pin sm/D_debug_dff_q_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#493 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_debug_dff_q_reg[3]/C is not reached by a timing clock
+The clock pin sm/D_decrease_timer_q_reg/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#494 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_debug_dff_q_reg[4]/C is not reached by a timing clock
+The clock pin sm/D_game_tick_q_reg/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#495 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_debug_dff_q_reg[5]/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#496 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_debug_dff_q_reg[6]/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[0]_rep/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#497 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_debug_dff_q_reg[7]/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[0]_rep__0/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#498 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_decrease_timer_q_reg/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[0]_rep__1/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#499 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_game_tick_q_reg/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#500 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[0]/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#501 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[0]_rep/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[2]_rep/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#502 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[0]_rep__0/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[2]_rep__0/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#503 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[0]_rep__1/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[2]_rep__1/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#504 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[1]/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#505 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[2]/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[3]_rep/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#506 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[2]_rep/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[3]_rep__0/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#507 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[2]_rep__0/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[3]_rep__1/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#508 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[2]_rep__1/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#509 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[3]/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[4]_rep/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#510 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[3]_rep/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[4]_rep__0/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#511 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[3]_rep__0/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[4]_rep__1/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#512 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[3]_rep__1/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#513 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[4]/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[5]_rep/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#514 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[4]_rep/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[5]_rep__0/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#515 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[4]_rep__0/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[5]_rep__1/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#516 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[4]_rep__1/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#517 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[5]/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[6]_rep/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#518 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[5]_rep/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[6]_rep__0/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#519 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[5]_rep__0/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#520 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[5]_rep__1/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[7]_rep/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#521 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[6]/C is not reached by a timing clock
+The clock pin sm/D_states_q_reg[7]_rep__0/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#522 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[6]_rep/C is not reached by a timing clock
+The clock pin sm/accel_edge/D_last_q_reg/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#523 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[6]_rep__0/C is not reached by a timing clock
+The clock pin sr1/D_raddr_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#524 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[7]/C is not reached by a timing clock
+The clock pin sr1/D_raddr_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#525 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[7]_rep/C is not reached by a timing clock
+The clock pin sr1/D_waddr_delay_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#526 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/D_states_q_reg[7]_rep__0/C is not reached by a timing clock
+The clock pin sr1/D_waddr_delay_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#527 Critical Warning
 Non-clocked sequential cell  
-The clock pin sm/accel_edge/D_last_q_reg/C is not reached by a timing clock
+The clock pin sr1/D_waddr_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#528 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr1/D_raddr_q_reg[0]/C is not reached by a timing clock
+The clock pin sr1/D_waddr_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#529 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr1/D_raddr_q_reg[1]/C is not reached by a timing clock
+The clock pin sr1/ram/mem_reg_0_3_0_0/DP/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#530 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr1/D_waddr_delay_q_reg[0]/C is not reached by a timing clock
+The clock pin sr1/ram/mem_reg_0_3_0_0/SP/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#531 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr1/D_waddr_delay_q_reg[1]/C is not reached by a timing clock
+The clock pin sr1/ram/mem_reg_0_3_1_1/DP/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#532 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr1/D_waddr_q_reg[0]/C is not reached by a timing clock
+The clock pin sr1/ram/mem_reg_0_3_1_1/SP/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#533 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr1/D_waddr_q_reg[1]/C is not reached by a timing clock
+The clock pin sr1/ram/read_data_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#534 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr1/ram/mem_reg_0_3_0_0/DP/CLK is not reached by a timing clock
+The clock pin sr1/ram/read_data_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#535 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr1/ram/mem_reg_0_3_0_0/SP/CLK is not reached by a timing clock
+The clock pin sr2/D_raddr_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#536 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr1/ram/mem_reg_0_3_1_1/DP/CLK is not reached by a timing clock
+The clock pin sr2/D_raddr_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#537 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr1/ram/mem_reg_0_3_1_1/SP/CLK is not reached by a timing clock
+The clock pin sr2/D_waddr_delay_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#538 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr1/ram/read_data_reg[0]/C is not reached by a timing clock
+The clock pin sr2/D_waddr_delay_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#539 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr1/ram/read_data_reg[1]/C is not reached by a timing clock
+The clock pin sr2/D_waddr_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#540 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr2/D_raddr_q_reg[0]/C is not reached by a timing clock
+The clock pin sr2/D_waddr_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#541 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr2/D_raddr_q_reg[1]/C is not reached by a timing clock
+The clock pin sr2/ram/mem_reg_0_3_0_0/DP/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#542 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr2/D_waddr_delay_q_reg[0]/C is not reached by a timing clock
+The clock pin sr2/ram/mem_reg_0_3_0_0/SP/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#543 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr2/D_waddr_delay_q_reg[1]/C is not reached by a timing clock
+The clock pin sr2/ram/mem_reg_0_3_1_1/DP/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#544 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr2/D_waddr_q_reg[0]/C is not reached by a timing clock
+The clock pin sr2/ram/mem_reg_0_3_1_1/SP/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#545 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr2/D_waddr_q_reg[1]/C is not reached by a timing clock
+The clock pin sr2/ram/read_data_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#546 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr2/ram/mem_reg_0_3_0_0/DP/CLK is not reached by a timing clock
+The clock pin sr2/ram/read_data_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#547 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr2/ram/mem_reg_0_3_0_0/SP/CLK is not reached by a timing clock
+The clock pin sr3/D_raddr_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#548 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr2/ram/mem_reg_0_3_1_1/DP/CLK is not reached by a timing clock
+The clock pin sr3/D_raddr_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#549 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr2/ram/mem_reg_0_3_1_1/SP/CLK is not reached by a timing clock
+The clock pin sr3/D_waddr_delay_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#550 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr2/ram/read_data_reg[0]/C is not reached by a timing clock
+The clock pin sr3/D_waddr_delay_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#551 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr2/ram/read_data_reg[1]/C is not reached by a timing clock
+The clock pin sr3/D_waddr_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#552 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr3/D_raddr_q_reg[0]/C is not reached by a timing clock
+The clock pin sr3/D_waddr_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#553 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr3/D_raddr_q_reg[1]/C is not reached by a timing clock
+The clock pin sr3/ram/mem_reg_0_3_0_0/DP/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#554 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr3/D_waddr_delay_q_reg[0]/C is not reached by a timing clock
+The clock pin sr3/ram/mem_reg_0_3_0_0/SP/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#555 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr3/D_waddr_delay_q_reg[1]/C is not reached by a timing clock
+The clock pin sr3/ram/mem_reg_0_3_1_1/DP/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#556 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr3/D_waddr_q_reg[0]/C is not reached by a timing clock
+The clock pin sr3/ram/mem_reg_0_3_1_1/SP/CLK is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#557 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr3/D_waddr_q_reg[1]/C is not reached by a timing clock
+The clock pin sr3/ram/read_data_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#558 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr3/ram/mem_reg_0_3_0_0/DP/CLK is not reached by a timing clock
+The clock pin sr3/ram/read_data_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#559 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr3/ram/mem_reg_0_3_0_0/SP/CLK is not reached by a timing clock
+The clock pin timerclk/D_last_q_reg/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#560 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr3/ram/mem_reg_0_3_1_1/DP/CLK is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[0]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#561 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr3/ram/mem_reg_0_3_1_1/SP/CLK is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[10]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#562 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr3/ram/read_data_reg[0]/C is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[11]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#563 Critical Warning
 Non-clocked sequential cell  
-The clock pin sr3/ram/read_data_reg[1]/C is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[12]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#564 Critical Warning
 Non-clocked sequential cell  
-The clock pin timerclk/D_last_q_reg/C is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[13]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#565 Critical Warning
 Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[0]/C is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[14]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#566 Critical Warning
 Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[10]/C is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[15]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#567 Critical Warning
 Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[11]/C is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[16]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#568 Critical Warning
 Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[12]/C is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[17]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#569 Critical Warning
 Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[13]/C is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[1]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#570 Critical Warning
 Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[14]/C is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[2]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#571 Critical Warning
 Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[15]/C is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[3]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#572 Critical Warning
 Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[16]/C is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[4]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#573 Critical Warning
 Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[17]/C is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[5]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#574 Critical Warning
 Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[1]/C is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[6]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#575 Critical Warning
 Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[2]/C is not reached by a timing clock
+The clock pin timerseg_driver/ctr/D_ctr_q_reg[7]/C is not reached by a timing clock
 Related violations: <none>
 
 TIMING-17#576 Critical Warning
 Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[3]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#577 Critical Warning
-Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[4]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#578 Critical Warning
-Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[5]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#579 Critical Warning
-Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[6]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#580 Critical Warning
-Non-clocked sequential cell  
-The clock pin timerseg_driver/ctr/D_ctr_q_reg[7]/C is not reached by a timing clock
-Related violations: <none>
-
-TIMING-17#581 Critical Warning
-Non-clocked sequential cell  
 The clock pin timerseg_driver/ctr/D_ctr_q_reg[8]/C is not reached by a timing clock
 Related violations: <none>
 
-TIMING-17#582 Critical Warning
+TIMING-17#577 Critical Warning
 Non-clocked sequential cell  
 The clock pin timerseg_driver/ctr/D_ctr_q_reg[9]/C is not reached by a timing clock
 Related violations: <none>
@@ -2958,6 +2934,51 @@ Related violations: <none>
 SYNTH-6#2 Warning
 Timing of a RAM block might be sub-optimal  
 The timing for the instance brams/bram2/ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
+Related violations: <none>
+
+TIMING-18#1 Warning
+Missing input or output delay  
+An input delay is missing on butt_reset relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#2 Warning
+Missing input or output delay  
+An output delay is missing on io_led[0] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#3 Warning
+Missing input or output delay  
+An output delay is missing on io_led[1] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#4 Warning
+Missing input or output delay  
+An output delay is missing on io_led[2] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#5 Warning
+Missing input or output delay  
+An output delay is missing on io_led[3] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#6 Warning
+Missing input or output delay  
+An output delay is missing on io_led[4] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#7 Warning
+Missing input or output delay  
+An output delay is missing on io_led[5] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#8 Warning
+Missing input or output delay  
+An output delay is missing on io_led[6] relative to the rising and/or falling clock edge(s) of clk_0.
+Related violations: <none>
+
+TIMING-18#9 Warning
+Missing input or output delay  
+An output delay is missing on io_led[7] relative to the rising and/or falling clock edge(s) of clk_0.
 Related violations: <none>
 
 

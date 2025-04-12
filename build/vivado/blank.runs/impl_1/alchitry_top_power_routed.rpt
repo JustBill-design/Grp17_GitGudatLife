@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Sun Apr 13 00:50:09 2025
+| Date             : Sun Apr 13 01:01:27 2025
 | Host             : PC running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
@@ -52,9 +52,9 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.000 |        3 |       --- |             --- |
+| Clocks                   |    <0.001 |        3 |       --- |             --- |
 | Slice Logic              |     0.002 |     2952 |       --- |             --- |
-|   LUT as Logic           |     0.002 |     1793 |     20800 |            8.62 |
+|   LUT as Logic           |     0.002 |     1757 |     20800 |            8.45 |
 |   CARRY4                 |    <0.001 |       73 |      8150 |            0.90 |
 |   Register               |    <0.001 |      561 |     41600 |            1.35 |
 |   F7/F8 Muxes            |    <0.001 |       56 |     32600 |            0.17 |
@@ -62,9 +62,9 @@ Table of Contents
 |   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
 |   LUT as Distributed RAM |    <0.001 |        6 |      9600 |            0.06 |
 |   Others                 |     0.000 |       80 |       --- |             --- |
-| Signals                  |     0.002 |     2548 |       --- |             --- |
+| Signals                  |     0.002 |     2550 |       --- |             --- |
 | Block RAM                |    <0.001 |        1 |        50 |            2.00 |
-| I/O                      |     0.005 |       78 |       170 |           45.88 |
+| I/O                      |     0.005 |       79 |       170 |           46.47 |
 | Static Power             |     0.072 |          |           |                 |
 | Total                    |     0.080 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
@@ -131,6 +131,8 @@ Table of Contents
 
 +-------+--------+-----------------+
 | Clock | Domain | Constraint (ns) |
++-------+--------+-----------------+
+| clk_0 | clk    |           100.0 |
 +-------+--------+-----------------+
 
 

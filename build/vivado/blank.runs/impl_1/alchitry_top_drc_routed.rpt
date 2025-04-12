@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Sun Apr 13 00:50:07 2025
+| Date         : Sun Apr 13 01:01:25 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_drc -file alchitry_top_drc_routed.rpt -pb alchitry_top_drc_routed.pb -rpx alchitry_top_drc_routed.rpx
 | Design       : alchitry_top
@@ -28,14 +28,14 @@ Table of Contents
 +----------+----------+----------------------------+--------+
 | Rule     | Severity | Description                | Checks |
 +----------+----------+----------------------------+--------+
-| PDRC-134 | Warning  | SLICE_PairEqSame_B6B5_WARN | 1      |
+| PDRC-138 | Warning  | SLICE_PairEqSame_D6D5_WARN | 1      |
 +----------+----------+----------------------------+--------+
 
 2. REPORT DETAILS
 -----------------
-PDRC-134#1 Warning
-SLICE_PairEqSame_B6B5_WARN  
-Luts B6LUT and B5LUT in use in site SLICE_X62Y36 with different equations without A6 pin connected to Global Logic High.
+PDRC-138#1 Warning
+SLICE_PairEqSame_D6D5_WARN  
+Luts D6LUT and D5LUT in use in site SLICE_X36Y30 with different equations without A6 pin connected to Global Logic High.
 Related violations: <none>
 
 
