@@ -35,11 +35,11 @@ module alu #(
         shifter.b = b
         shifter.alufn = alufn
         
-        multiplier.a = a
-        multiplier.b = b
+        // multiplier.a = a
+        // multiplier.b = b
         
-        divider.a = a
-        divider.b = b
+        // divider.a = a
+        // divider.b = b
         
         // flags default to 0
         z = 0
