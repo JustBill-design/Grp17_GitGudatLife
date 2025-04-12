@@ -14,13 +14,13 @@ module fsm (
         input wire move_right_button,
         input wire deselect_button,
         input wire select_button,
-        input wire [31:0] pac,
-        input wire [31:0] pbc,
-        input wire [31:0] timer,
+        input wire [12:0] pac,
+        input wire [12:0] pbc,
+        input wire [12:0] timer,
         input wire timerclk,
         input wire gameclk,
         input wire med_inputclk,
-        input wire [31:0] aluout,
+        input wire [12:0] aluout,
         output reg [5:0] alufn,
         input wire [1:0] brd,
         output reg [1:0] brsel,
@@ -29,10 +29,10 @@ module fsm (
         output reg bwe,
         output reg [1:0] bwd,
         input wire ddr,
-        output reg [31:0] ra1,
-        output reg [31:0] ra2,
-        input wire [31:0] rd1,
-        input wire [31:0] rd2,
+        output reg [12:0] ra1,
+        output reg [12:0] ra2,
+        input wire [12:0] rd1,
+        input wire [12:0] rd2,
         output reg [2:0] wa,
         output reg we,
         output reg asel,
@@ -233,14 +233,14 @@ module fsm (
     localparam E_States_COMPUTE = 8'hb1;
     localparam E_States_AUTO = 8'hb2;
     localparam E_States_IDLE = 8'hb3;
-    localparam _MP_RISE_475794905 = 1'h1;
-    localparam _MP_FALL_475794905 = 1'h0;
+    localparam _MP_RISE_924150888 = 1'h1;
+    localparam _MP_FALL_924150888 = 1'h0;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_475794905),
-        .FALL(_MP_FALL_475794905)
+        .RISE(_MP_RISE_924150888),
+        .FALL(_MP_FALL_924150888)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),

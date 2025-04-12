@@ -31,17 +31,17 @@ module alchitry_top (
     // input testpullup        // default high?
 
 ) {
-    const CLK = 25_000_000
+    const CLK = 100_000_000
 
-    alu alum(#SIZE(32))
+    alu alum(#SIZE(13))
     
     sig rst
     sig fifo_rst
     
     // 1/2 clk
-    dff clk_2[2](.clk(clk))
+    dff clk_2[3](.clk(clk))
 
-    .clk(clk_2.q[1]) {
+    .clk(clk) {
     
     
         reset_conditioner reset_cond        // whole board reset
@@ -83,7 +83,7 @@ module alchitry_top (
             bram brams
             
             // custom 32-bit regfile
-            regfile reg
+            regfile reg(#WIDTH(13))
             
             // seven segment drivers
             multi_seven_seg aseg_driver
