@@ -398,7 +398,6 @@ module alchitry_top (
         // button tester
         butt_cond.in = testpullup
         led[0] = butt_cond.out
-        
         // debugging
         led[7:0] = sm.debug_out
     }

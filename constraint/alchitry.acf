@@ -41,31 +41,31 @@ STANDARD(LVCMOS33) {
     }
     
     // seven segment pins
-    pin aseg[0] C9
-    pin aseg[1] C8
-    pin aseg[2] C42
-    pin aseg[3] C43
+    pin aseg[0] C24
+    pin aseg[1] C21
+    pin aseg[2] C18
+    pin aseg[3] C15
     pin aseg[4] C12
-    pin aseg[5] C11
-    pin aseg[6] C39
-    pin aseg[7] C40
-    pin aseg[8] C15
+    pin aseg[5] C9
+    pin aseg[6] C23                                                              
+    pin aseg[7] C20
+    pin aseg[8] C17
     pin aseg[9] C14
-    pin aseg[10] C36
-    pin aseg[11] C37
+    pin aseg[10] C11
+    pin aseg[11] C8
 
-    pin bseg[0] C18
-    pin bseg[1] C17
+    pin bseg[0] C27
+    pin bseg[1] C30
     pin bseg[2] C33
-    pin bseg[3] C34
-    pin bseg[4] C21
-    pin bseg[5] C20
-    pin bseg[6] C30
+    pin bseg[3] C36
+    pin bseg[4] C39
+    pin bseg[5] C42
+    pin bseg[6] C28
     pin bseg[7] C31
-    pin bseg[8] C24
-    pin bseg[9] C23
-    pin bseg[10] C27
-    pin bseg[11] C28
+    pin bseg[8] C34
+    pin bseg[9] C37
+    pin bseg[10] C40
+    pin bseg[11] C43
 
     pin timerseg[0] B2
     pin timerseg[1] B3

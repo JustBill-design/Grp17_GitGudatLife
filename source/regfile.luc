@@ -25,7 +25,7 @@ module regfile #(
         // always read 
         rd1 = registers.q[ra1]
         rd2 = registers.q[ra2]
-        pac = registers.q[2]
+        pac = registers.q[0]
         pbc = registers.q[3]
         timer = registers.q[6]
         bram_selector = registers.q[7][0]   // LSB
