@@ -20,16 +20,16 @@ module bram #(
         input wire [(WIDTH)-1:0] bwd,
         output reg [(WIDTH)-1:0] brd
     );
-    localparam _MP_WIDTH_53280210 = WIDTH;
-    localparam _MP_ENTRIES_53280210 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_53280210)-1) - (0) + 1))-1:0] M_bram1_address;
-    logic [(((_MP_WIDTH_53280210-1) - (0) + 1))-1:0] M_bram1_read_data;
-    logic [(((_MP_WIDTH_53280210-1) - (0) + 1))-1:0] M_bram1_write_data;
+    localparam _MP_WIDTH_179060969 = WIDTH;
+    localparam _MP_ENTRIES_179060969 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_179060969)-1) - (0) + 1))-1:0] M_bram1_address;
+    logic [(((_MP_WIDTH_179060969-1) - (0) + 1))-1:0] M_bram1_read_data;
+    logic [(((_MP_WIDTH_179060969-1) - (0) + 1))-1:0] M_bram1_write_data;
     logic M_bram1_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_53280210),
-        .ENTRIES(_MP_ENTRIES_53280210)
+        .WIDTH(_MP_WIDTH_179060969),
+        .ENTRIES(_MP_ENTRIES_179060969)
     ) bram1 (
         .clk(clk),
         .address(M_bram1_address),
@@ -39,16 +39,16 @@ module bram #(
     );
     
     
-    localparam _MP_WIDTH_800506051 = WIDTH;
-    localparam _MP_ENTRIES_800506051 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_800506051)-1) - (0) + 1))-1:0] M_bram2_address;
-    logic [(((_MP_WIDTH_800506051-1) - (0) + 1))-1:0] M_bram2_read_data;
-    logic [(((_MP_WIDTH_800506051-1) - (0) + 1))-1:0] M_bram2_write_data;
+    localparam _MP_WIDTH_1743043953 = WIDTH;
+    localparam _MP_ENTRIES_1743043953 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_1743043953)-1) - (0) + 1))-1:0] M_bram2_address;
+    logic [(((_MP_WIDTH_1743043953-1) - (0) + 1))-1:0] M_bram2_read_data;
+    logic [(((_MP_WIDTH_1743043953-1) - (0) + 1))-1:0] M_bram2_write_data;
     logic M_bram2_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_800506051),
-        .ENTRIES(_MP_ENTRIES_800506051)
+        .WIDTH(_MP_WIDTH_1743043953),
+        .ENTRIES(_MP_ENTRIES_1743043953)
     ) bram2 (
         .clk(clk),
         .address(M_bram2_address),
