@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Sun Apr 13 05:24:19 2025
+| Date         : Sun Apr 13 05:52:37 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_methodology -file alchitry_top_methodology_drc_routed.rpt -pb alchitry_top_methodology_drc_routed.pb -rpx alchitry_top_methodology_drc_routed.rpx
 | Design       : alchitry_top
@@ -23,13 +23,12 @@ Table of Contents
           Floorplan: design_1
       Design limits: <entire design considered>
              Max checks: <unlimited>
-             Checks found: 80
+             Checks found: 77
 +-----------+----------+--------------------------------------------+--------+
 | Rule      | Severity | Description                                | Checks |
 +-----------+----------+--------------------------------------------+--------+
 | LUTAR-1   | Warning  | LUT drives async reset alert               | 1      |
 | SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 2      |
-| TIMING-16 | Warning  | Large setup violation                      | 3      |
 | TIMING-18 | Warning  | Missing input or output delay              | 74     |
 +-----------+----------+--------------------------------------------+--------+
 
@@ -49,21 +48,6 @@ Related violations: <none>
 SYNTH-6#2 Warning
 Timing of a RAM block might be sub-optimal  
 The timing for the instance brams/bram2/ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
-Related violations: <none>
-
-TIMING-16#1 Warning
-Large setup violation  
-There is a large setup violation of -1.021 ns between sm/D_states_q_reg[6]_rep/C (clocked by clk_0) and sm/D_states_q_reg[3]_rep/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#2 Warning
-Large setup violation  
-There is a large setup violation of -1.105 ns between sm/D_states_q_reg[6]_rep/C (clocked by clk_0) and sm/D_states_q_reg[3]_rep__1/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
-Related violations: <none>
-
-TIMING-16#3 Warning
-Large setup violation  
-There is a large setup violation of -1.229 ns between sm/D_states_q_reg[6]_rep/C (clocked by clk_0) and sm/D_states_q_reg[2]_rep/D (clocked by clk_0). Large setup violations at the end of those stages might be difficult to fix during the post-placement implementation flow and could be the result of non-optimal XDC constraints or non-optimal design architecture
 Related violations: <none>
 
 TIMING-18#1 Warning
