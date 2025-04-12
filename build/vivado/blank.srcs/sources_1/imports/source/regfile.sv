@@ -20,7 +20,8 @@ module regfile #(
         output reg [(WIDTH)-1:0] pac,
         output reg [(WIDTH)-1:0] pbc,
         output reg [(WIDTH)-1:0] timer,
-        output reg bram_selector
+        output reg bram_selector,
+        output reg an
     );
     logic [(ENTRIES)-1:0][(WIDTH)-1:0] D_registers_d, D_registers_q = 0;
     always @* begin
@@ -28,10 +29,11 @@ module regfile #(
         
         rd1 = D_registers_q[ra1];
         rd2 = D_registers_q[ra2];
-        pac = D_registers_q[1'h0];
+        pac = D_registers_q[2'h2];
         pbc = D_registers_q[2'h3];
         timer = D_registers_q[3'h6];
         bram_selector = D_registers_q[3'h7][1'h0];
+        an = D_registers_q[1'h0];
         if (we) begin
             D_registers_d[wa] = wd;
         end

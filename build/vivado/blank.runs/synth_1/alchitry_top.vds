@@ -3,8 +3,8 @@
 # SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
 # IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
 # SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
-# Start of session at: Sat Apr 12 14:44:44 2025
-# Process ID: 46912
+# Start of session at: Sat Apr 12 15:38:23 2025
+# Process ID: 44192
 # Current directory: C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.runs/synth_1
 # Command line: vivado.exe -log alchitry_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source alchitry_top.tcl
 # Log file: C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.runs/synth_1/alchitry_top.vds
@@ -12,6 +12,7 @@
 # Running On: LAPTOP-6R0BMEKF, OS: Windows, CPU Frequency: 3294 MHz, CPU Physical cores: 12, Host memory: 16312 MB
 #-----------------------------------------------------------
 source alchitry_top.tcl -notrace
+create_project: Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 456.305 ; gain = 183.141
 Command: synth_design -top alchitry_top -part xc7a35tftg256-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a35t'
@@ -19,9 +20,9 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t
 INFO: [Device 21-403] Loading part xc7a35tftg256-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 28356
+INFO: [Synth 8-7075] Helper process launched with PID 44416
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1288.645 ; gain = 439.215
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1289.484 ; gain = 439.328
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'alchitry_top' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:7]
 INFO: [Synth 8-6157] synthesizing module 'button_conditioner' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/button_conditioner.sv:7]
@@ -97,12 +98,8 @@ INFO: [Synth 8-6157] synthesizing module 'x_bit_right_ari_shifter__parameterized
 	Parameter SHIFT bound to: 5'b10000 
 INFO: [Synth 8-6155] done synthesizing module 'x_bit_right_ari_shifter__parameterized3' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv:7]
 INFO: [Synth 8-6155] done synthesizing module 'shifter' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/shifter.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'multiplier' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/multiplier.sv:7]
-INFO: [Synth 8-6155] done synthesizing module 'multiplier' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/multiplier.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'divider' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/divider.sv:7]
-INFO: [Synth 8-6155] done synthesizing module 'divider' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/divider.sv:7]
-INFO: [Synth 8-226] default block is never used [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv:137]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv:174]
+INFO: [Synth 8-226] default block is never used [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv:111]
+INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv:148]
 INFO: [Synth 8-6155] done synthesizing module 'alu' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv:7]
 INFO: [Synth 8-6157] synthesizing module 'reset_conditioner' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/reset_conditioner.sv:7]
 	Parameter STAGES bound to: 3'b100 
@@ -154,7 +151,6 @@ INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Y
 INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2429]
 INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2445]
 INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2461]
-INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:2537]
 INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:349]
 INFO: [Synth 8-6155] done synthesizing module 'fsm' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv:7]
 INFO: [Synth 8-6157] synthesizing module 'bram' [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bram.sv:7]
@@ -199,9 +195,9 @@ INFO: [Synth 8-6157] synthesizing module 'simple_dual_port_ram' [C:/Users/Ye Ye 
 INFO: [Synth 8-6155] done synthesizing module 'simple_dual_port_ram' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/simple_dual_port_ram.v:47]
 INFO: [Synth 8-6155] done synthesizing module 'fifo' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fifo.sv:7]
 INFO: [Synth 8-6155] done synthesizing module 'alchitry_top' (0#1) [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:7]
-WARNING: [Synth 8-6014] Unused sequential element D_buff1_q_reg was removed.  [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:768]
-WARNING: [Synth 8-6014] Unused sequential element D_buff2_q_reg was removed.  [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:769]
-WARNING: [Synth 8-6014] Unused sequential element D_buff3_q_reg was removed.  [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:770]
+WARNING: [Synth 8-6014] Unused sequential element D_buff1_q_reg was removed.  [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:770]
+WARNING: [Synth 8-6014] Unused sequential element D_buff2_q_reg was removed.  [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:771]
+WARNING: [Synth 8-6014] Unused sequential element D_buff3_q_reg was removed.  [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:772]
 WARNING: [Synth 8-3917] design alchitry_top has port matgnd[1] driven by constant 0
 WARNING: [Synth 8-3917] design alchitry_top has port matgnd[0] driven by constant 0
 WARNING: [Synth 8-7129] Port rst in module bram is either unconnected or has no load
@@ -253,18 +249,18 @@ WARNING: [Synth 8-7129] Port alufn_signal[2] in module adder is either unconnect
 WARNING: [Synth 8-7129] Port alufn_signal[1] in module adder is either unconnected or has no load
 WARNING: [Synth 8-7129] Port rst_n in module alchitry_top is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1453.133 ; gain = 603.703
+Finished RTL Elaboration : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1440.133 ; gain = 589.977
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1453.133 ; gain = 603.703
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1440.133 ; gain = 589.977
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1453.133 ; gain = 603.703
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:07 . Memory (MB): peak = 1440.133 ; gain = 589.977
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.069 . Memory (MB): peak = 1453.133 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.071 . Memory (MB): peak = 1440.133 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -277,30 +273,30 @@ Parsing XDC File [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/bu
 Finished Parsing XDC File [C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/constraint/au_props.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1559.281 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1546.008 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.022 . Memory (MB): peak = 1559.281 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.013 . Memory (MB): peak = 1546.008 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1559.281 ; gain = 709.852
+Finished Constraint Validation : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1546.008 ; gain = 695.852
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tftg256-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1559.281 ; gain = 709.852
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1546.008 ; gain = 695.852
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1559.281 ; gain = 709.852
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:14 . Memory (MB): peak = 1546.008 ; gain = 695.852
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'D_states_q_reg' in module 'fsm'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:17 . Memory (MB): peak = 1559.281 ; gain = 709.852
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:15 ; elapsed = 00:00:16 . Memory (MB): peak = 1546.008 ; gain = 695.852
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -317,7 +313,7 @@ Detailed RTL Component Info :
 	   2 Input    2 Bit       Adders := 6     
 +---XORs : 
 	   2 Input     32 Bit         XORs := 2     
-	   3 Input      1 Bit         XORs := 528   
+	   3 Input      1 Bit         XORs := 32    
 	   2 Input      1 Bit         XORs := 1     
 +---Registers : 
 	               32 Bit    Registers := 8     
@@ -334,7 +330,7 @@ Detailed RTL Component Info :
 	               8K Bit	(4224 X 2 bit)          RAMs := 2     
 	                8 Bit	(4 X 2 bit)          RAMs := 3     
 +---Muxes : 
-	   2 Input   32 Bit        Muxes := 4     
+	   2 Input   32 Bit        Muxes := 3     
 	   4 Input   32 Bit        Muxes := 2     
 	   5 Input   32 Bit        Muxes := 1     
 	  10 Input   14 Bit        Muxes := 3     
@@ -347,10 +343,10 @@ Detailed RTL Component Info :
 	  10 Input   10 Bit        Muxes := 3     
 	   2 Input    8 Bit        Muxes := 3     
 	 176 Input    8 Bit        Muxes := 2     
-	   3 Input    8 Bit        Muxes := 10    
+	   3 Input    8 Bit        Muxes := 9     
 	   4 Input    8 Bit        Muxes := 9     
 	   4 Input    7 Bit        Muxes := 1     
-	   2 Input    7 Bit        Muxes := 48    
+	   2 Input    7 Bit        Muxes := 50    
 	  10 Input    7 Bit        Muxes := 3     
 	 176 Input    6 Bit        Muxes := 1     
 	   2 Input    6 Bit        Muxes := 27    
@@ -369,7 +365,7 @@ Detailed RTL Component Info :
 	   2 Input    2 Bit        Muxes := 3     
 	   3 Input    2 Bit        Muxes := 1     
 	 176 Input    2 Bit        Muxes := 6     
-	   2 Input    1 Bit        Muxes := 538   
+	   2 Input    1 Bit        Muxes := 540   
 	   4 Input    1 Bit        Muxes := 10    
 	   5 Input    1 Bit        Muxes := 2     
 	   6 Input    1 Bit        Muxes := 1     
@@ -428,19 +424,19 @@ WARNING: [Synth 8-7129] Port rd2[2] in module fsm is either unconnected or has n
 WARNING: [Synth 8-7129] Port rst_n in module alchitry_top is either unconnected or has no load
 WARNING: [Synth 8-7129] Port testpullup in module alchitry_top is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:39 ; elapsed = 00:00:40 . Memory (MB): peak = 1559.281 ; gain = 709.852
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:35 ; elapsed = 00:00:36 . Memory (MB): peak = 1546.008 ; gain = 695.852
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
 Block RAM: Preliminary Mapping Report (see note below)
-+-------------+---------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|Module Name  | RTL Object          | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
-+-------------+---------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|alchitry_top | brams/bram1/ram_reg | 4 K x 2(READ_FIRST)    | W | R |                        |   |   | Port A           | 1      | 0      | 
-|alchitry_top | brams/bram2/ram_reg | 4 K x 2(READ_FIRST)    | W | R |                        |   |   | Port A           | 1      | 0      | 
-+-------------+---------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
++------------+---------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name | RTL Object    | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++------------+---------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|brams       | bram1/ram_reg | 4 K x 2(READ_FIRST)    | W | R |                        |   |   | Port A           | 1      | 0      | 
+|brams       | bram2/ram_reg | 4 K x 2(READ_FIRST)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++------------+---------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
 
 Note: The table above is a preliminary report that shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. 
 
@@ -461,25 +457,25 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:42 ; elapsed = 00:00:44 . Memory (MB): peak = 1559.281 ; gain = 709.852
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:39 ; elapsed = 00:00:40 . Memory (MB): peak = 1546.008 ; gain = 695.852
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:56 ; elapsed = 00:00:58 . Memory (MB): peak = 1621.660 ; gain = 772.230
+Finished Timing Optimization : Time (s): cpu = 00:00:50 ; elapsed = 00:00:51 . Memory (MB): peak = 1592.090 ; gain = 741.934
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
 ---------------------------------------------------------------------------------
 
 Block RAM: Final Mapping Report
-+-------------+---------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|Module Name  | RTL Object          | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
-+-------------+---------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
-|alchitry_top | brams/bram1/ram_reg | 4 K x 2(READ_FIRST)    | W | R |                        |   |   | Port A           | 1      | 0      | 
-|alchitry_top | brams/bram2/ram_reg | 4 K x 2(READ_FIRST)    | W | R |                        |   |   | Port A           | 1      | 0      | 
-+-------------+---------------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
++------------+---------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|Module Name | RTL Object    | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | Ports driving FF | RAMB18 | RAMB36 | 
++------------+---------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
+|brams       | bram1/ram_reg | 4 K x 2(READ_FIRST)    | W | R |                        |   |   | Port A           | 1      | 0      | 
+|brams       | bram2/ram_reg | 4 K x 2(READ_FIRST)    | W | R |                        |   |   | Port A           | 1      | 0      | 
++------------+---------------+------------------------+---+---+------------------------+---+---+------------------+--------+--------+
 
 
 Distributed RAM: Final Mapping Report
@@ -500,7 +496,7 @@ Start Technology Mapping
 INFO: [Synth 8-7052] The timing for the instance brams/bram1/ram_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance brams/bram2/ram_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:58 ; elapsed = 00:01:00 . Memory (MB): peak = 1630.723 ; gain = 781.293
+Finished Technology Mapping : Time (s): cpu = 00:00:51 ; elapsed = 00:00:53 . Memory (MB): peak = 1592.309 ; gain = 742.152
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -518,37 +514,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:01 ; elapsed = 00:01:03 . Memory (MB): peak = 1644.523 ; gain = 795.094
+Finished IO Insertion : Time (s): cpu = 00:00:55 ; elapsed = 00:00:56 . Memory (MB): peak = 1605.117 ; gain = 754.961
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:01 ; elapsed = 00:01:03 . Memory (MB): peak = 1644.523 ; gain = 795.094
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:55 ; elapsed = 00:00:56 . Memory (MB): peak = 1605.117 ; gain = 754.961
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:01 ; elapsed = 00:01:04 . Memory (MB): peak = 1644.523 ; gain = 795.094
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:55 ; elapsed = 00:00:56 . Memory (MB): peak = 1605.117 ; gain = 754.961
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:01 ; elapsed = 00:01:04 . Memory (MB): peak = 1644.523 ; gain = 795.094
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:55 ; elapsed = 00:00:56 . Memory (MB): peak = 1605.117 ; gain = 754.961
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:02 ; elapsed = 00:01:04 . Memory (MB): peak = 1644.523 ; gain = 795.094
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:55 ; elapsed = 00:00:57 . Memory (MB): peak = 1605.129 ; gain = 754.973
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:02 ; elapsed = 00:01:04 . Memory (MB): peak = 1644.523 ; gain = 795.094
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:55 ; elapsed = 00:00:57 . Memory (MB): peak = 1605.129 ; gain = 754.973
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -559,8 +555,8 @@ Static Shift Register Report:
 |Module Name  | RTL Name                                                             | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
 +-------------+----------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
 |alchitry_top | cond_butt_next_play/sync/D_pipe_q_reg[29]                            | 30     | 1     | NO           | YES                | YES               | 0      | 1       | 
-|alchitry_top | forLoop_idx_0_615336515[0].cond_butt_sel_desel/sync/D_pipe_q_reg[29] | 30     | 2     | NO           | YES                | YES               | 0      | 2       | 
-|alchitry_top | forLoop_idx_0_104869499[0].cond_butt_dirs/sync/D_pipe_q_reg[29]      | 30     | 4     | NO           | YES                | YES               | 0      | 4       | 
+|alchitry_top | forLoop_idx_0_313565453[0].cond_butt_sel_desel/sync/D_pipe_q_reg[29] | 30     | 2     | NO           | YES                | YES               | 0      | 2       | 
+|alchitry_top | forLoop_idx_0_803055412[0].cond_butt_dirs/sync/D_pipe_q_reg[29]      | 30     | 4     | NO           | YES                | YES               | 0      | 4       | 
 +-------------+----------------------------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
 
 ---------------------------------------------------------------------------------
@@ -581,46 +577,46 @@ Report Cell Usage:
 |      |Cell     |Count |
 +------+---------+------+
 |1     |BUFG     |     1|
-|2     |CARRY4   |    83|
-|3     |LUT1     |    29|
-|4     |LUT2     |   323|
-|5     |LUT3     |   265|
-|6     |LUT4     |   297|
-|7     |LUT5     |   310|
-|8     |LUT6     |  1079|
-|9     |MUXF7    |    48|
+|2     |CARRY4   |    73|
+|3     |LUT1     |    24|
+|4     |LUT2     |   267|
+|5     |LUT3     |   221|
+|6     |LUT4     |   278|
+|7     |LUT5     |   306|
+|8     |LUT6     |  1048|
+|9     |MUXF7    |    50|
 |10    |RAM16X1D |     6|
 |11    |RAMB18E1 |     2|
 |12    |SRLC32E  |     7|
 |13    |FDPE     |     8|
-|14    |FDRE     |   536|
-|15    |FDSE     |    18|
+|14    |FDRE     |   538|
+|15    |FDSE     |    19|
 |16    |IBUF     |    10|
 |17    |OBUF     |    69|
 +------+---------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:02 ; elapsed = 00:01:04 . Memory (MB): peak = 1644.523 ; gain = 795.094
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:55 ; elapsed = 00:00:57 . Memory (MB): peak = 1605.129 ; gain = 754.973
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 36 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:53 ; elapsed = 00:01:01 . Memory (MB): peak = 1644.523 ; gain = 688.945
-Synthesis Optimization Complete : Time (s): cpu = 00:01:02 ; elapsed = 00:01:04 . Memory (MB): peak = 1644.523 ; gain = 795.094
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:46 ; elapsed = 00:00:54 . Memory (MB): peak = 1605.129 ; gain = 649.098
+Synthesis Optimization Complete : Time (s): cpu = 00:00:55 ; elapsed = 00:00:57 . Memory (MB): peak = 1605.129 ; gain = 754.973
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.022 . Memory (MB): peak = 1656.602 ; gain = 0.000
-INFO: [Netlist 29-17] Analyzing 139 Unisim elements for replacement
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.021 . Memory (MB): peak = 1617.148 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 131 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1662.273 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1622.832 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 6 instances were transformed.
   RAM16X1D => RAM32X1D (RAMD32(x2)): 6 instances
 
-Synth Design complete | Checksum: 9ba3ae75
+Synth Design complete | Checksum: e06b2739
 INFO: [Common 17-83] Releasing license: Synthesis
-133 Infos, 89 Warnings, 0 Critical Warnings and 0 Errors encountered.
+128 Infos, 89 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:06 ; elapsed = 00:01:09 . Memory (MB): peak = 1662.273 ; gain = 1205.898
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1662.273 ; gain = 0.000
+synth_design: Time (s): cpu = 00:00:59 ; elapsed = 00:01:01 . Memory (MB): peak = 1622.832 ; gain = 1166.527
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1622.832 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'C:/Users/Ye Ye Taut/Documents/alchitry/FPGA _PAIN/fpga-pain/build/vivado/blank.runs/synth_1/alchitry_top.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sat Apr 12 14:45:59 2025...
+INFO: [Common 17-206] Exiting Vivado at Sat Apr 12 15:39:32 2025...
