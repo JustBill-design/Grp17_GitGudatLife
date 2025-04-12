@@ -39,7 +39,7 @@ module alchitry_top (
     sig fifo_rst
     
     // 1/2 clk
-    dff clk_2[3](.clk(clk))
+    // dff clk_2[3](.clk(clk))
 
     .clk(clk) {
     
@@ -131,11 +131,11 @@ module alchitry_top (
         io_led[3:0] = buff4.q
         
         // slow clock
-        if (clk) {
-            clk_2.d = clk_2.q + 1
-        } else {
-            clk_2.d = clk_2.q
-        }
+        // if (clk) {
+        //     clk_2.d = clk_2.q + 1
+        // } else {
+        //     clk_2.d = clk_2.q
+        // }
 
         // whole board reset
         reset_cond.in = ~butt_reset
@@ -408,7 +408,7 @@ module alchitry_top (
         // button tester
         // butt_cond.in = testpullup
         // led[0] = butt_cond.out
-        aseg_driver.value = $width(gamecounter.value)
+        // aseg_driver.value = $width(gamecounter.value)
 
         // debugging
         led[7:0] = sm.debug_out
