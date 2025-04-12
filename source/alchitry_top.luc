@@ -117,15 +117,15 @@ module alchitry_top (
         buff3.d = buff3.q
         buff4.d = buff4.q
         edge_up.in = cond_butt_dirs.out[0]
-        if (edge_up.out) {
-            buff4.d = buff4.q + 1
-        }
+        // if (edge_up.out) {
+        //     buff4.d = buff4.q + 1
+        // }
         
-        io_led[3:0] = cond_butt_dirs.out
-        io_led[5:4] = cond_butt_sel_desel.out
+        io_led[3:0] = cond_butt_dirs.out[3:0]
+        io_led[5:4] = cond_butt_sel_desel.out[1:0]
         io_led[6] = cond_butt_next_play.out
         io_led[7] = reset_cond.out
-        io_led[3:0] = buff4.q
+        // io_led[3:0] = buff4.q
 
         // whole board reset
         reset_cond.in = ~butt_reset
