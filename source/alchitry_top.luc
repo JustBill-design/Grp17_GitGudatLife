@@ -37,9 +37,10 @@ module alchitry_top (
     
     sig rst
     sig fifo_rst
+    sig clk_10
     
 
-    .clk(clk) {
+    .clk(clk_10) {
     
         reset_conditioner reset_cond        // whole board reset
         reset_conditioner fifo_reset_cond   // reset for shift registers
@@ -66,6 +67,9 @@ module alchitry_top (
         edge_detector edge_up(#RISE(1),#FALL(0))
 
         .rst(rst) {
+        
+            // slow clock because 100MHz?
+            counter slow_counter(#SIZE(4),#TOP(10),#DIV(0))
         
             // display driver
             display_driver display(#CLK_FREQ(CLK))
@@ -126,6 +130,9 @@ module alchitry_top (
         io_led[6] = cond_butt_next_play.out
         io_led[7] = reset_cond.out
         io_led[3:0] = buff4.q
+        
+        // slow clock
+        clk_10 = ~|slow_counter.value
 
         // whole board reset
         reset_cond.in = ~butt_reset
