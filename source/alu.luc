@@ -14,8 +14,8 @@ module alu #(
     compare compare
     boolean boolean
     shifter shifter
-    multiplier multiplier
-    divider divider
+    // multiplier multiplier
+    // divider divider
     sig temp_out[SIZE]
     always {
         adder.a = a
