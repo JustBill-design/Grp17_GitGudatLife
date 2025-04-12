@@ -2475,12 +2475,12 @@ module fsm #(
                 asel = b0
                 bsel = b1001 
                 ra1 = TARGET_PIXEL_ADDRESS
-                //case(aluout){
-                    //b0:
-                        //states.d = States.SWITCH_BRAM
-                    //b1:
-                        //states.d = States.GAME_IDLE
-                //}
+                case(aluout){
+                    b0:
+                        states.d = States.SWITCH_BRAM
+                    b1:
+                        states.d = States.GAME_IDLE
+                }
                 debug_dff.d = 152
 
             States.SWITCH_BRAM:
