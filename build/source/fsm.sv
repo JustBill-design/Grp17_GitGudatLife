@@ -233,14 +233,14 @@ module fsm (
     localparam E_States_COMPUTE = 8'hb1;
     localparam E_States_AUTO = 8'hb2;
     localparam E_States_IDLE = 8'hb3;
-    localparam _MP_RISE_2106891514 = 1'h1;
-    localparam _MP_FALL_2106891514 = 1'h0;
+    localparam _MP_RISE_475794905 = 1'h1;
+    localparam _MP_FALL_475794905 = 1'h0;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_2106891514),
-        .FALL(_MP_FALL_2106891514)
+        .RISE(_MP_RISE_475794905),
+        .FALL(_MP_FALL_475794905)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -248,12 +248,14 @@ module fsm (
     );
     
     
+    logic D_rst_delay_d, D_rst_delay_q = 0;
     logic [7:0] D_states_d, D_states_q = 8'ha7;
     logic D_decrease_timer_d, D_decrease_timer_q = 0;
     logic D_game_tick_d, D_game_tick_q = 0;
     logic [1:0] D_accel_selector_d, D_accel_selector_q = 0;
     logic [3:0] D_accel_timer_d, D_accel_timer_q = 0;
     logic [3:0] D_accel_d, D_accel_q = 0;
+    logic D_accel_edge_buff_d, D_accel_edge_buff_q = 0;
     logic [7:0] D_debug_dff_d, D_debug_dff_q = 0;
     localparam ADD = 6'h0;
     localparam SUB = 6'h1;
@@ -272,15 +274,18 @@ module fsm (
     logic inputclk;
     always @* begin
         D_debug_dff_d = D_debug_dff_q;
+        D_rst_delay_d = D_rst_delay_q;
         D_states_d = D_states_q;
         D_decrease_timer_d = D_decrease_timer_q;
         D_game_tick_d = D_game_tick_q;
         D_accel_selector_d = D_accel_selector_q;
         D_accel_d = D_accel_q;
+        D_accel_edge_buff_d = D_accel_edge_buff_q;
         D_accel_timer_d = D_accel_timer_q;
         
         debug_out = D_debug_dff_q;
         D_debug_dff_d = 1'h0;
+        D_rst_delay_d = rst;
         D_states_d = D_states_q;
         brsel = 2'h2;
         bra = 1'h0;
@@ -345,6 +350,7 @@ module fsm (
         end else begin
             D_accel_d = D_accel_q;
         end
+        D_accel_edge_buff_d = M_accel_edge_out;
         
         case (D_states_q)
             8'ha7: begin
@@ -522,7 +528,7 @@ module fsm (
             end
             8'h6: begin
                 if (move_up_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -658,7 +664,7 @@ module fsm (
             end
             8'h11: begin
                 if (move_down_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -800,7 +806,7 @@ module fsm (
             end
             8'h1c: begin
                 if (move_left_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -940,7 +946,7 @@ module fsm (
             end
             8'h27: begin
                 if (move_right_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -1148,7 +1154,7 @@ module fsm (
             end
             8'h37: begin
                 if (move_up_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -1284,7 +1290,7 @@ module fsm (
             end
             8'h42: begin
                 if (move_down_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -1424,7 +1430,7 @@ module fsm (
             end
             8'h4d: begin
                 if (move_left_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -1561,7 +1567,7 @@ module fsm (
             end
             8'h58: begin
                 if (move_right_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -2558,12 +2564,20 @@ module fsm (
     
     always @(posedge (clk)) begin
         if ((rst) == 1'b1) begin
+            D_rst_delay_q <= 0;
+        end else begin
+            D_rst_delay_q <= D_rst_delay_d;
+        end
+    end
+    always @(posedge (clk)) begin
+        if ((D_rst_delay_q) == 1'b1) begin
             D_states_q <= 8'ha7;
             D_decrease_timer_q <= 0;
             D_game_tick_q <= 0;
             D_accel_selector_q <= 0;
             D_accel_timer_q <= 0;
             D_accel_q <= 0;
+            D_accel_edge_buff_q <= 0;
             D_debug_dff_q <= 0;
         end else begin
             D_states_q <= D_states_d;
@@ -2572,6 +2586,7 @@ module fsm (
             D_accel_selector_q <= D_accel_selector_d;
             D_accel_timer_q <= D_accel_timer_d;
             D_accel_q <= D_accel_d;
+            D_accel_edge_buff_q <= D_accel_edge_buff_d;
             D_debug_dff_q <= D_debug_dff_d;
         end
     end

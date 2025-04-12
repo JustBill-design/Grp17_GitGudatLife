@@ -135,14 +135,21 @@ module fsm #(
     }
     
     .clk(clk) {
+
         edge_detector accel_edge(#RISE(1),#FALL(0))
-        .rst(rst) {
+
+        // reset delay
+        dff rst_delay(.rst(rst))
+
+        .rst(rst_delay.q) {
             dff states[$width(States)](#INIT(States.SET_BRAM_SELECTOR_TO_1))
             dff decrease_timer
             dff game_tick
             dff accel_selector[2]   // select clock for inputclk
             dff accel_timer[4]      // timer for interval between acceleration
             dff accel[4]            // bits selected for acceleration
+            dff accel_edge_buff
+            
 
             // debug
             dff debug_dff[8]
@@ -174,6 +181,9 @@ module fsm #(
         // debugging
         debug_out = debug_dff.q
         debug_dff.d = 0
+        
+        // rst_delay
+        rst_delay.d = rst
 
         // default connections, all 0 except brsel=b10 ----------------------
         states.d = states.q
@@ -235,6 +245,7 @@ module fsm #(
         } else {
             accel.d = accel.q
         }
+        accel_edge_buff.d = accel_edge.out
 
         
         case (states.q) {
@@ -421,7 +432,7 @@ module fsm #(
             
             States.A_UP_CLK:
                 if (move_up_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -565,7 +576,7 @@ module fsm #(
             
             States.A_DOWN_CLK:
                 if (move_down_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -714,7 +725,7 @@ module fsm #(
                 debug_dff.d = 30
             States.A_LEFT_CLK:
                 if (move_left_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -863,7 +874,7 @@ module fsm #(
 
             States.A_RIGHT_CLK:
                 if (move_right_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -1085,7 +1096,7 @@ module fsm #(
 
             States.B_UP_CLK:
                 if (move_up_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -1227,7 +1238,7 @@ module fsm #(
 
             States.B_DOWN_CLK:
                 if (move_down_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -1374,7 +1385,7 @@ module fsm #(
 
             States.B_LEFT_CLK:
                 if (move_left_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -1516,7 +1527,7 @@ module fsm #(
 
             States.B_RIGHT_CLK:
                 if (move_right_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
