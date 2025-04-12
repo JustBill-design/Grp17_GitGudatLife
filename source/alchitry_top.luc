@@ -172,9 +172,9 @@ module alchitry_top (
         aseg_driver.value = reg.pac
         bseg_driver.value = reg.pbc
         timerseg_driver.value = reg.timer
-        aseg = aseg_driver.out
-        bseg = bseg_driver.out
-        timerseg = timerseg_driver.out
+        aseg = ~aseg_driver.out
+        bseg = ~bseg_driver.out
+        timerseg = ~timerseg_driver.out
         
         // FSM and regfile connections
         reg.ra1 = sm.ra1
