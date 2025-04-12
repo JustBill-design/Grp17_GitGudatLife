@@ -185,11 +185,11 @@ module alu #(
             // 6h23: // SRA 
             //     out_sig = a >>> b[4:0]
             6h33: // CMPEQ 
-                out_sig = a == b 
+                out_sig = a[1:0] == b[1:0]
             6h35: // CMPLT 
-                out_sig = a < b 
+                out_sig = a[1:0] < b[1:0]
             6h37: // CMPLE
-                out_sig = a <= b
+                out_sig = a[1:0] <= b[1:0]
             
             
             default:
