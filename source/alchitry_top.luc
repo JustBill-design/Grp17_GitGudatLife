@@ -155,8 +155,7 @@ module alchitry_top (
         timerclk.in = gamecounter.value[$clog2(CLK)-1]
         gameclk.in = gamecounter.value[$clog2(CLK/10)]
         med_inputclk.in = gamecounter.value[$clog2(CLK/5)]
-        // sm.timerclk = timerclk.out
-        sm.timerclk = ~|gamecounter.value
+        sm.timerclk = timerclk.out
         sm.gameclk = gameclk.out
         sm.med_inputclk = med_inputclk.out
 
@@ -400,6 +399,7 @@ module alchitry_top (
         // button tester
         // butt_cond.in = testpullup
         // led[0] = butt_cond.out
+        aseg_driver.value = $width(gamecounter.value)
 
         // debugging
         led[7:0] = sm.debug_out
