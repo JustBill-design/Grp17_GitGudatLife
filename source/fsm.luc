@@ -132,7 +132,7 @@ module fsm #(
         dff accel_edge_buff     // buffer dff for edge
         
         dff alu_buffer[2]
-        edge_detector accel_edge(#RISE(1),#FALL(0))
+        edge_detector accel_edge(#RISE(0),#FALL(1))
 
         .rst(rst) {
             dff states[$width(States)](#INIT(States.SET_BRAM_SELECTOR_TO_1))
