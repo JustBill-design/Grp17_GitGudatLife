@@ -230,14 +230,14 @@ module fsm (
     logic [3:0] D_accel_timer_d, D_accel_timer_q = 0;
     logic [3:0] D_accel_d, D_accel_q = 0;
     logic D_accel_edge_buff_d, D_accel_edge_buff_q = 0;
-    localparam _MP_RISE_277412235 = 1'h0;
-    localparam _MP_FALL_277412235 = 1'h1;
+    localparam _MP_RISE_367450239 = 1'h0;
+    localparam _MP_FALL_367450239 = 1'h1;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_277412235),
-        .FALL(_MP_FALL_277412235)
+        .RISE(_MP_RISE_367450239),
+        .FALL(_MP_FALL_367450239)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -1738,7 +1738,6 @@ module fsm (
                     bsel = 4'h4;
                     ra1 = 3'h4;
                     swe2 = 1'h1;
-                    D_states_d = 8'h6f;
                 end
                 D_debug_dff_d = 7'h62;
             end
@@ -1832,9 +1831,9 @@ module fsm (
                 alufn = 6'h0;
                 bsel = 4'h1;
                 we = 1'h1;
-                ra1 = 3'h1;
+                ra1 = 1'h1;
                 wdsel = 4'h0;
-                wa = 3'h1;
+                wa = 1'h1;
                 D_states_d = 8'h79;
                 D_debug_dff_d = 7'h6c;
             end
@@ -2232,16 +2231,6 @@ module fsm (
                     2'h2: begin
                         D_states_d = 8'ha0;
                     end
-                    default: begin
-                        D_states_d = 8'h99;
-                    end
-                endcase
-                D_debug_dff_d = 8'h8c;
-            end
-            8'h99: begin
-                ra1 = 1'h1;
-                
-                case (rd1[1'h1:1'h0])
                     2'h3: begin
                         D_states_d = 8'ha0;
                     end
@@ -2249,7 +2238,7 @@ module fsm (
                         D_states_d = 8'h9a;
                     end
                 endcase
-                D_debug_dff_d = 8'h8d;
+                D_debug_dff_d = 8'h8c;
             end
             8'h9a: begin
                 alufn = 6'h1;
@@ -2278,16 +2267,6 @@ module fsm (
                     2'h2: begin
                         D_states_d = 8'h9f;
                     end
-                    default: begin
-                        D_states_d = 8'h9e;
-                    end
-                endcase
-                D_debug_dff_d = 8'h90;
-            end
-            8'h9d: begin
-                ra1 = 1'h0;
-                
-                case (rd1[1'h1:1'h0])
                     2'h3: begin
                         D_states_d = 8'h9f;
                     end
