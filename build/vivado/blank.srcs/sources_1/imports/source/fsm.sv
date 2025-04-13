@@ -229,14 +229,14 @@ module fsm (
     logic [3:0] D_accel_d, D_accel_q = 0;
     logic D_accel_edge_buff_d, D_accel_edge_buff_q = 0;
     logic [1:0] D_alu_buffer_d, D_alu_buffer_q = 0;
-    localparam _MP_RISE_1470807421 = 1'h0;
-    localparam _MP_FALL_1470807421 = 1'h1;
+    localparam _MP_RISE_1562636344 = 1'h0;
+    localparam _MP_FALL_1562636344 = 1'h1;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_1470807421),
-        .FALL(_MP_FALL_1470807421)
+        .RISE(_MP_RISE_1562636344),
+        .FALL(_MP_FALL_1562636344)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -1845,16 +1845,23 @@ module fsm (
                 D_debug_dff_d = 7'h6c;
             end
             8'h79: begin
+                sre1 = 1'h1;
                 
                 case (srd1[1'h1:1'h0])
+                    2'h1: begin
+                        D_states_d = 8'h7a;
+                        sre1 = 1'h1;
+                    end
+                    2'h2: begin
+                        D_states_d = 8'h7b;
+                        sre1 = 1'h1;
+                    end
                     2'h0: begin
                         D_states_d = 8'h7c;
                         sre1 = 1'h1;
                     end
-                    default: begin
-                        D_debug_dff_d = 8'hff;
-                    end
                 endcase
+                D_debug_dff_d = 7'h6d;
             end
             8'h7a: begin
                 alufn = 6'h0;
@@ -1863,7 +1870,7 @@ module fsm (
                 ra1 = 1'h0;
                 wdsel = 4'h0;
                 wa = 1'h0;
-                D_states_d = 8'h79;
+                D_states_d = 8'h7c;
                 D_debug_dff_d = 7'h6e;
             end
             8'h7b: begin
@@ -1873,7 +1880,7 @@ module fsm (
                 ra1 = 1'h1;
                 wdsel = 4'h0;
                 wa = 1'h1;
-                D_states_d = 8'h79;
+                D_states_d = 8'h7c;
                 D_debug_dff_d = 7'h6f;
             end
             8'h7c: begin
