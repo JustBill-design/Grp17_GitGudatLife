@@ -190,7 +190,8 @@ module alchitry_top (
         sm.timer = reg.timer
         
         // alu
-        sm.aluout_lsb = alum.out[0]
+        // sm.aluout = alum.out
+        // sm.aluout_lsb = alum.out[0]
         alum.alufn = sm.alufn
         
         // a selector

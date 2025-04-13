@@ -20,7 +20,6 @@ module fsm (
         input wire timerclk,
         input wire gameclk,
         input wire med_inputclk,
-        input wire aluout_lsb,
         output reg [5:0] alufn,
         output reg [1:0] brsel,
         output reg bwe,
@@ -234,14 +233,14 @@ module fsm (
     logic [3:0] D_accel_d, D_accel_q = 0;
     logic D_accel_edge_buff_d, D_accel_edge_buff_q = 0;
     logic [1:0] D_alu_buffer_d, D_alu_buffer_q = 0;
-    localparam _MP_RISE_1154253609 = 1'h1;
-    localparam _MP_FALL_1154253609 = 1'h0;
+    localparam _MP_RISE_996293669 = 1'h1;
+    localparam _MP_FALL_996293669 = 1'h0;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_1154253609),
-        .FALL(_MP_FALL_1154253609)
+        .RISE(_MP_RISE_996293669),
+        .FALL(_MP_FALL_996293669)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -834,11 +833,15 @@ module fsm (
             end
             8'h21: begin
                 ra1 = 3'h4;
-                if (~(|rd1[3'h5:1'h0])) begin
-                    D_states_d = 8'h1c;
-                end else begin
-                    D_states_d = 8'h22;
-                end
+                
+                case (rd1[3'h5:1'h0])
+                    6'h0: begin
+                        D_states_d = 8'h1c;
+                    end
+                    default: begin
+                        D_states_d = 8'h22;
+                    end
+                endcase
                 D_debug_dff_d = 6'h23;
             end
             8'h22: begin
@@ -852,9 +855,7 @@ module fsm (
                 D_debug_dff_d = 6'h24;
             end
             8'h23: begin
-                if (ddr) begin
-                    D_states_d = 8'h23;
-                end else begin
+                if (~ddr) begin
                     alufn = 6'h1;
                     bsel = 4'h1;
                     we = 1'h1;
@@ -964,11 +965,15 @@ module fsm (
             end
             8'h2c: begin
                 ra1 = 3'h4;
-                if ((&rd1[3'h5:1'h0])) begin
-                    D_states_d = 8'h27;
-                end else begin
-                    D_states_d = 8'h2d;
-                end
+                
+                case (rd1[3'h5:1'h0])
+                    6'h3f: begin
+                        D_states_d = 8'h27;
+                    end
+                    default: begin
+                        D_states_d = 8'h2d;
+                    end
+                endcase
                 D_debug_dff_d = 6'h2d;
             end
             8'h2d: begin
@@ -982,9 +987,7 @@ module fsm (
                 D_debug_dff_d = 6'h2e;
             end
             8'h2e: begin
-                if (ddr) begin
-                    D_states_d = 8'h2e;
-                end else begin
+                if (~ddr) begin
                     alufn = 6'h0;
                     bsel = 4'h1;
                     we = 1'h1;
@@ -1423,11 +1426,15 @@ module fsm (
             end
             8'h52: begin
                 ra1 = 3'h4;
-                if (~(|rd1[3'h5:1'h0])) begin
-                    D_states_d = 8'h4d;
-                end else begin
-                    D_states_d = 8'h53;
-                end
+                
+                case (rd1[3'h5:1'h0])
+                    6'h0: begin
+                        D_states_d = 8'h4d;
+                    end
+                    default: begin
+                        D_states_d = 8'h53;
+                    end
+                endcase
                 D_debug_dff_d = 7'h4c;
             end
             8'h53: begin
@@ -1551,11 +1558,15 @@ module fsm (
             end
             8'h5d: begin
                 ra1 = 3'h4;
-                if ((&rd1[3'h5:1'h0])) begin
-                    D_states_d = 8'h58;
-                end else begin
-                    D_states_d = 8'h5e;
-                end
+                
+                case (rd1[3'h5:1'h0])
+                    6'h3f: begin
+                        D_states_d = 8'h58;
+                    end
+                    default: begin
+                        D_states_d = 8'h5e;
+                    end
+                endcase
                 D_debug_dff_d = 7'h56;
             end
             8'h5e: begin
@@ -2133,20 +2144,41 @@ module fsm (
                 D_debug_dff_d = 8'h85;
             end
             8'h91: begin
-                if (D_alu_buffer_q[1'h1]) begin
-                    if (D_alu_buffer_q[1'h0]) begin
+                ra1 = 1'h0;
+                ra2 = 1'h1;
+                
+                case ({rd1[2'h3:1'h0], rd2[2'h3:1'h0]})
+                    8'h0: begin
                         D_states_d = 8'ha0;
-                    end else begin
+                    end
+                    8'h11: begin
+                        D_states_d = 8'ha0;
+                    end
+                    8'h22: begin
+                        D_states_d = 8'ha0;
+                    end
+                    8'h33: begin
+                        D_states_d = 8'ha0;
+                    end
+                    8'h44: begin
+                        D_states_d = 8'ha0;
+                    end
+                    8'h55: begin
+                        D_states_d = 8'ha0;
+                    end
+                    8'h66: begin
+                        D_states_d = 8'ha0;
+                    end
+                    8'h77: begin
+                        D_states_d = 8'ha0;
+                    end
+                    8'h88: begin
+                        D_states_d = 8'ha0;
+                    end
+                    default: begin
                         D_states_d = 8'h92;
                     end
-                    D_alu_buffer_d = 2'h0;
-                end else begin
-                    alufn = 6'h33;
-                    bsel = 4'h0;
-                    ra1 = 1'h0;
-                    ra2 = 1'h1;
-                    D_alu_buffer_d = {1'h1, aluout_lsb};
-                end
+                endcase
                 D_debug_dff_d = 8'h86;
             end
             8'h92: begin
@@ -2196,19 +2228,12 @@ module fsm (
                 D_debug_dff_d = 8'h8a;
             end
             8'h96: begin
-                if (D_alu_buffer_q[1'h1]) begin
-                    if (D_alu_buffer_q[1'h0]) begin
-                        D_states_d = 8'h97;
-                    end else begin
-                        D_states_d = 8'h99;
-                    end
-                    D_alu_buffer_d = 2'h0;
+                ra1 = 1'h0;
+                ra2 = 1'h1;
+                if (rd1[2'h3:1'h0] < rd2[2'h3:1'h0]) begin
+                    D_states_d = 8'h97;
                 end else begin
-                    alufn = 6'h35;
-                    bsel = 4'h0;
-                    ra1 = 1'h0;
-                    ra2 = 1'h1;
-                    D_alu_buffer_d = {1'h1, aluout_lsb};
+                    D_states_d = 8'h99;
                 end
                 D_debug_dff_d = 8'h8b;
             end
@@ -2249,19 +2274,12 @@ module fsm (
                 D_debug_dff_d = 8'h8e;
             end
             8'h9a: begin
-                if (D_alu_buffer_q[1'h1]) begin
-                    if (D_alu_buffer_q[1'h0]) begin
-                        D_states_d = 8'h9b;
-                    end else begin
-                        D_states_d = 8'h9d;
-                    end
-                    D_alu_buffer_d = 2'h0;
+                ra1 = 1'h0;
+                ra2 = 1'h1;
+                if (rd2[2'h3:1'h0] < rd1[2'h3:1'h0]) begin
+                    D_states_d = 8'h9b;
                 end else begin
-                    alufn = 6'h35;
-                    bsel = 4'h0;
-                    ra1 = 1'h1;
-                    ra2 = 1'h0;
-                    D_alu_buffer_d = {1'h1, aluout_lsb};
+                    D_states_d = 8'h9d;
                 end
                 D_debug_dff_d = 8'h8f;
             end
