@@ -404,7 +404,7 @@ module fsm #(
                 debug_dff.d = 10
             
             States.A_UP_CLK:
-                if (move_up_button) {
+                if (move_up_button) 
                     // if (accel_edge_buff.q) {
                     if (accel_edge.out) {
                         case (accel_timer.q) {
@@ -539,8 +539,8 @@ module fsm #(
                 debug_dff.d = 20
             
             States.A_DOWN_CLK:
-                if (move_down_button) {
-                    // if (accel_edge_buff.q) {
+                if (move_down_button)
+                    // if (accel_edge_buff.q)
                     if (accel_edge.out) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
@@ -677,7 +677,7 @@ module fsm #(
                 // debugging
                 debug_dff.d = 30
             States.A_LEFT_CLK:
-                if (move_left_button) {
+                if (move_left_button)
                     // if (accel_edge_buff.q) {
                     if (accel_edge.out) {
                         case (accel_timer.q) {
@@ -814,7 +814,7 @@ module fsm #(
                 debug_dff.d = 40
 
             States.A_RIGHT_CLK:
-                if (move_right_button) {
+                if (move_right_button)
                     // if (accel_edge_buff.q) {
                     if (accel_edge.out) {
                         case (accel_timer.q) {
@@ -1024,7 +1024,7 @@ module fsm #(
 
             States.B_UP_CLK:
                 if (move_up_button) {
-                    // if (accel_edge_buff.q) {
+                    // if (accel_edge_buff.q)
                     if (accel_edge.out) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
@@ -1156,7 +1156,7 @@ module fsm #(
 
             States.B_DOWN_CLK:
                 if (move_down_button) {
-                    // if (accel_edge_buff.q) {
+                    // if (accel_edge_buff.q)
                     if (accel_edge.out) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
@@ -1289,7 +1289,7 @@ module fsm #(
 
             States.B_LEFT_CLK:
                 if (move_left_button) {
-                    // if (accel_edge_buff.q) {
+                    // if (accel_edge_buff.q)
                     if (accel_edge.out) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
@@ -1420,7 +1420,7 @@ module fsm #(
 
             States.B_RIGHT_CLK:
                 if (move_right_button) {
-                    // if (accel_edge_buff.q) {
+                    // if (accel_edge_buff.q)
                     if (accel_edge.out) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
@@ -1590,16 +1590,13 @@ module fsm #(
                 debug_dff.d = 92
                 
             States.GAME_IDLE_READ_CURR_PIXEL_VALUE: //TODO Some logic error here idk what, maybe looping issue or target pixel value not reset properly
-                if (&rd1[5:0]) {
-                    states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
-                }
-                else if (~|rd1[5:0]) {
-                    states.d = States.RESET_SR_POINTERS
-                }
-                else {
-                    states.d = States.READ_BRAM
+                case (rd1[5:0]) {
+                    b111111: states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
+                    b000000: states.d = States.RESET_SR_POINTERS
+                    default: states.d = States.READ_BRAM
                 }
                 debug_dff.d = 93
+
             // Reading BRAM and loading SR
             // First in the row
             States.RESET_SR_POINTERS:
@@ -1619,92 +1616,81 @@ module fsm #(
                     bsel = b0100
                     ra1 = TARGET_PIXEL_ADDRESS
 
-                    bwe = b0
-
                     // zeroing SRs
                     swe1 = b1
                     swe2 = b1
                     swe3 = b1
 
                     states.d = States.SR_LOAD_TOP_MID
-                    debug_dff.d = 95
                 }
+                debug_dff.d = 95
             
             States.SR_LOAD_TOP_MID:
                 if (~ddr){
                     alufn = SUB
                     bsel = b0101
                     ra1 = TARGET_PIXEL_ADDRESS
-                    bwe = b0
 
                     swe1 = b1
-                    sre1 = b0
 
                     states.d = States.SR_LOAD_TOP_RIGHT
-                    debug_dff.d = 96
                 }
+                debug_dff.d = 96
 
             States.SR_LOAD_TOP_RIGHT:
                 if (~ddr){
-                    ra1 = TARGET_PIXEL_ADDRESS
                     alufn = b011010
-                    bwe = b0
+                    ra1 = TARGET_PIXEL_ADDRESS
 
                     swe1 = b1
-                    sre1 = b0
 
                     states.d = States.SR_LOAD_MID_MID
-                    debug_dff.d = 158
                 }
+                debug_dff.d = 158
 
             States.SR_LOAD_MID_MID:
                 if (~ddr){
                     alufn = ADD
                     bsel = b0001
                     ra1 = TARGET_PIXEL_ADDRESS
-                    bwe = b0
 
                     swe2 = b1
-                    sre2 = b0
 
                     states.d = States.SR_LOAD_MID_RIGHT
-                    debug_dff.d = 97
                 }
+                debug_dff.d = 97
 
             States.SR_LOAD_MID_RIGHT:
                 if (~ddr){
                     alufn = ADD
                     bsel = b0100
                     ra1 = TARGET_PIXEL_ADDRESS
-                    bwe = b0
 
                     swe2 = b1
-                    sre2 = b0
 
                     states.d = States.SR_LOAD_BOT_MID
-                    debug_dff.d = 98
                 }
+                debug_dff.d = 98
 
             States.SR_LOAD_BOT_MID:
                 if (~ddr){
                     alufn = ADD
                     bsel = b0101
                     ra1 = TARGET_PIXEL_ADDRESS
-                    bwe = b0
 
                     swe3 = b1
-                    sre3 = b0
 
                     states.d = States.SR_LOAD_BOT_RIGHT
-                    debug_dff.d = 99
                 }
+                debug_dff.d = 99
 
             States.SR_LOAD_BOT_RIGHT:
                 swe3 = b1
                 sre3 = b0
                 states.d = States.READ_TOP_LEFT
                 debug_dff.d = 100
-            // Pixel is at middle row to load sr
+
+        // Middle Row Counting ----------------------------------------------------------
             States.READ_BRAM:
                 if (~ddr){
                     alufn = SUB
@@ -1720,12 +1706,12 @@ module fsm #(
                     alufn = ADD
                     bsel = b0001
                     ra1 = TARGET_PIXEL_ADDRESS
+
                     swe1 = b1
-                    sre1 = b0
 
                     states.d = States.RB_LOAD_MID_RIGHT
-                    debug_dff.d = 102
                 }
+                debug_dff.d = 102
 
             States.RB_LOAD_MID_RIGHT:
                 if (~ddr){
