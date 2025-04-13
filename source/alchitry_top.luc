@@ -31,14 +31,12 @@ module alchitry_top (
     // input testpullup        // default high?
 
 ) {
-    const CLK = 30_000_000
+    const CLK = 100_000_000
 
-    alu alum(#SIZE(32))
+    alu alum(#SIZE(13))
     
     sig rst
     sig fifo_rst
-    sig clk_10
-    
 
     .clk(clk) {
     
@@ -83,8 +81,8 @@ module alchitry_top (
             // dual bram module
             bram brams
             
-            // custom 32-bit regfile
-            regfile reg
+            // custom 13-bit regfile
+            regfile reg(#WIDTH(13))
             
             // seven segment drivers
             multi_seven_seg aseg_driver
@@ -92,7 +90,7 @@ module alchitry_top (
             multi_seven_seg timerseg_driver
             
             // bram testing counter
-            counter bramtest(#SIZE(13),#TOP(4223))
+            // counter bramtest(#SIZE(13),#TOP(4223))
             
             // debug
             dff buff1[2]
@@ -131,9 +129,6 @@ module alchitry_top (
         io_led[7] = reset_cond.out
         io_led[3:0] = buff4.q
         
-        // slow clock
-        clk_10 = ~|slow_counter.value
-
         // whole board reset
         reset_cond.in = ~butt_reset
         rst = reset_cond.out
@@ -195,7 +190,7 @@ module alchitry_top (
         sm.timer = reg.timer
         
         // alu
-        sm.aluout = alum.out
+        sm.aluout_lsb = alum.out[0]
         alum.alufn = sm.alufn
         
         // a selector
@@ -243,9 +238,9 @@ module alchitry_top (
         sr2.wput = sm.swe2
         sr3.wput = sm.swe3
         // write data
-        sr1.din = sm.swd1
-        sr2.din = sm.swd2
-        sr3.din = sm.swd3
+        sr1.din = brams.brd
+        sr2.din = brams.brd
+        sr3.din = brams.brd
         // read enable
         sr1.rget = sm.sre1
         sr2.rget = sm.sre2
@@ -263,8 +258,8 @@ module alchitry_top (
         // BRAM and FSM connections
         sm.brd = brams.brd
         brams.brsel = sm.brsel
-        brams.bra = sm.bra
-        brams.bwa = sm.bwa
+        brams.bra = alum.out
+        brams.bwa = reg.rd1
         brams.bwe = sm.bwe
         brams.bwd = sm.bwd
         
@@ -406,7 +401,7 @@ module alchitry_top (
         // button tester
         // butt_cond.in = testpullup
         // led[0] = butt_cond.out
-        aseg_driver.value = $width(gamecounter.value)
+        // aseg_driver.value = $width(gamecounter.value)
 
         // debugging
         led[7:0] = sm.debug_out

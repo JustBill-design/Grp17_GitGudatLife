@@ -70,29 +70,19 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib -sv {
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/adder.sv
   C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv
   C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bin_to_dec.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/boolean.sv
   C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/bram.sv
   C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/button_conditioner.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/compare.sv
   C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/counter.sv
   C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/display_driver.sv
   C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/edge_detector.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fa.sv
   C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fifo.sv
   C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/fsm.sv
   C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/multi_seven_seg.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/mux_2.sv
   C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/pipeline.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/rca.sv
   C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/regfile.sv
   C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/reset_conditioner.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/shifter.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_left_shifter.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_ari_shifter.sv
-  C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/x_bit_right_shifter.sv
   C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv
 }
 read_verilog -library xil_defaultlib {
