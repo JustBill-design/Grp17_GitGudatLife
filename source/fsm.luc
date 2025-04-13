@@ -118,7 +118,7 @@ module fsm #(
         RESET_A_NEIGHBOUR, RESET_B_NEIGHBOUR, MOVE_PIXEL_ADDRESS, CHECK_AT_LAST_PIXEL, SWITCH_BRAM, CHECK_END_GAME, SET_PIXEL_TO_BEGINNING, 
         
         // Initialisation States
-        SET_BRAM_SELECTOR_TO_1, SET_PIXEL_ADDRESS_TO_0, ZERO_BRAM, CHECK_ADDRESS_AT_MAX, SET_TIMER, RESET_PIXEL_VALUE, RESET_PIXEL_ADDRESS, SET_SELECTOR_PIXEL_STATE 
+        SET_BRAM_SELECTOR_TO_1, SET_PIXEL_ADDRESS_TO_0, ZERO_BRAM, ZERO_BRAM_2, CHECK_ADDRESS_AT_MAX, SET_TIMER, RESET_PIXEL_VALUE, RESET_PIXEL_ADDRESS, SET_SELECTOR_PIXEL_STATE 
     }
     
     .clk(clk) {
@@ -255,9 +255,18 @@ module fsm #(
                 bwe = b1
                 bwd = b00
                 brsel = b00
-                states.d = States.CHECK_ADDRESS_AT_MAX
+                states.d = States.ZERO_BRAM_2
                 // debugging
                 debug_dff.d = 3
+
+            States.ZERO_BRAM_2:
+                ra1 = TARGET_PIXEL_ADDRESS
+                bwe = b1
+                bwd = b00
+                brsel = b01
+                states.d = States.CHECK_ADDRESS_AT_MAX
+                // debugging
+                debug_dff.d = 157
 
             States.CHECK_ADDRESS_AT_MAX:
                 ra1 = TARGET_PIXEL_ADDRESS
@@ -672,6 +681,7 @@ module fsm #(
                 }
                 // debugging
                 debug_dff.d = 30
+                
             States.A_LEFT_CLK:
                 if (move_left_button) {
                     if (accel_edge_buff.q) {
