@@ -159,8 +159,6 @@ module fsm #(
     const TIMER = 6
     const BRAM_SWITCH = 7 
     
-    sig inputclk
-    
 
     always {
     
@@ -1831,7 +1829,7 @@ module fsm #(
                 ra1 = A_NEIGHBOUR_ADDRESS
                 wdsel = b0000
                 wa = A_NEIGHBOUR_ADDRESS
-                states.d = States.READ_TOP_RIGHT
+                states.d = States.READ_MID_LEFT
                 debug_dff.d = 113
             
             States.TOP_RIGHT_ADD_B_NEIGHBOUR:
@@ -1841,7 +1839,7 @@ module fsm #(
                 ra1 = B_NEIGHBOUR_ADDRESS
                 wdsel = b0000
                 wa = B_NEIGHBOUR_ADDRESS
-                states.d = States.READ_TOP_RIGHT
+                states.d = States.READ_MID_LEFT
                 debug_dff.d = 114
         
             // Reading mid left pixel for neighbours

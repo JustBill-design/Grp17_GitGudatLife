@@ -4,9 +4,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports {clk}]
 create_clock -period 10.0 -name clk_0 -waveform {0.000 5.0} [get_ports clk]
 set_clock_groups -asynchronous -group [get_clocks -include_generated_clocks clk_0]
 
-set_property PACKAGE_PIN P6 [get_ports {rst_n}]
-set_property IOSTANDARD LVCMOS33 [get_ports {rst_n}]
-
 set_property PACKAGE_PIN K13 [get_ports {led[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {led[0]}]
 

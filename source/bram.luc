@@ -3,7 +3,6 @@ module bram #(
     ENTRIES = 4224: ENTRIES > 0  // number of entries
 ) (
     input clk,  // clock
-    input rst,  // reset
     input bram_selector,                // selector from regfile
     input brsel[2],                     // selector override
     input bra[$clog2(ENTRIES)],         // read address

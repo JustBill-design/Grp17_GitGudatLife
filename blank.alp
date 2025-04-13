@@ -97,12 +97,6 @@
             },
             {
                 "file": {
-                    "type": "Component",
-                    "path": "Miscellaneous/decoder.luc"
-                }
-            },
-            {
-                "file": {
                     "type": "DiskFile",
                     "path": "source/alu.luc"
                 }

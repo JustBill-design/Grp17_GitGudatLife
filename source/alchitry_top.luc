@@ -1,6 +1,6 @@
 module alchitry_top (
     input clk,              // 100MHz clock
-    input rst_n,            // reset button (active low)
+    // input rst_n,            // reset button (active low)
     output led[8],          // 8 user controllable LEDs
     output io_led[8],       // 8 debugging leds
     input usb_rx,           // USB->Serial input
@@ -64,6 +64,9 @@ module alchitry_top (
         // debug
         edge_detector edge_up(#RISE(1),#FALL(0))
 
+        // dual bram module
+        bram brams
+            
         .rst(rst) {
         
             // slow clock because 100MHz?
@@ -77,9 +80,6 @@ module alchitry_top (
             
             // FSM
             fsm sm
-            
-            // dual bram module
-            bram brams
             
             // custom 13-bit regfile
             regfile reg(#WIDTH(13))
