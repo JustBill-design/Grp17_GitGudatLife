@@ -1772,13 +1772,13 @@ module fsm #(
             // Reading top mid pixel for neighbours
             States.READ_TOP_MID:
                 // sre1 = b1
-                case(srd1){
-                    b01:
-                        states.d = States.TOP_MID_ADD_A_NEIGHBOUR
-                        sre1 = b1
-                    b10:
-                        states.d = States.TOP_MID_ADD_B_NEIGHBOUR
-                        sre1 = b1
+                case(srd1[1:0]){
+                    // b01:
+                    //     states.d = States.TOP_MID_ADD_A_NEIGHBOUR
+                    //     sre1 = b1
+                    // b10:
+                    //     states.d = States.TOP_MID_ADD_B_NEIGHBOUR
+                    //     sre1 = b1
                     b00:
                         states.d = States.READ_TOP_RIGHT
                         sre1 = b1
