@@ -600,8 +600,8 @@ module fsm #(
             
             States.A_DOWN_CHECK_PIXEL:
                 ra1 = TARGET_PIXEL_ADDRESS
-                case (rd1[12:6]) {
-                    b1000000: states.d = States.A_DOWN_CLK
+                case (rd1[12]) {
+                    b1: states.d = States.A_DOWN_CLK
                     default: states.d = States.A_DOWN_RESET_PIXEL
                 }
                 // debugging
@@ -1210,8 +1210,8 @@ module fsm #(
             
             States.B_DOWN_CHECK_PIXEL:
                 ra1 = TARGET_PIXEL_ADDRESS
-                case (rd1[12:6]) {
-                    b100000: states.d = States.B_DOWN_CLK
+                case (rd1[12]) {
+                    b1: states.d = States.B_DOWN_CLK
                     default: states.d = States.B_DOWN_RESET_PIXEL
                 }
                 // debugging
