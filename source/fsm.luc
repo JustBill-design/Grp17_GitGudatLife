@@ -32,7 +32,6 @@ module fsm #(
     output alufn[6],        // alu function
 
     // BRAM
-    input brd[2],           // bram read data
     output brsel[2],        // bram selector override
     output bwe,             // bram write enable
     output bwd[2],          // bram write data

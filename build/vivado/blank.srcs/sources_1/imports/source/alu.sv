@@ -41,13 +41,13 @@ module alu #(
                 out_sig = a;
             end
             6'h33: begin
-                out_sig = a[1'h1:1'h0] == b[1'h1:1'h0];
+                out_sig = a == b;
             end
             6'h35: begin
-                out_sig = a[1'h1:1'h0] < b[1'h1:1'h0];
+                out_sig = a < b;
             end
             6'h37: begin
-                out_sig = a[1'h1:1'h0] <= b[1'h1:1'h0];
+                out_sig = a <= b;
             end
             default: begin
                 out_sig = 1'h0;

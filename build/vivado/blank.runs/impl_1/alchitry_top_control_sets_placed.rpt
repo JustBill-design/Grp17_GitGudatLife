@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Sun Apr 13 08:55:47 2025
+| Date         : Sun Apr 13 09:06:11 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file alchitry_top_control_sets_placed.rpt
 | Design       : alchitry_top
@@ -27,7 +27,7 @@ Table of Contents
 |    Minimum number of control sets                        |    37 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |   155 |
+| Unused register locations in slices containing registers |   156 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -59,11 +59,11 @@ Table of Contents
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | No           | No                    | No                     |              26 |           17 |
-| No           | No                    | Yes                    |               9 |            3 |
-| No           | Yes                   | No                     |             130 |           46 |
-| Yes          | No                    | No                     |               5 |            2 |
+| No           | No                    | Yes                    |               9 |            4 |
+| No           | Yes                   | No                     |             130 |           45 |
+| Yes          | No                    | No                     |               5 |            4 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |             235 |           95 |
+| Yes          | Yes                   | No                     |             234 |           96 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
@@ -77,38 +77,38 @@ Table of Contents
 |  clk_IBUF_BUFG | display/D_state_q0                                                     |                                                            |                1 |              1 |         1.00 |
 |  clk_IBUF_BUFG | display/D_rgb_data_0_d                                                 | reset_cond/Q[0]                                            |                2 |              3 |         1.50 |
 |  clk_IBUF_BUFG | display/D_rgb_data_1_d                                                 | reset_cond/Q[0]                                            |                1 |              3 |         3.00 |
-|  clk_IBUF_BUFG |                                                                        | sm/AS[0]                                                   |                1 |              4 |         4.00 |
-|  clk_IBUF_BUFG | sm/accel_edge/E[0]                                                     |                                                            |                1 |              4 |         4.00 |
-|  clk_IBUF_BUFG | sm/accel_edge/D_accel_timer_d                                          | sm/accel_edge/D_states_q_reg[2]                            |                1 |              4 |         4.00 |
 |  clk_IBUF_BUFG | sr3/ram/M_ram_write_enable                                             |                                                            |                1 |              4 |         4.00 |
 |  clk_IBUF_BUFG | sr2/ram/M_ram_write_enable                                             |                                                            |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG |                                                                        | sm/AS[0]                                                   |                2 |              4 |         2.00 |
+|  clk_IBUF_BUFG | forLoop_idx_0_1841616449[0].cond_butt_dirs/E[0]                        | reset_cond/Q[0]                                            |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG | sm/accel_edge/D_accel_timer_d                                          | sm/accel_edge/D_states_q_reg[2]                            |                1 |              4 |         4.00 |
+|  clk_IBUF_BUFG | sm/accel_edge/E[0]                                                     |                                                            |                3 |              4 |         1.33 |
 |  clk_IBUF_BUFG | sm/M_ram_write_enable                                                  |                                                            |                1 |              4 |         4.00 |
-|  clk_IBUF_BUFG | forLoop_idx_0_176727276[0].cond_butt_dirs/E[0]                         | reset_cond/Q[0]                                            |                1 |              4 |         4.00 |
 |  clk_IBUF_BUFG |                                                                        | reset_cond/M_reset_cond_in                                 |                2 |              5 |         2.50 |
-|  clk_IBUF_BUFG | forLoop_idx_0_1652461071[0].cond_butt_sel_desel/D_ctr_q[10]_i_2__3_n_0 | forLoop_idx_0_1652461071[0].cond_butt_sel_desel/sync/SR[0] |                3 |             11 |         3.67 |
-|  clk_IBUF_BUFG | forLoop_idx_0_176727276[3].cond_butt_dirs/D_ctr_q[10]_i_2__0_n_0       | forLoop_idx_0_176727276[3].cond_butt_dirs/sync/SR[0]       |                3 |             11 |         3.67 |
-|  clk_IBUF_BUFG | forLoop_idx_0_176727276[2].cond_butt_dirs/D_ctr_q[10]_i_2__2_n_0       | forLoop_idx_0_176727276[2].cond_butt_dirs/sync/SR[0]       |                3 |             11 |         3.67 |
 |  clk_IBUF_BUFG | display/D_pixel_idx_q[10]_i_1_n_0                                      | reset_cond/Q[0]                                            |                4 |             11 |         2.75 |
-|  clk_IBUF_BUFG | forLoop_idx_0_1652461071[1].cond_butt_sel_desel/D_ctr_q[10]_i_2__5_n_0 | forLoop_idx_0_1652461071[1].cond_butt_sel_desel/sync/SR[0] |                3 |             11 |         3.67 |
-|  clk_IBUF_BUFG | forLoop_idx_0_176727276[0].cond_butt_dirs/D_ctr_q[10]_i_2_n_0          | forLoop_idx_0_176727276[0].cond_butt_dirs/sync/SR[0]       |                3 |             11 |         3.67 |
-|  clk_IBUF_BUFG | forLoop_idx_0_176727276[1].cond_butt_dirs/D_ctr_q[10]_i_2__1_n_0       | forLoop_idx_0_176727276[1].cond_butt_dirs/sync/SR[0]       |                3 |             11 |         3.67 |
 |  clk_IBUF_BUFG | cond_butt_next_play/sel                                                | cond_butt_next_play/sync/SR[0]                             |                3 |             11 |         3.67 |
-|  clk_IBUF_BUFG |                                                                        | display/D_bram_addr_q[12]_i_1_n_0                          |                6 |             12 |         2.00 |
-|  clk_IBUF_BUFG | sm/D_ddr_q_reg[0]                                                      | reset_cond/Q[0]                                            |                4 |             13 |         3.25 |
-|  clk_IBUF_BUFG | sm/E[0]                                                                | reset_cond/Q[0]                                            |                5 |             13 |         2.60 |
-|  clk_IBUF_BUFG | L_reg/D_registers_d                                                    | reset_cond/Q[0]                                            |                7 |             13 |         1.86 |
-|  clk_IBUF_BUFG | L_reg/D_registers_d_reg[7]__0_n_0                                      | reset_cond/Q[0]                                            |                5 |             13 |         2.60 |
-|  clk_IBUF_BUFG | L_reg/D_registers_d_reg_n_0_[2]                                        | reset_cond/Q[0]                                            |                6 |             13 |         2.17 |
-|  clk_IBUF_BUFG | L_reg/D_registers_d_reg[2]__0_n_0                                      | reset_cond/Q[0]                                            |                8 |             13 |         1.62 |
-|  clk_IBUF_BUFG | sm/D_ddr_q_reg_1[0]                                                    | reset_cond/Q[0]                                            |                6 |             13 |         2.17 |
-|  clk_IBUF_BUFG | sm/D_ddr_q_reg_0[0]                                                    | reset_cond/Q[0]                                            |                6 |             13 |         2.17 |
-|  clk_IBUF_BUFG |                                                                        | bseg_driver/ctr/D_ctr_q[0]_i_1__7_n_0                      |                5 |             18 |         3.60 |
-|  clk_IBUF_BUFG |                                                                        | aseg_driver/ctr/D_ctr_q[0]_i_1__6_n_0                      |                5 |             18 |         3.60 |
-|  clk_IBUF_BUFG |                                                                        | timerseg_driver/ctr/D_ctr_q[0]_i_1__8_n_0                  |                5 |             18 |         3.60 |
-|  clk_IBUF_BUFG |                                                                        | reset_cond/SR[0]                                           |                6 |             18 |         3.00 |
-|  clk_IBUF_BUFG |                                                                        | reset_cond/Q[0]                                            |               12 |             19 |         1.58 |
+|  clk_IBUF_BUFG | forLoop_idx_0_1671886846[0].cond_butt_sel_desel/D_ctr_q[10]_i_2__2_n_0 | forLoop_idx_0_1671886846[0].cond_butt_sel_desel/sync/SR[0] |                4 |             11 |         2.75 |
+|  clk_IBUF_BUFG | forLoop_idx_0_1671886846[1].cond_butt_sel_desel/D_ctr_q[10]_i_2__4_n_0 | forLoop_idx_0_1671886846[1].cond_butt_sel_desel/sync/SR[0] |                4 |             11 |         2.75 |
+|  clk_IBUF_BUFG | forLoop_idx_0_1841616449[0].cond_butt_dirs/D_ctr_q_reg[9]_1            | forLoop_idx_0_1841616449[0].cond_butt_dirs/sync/SR[0]      |                3 |             11 |         3.67 |
+|  clk_IBUF_BUFG | forLoop_idx_0_1841616449[1].cond_butt_dirs/D_ctr_q[10]_i_2__0_n_0      | forLoop_idx_0_1841616449[1].cond_butt_dirs/sync/SR[0]      |                3 |             11 |         3.67 |
+|  clk_IBUF_BUFG | forLoop_idx_0_1841616449[2].cond_butt_dirs/D_ctr_q[10]_i_2__1_n_0      | forLoop_idx_0_1841616449[2].cond_butt_dirs/sync/SR[0]      |                3 |             11 |         3.67 |
+|  clk_IBUF_BUFG | forLoop_idx_0_1841616449[3].cond_butt_dirs/D_ctr_q[10]_i_2_n_0         | forLoop_idx_0_1841616449[3].cond_butt_dirs/sync/SR[0]      |                3 |             11 |         3.67 |
+|  clk_IBUF_BUFG |                                                                        | display/D_bram_addr_q[12]                                  |                5 |             12 |         2.40 |
+|  clk_IBUF_BUFG | sm/D_ddr_q_reg_0[0]                                                    | reset_cond/Q[0]                                            |                5 |             13 |         2.60 |
+|  clk_IBUF_BUFG | sm/D_states_q_reg[5]_2[0]                                              | reset_cond/Q[0]                                            |                6 |             13 |         2.17 |
+|  clk_IBUF_BUFG | sm/E[0]                                                                | reset_cond/Q[0]                                            |                6 |             13 |         2.17 |
+|  clk_IBUF_BUFG | sm/D_states_q_reg[5]_3[0]                                              | reset_cond/Q[0]                                            |                5 |             13 |         2.60 |
+|  clk_IBUF_BUFG | sm/D_ddr_q_reg[0]                                                      | reset_cond/Q[0]                                            |                8 |             13 |         1.62 |
+|  clk_IBUF_BUFG | sm/D_ddr_q_reg_2[0]                                                    | reset_cond/Q[0]                                            |                7 |             13 |         1.86 |
+|  clk_IBUF_BUFG | sm/D_states_q_reg[1]_rep_2[0]                                          | reset_cond/Q[0]                                            |                5 |             13 |         2.60 |
+|  clk_IBUF_BUFG | sm/D_ddr_q_reg_1[0]                                                    | reset_cond/Q[0]                                            |                3 |             13 |         4.33 |
+|  clk_IBUF_BUFG |                                                                        | aseg_driver/ctr/D_ctr_q[0]_i_1_n_0                         |                5 |             18 |         3.60 |
+|  clk_IBUF_BUFG |                                                                        | bseg_driver/ctr/D_ctr_q[0]_i_1__0_n_0                      |                5 |             18 |         3.60 |
+|  clk_IBUF_BUFG |                                                                        | fifo_reset_cond/SR[0]                                      |                5 |             18 |         3.60 |
+|  clk_IBUF_BUFG |                                                                        | timerseg_driver/ctr/D_ctr_q[0]_i_1__1_n_0                  |                5 |             18 |         3.60 |
+|  clk_IBUF_BUFG |                                                                        | reset_cond/Q[0]                                            |               13 |             19 |         1.46 |
 |  clk_IBUF_BUFG |                                                                        | gamecounter/clear                                          |                7 |             27 |         3.86 |
-|  clk_IBUF_BUFG | sm/accel_edge/D_states_q_reg[7]_rep__0                                 | reset_cond/Q[0]                                            |               17 |             28 |         1.65 |
+|  clk_IBUF_BUFG | sm/accel_edge/D_states_q_reg[6]_rep                                    | reset_cond/Q[0]                                            |               18 |             27 |         1.50 |
 |  clk_IBUF_BUFG |                                                                        |                                                            |               17 |             33 |         1.94 |
 +----------------+------------------------------------------------------------------------+------------------------------------------------------------+------------------+----------------+--------------+
 

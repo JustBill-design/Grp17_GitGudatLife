@@ -22,7 +22,6 @@ module fsm (
         input wire med_inputclk,
         input wire aluout_lsb,
         output reg [5:0] alufn,
-        input wire [1:0] brd,
         output reg [1:0] brsel,
         output reg bwe,
         output reg [1:0] bwd,
@@ -234,14 +233,14 @@ module fsm (
     logic [3:0] D_accel_timer_d, D_accel_timer_q = 0;
     logic [3:0] D_accel_d, D_accel_q = 0;
     logic D_accel_edge_buff_d, D_accel_edge_buff_q = 0;
-    localparam _MP_RISE_1030692632 = 1'h1;
-    localparam _MP_FALL_1030692632 = 1'h0;
+    localparam _MP_RISE_1077328584 = 1'h1;
+    localparam _MP_FALL_1077328584 = 1'h0;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_1030692632),
-        .FALL(_MP_FALL_1030692632)
+        .RISE(_MP_RISE_1077328584),
+        .FALL(_MP_FALL_1077328584)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),

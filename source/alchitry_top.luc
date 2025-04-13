@@ -256,7 +256,6 @@ module alchitry_top (
         brams.ro = display.reading
         
         // BRAM and FSM connections
-        sm.brd = brams.brd
         brams.brsel = sm.brsel
         brams.bra = alum.out
         brams.bwa = reg.rd1
