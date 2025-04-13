@@ -404,6 +404,6 @@ module alchitry_top (
         // aseg_driver.value = $width(gamecounter.value)
 
         // debugging
-        led[7:0] = sm.debug_out
+        led[7:0] = sm.brsel
     }
 }

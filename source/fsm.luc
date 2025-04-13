@@ -1571,7 +1571,7 @@ module fsm #(
                 wa = TIMER
                 states.d = States.GAME_IDLE
                 debug_dff.d = 155
-    
+                
             States.END_GAME_SWITCH_BRAM:
                 if (~ddr){
                     alufn = XOR
