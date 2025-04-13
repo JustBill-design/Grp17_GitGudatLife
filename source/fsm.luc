@@ -405,8 +405,7 @@ module fsm #(
             
             States.A_UP_CLK:
                 if (move_up_button) {
-                    // if (accel_edge_buff.q)
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -540,8 +539,7 @@ module fsm #(
             
             States.A_DOWN_CLK:
                 if (move_down_button) {
-                    // if (accel_edge_buff.q)
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -678,8 +676,7 @@ module fsm #(
                 debug_dff.d = 30
             States.A_LEFT_CLK:
                 if (move_left_button) {
-                    // if (accel_edge_buff.q) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -815,8 +812,7 @@ module fsm #(
 
             States.A_RIGHT_CLK:
                 if (move_right_button) {
-                    // if (accel_edge_buff.q) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -1024,8 +1020,7 @@ module fsm #(
 
             States.B_UP_CLK:
                 if (move_up_button) {
-                    // if (accel_edge_buff.q)
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -1156,8 +1151,7 @@ module fsm #(
 
             States.B_DOWN_CLK:
                 if (move_down_button) {
-                    // if (accel_edge_buff.q)
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -1289,8 +1283,7 @@ module fsm #(
 
             States.B_LEFT_CLK:
                 if (move_left_button) {
-                    // if (accel_edge_buff.q)
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -1420,8 +1413,7 @@ module fsm #(
 
             States.B_RIGHT_CLK:
                 if (move_right_button) {
-                    // if (accel_edge_buff.q)
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -1592,7 +1584,7 @@ module fsm #(
             States.GAME_IDLE_READ_CURR_PIXEL_VALUE: //TODO Some logic error here idk what, maybe looping issue or target pixel value not reset properly
                 case (rd1[5:0]) {
                     b111111: states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
-                    b000000: states.d = States.RESET_SR_POINTERS
+                    b000000: states.d = States.RESET_SR_POINTERS                    //
                     default: states.d = States.READ_BRAM
                 }
                 debug_dff.d = 93
