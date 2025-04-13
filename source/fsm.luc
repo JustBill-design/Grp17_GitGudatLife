@@ -2313,7 +2313,7 @@ module fsm #(
                 we = b1
                 wa = TARGET_PIXEL_ADDRESS
                 wdsel = b1001
-                states.d = States.CHECK_AT_LAST_PIXEL
+                states.d = States.GAME_IDLE
                 debug_dff.d = 154
         }   
     }
