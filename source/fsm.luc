@@ -2247,7 +2247,7 @@ module fsm #(
                 states.d = States.RESET_A_NEIGHBOUR
                 debug_dff.d = 148
 
-            //Resetting neighbours
+        // End Game Cycle ----------------------------------------------------------------
 
             States.RESET_A_NEIGHBOUR:
                 we = b1
@@ -2276,8 +2276,8 @@ module fsm #(
             States.CHECK_AT_LAST_PIXEL:
                 ra1 = TARGET_PIXEL_ADDRESS
                 case (rd1) {
-                    b1000001111111: states.d = States.GAME_IDLE
-                    default: states.d = States.SWITCH_BRAM
+                    b1000000111111: states.d = States.SWITCH_BRAM
+                    default: states.d = States.GAME_IDLE
                 }
                 // debugging
                 debug_dff.d = 152
