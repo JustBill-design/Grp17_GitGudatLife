@@ -152,7 +152,7 @@ module alchitry_top (
         
         // connect slow clocks
         timerclk.in = gamecounter.value[$clog2(CLK)-1]
-        gameclk.in = gamecounter.value[$clog2(CLK/4224)]
+        gameclk.in = gamecounter.value[$clog2(CLK)-1]
         med_inputclk.in = gamecounter.value[$clog2(CLK/5)]
         sm.timerclk = timerclk.out
         sm.gameclk = gameclk.out
@@ -402,7 +402,9 @@ module alchitry_top (
 
         // debugging
         led[7:0] = sm.debug_out
-        bseg_driver.value = reg.targetpixel
+        aseg_driver.value = reg.an
+        bseg_driver.value = reg.bn
+        timerseg_driver.value = reg.targetpixel
         // aseg_driver.value = sr1.dout
     }
 }
