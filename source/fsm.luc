@@ -2283,11 +2283,11 @@ module fsm #(
             States.CHECK_AT_LAST_PIXEL:
                 ra1 = TARGET_PIXEL_ADDRESS
                 case (rd1) {
-                    b1000000111111: debug_dff.d = 152                    //states.d = States.SWITCH_BRAM
+                    b1000000111111: states.d = States.SWITCH_BRAM
                     default: states.d = States.GAME_IDLE
                 }
                 // debugging
-                //debug_dff.d = 152
+                debug_dff.d = 152
 
             States.SWITCH_BRAM:
                 if (~ddr){
@@ -2298,7 +2298,7 @@ module fsm #(
                     ra1 = BRAM_SWITCH
                     wdsel = b0000
 
-                    states.d = States.SET_PIXEL_TO_BEGINNING
+                    states.d = States.CHECK_END_GAME
                 }
                 debug_dff.d = 153
             
