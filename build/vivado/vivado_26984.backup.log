@@ -3,10 +3,10 @@
 # SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
 # IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
 # SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
-# Start of session at: Sun Apr 13 11:26:44 2025
-# Process ID         : 29316
+# Start of session at: Sun Apr 13 11:24:03 2025
+# Process ID         : 26984
 # Current directory  : C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado
-# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent1876 C:\Users\yourmum\Downloads\fpga-pain\fpga-pain\build\vivado\blank.xpr
+# Command line       : vivado.exe -gui_launcher_event rodinguilauncherevent34276 C:\Users\yourmum\Downloads\fpga-pain\fpga-pain\build\vivado\blank.xpr
 # Log file           : C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/vivado.log
 # Journal file       : C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado\vivado.jou
 # Running On         : PC
@@ -19,7 +19,7 @@
 # Host memory        : 66125 MB
 # Swap memory        : 4160 MB
 # Total Virtual      : 70286 MB
-# Available Virtual  : 43727 MB
+# Available Virtual  : 43689 MB
 #-----------------------------------------------------------
 start_gui
 open_project C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.xpr
@@ -32,34 +32,34 @@ INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2024.2/dat
 update_compile_order -fileset sources_1
 open_run impl_1
 INFO: [Device 21-403] Loading part xc7a35tftg256-1
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 1358.758 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.007 . Memory (MB): peak = 1360.469 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 101 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-479] Netlist was created with Vivado 2024.2
 INFO: [Project 1-570] Preparing netlist for logic optimization
-Read ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1449.551 ; gain = 0.531
+Read ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1450.441 ; gain = 0.461
 INFO: [Timing 38-478] Restoring timing data from binary archive.
 INFO: [Timing 38-479] Binary timing data restore complete.
 INFO: [Project 1-856] Restoring constraints from binary archive.
 INFO: [Project 1-853] Binary constraint restore complete.
 INFO: [Designutils 20-5722] Start Reading Physical Databases.
 Reading placement.
-Read Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.002 . Memory (MB): peak = 2052.949 ; gain = 0.000
+Read Netlist Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2053.258 ; gain = 0.000
 Reading placer database...
-Read Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 2052.949 ; gain = 0.000
-Read PlaceDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.041 . Memory (MB): peak = 2052.949 ; gain = 0.000
-Read PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2052.949 ; gain = 0.000
+Read Device Cache: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 2053.258 ; gain = 0.000
+Read PlaceDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.041 . Memory (MB): peak = 2053.258 ; gain = 0.000
+Read PulsedLatchDB: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2053.258 ; gain = 0.000
 Reading routing.
-Read RouteStorage: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 2052.949 ; gain = 0.000
-Read Physdb Files: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.068 . Memory (MB): peak = 2052.949 ; gain = 0.000
+Read RouteStorage: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.016 . Memory (MB): peak = 2053.258 ; gain = 0.000
+Read Physdb Files: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.068 . Memory (MB): peak = 2053.258 ; gain = 0.000
 Restored from archive | CPU: 0.000000 secs | Memory: 0.000000 MB |
-Finished XDEF File Restore: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.068 . Memory (MB): peak = 2052.949 ; gain = 0.000
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2052.949 ; gain = 0.000
+Finished XDEF File Restore: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.068 . Memory (MB): peak = 2053.258 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2053.258 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 6 instances were transformed.
   RAM16X1D => RAM32X1D (RAMD32(x2)): 6 instances
 
-open_run: Time (s): cpu = 00:00:10 ; elapsed = 00:00:08 . Memory (MB): peak = 2417.387 ; gain = 1206.461
+open_run: Time (s): cpu = 00:00:10 ; elapsed = 00:00:08 . Memory (MB): peak = 2421.184 ; gain = 1230.535
 CRITICAL WARNING: [Timing 38-282] The design failed to meet the timing requirements. Please see the timing summary report for details on the timing violations.
 phys_opt_design -directive AggressiveExplore
 Command: phys_opt_design -directive AggressiveExplore
@@ -70,9 +70,9 @@ INFO: [Vivado_Tcl 4-137] Directive used for phys_opt_design is: AggressiveExplor
 
 Starting Initial Update Timing Task
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.127 . Memory (MB): peak = 2452.543 ; gain = 0.000
-INFO: [Vivado_Tcl 4-1435] PhysOpt_Tcl_Interface Runtime Before Starting Physical Synthesis Task | CPU: 0.00s |  WALL: 0.14s
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2452.543 ; gain = 0.000
+Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.133 . Memory (MB): peak = 3500.148 ; gain = 0.000
+INFO: [Vivado_Tcl 4-1435] PhysOpt_Tcl_Interface Runtime Before Starting Physical Synthesis Task | CPU: 1.00s |  WALL: 0.15s
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3500.148 ; gain = 0.000
 
 Starting Physical Synthesis Task
 
@@ -81,7 +81,7 @@ INFO: [Physopt 32-721] Multithreading enabled for phys_opt_design using a maximu
 INFO: [Physopt 32-668] Current Timing Summary | WNS=-0.556 | TNS=-4.776 | WHS=0.024 | THS=0.000 |
 Phase 1 Physical Synthesis Initialization | Checksum: 2d0c72246
 
-Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.072 . Memory (MB): peak = 2452.543 ; gain = 0.000
+Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.072 . Memory (MB): peak = 3500.148 ; gain = 0.000
 WARNING: [Physopt 32-745] Physical Optimization has determined that the magnitude of the negative slack is too large and it is highly unlikely that slack will be improved. Post-Route Physical Optimization is most effective when WNS is above -0.5ns
 
 Phase 2 Critical Path Optimization
@@ -139,10 +139,10 @@ INFO: [Physopt 32-953] Path group WNS did not improve. Path group: clk_0. Proces
 INFO: [Physopt 32-953] Path group WNS did not improve. Path group: clk_0. Processed net: sm/D_bram_addr_q_reg[5][0].
 INFO: [Physopt 32-953] Path group WNS did not improve. Path group: clk_0. Processed net: clk_IBUF.
 INFO: [Physopt 32-668] Current Timing Summary | WNS=-0.253 | TNS=-1.020 | WHS=0.024 | THS=0.000 |
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2570.895 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 3500.148 ; gain = 0.000
 Phase 2 Critical Path Optimization | Checksum: 2d0c72246
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:14 . Memory (MB): peak = 2570.895 ; gain = 118.352
+Time (s): cpu = 00:00:18 ; elapsed = 00:00:14 . Memory (MB): peak = 3500.148 ; gain = 0.000
 
 Phase 3 Hold Fix Optimization
 INFO: [Physopt 32-668] Current Timing Summary | WNS=-0.253 | TNS=-1.020 | WHS=0.024 | THS=0.000 |
@@ -152,8 +152,8 @@ INFO: [Physopt 32-234] Optimized 0 nets. Inserted 0 new ZHOLD_DELAYs. Calibrated
 INFO: [Physopt 32-668] Current Timing Summary | WNS=-0.253 | TNS=-1.020 | WHS=0.024 | THS=0.000 |
 Phase 3 Hold Fix Optimization | Checksum: 2d0c72246
 
-Time (s): cpu = 00:00:17 ; elapsed = 00:00:14 . Memory (MB): peak = 2570.895 ; gain = 118.352
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 2570.895 ; gain = 0.000
+Time (s): cpu = 00:00:18 ; elapsed = 00:00:14 . Memory (MB): peak = 3500.148 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3500.148 ; gain = 0.000
 INFO: [Physopt 32-669] Post Physical Optimization Timing Summary | WNS=-0.253 | TNS=-1.020 | WHS=0.024 | THS=0.000 |
 
 Summary of Physical Synthesis Optimizations
@@ -179,14 +179,11 @@ Summary of Hold Fix Optimizations
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 2570.895 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 3500.148 ; gain = 0.000
 Ending Physical Synthesis Task | Checksum: 2b113f4cf
 
-Time (s): cpu = 00:00:18 ; elapsed = 00:00:14 . Memory (MB): peak = 2570.895 ; gain = 118.352
+Time (s): cpu = 00:00:18 ; elapsed = 00:00:14 . Memory (MB): peak = 3500.148 ; gain = 0.000
 INFO: [Common 17-83] Releasing license: Implementation
 66 Infos, 1 Warnings, 0 Critical Warnings and 0 Errors encountered.
 phys_opt_design completed successfully
-phys_opt_design: Time (s): cpu = 00:00:18 ; elapsed = 00:00:14 . Memory (MB): peak = 2570.895 ; gain = 128.258
-report_timing_summary -delay_type min_max -report_unconstrained -check_timing_verbose -max_paths 1000 -nworst 1000 -input_pins -routable_nets -name timing_1
-INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
-INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 2 CPUs
+phys_opt_design: Time (s): cpu = 00:00:19 ; elapsed = 00:00:14 . Memory (MB): peak = 3500.148 ; gain = 0.000

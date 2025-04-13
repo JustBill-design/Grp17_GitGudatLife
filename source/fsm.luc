@@ -267,18 +267,10 @@ module fsm #(
                 debug_dff.d = 3
 
             States.CHECK_ADDRESS_AT_MAX:
-                if (alu_buffer.q[1]) {
-                    if (alu_buffer.q[0]) {
-                        states.d = States.ZERO_BRAM
-                    } else {
-                        states.d = States.SET_TIMER                    
-                    }
-                    alu_buffer.d = b00
-                } else {
-                    alufn = b110101
-                    bsel = b1000
-                    ra1 = TARGET_PIXEL_ADDRESS
-                    alu_buffer.d = c{b1,aluout_lsb}
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1) {
+                    4223: states.d = States.SET_TIMER
+                    default: States.ZERO_BRAM
                 }
                 // debugging
                 debug_dff.d = 4
@@ -473,18 +465,10 @@ module fsm #(
                 debug_dff.d = 14
 
             States.A_UP_CHECK_PIXEL:
-                if (alu_buffer.q[1]) {
-                    if (alu_buffer.q[0]) {
-                        states.d = States.A_UP_CLK                    
-                    } else {
-                        states.d = States.A_UP_RESET_PIXEL
-                    }
-                    alu_buffer.d = b00
-                } else {
-                    alufn = b110101
-                    bsel = b0110
-                    ra1 = TARGET_PIXEL_ADDRESS
-                    alu_buffer.d = c{b1,aluout_lsb}
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1[12:6]) {
+                    b0000001: states.d = States.A_UP_CLK
+                    default: states.d = States.A_UP_RESET_PIXEL
                 }
                 // debugging
                 debug_dff.d = 15
@@ -501,10 +485,7 @@ module fsm #(
                 debug_dff.d = 16
             
             States.A_UP_MOVE_CURSOR:
-                if (ddr) {
-                    states.d = States.A_UP_MOVE_CURSOR
-                }
-                else {
+                if (~ddr) {
                     alufn = b000001
                     bsel = b0100
                     we = b1
@@ -618,18 +599,10 @@ module fsm #(
                 debug_dff.d = 24
             
             States.A_DOWN_CHECK_PIXEL:
-                if (alu_buffer.q[1]){
-                    if (alu_buffer.q[0]) {
-                        states.d = States.A_DOWN_RESET_PIXEL                    
-                    } else {
-                        states.d = States.A_DOWN_CLK                    
-                    }
-                    alu_buffer.d = b00
-                } else {
-                    alufn = b110101
-                    bsel = b1010
-                    ra1 = TARGET_PIXEL_ADDRESS
-                    alu_buffer.d = c{b1,aluout_lsb}
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1[12:6]) {
+                    b1000000: states.d = States.A_DOWN_CLK
+                    default: states.d = States.A_DOWN_RESET_PIXEL
                 }
                 // debugging
                 debug_dff.d = 25
@@ -1112,18 +1085,10 @@ module fsm #(
                 debug_dff.d = 55
             
             States.B_UP_CHECK_PIXEL:
-                if (alu_buffer.q[1]){
-                    if (alu_buffer.q[0]) {
-                        states.d = States.B_UP_CLK                    
-                    } else {
-                        states.d = States.B_UP_RESET_PIXEL                    
-                    }
-                    alu_buffer.d = b00
-                } else {
-                    alufn = b110101
-                    bsel = b0110
-                    ra1 = TARGET_PIXEL_ADDRESS
-                    alu_buffer.d = c{b1,aluout_lsb}
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1[12:6]) {
+                    b0000001: states = States.B_UP_CLK
+                    default: states.d = States.B_UP_RESET_PIXEL
                 }
                 // debugging
                 debug_dff.d = 56
@@ -1251,18 +1216,10 @@ module fsm #(
                 debug_dff.d = 65
             
             States.B_DOWN_CHECK_PIXEL:
-                if (alu_buffer.q[1]){
-                    if (alu_buffer.q[0]) {
-                        states.d = States.B_DOWN_RESET_PIXEL                    
-                    } else {
-                        states.d = States.B_DOWN_CLK                    
-                    }
-                    alu_buffer.d = b00
-                } else {
-                    alufn = b110101
-                    bsel = b1010
-                    ra1 = TARGET_PIXEL_ADDRESS
-                    alu_buffer.d = c{b1,aluout_lsb}
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1[12:6]) {
+                    b100000: states.d = States.B_DOWN_CLK
+                    default: states.d = States.B_DOWN_RESET_PIXEL
                 }
                 // debugging
                 debug_dff.d = 66
