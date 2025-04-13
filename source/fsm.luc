@@ -1610,7 +1610,7 @@ module fsm #(
                     swe2 = b1
                     swe3 = b1
 
-                    states.d = States.SR_LOAD_TOP_MID
+                    //states.d = States.SR_LOAD_TOP_MID
                 }
                 debug_dff.d = 95
             
