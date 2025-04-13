@@ -404,8 +404,8 @@ module fsm #(
                 debug_dff.d = 10
             
             States.A_UP_CLK:
-                if (move_up_button) 
-                    // if (accel_edge_buff.q) {
+                if (move_up_button) {
+                    // if (accel_edge_buff.q)
                     if (accel_edge.out) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
@@ -539,7 +539,7 @@ module fsm #(
                 debug_dff.d = 20
             
             States.A_DOWN_CLK:
-                if (move_down_button)
+                if (move_down_button) {
                     // if (accel_edge_buff.q)
                     if (accel_edge.out) {
                         case (accel_timer.q) {
@@ -677,7 +677,7 @@ module fsm #(
                 // debugging
                 debug_dff.d = 30
             States.A_LEFT_CLK:
-                if (move_left_button)
+                if (move_left_button) {
                     // if (accel_edge_buff.q) {
                     if (accel_edge.out) {
                         case (accel_timer.q) {
@@ -814,7 +814,7 @@ module fsm #(
                 debug_dff.d = 40
 
             States.A_RIGHT_CLK:
-                if (move_right_button)
+                if (move_right_button) {
                     // if (accel_edge_buff.q) {
                     if (accel_edge.out) {
                         case (accel_timer.q) {
@@ -1597,8 +1597,7 @@ module fsm #(
                 }
                 debug_dff.d = 93
 
-            // Reading BRAM and loading SR
-            // First in the row
+            // First Column Loading
             States.RESET_SR_POINTERS:
                 if (~ddr) {
                     // x - x to read from 0 address in bram, to pass b00 to SRs
@@ -1690,11 +1689,11 @@ module fsm #(
                 states.d = States.READ_TOP_LEFT
                 debug_dff.d = 100
 
-        // Middle Row Counting ----------------------------------------------------------
+        // Middle Columns Loading ----------------------------------------------------------
             States.READ_BRAM:
                 if (~ddr){
                     alufn = SUB
-                    bsel = b0100
+                    bsel = b0101
                     ra1 = TARGET_PIXEL_ADDRESS
 
                     states.d = States.RB_LOAD_TOP_RIGHT
@@ -1734,22 +1733,17 @@ module fsm #(
                     states.d = States.READ_TOP_LEFT
                 }
                 debug_dff.d = 104
-            //SR at the end
+            
+        // Last Column Loading ------------------------------------------------------------
             States.READ_CURR_PIXEL_VALUE_00_ALL_SR:
-                if (~ddr){
-                    swe1 = b1
-                    sre1 = b0
+                swe1 = b1
+                swe2 = b1
+                swe3 = b1
 
-                    swe2 = b1
-                    sre2 = b0
-
-                    swe3 = b1
-                    sre3 = b0
-
-                    states.d = States.READ_TOP_LEFT
-                }
+                states.d = States.READ_TOP_LEFT
                 debug_dff.d = 105
-            // Reading top left pixel for neighbours
+
+        // Counting Neighbours -----------------------------------------------------------
             States.READ_TOP_LEFT:
                 sre1 = b1
                 case(srd1){
@@ -1893,15 +1887,15 @@ module fsm #(
 
             // Reading mid right pixel for neighbours
             States.READ_MID_RIGHT:
-                //sre2 = b1
-                //case(srd2){
-                //    b01:
-                //        states.d = States.MID_RIGHT_ADD_A_NEIGHBOUR
-                //    b10:
-                //        states.d = States.MID_RIGHT_ADD_B_NEIGHBOUR
-                //    b00:
-                //        states.d = States.READ_BOT_LEFT
-                //}
+                sre2 = b1
+                case(srd2){
+                    b01:
+                        states.d = States.MID_RIGHT_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.MID_RIGHT_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.READ_BOT_LEFT
+                }
                 debug_dff.d = srd2 + 1
             
             States.MID_RIGHT_ADD_A_NEIGHBOUR:
@@ -2037,7 +2031,7 @@ module fsm #(
                 states.d = States.CHECK_NEIGHBOURS
                 debug_dff.d = 132
             
-            //Game logic
+            // Game logic ---------------------------------------------------------------
             States.CHECK_NEIGHBOURS:
                 ra1 = TARGET_PIXEL_VALUE
                 case(rd1){
