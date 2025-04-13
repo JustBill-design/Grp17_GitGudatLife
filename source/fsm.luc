@@ -106,11 +106,11 @@ module fsm #(
         SR_EMPTY_READ_1, SR_EMPTY_READ_2, 
         
         CHECK_NEIGHBOURS, 
-        //current pixel is 0
+        // current pixel is 0
         B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS, B00_CHECK_A_NEIGHBOUR_EQ_3, B00_CHECK_B_NEIGHBOUR_EQ_3, B00_A_COUNTP1, B00_B_COUNTP1, 
-        //current pixel is B
+        // current pixel is B
         B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR, B10_CHECK_B_NEIGHBOUR_EQ_2, B10_CHECK_B_NEIGHBOUR_EQ_3, B10_B_COUNTM1, 
-        //current pixel is A, 
+        // current pixel is A, 
         B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR, B01_CHECK_A_NEIGHBOUR_EQ_2, B01_CHECK_A_NEIGHBOUR_EQ_3, B01_A_COUNTM1, 
         
         SET_A, SET_B, SET_00, 
@@ -1899,16 +1899,16 @@ module fsm #(
 
             // Reading mid right pixel for neighbours
             States.READ_MID_RIGHT:
-                sre2 = b1
-                case(srd2){
-                    b01:
-                        states.d = States.MID_RIGHT_ADD_A_NEIGHBOUR
-                    b10:
-                        states.d = States.MID_RIGHT_ADD_B_NEIGHBOUR
-                    b00:
-                        states.d = States.READ_BOT_LEFT
-                }
-                debug_dff.d = 119
+                //sre2 = b1
+                //case(srd2){
+                //    b01:
+                //        states.d = States.MID_RIGHT_ADD_A_NEIGHBOUR
+                //    b10:
+                //        states.d = States.MID_RIGHT_ADD_B_NEIGHBOUR
+                //    b00:
+                //        states.d = States.READ_BOT_LEFT
+                //}
+                debug_dff.d = srd2 + 1
             
             States.MID_RIGHT_ADD_A_NEIGHBOUR:
                 alufn = ADD
