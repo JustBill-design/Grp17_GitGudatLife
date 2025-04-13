@@ -1583,9 +1583,9 @@ module fsm #(
                 
             States.GAME_IDLE_READ_CURR_PIXEL_VALUE: //TODO Some logic error here idk what, maybe looping issue or target pixel value not reset properly
                 case (rd1[5:0]) {
-                    b111111: states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
-                    b000000: states.d = States.RESET_SR_POINTERS                    //
-                    default: states.d = States.READ_BRAM
+                    b111111: states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR      // last column
+                    b000000: states.d = States.RESET_SR_POINTERS                    // first column
+                    default: states.d = States.READ_BRAM                            // middle columns
                 }
                 debug_dff.d = 93
 

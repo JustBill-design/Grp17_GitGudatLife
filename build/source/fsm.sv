@@ -229,14 +229,14 @@ module fsm (
     logic [3:0] D_accel_d, D_accel_q = 0;
     logic D_accel_edge_buff_d, D_accel_edge_buff_q = 0;
     logic [1:0] D_alu_buffer_d, D_alu_buffer_q = 0;
-    localparam _MP_RISE_1463790462 = 1'h0;
-    localparam _MP_FALL_1463790462 = 1'h1;
+    localparam _MP_RISE_659561935 = 1'h0;
+    localparam _MP_FALL_659561935 = 1'h1;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_1463790462),
-        .FALL(_MP_FALL_1463790462)
+        .RISE(_MP_RISE_659561935),
+        .FALL(_MP_FALL_659561935)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -506,7 +506,7 @@ module fsm (
             end
             8'h6: begin
                 if (move_up_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -638,7 +638,7 @@ module fsm (
             end
             8'h11: begin
                 if (move_down_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -773,7 +773,7 @@ module fsm (
             end
             8'h1c: begin
                 if (move_left_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -906,7 +906,7 @@ module fsm (
             end
             8'h27: begin
                 if (move_right_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -1105,7 +1105,7 @@ module fsm (
             end
             8'h37: begin
                 if (move_up_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -1236,7 +1236,7 @@ module fsm (
             end
             8'h42: begin
                 if (move_down_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -1367,7 +1367,7 @@ module fsm (
             end
             8'h4d: begin
                 if (move_left_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
@@ -1498,7 +1498,7 @@ module fsm (
             end
             8'h58: begin
                 if (move_right_button) begin
-                    if (M_accel_edge_out) begin
+                    if (D_accel_edge_buff_q) begin
                         
                         case (D_accel_timer_q)
                             4'hf: begin
