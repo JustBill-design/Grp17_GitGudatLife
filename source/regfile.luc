@@ -16,12 +16,15 @@ module regfile #(
     output pbc[WIDTH],              // player A cell count
     output timer[WIDTH],            // timer countdown, seconds
     output bram_selector,            // bram selector
-    output an
+    output targetpixel[13]              // debug
 ) {
 
     dff registers[ENTRIES][WIDTH](.clk(clk),.rst(rst))
   
     always {
+    
+        // debug
+        targetpixel = registers.q[4]
       
         // always read 
         rd1 = registers.q[ra1]
@@ -30,7 +33,6 @@ module regfile #(
         pbc = registers.q[3]
         timer = registers.q[6]
         bram_selector = registers.q[7][0]   // LSB
-        an = registers.q[0]
 
         // check if write_en and its not R31 
         if (we){
