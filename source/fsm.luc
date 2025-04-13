@@ -166,7 +166,7 @@ module fsm #(
     
         // debugging
         debug_out = debug_dff.q
-        debug_dff.d = 0
+        debug_dff.d = 1
 
         // default connections, all 0 except brsel=b10 ----------------------
         states.d = states.q
@@ -1794,6 +1794,8 @@ module fsm #(
                 wdsel = b0000
                 wa = A_NEIGHBOUR_ADDRESS
                 states.d = States.READ_TOP_MID
+                
+                // debug
                 debug_dff.d = 110
             
             States.TOP_MID_ADD_B_NEIGHBOUR:
@@ -1804,6 +1806,8 @@ module fsm #(
                 wdsel = b0000
                 wa = B_NEIGHBOUR_ADDRESS
                 states.d = States.READ_TOP_MID
+                
+                // debug
                 debug_dff.d = 111
             
             // Reading top right pixel for neighbours
@@ -1817,6 +1821,8 @@ module fsm #(
                     b00:
                         states.d = States.READ_MID_LEFT
                 }
+
+                // debug
                 debug_dff.d = 112
             
             States.TOP_RIGHT_ADD_A_NEIGHBOUR:
