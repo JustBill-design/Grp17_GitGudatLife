@@ -2149,19 +2149,11 @@ module fsm #(
                 ra1 = B_NEIGHBOUR_ADDRESS
                 case(rd1[1:0]){
                     b10: states.d = States.SET_B
-                    default: states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_3
-                }
-                // debugging
-                debug_dff.d = 140
-
-            States.B10_CHECK_B_NEIGHBOUR_EQ_3:
-                ra1 = B_NEIGHBOUR_ADDRESS
-                case(rd1[1:0]){
                     b11: states.d = States.SET_B
                     default: states.d = States.B10_B_COUNTM1
                 }
                 // debugging
-                debug_dff.d = 141
+                debug_dff.d = 140
 
             States.B10_B_COUNTM1:
                 alufn = SUB
@@ -2206,15 +2198,6 @@ module fsm #(
                 ra1 = A_NEIGHBOUR_ADDRESS
                 case(rd1[1:0]){
                     b10: states.d = States.SET_A
-                    default: states.d = States.B01_A_COUNTM1
-                }
-                // debugging
-                debug_dff.d = 144
-            
-
-            States.B01_CHECK_A_NEIGHBOUR_EQ_3:
-                ra1 = A_NEIGHBOUR_ADDRESS
-                case(rd1[1:0]){
                     b11: states.d = States.SET_A
                     default: states.d = States.B01_A_COUNTM1
                 }
