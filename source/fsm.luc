@@ -270,7 +270,7 @@ module fsm #(
                 ra1 = TARGET_PIXEL_ADDRESS
                 case (rd1) {
                     4223: states.d = States.SET_TIMER
-                    default: States.ZERO_BRAM
+                    default: states.d = States.ZERO_BRAM
                 }
                 // debugging
                 debug_dff.d = 4
@@ -1087,7 +1087,7 @@ module fsm #(
             States.B_UP_CHECK_PIXEL:
                 ra1 = TARGET_PIXEL_ADDRESS
                 case (rd1[12:6]) {
-                    b0000001: states = States.B_UP_CLK
+                    b0000001: states.d = States.B_UP_CLK
                     default: states.d = States.B_UP_RESET_PIXEL
                 }
                 // debugging
@@ -2139,7 +2139,7 @@ module fsm #(
                 ra1 = B_NEIGHBOUR_ADDRESS
                 case(rd1[1:0]){
                     b10: states.d = States.SET_B
-                    default: states.d = B10_CHECK_B_NEIGHBOUR_EQ_3
+                    default: states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_3
                 }
                 // debugging
                 debug_dff.d = 140
