@@ -135,6 +135,8 @@ module fsm #(
         dff accel_timer[4]      // timer for interval between acceleration
         dff accel[4]            // bits selected for acceleration
         dff accel_edge_buff     // buffer dff for edge
+        
+        dff alu_buffer[2]
         edge_detector accel_edge(#RISE(1),#FALL(0))
 
         .rst(rst) {
@@ -198,6 +200,8 @@ module fsm #(
 
         swe3 = 0
         sre3 = 0
+
+        alu_buffer.d = alu_buffer.q
 
         // timer and game update triggers
         decrease_timer.d = decrease_timer.q
@@ -263,13 +267,18 @@ module fsm #(
                 debug_dff.d = 3
 
             States.CHECK_ADDRESS_AT_MAX:
-                alufn = b110101
-                bsel = b1000
-                ra1 = TARGET_PIXEL_ADDRESS
-                if (aluout_lsb) {
-                    states.d = States.ZERO_BRAM
+                if (alu_buffer.q[1]) {
+                    if (alu_buffer.q[0]) {
+                        states.d = States.ZERO_BRAM
+                    } else {
+                        states.d = States.SET_TIMER                    
+                    }
+                    alu_buffer.d = b00
                 } else {
-                    states.d = States.SET_TIMER                    
+                    alufn = b110101
+                    bsel = b1000
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    alu_buffer.d = c{b1,aluout_lsb}
                 }
                 // debugging
                 debug_dff.d = 4
@@ -464,13 +473,18 @@ module fsm #(
                 debug_dff.d = 14
 
             States.A_UP_CHECK_PIXEL:
-                alufn = b110101
-                bsel = b0110
-                ra1 = TARGET_PIXEL_ADDRESS
-                if (aluout_lsb) {
-                    states.d = States.A_UP_CLK                    
+                if (alu_buffer.q[1]) {
+                    if (alu_buffer.q[0]) {
+                        states.d = States.A_UP_CLK                    
+                    } else {
+                        states.d = States.A_UP_RESET_PIXEL
+                    }
+                    alu_buffer.d = b00
                 } else {
-                    states.d = States.A_UP_RESET_PIXEL
+                    alufn = b110101
+                    bsel = b0110
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    alu_buffer.d = c{b1,aluout_lsb}
                 }
                 // debugging
                 debug_dff.d = 15
@@ -604,13 +618,18 @@ module fsm #(
                 debug_dff.d = 24
             
             States.A_DOWN_CHECK_PIXEL:
-                alufn = b110101
-                bsel = b1010
-                ra1 = TARGET_PIXEL_ADDRESS
-                if (aluout_lsb) {
-                    states.d = States.A_DOWN_RESET_PIXEL                    
+                if (alu_buffer.q[1]){
+                    if (alu_buffer.q[0]) {
+                        states.d = States.A_DOWN_RESET_PIXEL                    
+                    } else {
+                        states.d = States.A_DOWN_CLK                    
+                    }
+                    alu_buffer.d = b00
                 } else {
-                    states.d = States.A_DOWN_CLK                    
+                    alufn = b110101
+                    bsel = b1010
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    alu_buffer.d = c{b1,aluout_lsb}
                 }
                 // debugging
                 debug_dff.d = 25
@@ -1093,13 +1112,18 @@ module fsm #(
                 debug_dff.d = 55
             
             States.B_UP_CHECK_PIXEL:
-                alufn = b110101
-                bsel = b0110
-                ra1 = TARGET_PIXEL_ADDRESS
-                if (aluout_lsb) {
-                    states.d = States.B_UP_CLK                    
+                if (alu_buffer.q[1]){
+                    if (alu_buffer.q[0]) {
+                        states.d = States.B_UP_CLK                    
+                    } else {
+                        states.d = States.B_UP_RESET_PIXEL                    
+                    }
+                    alu_buffer.d = b00
                 } else {
-                    states.d = States.B_UP_RESET_PIXEL                    
+                    alufn = b110101
+                    bsel = b0110
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    alu_buffer.d = c{b1,aluout_lsb}
                 }
                 // debugging
                 debug_dff.d = 56
@@ -1116,10 +1140,7 @@ module fsm #(
                 debug_dff.d = 57
             
             States.B_UP_MOVE_CURSOR:
-                if (ddr) {
-                    states.d = States.B_UP_MOVE_CURSOR
-                }
-                else {
+                if (~ddr) {
                     alufn = b000001
                     bsel = b0100
                     we = b1
@@ -1230,13 +1251,18 @@ module fsm #(
                 debug_dff.d = 65
             
             States.B_DOWN_CHECK_PIXEL:
-                alufn = b110101
-                bsel = b1010
-                ra1 = TARGET_PIXEL_ADDRESS
-                if (aluout_lsb) {
-                    states.d = States.B_DOWN_RESET_PIXEL                    
+                if (alu_buffer.q[1]){
+                    if (alu_buffer.q[0]) {
+                        states.d = States.B_DOWN_RESET_PIXEL                    
+                    } else {
+                        states.d = States.B_DOWN_CLK                    
+                    }
+                    alu_buffer.d = b00
                 } else {
-                    states.d = States.B_DOWN_CLK                    
+                    alufn = b110101
+                    bsel = b1010
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    alu_buffer.d = c{b1,aluout_lsb}
                 }
                 // debugging
                 debug_dff.d = 66
@@ -1253,10 +1279,7 @@ module fsm #(
                 debug_dff.d = 67
             
             States.B_DOWN_MOVE_CURSOR:
-                if (ddr) {
-                    states.d = States.B_DOWN_MOVE_CURSOR
-                }
-                else {
+                if (~ddr) {
                     alufn = b000000
                     bsel = b0100
                     we = b1
@@ -1389,10 +1412,7 @@ module fsm #(
                 debug_dff.d = 77
             
             States.B_LEFT_MOVE_CURSOR:
-                if (ddr) {
-                    states.d = States.B_LEFT_MOVE_CURSOR
-                }
-                else {
+                if (~ddr){
                     alufn = b000001
                     bsel = b0001
                     we = b1
@@ -1519,10 +1539,7 @@ module fsm #(
                 debug_dff.d = 87
             
             States.B_RIGHT_MOVE_CURSOR:
-                if (ddr) {
-                    states.d = States.B_RIGHT_MOVE_CURSOR
-                }
-                else {
+                if (~ddr){
                     alufn = b000000
                     bsel = b0001
                     we = b1
@@ -1652,10 +1669,7 @@ module fsm #(
                 }
             
             States.SR_LOAD_TOP_MID:
-                if (ddr) {
-                    states.d = States.SR_LOAD_TOP_MID
-                }
-                else {
+                if (~ddr){
                     alufn = b000001
                     bsel = b0101
                     ra1 = TARGET_PIXEL_ADDRESS
@@ -1669,10 +1683,7 @@ module fsm #(
                 }
 
             States.SR_LOAD_TOP_RIGHT:
-                if (ddr) {
-                    states.d = States.SR_LOAD_TOP_RIGHT
-                }
-                else {
+                if (~ddr){
                     ra1 = TARGET_PIXEL_ADDRESS
                     alufn = b011010
                     bwe = b0
@@ -1685,10 +1696,7 @@ module fsm #(
                 }
 
             States.SR_LOAD_MID_MID:
-                if (ddr) {
-                    states.d = States.SR_LOAD_MID_MID
-                }
-                else {
+                if (~ddr){
                     alufn = b000000
                     bsel = b0001
                     ra1 = TARGET_PIXEL_ADDRESS
@@ -1702,10 +1710,7 @@ module fsm #(
                 }
 
             States.SR_LOAD_MID_RIGHT:
-                if (ddr) {
-                    states.d = States.SR_LOAD_MID_RIGHT
-                }
-                else {
+                if (~ddr){
                     alufn = b000000
                     bsel = b0100
                     ra1 = TARGET_PIXEL_ADDRESS
@@ -1719,10 +1724,7 @@ module fsm #(
                 }
 
             States.SR_LOAD_BOT_MID:
-                if (ddr) {
-                    states.d = States.SR_LOAD_BOT_MID
-                }
-                else {
+                if (~ddr){
                     alufn = b000000
                     bsel = b0101
                     ra1 = TARGET_PIXEL_ADDRESS
@@ -1742,10 +1744,7 @@ module fsm #(
                 debug_dff.d = 100
             // Pixel is at middle row to load sr
             States.READ_BRAM:
-                if (ddr) {
-                    states.d = States.READ_BRAM
-                }
-                else {
+                if (~ddr){
                     alufn = b000001
                     bsel = b0100
                     ra1 = TARGET_PIXEL_ADDRESS
@@ -1755,10 +1754,7 @@ module fsm #(
                 debug_dff.d = 101
 
             States.RB_LOAD_TOP_RIGHT:
-                if (ddr) {
-                    states.d = States.RB_LOAD_TOP_RIGHT
-                }
-                else {
+                if (~ddr){
                     alufn = b000000
                     bsel = b0001
                     ra1 = TARGET_PIXEL_ADDRESS
@@ -1770,10 +1766,7 @@ module fsm #(
                 }
 
             States.RB_LOAD_MID_RIGHT:
-                if (ddr) {
-                    states.d = States.RB_LOAD_MID_RIGHT
-                }
-                else {
+                if (~ddr){
                     alufn = b000000
                     bsel = b0101
                     ra1 = TARGET_PIXEL_ADDRESS
@@ -1786,10 +1779,7 @@ module fsm #(
                     debug_dff.d = 103
                 }
             States.RB_LOAD_BOT_RIGHT:
-                if (ddr) {
-                    states.d = States.RB_LOAD_BOT_RIGHT
-                }
-                else {
+                if (~ddr){
                     swe3 = b1
                     sre3 = b0
 
@@ -1798,10 +1788,7 @@ module fsm #(
                 debug_dff.d = 104
             //SR at the end
             States.READ_CURR_PIXEL_VALUE_00_ALL_SR:
-                if (ddr) {
-                    states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
-                }
-                else {
+                if (~ddr){
                     swe1 = b1
                     sre1 = b0
 
@@ -2117,37 +2104,55 @@ module fsm #(
 
             //current -pixel is game state
             States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS:
-                alufn = b110011
-                bsel = b0000
-                ra1 = A_NEIGHBOUR_ADDRESS
-                ra2 = B_NEIGHBOUR_ADDRESS
-                if (aluout_lsb) {
-                    states.d = States.SET_00                    
+                if (alu_buffer.q[1]){
+                    if (alu_buffer.q[0]) {
+                        states.d = States.SET_00                    
+                    } else {
+                        states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
+                    }
+                    alu_buffer.d = b00
                 } else {
-                    states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
+                    alufn = b110011
+                    bsel = b0000
+                    ra1 = A_NEIGHBOUR_ADDRESS
+                    ra2 = B_NEIGHBOUR_ADDRESS
+                    alu_buffer.d = c{b1,aluout_lsb}
                 }
+                // debugging
                 debug_dff.d = 134
 
             States.B00_CHECK_A_NEIGHBOUR_EQ_3:
-                alufn = b110011
-                bsel = b0011
-                ra1 = A_NEIGHBOUR_ADDRESS
-                if (aluout_lsb) {
-                    states.d = States.B00_A_COUNTP1                    
+                if (alu_buffer.q[1]){
+                    if (alu_buffer.q[0]) {
+                        states.d = States.B00_A_COUNTP1                    
+                    } else {
+                        states.d = States.B00_CHECK_B_NEIGHBOUR_EQ_3                    
+                    }
+                    alu_buffer.d = b00
                 } else {
-                    states.d = States.B00_CHECK_B_NEIGHBOUR_EQ_3                    
+                    alufn = b110011
+                    bsel = b0011
+                    ra1 = A_NEIGHBOUR_ADDRESS
+                    alu_buffer.d = c{b1,aluout_lsb}
                 }
+                // debugging
                 debug_dff.d = 135
         
             States.B00_CHECK_B_NEIGHBOUR_EQ_3:
-                alufn = b110011
-                bsel = b0011
-                ra1 = B_NEIGHBOUR_ADDRESS
-                if (aluout_lsb) {
-                    states.d = States.B00_B_COUNTP1                    
+                if (alu_buffer.q[1]){
+                    if (alu_buffer.q[0]) {
+                        states.d = States.B00_B_COUNTP1                    
+                    } else {
+                        states.d = States.SET_00                    
+                    }
+                    alu_buffer.d = b00
                 } else {
-                    states.d = States.SET_00                    
+                    alufn = b110011
+                    bsel = b0011
+                    ra1 = B_NEIGHBOUR_ADDRESS
+                    alu_buffer.d = c{b1,aluout_lsb}
                 }
+                // debugging
                 debug_dff.d = 136
 
             States.B00_B_COUNTP1:
@@ -2172,37 +2177,55 @@ module fsm #(
 
             // current pixel is b10
             States.B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR:
-                alufn = b110101
-                bsel = b0000
-                ra1 = A_NEIGHBOUR_ADDRESS
-                ra2 = B_NEIGHBOUR_ADDRESS
-                if (aluout_lsb) {
-                    states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_2                    
+                if (alu_buffer.q[1]){
+                    if (alu_buffer.q[0]) {
+                        states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_2                    
+                    } else {
+                        states.d = States.B10_B_COUNTM1
+                    }
+                    alu_buffer.d = b00
                 } else {
-                    states.d = States.B10_B_COUNTM1
+                    alufn = b110101
+                    bsel = b0000
+                    ra1 = A_NEIGHBOUR_ADDRESS
+                    ra2 = B_NEIGHBOUR_ADDRESS
+                    alu_buffer.d = c{b1,aluout_lsb}
                 }
+                // debugging
                 debug_dff.d = 139
 
             States.B10_CHECK_B_NEIGHBOUR_EQ_2:
-                alufn = b110011
-                bsel = b0010
-                ra1 = B_NEIGHBOUR_ADDRESS
-                if (aluout_lsb) {
-                    states.d = States.SET_B                    
+                if (alu_buffer.q[1]){
+                    if (alu_buffer.q[0]) {
+                        states.d = States.SET_B                    
+                    } else {
+                        states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_3                    
+                    }
+                    alu_buffer.d = b00
                 } else {
-                    states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_3                    
+                    alufn = b110011
+                    bsel = b0010
+                    ra1 = B_NEIGHBOUR_ADDRESS
+                    alu_buffer.d = c{b1,aluout_lsb}
                 }
+                // debugging
                 debug_dff.d = 140
 
             States.B10_CHECK_B_NEIGHBOUR_EQ_3:
-                alufn = b110011
-                bsel = b0011 
-                ra1 = B_NEIGHBOUR_ADDRESS
-                if (aluout_lsb) {
-                    states.d = States.SET_B                     
+                if (alu_buffer.q[1]){
+                    if (alu_buffer.q[0]) {
+                        states.d = States.SET_B                     
+                    } else {
+                        states.d = States.B10_B_COUNTM1                    
+                    }
+                    alu_buffer.d = b00
                 } else {
-                    states.d = States.B10_B_COUNTM1                    
+                    alufn = b110011
+                    bsel = b0011 
+                    ra1 = B_NEIGHBOUR_ADDRESS
+                    alu_buffer.d = c{b1,aluout_lsb}
                 }
+                // debugging
                 debug_dff.d = 141
 
             States.B10_B_COUNTM1:
@@ -2215,40 +2238,58 @@ module fsm #(
                 states.d = States.SET_00
                 debug_dff.d = 142
 
-            //current pixel is b01
+            // current pixel is b01
             States.B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR:
-                alufn = b110101
-                bsel = b0000
-                ra1 = B_NEIGHBOUR_ADDRESS
-                ra2 = A_NEIGHBOUR_ADDRESS
-                if (aluout_lsb) {
-                    states.d = States.B01_CHECK_A_NEIGHBOUR_EQ_2                    
+                if (alu_buffer.q[1]){
+                    if (alu_buffer.q[0]) {
+                        states.d = States.B01_CHECK_A_NEIGHBOUR_EQ_2                    
+                    } else {
+                        states.d = States.B01_A_COUNTM1                    
+                    }
+                    alu_buffer.d = b00
                 } else {
-                    states.d = States.B01_A_COUNTM1                    
+                    alufn = b110101
+                    bsel = b0000
+                    ra1 = B_NEIGHBOUR_ADDRESS
+                    ra2 = A_NEIGHBOUR_ADDRESS
+                    alu_buffer.d = c{b1,aluout_lsb}
                 }
+                // debugging
                 debug_dff.d = 143
             
             States.B01_CHECK_A_NEIGHBOUR_EQ_2:
-                alufn = b110011
-                bsel = b0010
-                ra1 = A_NEIGHBOUR_ADDRESS
-                if (aluout_lsb) {
-                    states.d = States.SET_A                    
+                if (alu_buffer.q[1]) {
+                    if (alu_buffer.q[0]) {
+                        states.d = States.SET_A                    
+                    } else {
+                        states.d = States.B01_CHECK_A_NEIGHBOUR_EQ_3                    
+                    }
+                    alu_buffer.d = b00
                 } else {
-                    states.d = States.B01_CHECK_A_NEIGHBOUR_EQ_3                    
+                    alufn = b110011
+                    bsel = b0010
+                    ra1 = A_NEIGHBOUR_ADDRESS
+                    alu_buffer.d = c{b1,aluout_lsb}
                 }
+                // debugging
                 debug_dff.d = 144
             
 
             States.B01_CHECK_A_NEIGHBOUR_EQ_3:
-                alufn = b110011
-                bsel = b0011
-                ra1 = A_NEIGHBOUR_ADDRESS
-                if (aluout_lsb) {
-                    states.d = States.SET_A                    
+                if (alu_buffer.q[1]) {
+                    if (alu_buffer.q[0]) {
+                        states.d = States.SET_A                    
+                    } else {
+                        states.d = States.B01_A_COUNTM1                    
+                    }
+                    alu_buffer.d = b00
                 } else {
-                    states.d = States.B01_A_COUNTM1                    
+                    alufn = b110011
+                    bsel = b0011
+                    ra1 = A_NEIGHBOUR_ADDRESS
+                    alu_buffer.d = c{b1,aluout_lsb}
                 }
+                // debugging
                 debug_dff.d = 144
 
             States.B01_A_COUNTM1:
@@ -2311,14 +2352,20 @@ module fsm #(
                 debug_dff.d = 151
             
             States.CHECK_AT_LAST_PIXEL:
-                alufn = b110101
-                bsel = b1001 
-                ra1 = TARGET_PIXEL_ADDRESS
-                if (aluout_lsb) {
-                    states.d = States.GAME_IDLE                    
+                if (alu_buffer.q[1]) {
+                    if (alu_buffer.q[0]) {
+                        states.d = States.GAME_IDLE                    
+                    } else {
+                        states.d = States.SWITCH_BRAM                    
+                    }
+                    alu_buffer.d = b00
                 } else {
-                    states.d = States.SWITCH_BRAM                    
+                    alufn = b110101
+                    bsel = b1001 
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    alu_buffer.d = c{b1,aluout_lsb}
                 }
+                // debugging
                 debug_dff.d = 152
 
             States.SWITCH_BRAM:
