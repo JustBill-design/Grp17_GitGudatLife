@@ -1712,15 +1712,15 @@ module fsm #(
                     bwe = b0
 
                     swe2 = b1
-                    sre2 = b0
 
                     states.d = States.RB_LOAD_BOT_RIGHT
-                    debug_dff.d = 103
                 }
+                debug_dff.d = 103
+
             States.RB_LOAD_BOT_RIGHT:
                 if (~ddr){
+
                     swe3 = b1
-                    sre3 = b0
 
                     states.d = States.READ_TOP_LEFT
                 }
@@ -1771,12 +1771,18 @@ module fsm #(
             
             // Reading top mid pixel for neighbours
             States.READ_TOP_MID:
-                sre1 = b1
+                // sre1 = b1
                 case(srd1){
-                    b01: states.d = States.TOP_MID_ADD_A_NEIGHBOUR
-                    b10: states.d = States.TOP_MID_ADD_B_NEIGHBOUR
-                    b00: states.d = States.READ_TOP_RIGHT
-                    b11: debug_dff.d = 255
+                    b01:
+                        states.d = States.TOP_MID_ADD_A_NEIGHBOUR
+                        sre1 = b1
+                    b10:
+                        states.d = States.TOP_MID_ADD_B_NEIGHBOUR
+                        sre1 = b1
+                    b00:
+                        states.d = States.READ_TOP_RIGHT
+                        sre1 = b1
+                    default: debug_dff.d = 255
                 }
                 // debug_dff.d = 109
             
