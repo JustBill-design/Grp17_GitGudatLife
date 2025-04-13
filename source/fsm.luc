@@ -1773,14 +1773,12 @@ module fsm #(
             States.READ_TOP_MID:
                 sre1 = b1
                 case(srd1){
-                    b01:
-                        states.d = States.TOP_MID_ADD_A_NEIGHBOUR
-                    b10:
-                        states.d = States.TOP_MID_ADD_B_NEIGHBOUR
-                    b00:
-                        states.d = States.READ_TOP_RIGHT
+                    b01: states.d = States.TOP_MID_ADD_A_NEIGHBOUR
+                    b10: states.d = States.TOP_MID_ADD_B_NEIGHBOUR
+                    b00: states.d = States.READ_TOP_RIGHT
+                    b11: debug_dff.d = 255
                 }
-                debug_dff.d = 109
+                // debug_dff.d = 109
             
             States.TOP_MID_ADD_A_NEIGHBOUR:
                 alufn = ADD
