@@ -1,207 +1,136 @@
-// module alu #(
-//     SIZE ~ 32 : SIZE > 1
-// )(
-//     input a[SIZE],
-//     input b[SIZE],
-//     input alufn[6],
-//     output out[SIZE],
-//     output z,           // signals zero value output 
-//     output v,           // signals overflow in specific cases
-//     output n,           // signals negative output
-//     output illop        // signals illegal op code
-// ) {
-//     adder adder(#SIZE(SIZE))
-//     compare compare
-//     boolean boolean
-//     shifter shifter
-//     // multiplier multiplier
-//     // divider divider
-//     sig temp_out[SIZE]
-//     always {
-//         adder.a = a
-//         adder.b = b
-//         adder.alufn_signal = alufn
-//         
-//         boolean.a = a
-//         boolean.b = b
-//         boolean.alufn = alufn
-//         
-//         compare.z = adder.z
-//         compare.v = adder.v
-//         compare.n = adder.n
-//         compare.alufn = alufn
-//         
-//         shifter.a = a
-//         shifter.b = b
-//         shifter.alufn = alufn
-//         
-//         // multiplier.a = a
-//         // multiplier.b = b
-//         
-//         // divider.a = a
-//         // divider.b = b
-//         
-//         // flags default to 0
-//         z = 0
-//         v = 0
-//         n = 0
-//         illop = 0
-// 
-//         // case(alufn) {
-//         //     // b000000: temp_out = a+b
-//         //     b000000: temp_out = adder.out
-// 
-//         //     // b000001: temp_out = a-b
-//         //     b000001: temp_out = adder.out
-// 
-//         //     // b000010: temp_out = a*b
-//         //     b000010: temp_out = multiplier.mul
-// 
-//         //     // b000011: temp_out = a/b
-//         //     b000011: temp_out = divider.d
-// 
-//         //     // b011000: temp_out = a & b
-//         //     b011000: temp_out = boolean.bool
-// 
-//         //     // b011110: temp_out = a|b
-//         //     b011110: temp_out = boolean.bool
-// 
-//         //     b110011: temp_out = a == b
-//         //     // b110011: temp_out = compare.cmp
-// 
-//         //     b110101: temp_out = a < b
-//         //     // b110101: temp_out = compare.cmp
-// 
-//         //     b110111: temp_out = a <= b
-//         //     // b110111: temp_out = compare.cmp
-// 
-//         //     default: temp_out = 0
-//         // }
-// 
-//         case (alufn[5:4]) {
-//             b00:
-//                 case(alufn[3:0]) {
-//                     b0000:
-//                         temp_out = adder.out
-//                         v = adder.v
-//                     b0001:
-//                         temp_out = adder.out
-//                         v = adder.v
-//                     // b0010:
-//                     //     temp_out = multiplier.mul
-//                     // b0011:
-//                     //     temp_out = divider.d
-//                     default:
-//                         temp_out = 0
-//                         illop = 1
-//                 }
-//                 n = temp_out[SIZE-1]
-// 
-//             b01:
-//                 temp_out = boolean.bool
-//                 illop = boolean.illop
-// 
-//             b10:
-//                 temp_out = shifter.shift
-//                 //v = shifter.v
-//                 illop = shifter.illop
-// 
-//             b11:
-//                 temp_out = compare.cmp
-//                 illop = compare.illop
-// 
-//             default:
-//                 temp_out = 0
-//                 illop = 1
-//         }
-// 
-//         // case (alufn) {
-//         //     
-//         //     b110011: temp_out = a == b
-//         //     // b110011: temp_out = compare.cmp
-// 
-//         //     b110101: temp_out = a < b
-//         //     // b110101: temp_out = compare.cmp
-// 
-//         //     b110111: temp_out = a <= b
-//         //     // b110111: temp_out = compare.cmp
-//         //     
-//         //     b010110: temp_out = a ^ b
-//         // }
-// 
-//         // z flag also triggers for boolean outputs, 1 for true
-//         z = ~|temp_out
-//         n = temp_out[SIZE-1]
-//         out = temp_out
-//     }
-// }
-
 module alu #(
-    SIZE ~ 32 : SIZE > 0
-) (
-    input a[32],
-    input b[32],
+    SIZE ~ 32 : SIZE > 1
+)(
+    input a[SIZE],
+    input b[SIZE],
     input alufn[6],
-    output out[32],
-    output z,
-    output v,
-    output n
+    output out[SIZE],
+    output z,           // signals zero value output 
+    output v,           // signals overflow in specific cases
+    output n,           // signals negative output
+    output illop        // signals illegal op code
 ) {
-    
-    sig out_sig[SIZE]
-    
-    
+    adder adder(#SIZE(SIZE))
+    compare compare
+    boolean boolean
+    shifter shifter
+    // multiplier multiplier
+    // divider divider
+    sig temp_out[SIZE]
     always {
+        adder.a = a
+        adder.b = b
+        adder.alufn_signal = alufn
         
+        boolean.a = a
+        boolean.b = b
+        boolean.alufn = alufn
+        
+        compare.z = adder.z
+        compare.v = adder.v
+        compare.n = adder.n
+        compare.alufn = alufn
+        
+        shifter.a = a
+        shifter.b = b
+        shifter.alufn = alufn
+        
+        // multiplier.a = a
+        // multiplier.b = b
+        
+        // divider.a = a
+        // divider.b = b
+        
+        // flags default to 0
         z = 0
         v = 0
         n = 0
-        
-        case(alufn){
-            6h00: // ADD
-                out_sig = a + b
-                z = ~|out_sig
-                v = (a[SIZE-1] & (b[SIZE-1] ^ alufn[0]) & !out_sig[SIZE-1]) | (!a[SIZE-1] & !(b[SIZE-1] ^ alufn[0]) & out_sig[SIZE-1]) 
-                n = out_sig[SIZE-1]
-            6h01: // SUB
-                out_sig = a - b
-                z = ~|out_sig
-                v = (a[SIZE-1] & (b[SIZE-1] ^ alufn[0]) & !out_sig[SIZE-1]) | (!a[SIZE-1] & !(b[SIZE-1] ^ alufn[0]) & out_sig[SIZE-1]) 
-                n = out_sig[SIZE-1]   
-            // 6h02: // MUL
-            //     out_sig = a * b 
-            // 6h18: // BITWISE AND
-            //     out_sig = a & b 
-            // 6h1E: // BITWISE OR 
-            //     out_sig = a | b 
-            6h16: // BITWISE XOR
-                out_sig = a ^ b 
-            6h1A: // "A"
-                out_sig = a
-            // 6h20: // SHL 
-            //     out_sig = a << b[4:0]
-            // 6h21: // SHR 
-            //     out_sig = a >> b[4:0]
-            // 6h23: // SRA 
-            //     out_sig = a >>> b[4:0]
-            6h33: // CMPEQ 
-                out_sig = a[1:0] == b[1:0]
-            6h35: // CMPLT 
-                out_sig = a[1:0] < b[1:0]
-            6h37: // CMPLE
-                out_sig = a[1:0] <= b[1:0]
-            
-            
-            default:
-                out_sig = 0
-           
-            
-        }
-        
+        illop = 0
 
-        out = out_sig
-        
-        
-        
+        // case(alufn) {
+        //     // b000000: temp_out = a+b
+        //     b000000: temp_out = adder.out
+
+        //     // b000001: temp_out = a-b
+        //     b000001: temp_out = adder.out
+
+        //     // b000010: temp_out = a*b
+        //     b000010: temp_out = multiplier.mul
+
+        //     // b000011: temp_out = a/b
+        //     b000011: temp_out = divider.d
+
+        //     // b011000: temp_out = a & b
+        //     b011000: temp_out = boolean.bool
+
+        //     // b011110: temp_out = a|b
+        //     b011110: temp_out = boolean.bool
+
+        //     b110011: temp_out = a == b
+        //     // b110011: temp_out = compare.cmp
+
+        //     b110101: temp_out = a < b
+        //     // b110101: temp_out = compare.cmp
+
+        //     b110111: temp_out = a <= b
+        //     // b110111: temp_out = compare.cmp
+
+        //     default: temp_out = 0
+        // }
+
+        case (alufn[5:4]) {
+            b00:
+                case(alufn[3:0]) {
+                    b0000:
+                        temp_out = adder.out
+                        v = adder.v
+                    b0001:
+                        temp_out = adder.out
+                        v = adder.v
+                    // b0010:
+                    //     temp_out = multiplier.mul
+                    // b0011:
+                    //     temp_out = divider.d
+                    default:
+                        temp_out = 0
+                        illop = 1
+                }
+                n = temp_out[SIZE-1]
+
+            b01:
+                temp_out = boolean.bool
+                illop = boolean.illop
+
+            b10:
+                temp_out = shifter.shift
+                //v = shifter.v
+                illop = shifter.illop
+
+            b11:
+                temp_out = compare.cmp
+                illop = compare.illop
+
+            default:
+                temp_out = 0
+                illop = 1
+        }
+        case (alufn) {
+            
+            b110011: temp_out = a == b
+            // b110011: temp_out = compare.cmp
+
+            b110101: temp_out = a < b
+            // b110101: temp_out = compare.cmp
+
+            b110111: temp_out = a <= b
+            // b110111: temp_out = compare.cmp
+            
+            b010110: temp_out = a ^ b
+        }
+
+        // z flag also triggers for boolean outputs, 1 for true
+        z = ~|temp_out
+        n = temp_out[SIZE-1]
+        out = temp_out
     }
 }

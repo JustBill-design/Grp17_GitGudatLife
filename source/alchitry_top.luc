@@ -31,18 +31,16 @@ module alchitry_top (
     // input testpullup        // default high?
 
 ) {
-    const CLK = 100_000_000
+    const CLK = 30_000_000
 
-    alu alum(#SIZE(13))
+    alu alum(#SIZE(32))
     
     sig rst
     sig fifo_rst
+    sig clk_10
     
-    // 1/2 clk
-    // dff clk_2[3](.clk(clk))
 
     .clk(clk) {
-    
     
         reset_conditioner reset_cond        // whole board reset
         reset_conditioner fifo_reset_cond   // reset for shift registers
@@ -61,7 +59,7 @@ module alchitry_top (
         edge_detector edge_next_play(#RISE(1),#FALL(0))
         
         // edge detecors for internal clocks
-        edge_detector timerclk(#RISE(0),#FALL(1))       // ticks once per second
+        edge_detector timerclk(#RISE(1),#FALL(0))       // ticks once per second
         edge_detector gameclk(#RISE(1),#FALL(0))        // ticks roughly 10 times per second
         edge_detector med_inputclk(#RISE(1),#FALL(0))   // ticks roughly 5 times per second
         
@@ -69,6 +67,9 @@ module alchitry_top (
         edge_detector edge_up(#RISE(1),#FALL(0))
 
         .rst(rst) {
+        
+            // slow clock because 100MHz?
+            counter slow_counter(#SIZE(4),#TOP(10),#DIV(0))
         
             // display driver
             display_driver display(#CLK_FREQ(CLK))
@@ -83,7 +84,7 @@ module alchitry_top (
             bram brams
             
             // custom 32-bit regfile
-            regfile reg(#WIDTH(13))
+            regfile reg
             
             // seven segment drivers
             multi_seven_seg aseg_driver
@@ -131,11 +132,7 @@ module alchitry_top (
         io_led[3:0] = buff4.q
         
         // slow clock
-        // if (clk) {
-        //     clk_2.d = clk_2.q + 1
-        // } else {
-        //     clk_2.d = clk_2.q
-        // }
+        clk_10 = ~|slow_counter.value
 
         // whole board reset
         reset_cond.in = ~butt_reset
@@ -198,7 +195,7 @@ module alchitry_top (
         sm.timer = reg.timer
         
         // alu
-        sm.aluout_LSB = alum.out[0]
+        sm.aluout = alum.out
         alum.alufn = sm.alufn
         
         // a selector
@@ -246,9 +243,9 @@ module alchitry_top (
         sr2.wput = sm.swe2
         sr3.wput = sm.swe3
         // write data
-        sr1.din = brams.brd
-        sr2.din = brams.brd
-        sr3.din = brams.brd
+        sr1.din = sm.swd1
+        sr2.din = sm.swd2
+        sr3.din = sm.swd3
         // read enable
         sr1.rget = sm.sre1
         sr2.rget = sm.sre2
@@ -264,9 +261,10 @@ module alchitry_top (
         brams.ro = display.reading
         
         // BRAM and FSM connections
+        sm.brd = brams.brd
         brams.brsel = sm.brsel
-        brams.bra = alum.out
-        brams.bwa = reg.rd1
+        brams.bra = sm.bra
+        brams.bwa = sm.bwa
         brams.bwe = sm.bwe
         brams.bwd = sm.bwd
         
@@ -408,7 +406,7 @@ module alchitry_top (
         // button tester
         // butt_cond.in = testpullup
         // led[0] = butt_cond.out
-        // aseg_driver.value = $width(gamecounter.value)
+        aseg_driver.value = $width(gamecounter.value)
 
         // debugging
         led[7:0] = sm.debug_out
