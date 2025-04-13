@@ -21,7 +21,7 @@ module regfile #(
         output reg [(WIDTH)-1:0] pbc,
         output reg [(WIDTH)-1:0] timer,
         output reg bram_selector,
-        output reg targetpixel
+        output reg [12:0] targetpixel
     );
     logic [(ENTRIES)-1:0][(WIDTH)-1:0] D_registers_d, D_registers_q = 0;
     always @* begin

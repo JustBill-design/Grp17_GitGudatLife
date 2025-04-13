@@ -16,7 +16,7 @@ module regfile #(
     output pbc[WIDTH],              // player A cell count
     output timer[WIDTH],            // timer countdown, seconds
     output bram_selector,            // bram selector
-    output targetpixel
+    output targetpixel[13]
 ) {
 
     dff registers[ENTRIES][WIDTH](.clk(clk),.rst(rst))
