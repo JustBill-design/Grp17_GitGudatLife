@@ -2122,35 +2122,19 @@ module fsm #(
                 debug_dff.d = 134
 
             States.B00_CHECK_A_NEIGHBOUR_EQ_3:
-                if (alu_buffer.q[1]){
-                    if (alu_buffer.q[0]) {
-                        states.d = States.B00_A_COUNTP1                    
-                    } else {
-                        states.d = States.B00_CHECK_B_NEIGHBOUR_EQ_3                    
-                    }
-                    alu_buffer.d = b00
-                } else {
-                    alufn = b110011
-                    bsel = b0011
-                    ra1 = A_NEIGHBOUR_ADDRESS
-                    alu_buffer.d = c{b1,aluout_lsb}
+                ra1 = A_NEIGHBOUR_ADDRESS
+                case(rd1[1:0]){
+                    b11: states.d = States.B00_A_COUNTP1
+                    default: states.d = States.B00_CHECK_B_NEIGHBOUR_EQ_3
                 }
                 // debugging
                 debug_dff.d = 135
         
             States.B00_CHECK_B_NEIGHBOUR_EQ_3:
-                if (alu_buffer.q[1]){
-                    if (alu_buffer.q[0]) {
-                        states.d = States.B00_B_COUNTP1                    
-                    } else {
-                        states.d = States.SET_00                    
-                    }
-                    alu_buffer.d = b00
-                } else {
-                    alufn = b110011
-                    bsel = b0011
-                    ra1 = B_NEIGHBOUR_ADDRESS
-                    alu_buffer.d = c{b1,aluout_lsb}
+                ra1 = B_NEIGHBOUR_ADDRESS
+                case(rd1[1:0]){
+                    b11: states.d = States.B00_B_COUNTP1
+                    default: states.d = States.SET_00
                 }
                 // debugging
                 debug_dff.d = 136
@@ -2195,35 +2179,19 @@ module fsm #(
                 debug_dff.d = 139
 
             States.B10_CHECK_B_NEIGHBOUR_EQ_2:
-                if (alu_buffer.q[1]){
-                    if (alu_buffer.q[0]) {
-                        states.d = States.SET_B                    
-                    } else {
-                        states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_3                    
-                    }
-                    alu_buffer.d = b00
-                } else {
-                    alufn = b110011
-                    bsel = b0010
-                    ra1 = B_NEIGHBOUR_ADDRESS
-                    alu_buffer.d = c{b1,aluout_lsb}
+                ra1 = B_NEIGHBOUR_ADDRESS
+                case(rd1[1:0]){
+                    b10: states.d = States.SET_B
+                    default: states.d = B10_CHECK_B_NEIGHBOUR_EQ_3
                 }
                 // debugging
                 debug_dff.d = 140
 
             States.B10_CHECK_B_NEIGHBOUR_EQ_3:
-                if (alu_buffer.q[1]){
-                    if (alu_buffer.q[0]) {
-                        states.d = States.SET_B                     
-                    } else {
-                        states.d = States.B10_B_COUNTM1                    
-                    }
-                    alu_buffer.d = b00
-                } else {
-                    alufn = b110011
-                    bsel = b0011 
-                    ra1 = B_NEIGHBOUR_ADDRESS
-                    alu_buffer.d = c{b1,aluout_lsb}
+                ra1 = B_NEIGHBOUR_ADDRESS
+                case(rd1[1:0]){
+                    b11: states.d = States.SET_B
+                    default: states.d = States.B10_B_COUNTM1
                 }
                 // debugging
                 debug_dff.d = 141
@@ -2258,36 +2226,20 @@ module fsm #(
                 debug_dff.d = 143
             
             States.B01_CHECK_A_NEIGHBOUR_EQ_2:
-                if (alu_buffer.q[1]) {
-                    if (alu_buffer.q[0]) {
-                        states.d = States.SET_A                    
-                    } else {
-                        states.d = States.B01_CHECK_A_NEIGHBOUR_EQ_3                    
-                    }
-                    alu_buffer.d = b00
-                } else {
-                    alufn = b110011
-                    bsel = b0010
-                    ra1 = A_NEIGHBOUR_ADDRESS
-                    alu_buffer.d = c{b1,aluout_lsb}
+                ra1 = A_NEIGHBOUR_ADDRESS
+                case(rd1[1:0]){
+                    b10: states.d = States.SET_A
+                    default: states.d = States.B01_A_COUNTM1
                 }
                 // debugging
                 debug_dff.d = 144
             
 
             States.B01_CHECK_A_NEIGHBOUR_EQ_3:
-                if (alu_buffer.q[1]) {
-                    if (alu_buffer.q[0]) {
-                        states.d = States.SET_A                    
-                    } else {
-                        states.d = States.B01_A_COUNTM1                    
-                    }
-                    alu_buffer.d = b00
-                } else {
-                    alufn = b110011
-                    bsel = b0011
-                    ra1 = A_NEIGHBOUR_ADDRESS
-                    alu_buffer.d = c{b1,aluout_lsb}
+                ra1 = A_NEIGHBOUR_ADDRESS
+                case(rd1[1:0]){
+                    b11: states.d = States.SET_A
+                    default: states.d = States.B01_A_COUNTM1
                 }
                 // debugging
                 debug_dff.d = 144
@@ -2352,27 +2304,16 @@ module fsm #(
                 debug_dff.d = 151
             
             States.CHECK_AT_LAST_PIXEL:
-                if (alu_buffer.q[1]) {
-                    if (alu_buffer.q[0]) {
-                        states.d = States.GAME_IDLE                    
-                    } else {
-                        states.d = States.SWITCH_BRAM                    
-                    }
-                    alu_buffer.d = b00
-                } else {
-                    alufn = b110101
-                    bsel = b1001 
-                    ra1 = TARGET_PIXEL_ADDRESS
-                    alu_buffer.d = c{b1,aluout_lsb}
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1) {
+                    b1000001111111: states.d = States.GAME_IDLE
+                    default: states.d = States.SWITCH_BRAM
                 }
                 // debugging
                 debug_dff.d = 152
 
             States.SWITCH_BRAM:
-                if (ddr) {
-                    states.d = States.SWITCH_BRAM
-                }
-                else {
+                if (~ddr){
                     alufn = b010110
                     bsel = b0001
                     we = b1
