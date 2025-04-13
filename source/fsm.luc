@@ -1527,7 +1527,7 @@ module fsm #(
 
             States.RESET_PIXEL_TO_0:
                 we = b1
-                wdsel = b0100
+                wdsel = b1001
                 wa = TARGET_PIXEL_ADDRESS
                 states.d = States.GAME_IDLE
                 // debugging
