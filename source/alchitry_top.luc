@@ -69,9 +69,6 @@ module alchitry_top (
             
         .rst(rst) {
         
-            // slow clock because 100MHz?
-            counter slow_counter(#SIZE(4),#TOP(10),#DIV(0))
-        
             // display driver
             display_driver display(#CLK_FREQ(CLK))
             

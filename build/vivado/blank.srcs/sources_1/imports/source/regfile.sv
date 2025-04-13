@@ -20,14 +20,12 @@ module regfile #(
         output reg [(WIDTH)-1:0] pac,
         output reg [(WIDTH)-1:0] pbc,
         output reg [(WIDTH)-1:0] timer,
-        output reg bram_selector,
-        output reg [12:0] targetpixel
+        output reg bram_selector
     );
     logic [(ENTRIES)-1:0][(WIDTH)-1:0] D_registers_d, D_registers_q = 0;
     always @* begin
         D_registers_d = D_registers_q;
         
-        targetpixel = D_registers_q[3'h4];
         rd1 = D_registers_q[ra1];
         rd2 = D_registers_q[ra2];
         pac = D_registers_q[2'h2];

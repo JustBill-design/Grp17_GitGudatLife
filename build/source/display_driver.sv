@@ -19,8 +19,7 @@ module display_driver #(
         output reg latch,
         output reg blank,
         output reg sclk_out,
-        output reg [(ADDRESS_SIZE)-1:0] address,
-        output reg [(ADDRESS_SIZE + $clog2(MATRIX_WIDTH))-1:0] raw_pixel_idx
+        output reg [(ADDRESS_SIZE)-1:0] address
     );
     localparam DIV = $clog2(CLK_FREQ) - 5'h14;
     logic [2:0] pixeldata;
@@ -44,7 +43,6 @@ module display_driver #(
         D_state_d = D_state_q;
         D_sclk_counter_d = D_sclk_counter_q;
         
-        raw_pixel_idx = D_pixel_idx_q;
         D_bram_addr_d = 7'h40;
         D_rgb_data_0_d = D_rgb_data_0_q;
         D_rgb_data_1_d = D_rgb_data_1_q;

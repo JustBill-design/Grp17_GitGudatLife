@@ -213,30 +213,30 @@ module fsm (
     localparam E_States_MOVE_PIXEL_ADDRESS = 8'ha4;
     localparam E_States_CHECK_AT_LAST_PIXEL = 8'ha5;
     localparam E_States_SWITCH_BRAM = 8'ha6;
-    localparam E_States_SET_PIXEL_TO_BEGINNING = 8'ha7;
-    localparam E_States_SET_BRAM_SELECTOR_TO_1 = 8'ha8;
-    localparam E_States_SET_PIXEL_ADDRESS_TO_0 = 8'ha9;
-    localparam E_States_ZERO_BRAM = 8'haa;
-    localparam E_States_CHECK_ADDRESS_AT_MAX = 8'hab;
-    localparam E_States_SET_TIMER = 8'hac;
-    localparam E_States_RESET_PIXEL_VALUE = 8'had;
-    localparam E_States_RESET_PIXEL_ADDRESS = 8'hae;
-    localparam E_States_SET_SELECTOR_PIXEL_STATE = 8'haf;
+    localparam E_States_CHECK_END_GAME = 8'ha7;
+    localparam E_States_SET_PIXEL_TO_BEGINNING = 8'ha8;
+    localparam E_States_SET_BRAM_SELECTOR_TO_1 = 8'ha9;
+    localparam E_States_SET_PIXEL_ADDRESS_TO_0 = 8'haa;
+    localparam E_States_ZERO_BRAM = 8'hab;
+    localparam E_States_CHECK_ADDRESS_AT_MAX = 8'hac;
+    localparam E_States_SET_TIMER = 8'had;
+    localparam E_States_RESET_PIXEL_VALUE = 8'hae;
+    localparam E_States_RESET_PIXEL_ADDRESS = 8'haf;
+    localparam E_States_SET_SELECTOR_PIXEL_STATE = 8'hb0;
     logic D_decrease_timer_d, D_decrease_timer_q = 0;
     logic D_game_tick_d, D_game_tick_q = 0;
     logic [1:0] D_accel_selector_d, D_accel_selector_q = 0;
     logic [3:0] D_accel_timer_d, D_accel_timer_q = 0;
     logic [3:0] D_accel_d, D_accel_q = 0;
     logic D_accel_edge_buff_d, D_accel_edge_buff_q = 0;
-    logic [1:0] D_alu_buffer_d, D_alu_buffer_q = 0;
-    localparam _MP_RISE_277607173 = 1'h0;
-    localparam _MP_FALL_277607173 = 1'h1;
+    localparam _MP_RISE_1274239898 = 1'h0;
+    localparam _MP_FALL_1274239898 = 1'h1;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_277607173),
-        .FALL(_MP_FALL_277607173)
+        .RISE(_MP_RISE_1274239898),
+        .FALL(_MP_FALL_1274239898)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -244,13 +244,11 @@ module fsm (
     );
     
     
-    logic [7:0] D_states_d, D_states_q = 8'ha8;
+    logic [7:0] D_states_d, D_states_q = 8'ha9;
     logic [7:0] D_debug_dff_d, D_debug_dff_q = 0;
     localparam ADD = 6'h0;
     localparam SUB = 6'h1;
-    localparam CMPEQ = 6'h33;
     localparam CMPLT = 6'h35;
-    localparam CMPLE = 6'h37;
     localparam XOR = 6'h16;
     localparam A_NEIGHBOUR_ADDRESS = 1'h0;
     localparam B_NEIGHBOUR_ADDRESS = 1'h1;
@@ -263,7 +261,6 @@ module fsm (
     always @* begin
         D_debug_dff_d = D_debug_dff_q;
         D_states_d = D_states_q;
-        D_alu_buffer_d = D_alu_buffer_q;
         D_decrease_timer_d = D_decrease_timer_q;
         D_game_tick_d = D_game_tick_q;
         D_accel_selector_d = D_accel_selector_q;
@@ -292,10 +289,11 @@ module fsm (
         sre2 = 1'h0;
         swe3 = 1'h0;
         sre3 = 1'h0;
-        D_alu_buffer_d = D_alu_buffer_q;
         D_decrease_timer_d = D_decrease_timer_q;
         if (timerclk) begin
-            D_decrease_timer_d = 1'h1;
+            if (~(|timer)) begin
+                D_decrease_timer_d = 1'h1;
+            end
         end
         D_game_tick_d = D_game_tick_q;
         if (gameclk) begin
@@ -336,21 +334,21 @@ module fsm (
         D_accel_edge_buff_d = M_accel_edge_out;
         
         case (D_states_q)
-            8'ha8: begin
+            8'ha9: begin
                 we = 1'h1;
                 wdsel = 4'h2;
                 wa = 3'h7;
-                D_states_d = 8'ha9;
+                D_states_d = 8'haa;
                 D_debug_dff_d = 1'h1;
             end
-            8'ha9: begin
+            8'haa: begin
                 we = 1'h1;
                 wdsel = 4'h1;
                 wa = 3'h4;
-                D_states_d = 8'haa;
+                D_states_d = 8'hab;
                 D_debug_dff_d = 2'h2;
             end
-            8'haa: begin
+            8'hab: begin
                 alufn = 6'h0;
                 bsel = 4'h1;
                 we = 1'h1;
@@ -360,44 +358,44 @@ module fsm (
                 bwe = 1'h1;
                 bwd = 2'h0;
                 brsel = 2'h0;
-                D_states_d = 8'hab;
+                D_states_d = 8'hac;
                 D_debug_dff_d = 2'h3;
             end
-            8'hab: begin
+            8'hac: begin
                 ra1 = 3'h4;
                 
                 case (rd1)
                     13'h107f: begin
-                        D_states_d = 8'hac;
+                        D_states_d = 8'had;
                     end
                     default: begin
-                        D_states_d = 8'haa;
+                        D_states_d = 8'hab;
                     end
                 endcase
                 D_debug_dff_d = 3'h4;
             end
-            8'hac: begin
+            8'had: begin
                 we = 1'h1;
                 wdsel = 4'h6;
                 wa = 3'h6;
-                D_states_d = 8'had;
-                D_debug_dff_d = 3'h5;
-            end
-            8'had: begin
-                we = 1'h1;
-                wdsel = 4'h1;
-                wa = 3'h5;
                 D_states_d = 8'hae;
-                D_debug_dff_d = 3'h6;
+                D_debug_dff_d = 3'h5;
             end
             8'hae: begin
                 we = 1'h1;
-                wdsel = 4'h7;
-                wa = 3'h4;
+                wdsel = 4'h1;
+                wa = 3'h5;
                 D_states_d = 8'haf;
-                D_debug_dff_d = 3'h7;
+                D_debug_dff_d = 3'h6;
             end
             8'haf: begin
+                we = 1'h1;
+                wdsel = 4'h7;
+                wa = 3'h4;
+                D_states_d = 8'hb0;
+                D_debug_dff_d = 3'h7;
+            end
+            8'hb0: begin
                 ra1 = 3'h4;
                 bwe = 1'h1;
                 bwd = 2'h3;
@@ -1667,7 +1665,7 @@ module fsm (
             end
             8'h67: begin
                 if (next_start_button) begin
-                    D_states_d = 8'ha8;
+                    D_states_d = 8'ha9;
                 end
                 D_debug_dff_d = 7'h5c;
             end
@@ -2378,11 +2376,26 @@ module fsm (
                     wa = 3'h7;
                     ra1 = 3'h7;
                     wdsel = 4'h0;
-                    D_states_d = 8'ha7;
+                    D_states_d = 8'ha8;
                 end
                 D_debug_dff_d = 8'h99;
             end
             8'ha7: begin
+                if (~(|timer)) begin
+                    D_states_d = 8'h66;
+                end else begin
+                    if (~(|pac)) begin
+                        D_states_d = 8'h66;
+                    end else begin
+                        if (~(|pbc)) begin
+                            D_states_d = 8'h66;
+                        end else begin
+                            D_states_d = 8'ha8;
+                        end
+                    end
+                end
+            end
+            8'ha8: begin
                 we = 1'h1;
                 wa = 3'h4;
                 wdsel = 4'h9;
@@ -2400,12 +2413,11 @@ module fsm (
         D_accel_timer_q <= D_accel_timer_d;
         D_accel_q <= D_accel_d;
         D_accel_edge_buff_q <= D_accel_edge_buff_d;
-        D_alu_buffer_q <= D_alu_buffer_d;
         
     end
     always @(posedge (clk)) begin
         if ((rst) == 1'b1) begin
-            D_states_q <= 8'ha8;
+            D_states_q <= 8'ha9;
             D_debug_dff_q <= 0;
         end else begin
             D_states_q <= D_states_d;

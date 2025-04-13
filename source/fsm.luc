@@ -38,8 +38,8 @@ module fsm #(
     input ddr,              // display driver read override
     
     // regfile
-    output ra1[3],         // read address 1
-    output ra2[3],         // read address 2
+    output ra1[3],          // read address 1
+    output ra2[3],          // read address 2
     input rd1[13],          // read data
     input rd2[13],          // read data
     output wa[3],           // write address
@@ -115,7 +115,7 @@ module fsm #(
         
         SET_A, SET_B, SET_00, 
         
-        RESET_A_NEIGHBOUR, RESET_B_NEIGHBOUR, MOVE_PIXEL_ADDRESS, CHECK_AT_LAST_PIXEL, SWITCH_BRAM, SET_PIXEL_TO_BEGINNING, 
+        RESET_A_NEIGHBOUR, RESET_B_NEIGHBOUR, MOVE_PIXEL_ADDRESS, CHECK_AT_LAST_PIXEL, SWITCH_BRAM, CHECK_END_GAME, SET_PIXEL_TO_BEGINNING, 
         
         // Initialisation States
         SET_BRAM_SELECTOR_TO_1, SET_PIXEL_ADDRESS_TO_0, ZERO_BRAM, CHECK_ADDRESS_AT_MAX, SET_TIMER, RESET_PIXEL_VALUE, RESET_PIXEL_ADDRESS, SET_SELECTOR_PIXEL_STATE 
@@ -131,7 +131,7 @@ module fsm #(
         dff accel[4]            // bits selected for acceleration
         dff accel_edge_buff     // buffer dff for edge
         
-        dff alu_buffer[2]
+        // dff alu_buffer[2]
         edge_detector accel_edge(#RISE(0),#FALL(1))
 
         .rst(rst) {
@@ -144,9 +144,7 @@ module fsm #(
 
     const ADD = b000000
     const SUB = b000001
-    const CMPEQ = b110011
     const CMPLT = b110101
-    const CMPLE = b110111
     const XOR = b010110
 
     const A_NEIGHBOUR_ADDRESS = 0
@@ -194,12 +192,14 @@ module fsm #(
         swe3 = 0
         sre3 = 0
 
-        alu_buffer.d = alu_buffer.q
+        // alu_buffer.d = alu_buffer.q
 
         // timer and game update triggers
         decrease_timer.d = decrease_timer.q
         if (timerclk) {
-            decrease_timer.d = 1
+            if (~|timer) {
+                decrease_timer.d = 1
+            }
         }
         game_tick.d = game_tick.q
         if (gameclk) {
@@ -2301,6 +2301,17 @@ module fsm #(
                     states.d = States.SET_PIXEL_TO_BEGINNING
                 }
                 debug_dff.d = 153
+            
+            States.CHECK_END_GAME:
+                if (~|timer) {
+                    states.d = States.END_GAME_SWITCH_BRAM
+                } else if (~|pac) {
+                    states.d = States.END_GAME_SWITCH_BRAM
+                } else if (~|pbc) {
+                    states.d = States.END_GAME_SWITCH_BRAM
+                } else {
+                    states.d = States.SET_PIXEL_TO_BEGINNING
+                }
             
             States.SET_PIXEL_TO_BEGINNING:
                 we = b1

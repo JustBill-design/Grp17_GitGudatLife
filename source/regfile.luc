@@ -15,17 +15,13 @@ module regfile #(
     output pac[WIDTH],              // player B cell count
     output pbc[WIDTH],              // player A cell count
     output timer[WIDTH],            // timer countdown, seconds
-    output bram_selector,            // bram selector
-    output targetpixel[13]              // debug
+    output bram_selector            // bram selector
 ) {
 
     dff registers[ENTRIES][WIDTH](.clk(clk),.rst(rst))
   
     always {
     
-        // debug
-        targetpixel = registers.q[4]
-      
         // always read 
         rd1 = registers.q[ra1]
         rd2 = registers.q[ra2]
