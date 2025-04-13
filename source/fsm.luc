@@ -197,7 +197,7 @@ module fsm #(
         // timer and game update triggers
         decrease_timer.d = decrease_timer.q
         if (timerclk) {
-            if (~|timer) {
+            if (|timer) {
                 decrease_timer.d = 1
             }
         }
@@ -681,7 +681,7 @@ module fsm #(
                 }
                 // debugging
                 debug_dff.d = 30
-                
+
             States.A_LEFT_CLK:
                 if (move_left_button) {
                     if (accel_edge_buff.q) {
@@ -1543,20 +1543,10 @@ module fsm #(
 
             // Game Idle Stage
             States.GAME_IDLE:
-                if(decrease_timer.q){
+                if (decrease_timer.q) {
                     decrease_timer.d = 0
                     states.d = States.TIMER_M1
-                }
-                else if (~|timer){
-                    states.d = States.END_GAME_SWITCH_BRAM
-                }
-                else if (~|pac){
-                    states.d = States.END_GAME_SWITCH_BRAM
-                }
-                else if (~|pbc){
-                    states.d = States.END_GAME_SWITCH_BRAM
-                }
-                else if (game_tick.q) {
+                } else if (game_tick.q) {
                     game_tick.d = 0
                     states.d = States.GAME_IDLE_READ_CURR_PIXEL_VALUE
                 }
