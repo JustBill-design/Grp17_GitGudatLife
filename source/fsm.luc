@@ -253,7 +253,7 @@ module fsm #(
                 debug_dff.d = 2
 
             States.ZERO_BRAM:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = TARGET_PIXEL_ADDRESS
@@ -353,7 +353,7 @@ module fsm #(
                 debug_dff.d = 9
 
             States.A_COUNTP1:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = A_COUNT
@@ -418,7 +418,7 @@ module fsm #(
             
             States.A_UP_CLK:
                 if (move_up_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -435,7 +435,7 @@ module fsm #(
                 debug_dff.d = 255
             
             States.A_UP_COUNTP1:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = A_COUNT
@@ -563,7 +563,7 @@ module fsm #(
             
             States.A_DOWN_CLK:
                 if (move_down_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -580,7 +580,7 @@ module fsm #(
                 debug_dff.d = 255
 
             States.A_DOWN_COUNTP1:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = A_COUNT
@@ -650,7 +650,7 @@ module fsm #(
                     states.d = States.A_DOWN_MOVE_CURSOR
                 }
                 else {
-                    alufn = b000000
+                    alufn = ADD
                     bsel = b0100
                     we = b1
                     ra1 = TARGET_PIXEL_ADDRESS
@@ -708,7 +708,7 @@ module fsm #(
                 debug_dff.d = 30
             States.A_LEFT_CLK:
                 if (move_left_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -725,7 +725,7 @@ module fsm #(
                 debug_dff.d = 255
 
             States.A_LEFT_COUNTP1:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = A_COUNT
@@ -848,7 +848,7 @@ module fsm #(
 
             States.A_RIGHT_CLK:
                 if (move_right_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -863,7 +863,7 @@ module fsm #(
                 }
 
             States.A_RIGHT_COUNTP1:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = A_COUNT
@@ -926,7 +926,7 @@ module fsm #(
                     states.d = States.A_RIGHT_MOVE_CURSOR
                 }
                 else {
-                    alufn = b000000
+                    alufn = ADD
                     bsel = b0001
                     we = b1
                     ra1 = TARGET_PIXEL_ADDRESS
@@ -994,7 +994,7 @@ module fsm #(
                 debug_dff.d = 50
 
             States.B_COUNTP1:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = B_COUNT
@@ -1059,7 +1059,7 @@ module fsm #(
 
             States.B_UP_CLK:
                 if (move_up_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -1074,7 +1074,7 @@ module fsm #(
                 }
 
             States.B_UP_COUNTP1:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = B_COUNT
@@ -1198,7 +1198,7 @@ module fsm #(
 
             States.B_DOWN_CLK:
                 if (move_down_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -1213,7 +1213,7 @@ module fsm #(
                 }
 
             States.B_DOWN_COUNTP1:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = B_COUNT
@@ -1338,7 +1338,7 @@ module fsm #(
 
             States.B_LEFT_CLK:
                 if (move_left_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -1353,7 +1353,7 @@ module fsm #(
                 }
 
             States.B_LEFT_COUNTP1:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = B_COUNT
@@ -1469,7 +1469,7 @@ module fsm #(
 
             States.B_RIGHT_CLK:
                 if (move_right_button) {
-                    if (accel_edge.out) {
+                    if (accel_edge_buff.q) {
                         case (accel_timer.q) {
                             b1111: accel_timer.d = accel_timer.q
                             default: accel_timer.d = accel_timer.q + 1
@@ -1485,7 +1485,7 @@ module fsm #(
                 debug_dff.d = 81
 
             States.B_RIGHT_COUNTP1:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = B_COUNT
@@ -1697,7 +1697,7 @@ module fsm #(
 
             States.SR_LOAD_MID_MID:
                 if (~ddr){
-                    alufn = b000000
+                    alufn = ADD
                     bsel = b0001
                     ra1 = TARGET_PIXEL_ADDRESS
                     bwe = b0
@@ -1711,7 +1711,7 @@ module fsm #(
 
             States.SR_LOAD_MID_RIGHT:
                 if (~ddr){
-                    alufn = b000000
+                    alufn = ADD
                     bsel = b0100
                     ra1 = TARGET_PIXEL_ADDRESS
                     bwe = b0
@@ -1725,7 +1725,7 @@ module fsm #(
 
             States.SR_LOAD_BOT_MID:
                 if (~ddr){
-                    alufn = b000000
+                    alufn = ADD
                     bsel = b0101
                     ra1 = TARGET_PIXEL_ADDRESS
                     bwe = b0
@@ -1755,7 +1755,7 @@ module fsm #(
 
             States.RB_LOAD_TOP_RIGHT:
                 if (~ddr){
-                    alufn = b000000
+                    alufn = ADD
                     bsel = b0001
                     ra1 = TARGET_PIXEL_ADDRESS
                     swe1 = b1
@@ -1767,7 +1767,7 @@ module fsm #(
 
             States.RB_LOAD_MID_RIGHT:
                 if (~ddr){
-                    alufn = b000000
+                    alufn = ADD
                     bsel = b0101
                     ra1 = TARGET_PIXEL_ADDRESS
                     bwe = b0
@@ -1815,7 +1815,7 @@ module fsm #(
                 debug_dff.d = 106
             
             States.TOP_LEFT_ADD_A_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = A_NEIGHBOUR_ADDRESS
@@ -1825,7 +1825,7 @@ module fsm #(
                 debug_dff.d = 107
             
             States.TOP_LEFT_ADD_B_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = b001
@@ -1849,7 +1849,7 @@ module fsm #(
                 debug_dff.d = 109
             
             States.TOP_MID_ADD_A_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = A_NEIGHBOUR_ADDRESS
@@ -1859,7 +1859,7 @@ module fsm #(
                 debug_dff.d = 110
             
             States.TOP_MID_ADD_B_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = B_NEIGHBOUR_ADDRESS
@@ -1882,7 +1882,7 @@ module fsm #(
                 debug_dff.d = 112
             
             States.TOP_RIGHT_ADD_A_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = A_NEIGHBOUR_ADDRESS
@@ -1892,7 +1892,7 @@ module fsm #(
                 debug_dff.d = 113
             
             States.TOP_RIGHT_ADD_B_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = B_NEIGHBOUR_ADDRESS
@@ -1915,7 +1915,7 @@ module fsm #(
                 debug_dff.d = 115
             
             States.MID_LEFT_ADD_A_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = A_NEIGHBOUR_ADDRESS
@@ -1925,7 +1925,7 @@ module fsm #(
                 debug_dff.d = 116
             
             States.MID_LEFT_ADD_B_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = B_NEIGHBOUR_ADDRESS
@@ -1957,7 +1957,7 @@ module fsm #(
                 debug_dff.d = 119
             
             States.MID_RIGHT_ADD_A_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = A_NEIGHBOUR_ADDRESS
@@ -1967,7 +1967,7 @@ module fsm #(
                 debug_dff.d = 120
             
             States.MID_RIGHT_ADD_B_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = B_NEIGHBOUR_ADDRESS
@@ -1990,7 +1990,7 @@ module fsm #(
                 debug_dff.d = 122
             
             States.BOT_LEFT_ADD_A_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = A_NEIGHBOUR_ADDRESS
@@ -2000,7 +2000,7 @@ module fsm #(
                 debug_dff.d = 123
             
             States.BOT_LEFT_ADD_B_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = B_NEIGHBOUR_ADDRESS
@@ -2023,7 +2023,7 @@ module fsm #(
                 debug_dff.d = 125
             
             States.BOT_MID_ADD_A_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = A_NEIGHBOUR_ADDRESS
@@ -2033,7 +2033,7 @@ module fsm #(
                 debug_dff.d = 126
             
             States.BOT_MID_ADD_B_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = B_NEIGHBOUR_ADDRESS
@@ -2056,7 +2056,7 @@ module fsm #(
                 debug_dff.d = 128
             
             States.BOT_RIGHT_ADD_A_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = A_NEIGHBOUR_ADDRESS
@@ -2066,7 +2066,7 @@ module fsm #(
                 debug_dff.d = 129
             
             States.BOT_RIGHT_ADD_B_NEIGHBOUR:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = B_NEIGHBOUR_ADDRESS
@@ -2156,7 +2156,7 @@ module fsm #(
                 debug_dff.d = 136
 
             States.B00_B_COUNTP1:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = B_COUNT
@@ -2166,7 +2166,7 @@ module fsm #(
                 debug_dff.d = 137
 
             States.B00_A_COUNTP1:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = A_COUNT
@@ -2342,7 +2342,7 @@ module fsm #(
                 debug_dff.d = 150
             
             States.MOVE_PIXEL_ADDRESS:
-                alufn = b000000
+                alufn = ADD
                 bsel = b0001
                 we = b1
                 ra1 = TARGET_PIXEL_ADDRESS
