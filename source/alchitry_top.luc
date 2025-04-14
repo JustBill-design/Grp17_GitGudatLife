@@ -31,7 +31,7 @@ module alchitry_top (
     // input testpullup        // default high?
 
 ) {
-    const BASECLK = 100_000_000
+    const BASECLK = 10_000_000
     const SLOWCLK_WIDTH = 3
     const CLK = BASECLK / $pow(2,SLOWCLK_WIDTH)
 
@@ -39,15 +39,15 @@ module alchitry_top (
     
     sig rst
     sig fifo_rst
-    sig slowclk
+    // sig slowclk
 
-    .rst(rst) {
-        .clk(clk) {
-            dff slowclk_dff[SLOWCLK_WIDTH]
-        }
-    }
+    // .rst(rst) {
+    //     .clk(clk) {
+    //         dff slowclk_dff[SLOWCLK_WIDTH]
+    //     }
+    // }
 
-    .clk(slowclk) {
+    .clk(clk) {
     
         reset_conditioner reset_cond        // whole board reset
         reset_conditioner fifo_reset_cond   // reset for shift registers
@@ -117,8 +117,8 @@ module alchitry_top (
     always {
     
         // slow clock
-        slowclk_dff.d = slowclk_dff.q + 1
-        slowclk = slowclk_dff.q[SLOWCLK_WIDTH-1]
+        // slowclk_dff.d = slowclk_dff.q + 1
+        // slowclk = slowclk_dff.q[SLOWCLK_WIDTH-1]
     
         // debug
         buff1.d = buff1.q
