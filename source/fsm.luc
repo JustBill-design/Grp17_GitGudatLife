@@ -1662,7 +1662,7 @@ module fsm #(
 
                     swe2 = b1
 
-                    //states.d = States.SR_LOAD_MID_RIGHT
+                    states.d = States.SR_LOAD_MID_RIGHT
                 }
                 debug_dff.d = 97
 
