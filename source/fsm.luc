@@ -119,6 +119,8 @@ module fsm #(
         
         // Initialisation States
         SET_BRAM_SELECTOR_TO_1, SET_PIXEL_ADDRESS_TO_0, ZERO_BRAM, ZERO_BRAM_2, CHECK_ADDRESS_AT_MAX, SET_TIMER, RESET_PIXEL_VALUE, RESET_PIXEL_ADDRESS, SET_SELECTOR_PIXEL_STATE 
+
+        //TODO Reset B count and A count after game ends
     }
     
     .clk(clk) {
