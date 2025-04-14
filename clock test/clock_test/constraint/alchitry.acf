@@ -1,5 +1,5 @@
 STANDARD(LVCMOS33) {
-    pin clk CLOCK FREQUENCY(10MHz)
+    pin clk CLOCK FREQUENCY(100KHz)
 
     // pin rst_n RESET
 

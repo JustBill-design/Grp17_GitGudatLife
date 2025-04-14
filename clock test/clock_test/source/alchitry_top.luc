@@ -18,7 +18,7 @@ module alchitry_top (
     output timerseg[12]
 
 ) {
-    const CLK = 10_000_000
+    const CLK = 100_000
     
     sig rst
     .clk(clk) {
