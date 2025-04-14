@@ -31,7 +31,7 @@ module alchitry_top (
     // input testpullup        // default high?
 
 ) {
-    const CLK = 10_000_000
+    const CLK = 100_000_000
 
     alu alum(#SIZE(13))
     
