@@ -13,10 +13,12 @@ module shift_register #(
     const ADDR_SIZE = $clog2(ENTRIES)
 
     // write clock domain
-    .clk(clk), .rst(rst) {
-        dff waddr[ADDR_SIZE]
-        dff raddr[ADDR_SIZE]
+    .clk(clk) {
         dff mem[ENTRIES][WIDTH]
+        .rst(rst) {
+            dff waddr[ADDR_SIZE]
+            dff raddr[ADDR_SIZE]
+        }
     }
 
     always {

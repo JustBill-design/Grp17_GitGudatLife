@@ -16,9 +16,9 @@ module shift_register #(
         input wire rget
     );
     localparam ADDR_SIZE = $clog2(ENTRIES);
+    logic [(ENTRIES)-1:0][(WIDTH)-1:0] D_mem_d, D_mem_q = 0;
     logic [(ADDR_SIZE)-1:0] D_waddr_d, D_waddr_q = 0;
     logic [(ADDR_SIZE)-1:0] D_raddr_d, D_raddr_q = 0;
-    logic [(ENTRIES)-1:0][(WIDTH)-1:0] D_mem_d, D_mem_q = 0;
     always @* begin
         D_mem_d = D_mem_q;
         D_waddr_d = D_waddr_q;
@@ -39,14 +39,16 @@ module shift_register #(
     
     
     always @(posedge (clk)) begin
+        D_mem_q <= D_mem_d;
+        
+    end
+    always @(posedge (clk)) begin
         if ((rst) == 1'b1) begin
             D_waddr_q <= 0;
             D_raddr_q <= 0;
-            D_mem_q <= 0;
         end else begin
             D_waddr_q <= D_waddr_d;
             D_raddr_q <= D_raddr_d;
-            D_mem_q <= D_mem_d;
         end
     end
 endmodule
