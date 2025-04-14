@@ -32,15 +32,21 @@ module alchitry_top (
 
 ) {
     const CLK = 10_000_000
-    const BASECLK = 100_000_000
-    const CLK_FACTOR = BASECLK / CLK / 2
+    const SLOWCLK_DIV = 3
 
     alu alum(#SIZE(13))
     
     sig rst
     sig fifo_rst
+    sig slowclk
 
-    .clk(clk) {
+    .rst(rst) {
+        .clk(clk) {
+            dff slowclk_dff[SLOWCLK_DIV]
+        }
+    }
+
+    .clk(slowclk) {
     
         reset_conditioner reset_cond        // whole board reset
         reset_conditioner fifo_reset_cond   // reset for shift registers
@@ -114,6 +120,8 @@ module alchitry_top (
     always {
     
         // slow clock
+        slowclk = slowclk_dff.q[SLOWCLK_DIV-1]
+        slowclk_dff.d = slowclk_dff.q + 1
     
         // debug
         buff1.d = buff1.q
