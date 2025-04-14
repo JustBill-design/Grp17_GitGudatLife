@@ -146,7 +146,7 @@ module fsm #(
     const SUB = b000001
     const CMPLT = b110101
     const XOR = b010110
-    const A = b011010
+    const PASSTHROUGH = b011010
 
     const A_NEIGHBOUR_ADDRESS = 0
     const B_NEIGHBOUR_ADDRESS = 1
@@ -1630,7 +1630,7 @@ module fsm #(
 
             States.SR_LOAD_TOP_RIGHT:
                 if (~ddr){
-                    alufn = b011010
+                    alufn = PASSTHROUGH
                     ra1 = TARGET_PIXEL_ADDRESS
 
                     swe1 = b1
@@ -1666,7 +1666,7 @@ module fsm #(
             States.SR_LOAD_BOT_MID:
                 if (~ddr){
                     alufn = ADD
-                    bsel = b0101
+                    bsel = b1011
                     ra1 = TARGET_PIXEL_ADDRESS
 
                     swe3 = b1
@@ -1707,7 +1707,7 @@ module fsm #(
             States.RB_LOAD_MID_RIGHT:
                 if (~ddr){
                     alufn = ADD
-                    bsel = b0101
+                    bsel = b1101
                     ra1 = TARGET_PIXEL_ADDRESS
                     bwe = b0
 
@@ -1751,12 +1751,10 @@ module fsm #(
             States.TOP_LEFT_ADD_A_NEIGHBOUR:
                 alufn = ADD
                 bsel = b0001
-                ra1 = A_NEIGHBOUR_ADDRESS
-
-                wdsel = b0000
                 we = b1
+                ra1 = A_NEIGHBOUR_ADDRESS
+                wdsel = b0000
                 wa = A_NEIGHBOUR_ADDRESS
-                
                 states.d = States.READ_TOP_MID
                 debug_dff.d = 107
             
@@ -1777,13 +1775,13 @@ module fsm #(
                 case(srd1[1:0]){
                     b01:
                         states.d = States.TOP_MID_ADD_A_NEIGHBOUR
-                        sre1 = b1
+                        //sre1 = b1
                     b10:
                         states.d = States.TOP_MID_ADD_B_NEIGHBOUR
-                        sre1 = b1
+                        //sre1 = b1
                     b00:
                         states.d = States.READ_TOP_RIGHT
-                        sre1 = b1
+                        //sre1 = b1
                 }
                 debug_dff.d = 109
             
@@ -2229,6 +2227,7 @@ module fsm #(
                 debug_dff.d = 146
             
             States.SET_B:
+
                 ra1 = TARGET_PIXEL_ADDRESS
                 bwe = b1
                 bwd = b10
@@ -2236,6 +2235,7 @@ module fsm #(
                 debug_dff.d = 147
             
             States.SET_00:
+
                 ra1 = TARGET_PIXEL_ADDRESS
                 bwe = b1
                 bwd = b00
