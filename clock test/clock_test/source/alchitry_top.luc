@@ -14,7 +14,8 @@ module alchitry_top (
     // ^ to pass through edge detector
 
     // seven segment leds
-    output aseg[12]      // counter for player A
+    output aseg[12],      // counter for player A
+    output timerseg[12]
 
 ) {
     const CLK = 10_000_000
@@ -33,10 +34,11 @@ module alchitry_top (
 
         .rst(rst) {
             // counter resets every second
-            counter gamecounter(#SIZE(24),#TOP(CLK))
+            counter gamecounter(#SIZE($clog2(CLK*10)),#TOP(CLK*10))
             
             // seven segment drivers
             multi_seven_seg aseg_driver
+            multi_seven_seg timerseg_driver
             
             dff countdown[14]
         }
@@ -54,7 +56,7 @@ module alchitry_top (
         
         
         // connect slow clocks
-        timerclk.in = gamecounter.value[23]
+        timerclk.in = gamecounter.value[$clog2(CLK*10)-1]
 
         countdown.d = countdown.q
         if (timerclk.out) {
@@ -63,5 +65,7 @@ module alchitry_top (
         
         aseg_driver.value = countdown.q
         aseg = ~aseg_driver.out
+        timerseg_driver.value = timerclk.out
+        timerseg = timerseg_driver.out
     }
 }

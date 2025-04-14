@@ -126,3 +126,39 @@ set_property IOSTANDARD LVCMOS33 [get_ports {aseg[10]}]
 set_property PACKAGE_PIN R11 [get_ports {aseg[11]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {aseg[11]}]
 
+set_property PACKAGE_PIN C6 [get_ports {timerseg[0]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {timerseg[0]}]
+
+set_property PACKAGE_PIN D5 [get_ports {timerseg[1]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {timerseg[1]}]
+
+set_property PACKAGE_PIN E5 [get_ports {timerseg[2]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {timerseg[2]}]
+
+set_property PACKAGE_PIN G4 [get_ports {timerseg[3]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {timerseg[3]}]
+
+set_property PACKAGE_PIN C4 [get_ports {timerseg[4]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {timerseg[4]}]
+
+set_property PACKAGE_PIN D3 [get_ports {timerseg[5]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {timerseg[5]}]
+
+set_property PACKAGE_PIN C7 [get_ports {timerseg[6]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {timerseg[6]}]
+
+set_property PACKAGE_PIN D6 [get_ports {timerseg[7]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {timerseg[7]}]
+
+set_property PACKAGE_PIN F5 [get_ports {timerseg[8]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {timerseg[8]}]
+
+set_property PACKAGE_PIN G5 [get_ports {timerseg[9]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {timerseg[9]}]
+
+set_property PACKAGE_PIN D4 [get_ports {timerseg[10]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {timerseg[10]}]
+
+set_property PACKAGE_PIN E3 [get_ports {timerseg[11]}]
+set_property IOSTANDARD LVCMOS33 [get_ports {timerseg[11]}]
+
