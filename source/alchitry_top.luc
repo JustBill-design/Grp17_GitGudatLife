@@ -45,7 +45,7 @@ module alchitry_top (
         edge_detector slowclk_edge(#RISE(1),#FALL(0))
         .rst(rst) {
         dff slowclk_dff
-        counter slowclk_counter(#SIZE(1),#TOP(CLK_FACTOR),#DIV($clog2(CLK_FACTOR)-1))
+        counter slowclk_counter(#SIZE($clog2(CLK_FACTOR)),#TOP(CLK_FACTOR))
         }
     }
 
@@ -129,7 +129,7 @@ module alchitry_top (
         } else {
             slowclk_dff.d = slowclk_dff.q
         }
-        slowclk_edge.in = slowclk_counter.value
+        slowclk_edge.in = ~|slowclk_counter.value
     
         // debug
         buff1.d = buff1.q
