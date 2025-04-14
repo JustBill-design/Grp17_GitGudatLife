@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Mon Apr 14 23:26:08 2025
+| Date             : Mon Apr 14 23:51:59 2025
 | Host             : PC running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
@@ -53,12 +53,12 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |    <0.001 |        3 |       --- |             --- |
-| Slice Logic    |    <0.001 |      321 |       --- |             --- |
-|   LUT as Logic |    <0.001 |      168 |     20800 |            0.81 |
-|   CARRY4       |    <0.001 |       25 |      8150 |            0.31 |
-|   Register     |    <0.001 |       61 |     41600 |            0.15 |
+| Slice Logic    |    <0.001 |      305 |       --- |             --- |
+|   LUT as Logic |    <0.001 |      166 |     20800 |            0.80 |
+|   CARRY4       |    <0.001 |       23 |      8150 |            0.28 |
+|   Register     |    <0.001 |       51 |     41600 |            0.12 |
 |   Others       |     0.000 |       11 |       --- |             --- |
-| Signals        |    <0.001 |      286 |       --- |             --- |
+| Signals        |    <0.001 |      268 |       --- |             --- |
 | I/O            |     0.001 |       32 |       170 |           18.82 |
 | Static Power   |     0.072 |          |           |                 |
 | Total          |     0.073 |          |           |                 |

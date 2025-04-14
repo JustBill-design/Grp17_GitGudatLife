@@ -1,0 +1,108 @@
+module game_datapath#(
+    SLOW_CLOCK_DIV ~ 26 : SLOW_CLOCK_DIV > 0,
+    FAST_CLOCK_DIV ~ 21 : FAST_CLOCK_DIV > 0
+)(
+    input p1_button,
+    input p2_button,
+    
+    input clk,  // clock
+    input rst,  // reset
+    
+    // output to LEDs/7segments
+    output p1_score_out[32],
+    output p2_score_out[32],
+    output p1_button_press_out[32],
+    output p2_button_press_out[32],
+    output current_counter_out[32],
+    output timer_out[32],
+    output slow_clock_out,
+    output variable_clock_out,
+        
+    // debug signals
+    output debug_general[4]
+) {
+    
+    //temp variables
+    sig input_alu_a[32]
+    sig input_alu_b[32]
+    
+    alu game_alu
+    
+    .clk(clk){
+        variable_timer variable_timer_clock(#FAST_CLOCK_DIV(FAST_CLOCK_DIV), .rst(rst))
+        counter game_timer_clock(#SIZE(1),#DIV(SLOW_CLOCK_DIV), .rst(rst)) 
+        
+        // edge detector declaration & connection with counters
+        edge_detector edge_detector_variable_timer (#RISE(1), #FALL(0), .in(variable_timer_clock.out))
+        edge_detector edge_detector_game_timer(#RISE(1), #FALL(0), .in(game_timer_clock.value))
+        
+        game_cu game_cu(
+            .p1_button(p1_button),
+            .p2_button(p2_button),
+            .rst(rst),
+            .increase_counter(edge_detector_variable_timer.out),
+            .decrease_timer(edge_detector_game_timer.out)
+            
+        )
+        
+        game_regfiles game_regfiles(
+            .we(game_cu.regfile_we), 
+            .wa(game_cu.regfile_wa), 
+            .ra1(game_cu.regfile_ra1), 
+            .ra2(game_cu.regfile_ra2),
+            .rst(rst)
+        )
+    }
+    always {
+       
+        
+        // bootstrap rd2 output to CU for convenient branching conditions
+        game_cu.regfile_rd2 = game_regfiles.rd2
+        
+        // asel mux
+        case(game_cu.asel){
+            b00  : input_alu_a = game_regfiles.rd1
+            b01  : input_alu_a = 1 
+            b11  : input_alu_a = 30
+            default : //b10 unused
+                input_alu_a = 0
+        }
+        
+        // bsel mux
+        case(game_cu.bsel){
+            b00 : input_alu_b = game_regfiles.rd2
+            b01 : input_alu_b = 1
+            b11 : input_alu_b = 3
+            b10 : input_alu_b = 0
+            default: //necessary to init
+                input_alu_b = 0
+            
+        }
+        
+        // alu
+        game_alu.a = input_alu_a
+        game_alu.b = input_alu_b
+        game_alu.alufn = game_cu.alufn
+        
+        // wdsel mux
+        case (game_cu.alu_out_sel){
+            b01 : game_regfiles.data = hFFFF
+            b10 : game_regfiles.data = hF
+            b11 : game_regfiles.data = 0
+            default : 
+                game_regfiles.data = game_alu.out
+        }
+        
+        current_counter_out = game_regfiles.counter_out
+        timer_out = game_regfiles.timer_out
+        p1_score_out = game_regfiles.p1_score_out
+        p2_score_out = game_regfiles.p2_score_out
+        p1_button_press_out = game_regfiles.p1_button_press_out
+        p2_button_press_out = game_regfiles.p2_button_press_out
+        variable_clock_out = variable_timer_clock.out
+        slow_clock_out = game_timer_clock.value
+        
+        debug_general = game_cu.debug
+        
+    }
+}

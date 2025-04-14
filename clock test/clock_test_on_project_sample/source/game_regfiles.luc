@@ -1,0 +1,82 @@
+module game_regfiles (
+    input clk,  // clock
+    input rst,  // reset
+    input wa[3], // write address
+    input we, // write enable
+    input data[32], // data in
+    
+    input ra1[3], // read address port 1
+    input ra2[3], // read address port 2
+    output rd1[32], // read data port 1
+    output rd2[32], // read data port 1
+    
+    // states
+    output timer_out[32],
+    output p1_score_out[32],
+    output p2_score_out[32],
+    output p1_button_press_out[32],
+    output p2_button_press_out[32],
+    output counter_out[32]
+    
+) {
+    .clk(clk){
+        .rst(rst){
+            dff p1_score[32](#INIT(0))
+            dff p2_score[32](#INIT(0))
+            dff p1_button_press[32](#INIT(0))
+            dff p2_button_press[32](#INIT(0))
+            dff current_counter[32](#INIT(0))
+            dff temp_var[32](#INIT(0))
+            dff current_timer[32](#INIT(0))
+        }
+    }
+    
+    always {
+        
+        //write port
+        if (we){
+            case(wa){
+                d0 : p1_score.d = data
+                d1 : p2_score.d = data
+                d2 : p1_button_press.d = data
+                d3 : p2_button_press.d = data
+                d4 : current_counter.d = data
+                d5 : current_timer.d = data
+                d6 : temp_var.d = data
+            }
+        }
+        
+        
+        //read port a
+        case(ra1){
+            d0 : rd1 = p1_score.q
+            d1 : rd1 = p2_score.q
+            d2 : rd1 = p1_button_press.q
+            d3 : rd1 = p2_button_press.q
+            d4 : rd1 = current_counter.q
+            d5 : rd1 = current_timer.q
+            d611 : rd1 = temp_var.q
+            default : rd1 = 0
+        }
+        
+        //read port b
+        case(ra2){
+            d0 : rd2 = p1_score.q
+            d1 : rd2 = p2_score.q
+            d2 : rd2 = p1_button_press.q
+            d3 : rd2 = p2_button_press.q
+            d4 : rd2 = current_counter.q
+            d5 : rd2 = current_timer.q
+            d6 : rd2 = temp_var.q
+            default : rd2 = 0
+        }
+
+        p1_score_out = p1_score.q
+        p2_score_out = p2_score.q
+        p1_button_press_out = p1_button_press.q[1:0]
+        p2_button_press_out = p2_button_press.q[1:0]
+        timer_out = current_timer.q
+        counter_out = current_counter.q
+ 
+    }
+}

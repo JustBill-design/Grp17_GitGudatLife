@@ -1,0 +1,78 @@
+module alchitry_top (
+    input clk,              // 100MHz clock
+    input rst_n,            // reset button (active low)
+    output led[8],          // 8 user controllable LEDs
+    input usb_rx,            // USB->Serial input
+    output usb_tx,           // USB->Serial output
+    output io_led[3][8],     // LEDs on IO Shield
+    output io_segment[8],        // 7-segment LEDs on IO Shield
+    output io_select[4],        // Digit select on IO Shield
+    input io_button[5],      // 5 buttons on IO Shield
+    input io_dip[3][8],       // DIP switches on IO Shield
+) {
+    
+    sig rst                 // reset signal
+    const CLK_FREQ = $is_sim() ? 1000 : 100000000 // put 1000 for sim, 100M for hardware 
+    const SEVEN_SEG_DIV = $is_sim() ? 3 : 16 // put 3 for sim, 16 for hardware
+    const SLOW_CLOCK_DIV = $is_sim() ? 9 : 26 // put 9 for sim, 26 for hardware 
+    const FAST_CLOCK_DIV = $is_sim() ? 7 : 21 // put 7 for sim, 21 for hardware 
+    
+    .clk(clk) {
+        // The reset conditioner is used to synchronize the reset signal to the FPGA
+        // clock. This ensures the entire FPGA comes out of reset at the same time.
+        reset_conditioner reset_cond
+        edge_detector edge_dt_btn_p1 (#RISE(1), #FALL(0))
+        edge_detector edge_dt_btn_p2(#RISE(1), #FALL(0))
+        
+        button_conditioner btn_cond_p1(#CLK_FREQ(CLK_FREQ))
+        button_conditioner btn_cond_p2(#CLK_FREQ(CLK_FREQ)) 
+        
+        
+        .rst(rst){
+            multi_seven_seg seg(#DIV(SEVEN_SEG_DIV))
+            game_datapath game_datapath(#SLOW_CLOCK_DIV(SLOW_CLOCK_DIV), #FAST_CLOCK_DIV(FAST_CLOCK_DIV))
+        }
+        
+    }
+    
+   
+    bin_to_dec bin_to_dec_converter(#DIGITS(4))
+    
+    always {
+        reset_cond.in = ~rst_n // input raw inverted reset signal
+        rst = reset_cond.out   // conditioned reset
+        
+        usb_tx = usb_rx        // loop serial port
+        
+        led = 8h00             // turn LEDs off
+        
+        io_led = 3x{{8h00}}    // turn LEDs off
+        io_segment = 8hff          // turn segments off
+        io_select = 4hf           // select no digits
+        
+        btn_cond_p1.in = io_button[4] //to reduce the bouncing effects of your button 
+        btn_cond_p2.in = io_button[3]
+        edge_dt_btn_p1.in = btn_cond_p1.out //get the edge of button press
+        edge_dt_btn_p2.in = btn_cond_p2.out
+        
+        game_datapath.p1_button = edge_dt_btn_p1.out
+        game_datapath.p2_button = edge_dt_btn_p2.out
+        
+        //update 7segments
+        seg.values = 4x{{4b0}} // default to all 0 first
+        bin_to_dec_converter.value = game_datapath.current_counter_out
+        seg.values = bin_to_dec_converter.digits
+
+        io_led[2] = game_datapath.timer_out // timer
+        io_led[0] = game_datapath.p1_score_out    // p1 score 
+        io_led[1] = game_datapath.p2_score_out    // p2 score
+        led[0] = game_datapath.slow_clock_out
+        led[1] = game_datapath.variable_clock_out
+        led[7:6] = game_datapath.p1_button_press_out
+        led[5:4] = game_datapath.p2_button_press_out
+        
+        io_segment = ~seg.seg
+        io_select = ~seg.sel
+        
+    }
+}

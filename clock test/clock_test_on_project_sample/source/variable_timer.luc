@@ -1,0 +1,45 @@
+module variable_timer 
+#(
+    SEED = 678120348,
+    FAST_CLOCK_DIV ~ 10
+)
+(
+    input clk,  // clock
+    input rst,
+    output out,
+    output debug[16]
+) {
+    
+    const GENERATE_NUMBER_CLOCK_SPEED = FAST_CLOCK_DIV + 1
+    .clk(clk){
+
+        .rst(rst){
+            counter seed_clock(#SIZE(1),#DIV(FAST_CLOCK_DIV)) 
+            counter generate_next_number_clock(#SIZE(1), #DIV(GENERATE_NUMBER_CLOCK_SPEED))
+            pn_gen random_number
+        }
+        
+        edge_detector edge_detector_next(.in(generate_next_number_clock.value))
+        edge_detector edge_detector_seed(.in(seed_clock.value))
+        dff seed[16] // not globally reset
+        
+    }
+    
+    sig pointer[5]
+    
+    always {
+        out = 0
+        random_number.seed = seed.q
+        random_number.next = edge_detector_next.out
+        pointer = random_number.num[4:0] // select lower 8 bits as pointer
+        
+        debug = random_number.num[15:0]
+        
+        if(edge_detector_seed.out){
+            seed.d = seed.q + 1
+        }
+        
+        out = random_number.num[pointer] // select the nth bit of the current random number to increase/decrease the counter
+        
+    }
+}
