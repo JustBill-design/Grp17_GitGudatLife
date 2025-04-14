@@ -33,12 +33,12 @@ module alchitry_top (
 
         .rst(rst) {
             // counter resets every second
-            counter gamecounter(#SIZE(14),#TOP(CLK))
+            counter gamecounter(#SIZE(24),#TOP(CLK))
             
             // seven segment drivers
             multi_seven_seg aseg_driver
             
-            dff countdown[15]
+            dff countdown[14]
         }
     }
     
@@ -54,7 +54,7 @@ module alchitry_top (
         
         
         // connect slow clocks
-        timerclk.in = gamecounter.value[13]
+        timerclk.in = gamecounter.value[23]
 
         countdown.d = countdown.q
         if (timerclk.out) {

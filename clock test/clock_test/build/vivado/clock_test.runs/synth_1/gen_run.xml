@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a35tftg256-1" LaunchTime="1744646058">
+<GenRun Id="synth_1" LaunchPart="xc7a35tftg256-1" LaunchTime="1744646372">
   <File Type="PA-TCL" Name="alchitry_top.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="alchitry_top_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="alchitry_top_reports.tcl"/>
@@ -14,7 +14,7 @@
     <File Path="$PSRCDIR/sources_1/imports/source/bin_to_dec.sv">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../source/bin_to_dec.sv"/>
-        <Attr Name="ImportTime" Val="1744646053"/>
+        <Attr Name="ImportTime" Val="1744646367"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -23,7 +23,7 @@
     <File Path="$PSRCDIR/sources_1/imports/source/counter.sv">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../source/counter.sv"/>
-        <Attr Name="ImportTime" Val="1744646053"/>
+        <Attr Name="ImportTime" Val="1744646367"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -32,7 +32,7 @@
     <File Path="$PSRCDIR/sources_1/imports/source/edge_detector.sv">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../source/edge_detector.sv"/>
-        <Attr Name="ImportTime" Val="1744646053"/>
+        <Attr Name="ImportTime" Val="1744646367"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -41,7 +41,7 @@
     <File Path="$PSRCDIR/sources_1/imports/source/multi_seven_seg.sv">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../source/multi_seven_seg.sv"/>
-        <Attr Name="ImportTime" Val="1744646053"/>
+        <Attr Name="ImportTime" Val="1744646367"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -50,7 +50,7 @@
     <File Path="$PSRCDIR/sources_1/imports/source/reset_conditioner.sv">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../source/reset_conditioner.sv"/>
-        <Attr Name="ImportTime" Val="1744646053"/>
+        <Attr Name="ImportTime" Val="1744646367"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -59,7 +59,7 @@
     <File Path="$PSRCDIR/sources_1/imports/source/alchitry_top.sv">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../source/alchitry_top.sv"/>
-        <Attr Name="ImportTime" Val="1744646053"/>
+        <Attr Name="ImportTime" Val="1744646367"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -69,7 +69,7 @@
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="ImportPath" Val="$PPRDIR/../source/pipeline.sv"/>
-        <Attr Name="ImportTime" Val="1744646053"/>
+        <Attr Name="ImportTime" Val="1744646367"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -79,7 +79,7 @@
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="ImportPath" Val="$PPRDIR/../source/button_conditioner.sv"/>
-        <Attr Name="ImportTime" Val="1744646053"/>
+        <Attr Name="ImportTime" Val="1744646367"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -89,7 +89,7 @@
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="ImportPath" Val="$PPRDIR/../source/lucid_globals.sv"/>
-        <Attr Name="ImportTime" Val="1744646053"/>
+        <Attr Name="ImportTime" Val="1744646367"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
