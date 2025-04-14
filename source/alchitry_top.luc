@@ -44,12 +44,12 @@ module alchitry_top (
         reset_conditioner fifo_reset_cond   // reset for shift registers
 
         // button conditioners
-        button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}),#MIN_DELAY(4x{{200}}),#NUM_SYNC(4x{{30}}))
-        button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}),#MIN_DELAY(2x{{200}}),#NUM_SYNC(2x{{30}}))
-        button_conditioner cond_butt_next_play(#CLK_FREQ(CLK),#MIN_DELAY(200),#NUM_SYNC(30))
-        // button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}))
-        // button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}))
-        // button_conditioner cond_butt_next_play(#CLK_FREQ(CLK))
+        // button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}),#MIN_DELAY(4x{{200}}),#NUM_SYNC(4x{{30}}))
+        // button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}),#MIN_DELAY(2x{{200}}),#NUM_SYNC(2x{{30}}))
+        // button_conditioner cond_butt_next_play(#CLK_FREQ(CLK),#MIN_DELAY(200),#NUM_SYNC(30))
+        button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}))
+        button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}))
+        button_conditioner cond_butt_next_play(#CLK_FREQ(CLK))
 
         // button_conditioner butt_cond(#CLK_FREQ(CLK))            // CAN REMOVE WITH BUTTON TESTER
         
@@ -73,7 +73,7 @@ module alchitry_top (
             display_driver display(#CLK_FREQ(CLK))
             
             // counter resets every second
-            counter gamecounter(#SIZE($clog2(CLK)),#TOP(CLK),#DIV(0))
+            counter gamecounter(#SIZE($clog2(CLK)),#TOP(CLK))
             
             // FSM
             fsm sm

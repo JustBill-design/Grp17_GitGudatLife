@@ -109,9 +109,9 @@ module fsm #(
         // current pixel is 0
         B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS, B00_CHECK_A_NEIGHBOUR_EQ_3, B00_CHECK_B_NEIGHBOUR_EQ_3, B00_A_COUNTP1, B00_B_COUNTP1, 
         // current pixel is B
-        B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR, B10_CHECK_B_NEIGHBOUR_EQ_2, B10_CHECK_B_NEIGHBOUR_EQ_3, B10_B_COUNTM1, 
+        B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR, B10_CHECK_B_NEIGHBOUR_EQ_2_OR_3, B10_B_COUNTM1, 
         // current pixel is A, 
-        B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR, B01_CHECK_A_NEIGHBOUR_EQ_2, B01_CHECK_A_NEIGHBOUR_EQ_3, B01_A_COUNTM1, 
+        B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR, B01_CHECK_A_NEIGHBOUR_EQ_2_OR_3, B01_A_COUNTM1, 
         
         SET_A, SET_B, SET_00, 
         
@@ -227,7 +227,7 @@ module fsm #(
         
         case (states.q) {
 
-        // INITIALISE GAME STATE -----------------------------------------
+    // INITIALISE GAME STATE -----------------------------------------
 
             States.SET_BRAM_SELECTOR_TO_1:
                 we = b1
@@ -310,7 +310,7 @@ module fsm #(
                 // debugging
                 debug_dff.d = 8
 
-        // A INPUT -------------------------------------------------------
+    // A INPUT -------------------------------------------------------
 
             States.A_INPUT_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
@@ -926,7 +926,7 @@ module fsm #(
                 // debugging
                 debug_dff.d = 49
             
-        // B INPUT ------------------------------------------------------------------
+    // B INPUT ------------------------------------------------------------------
 
             States.B_INPUT_IDLE:
                 ra1 = TARGET_PIXEL_VALUE
@@ -1520,7 +1520,7 @@ module fsm #(
                 states.d = States.B_RIGHT_CLK
                 debug_dff.d = 90
 
-        // GAME LOGIC ------------------------------------------------------------------
+    // GAME LOGIC ------------------------------------------------------------------
 
             States.REMOVE_CURSOR:
                 bsel = b0000
@@ -1587,7 +1587,7 @@ module fsm #(
                 }
                 debug_dff.d = 93
 
-            // First Column Loading
+        // First Column Loading -----------------------------------------------------
             States.RESET_SR_POINTERS:
                 if (~ddr) {
                     // x - x to read from 0 address in bram, to pass b00 to SRs
@@ -2030,7 +2030,7 @@ module fsm #(
                 states.d = States.CHECK_NEIGHBOURS
                 debug_dff.d = 132
             
-            // Game logic ---------------------------------------------------------------
+        // Evaluation logic ---------------------------------------------------------------
             States.CHECK_NEIGHBOURS:
                 ra1 = TARGET_PIXEL_VALUE
                 case(rd1){
@@ -2043,7 +2043,7 @@ module fsm #(
                 }
                 debug_dff.d = 133
 
-            //current -pixel is game state
+            // current pixel is b00
             States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS:
                 // alufn = SUB
                 ra1 = A_NEIGHBOUR_ADDRESS
@@ -2124,13 +2124,13 @@ module fsm #(
                 ra2 = B_NEIGHBOUR_ADDRESS
 
                 if (rd1[3:0]<rd2[3:0]) {
-                    states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_2
+                    states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_2_OR_3
                 } else {
                     states.d = States.B10_B_COUNTM1
                 }
                 // if (alu_buffer.q[1]){
                 //     if (alu_buffer.q[0]) {
-                //         states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_2                    
+                //         states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_2_OR_3                    
                 //     } else {
                 //         states.d = States.B10_B_COUNTM1
                 //     }
@@ -2145,7 +2145,7 @@ module fsm #(
                 // debugging
                 debug_dff.d = 139
 
-            States.B10_CHECK_B_NEIGHBOUR_EQ_2:
+            States.B10_CHECK_B_NEIGHBOUR_EQ_2_OR_3:
                 ra1 = B_NEIGHBOUR_ADDRESS
                 case(rd1[1:0]){
                     b10: states.d = States.SET_B
@@ -2172,14 +2172,14 @@ module fsm #(
                 ra2 = B_NEIGHBOUR_ADDRESS
 
                 if (rd2[3:0]<rd1[3:0]) {
-                    states.d = States.B01_CHECK_A_NEIGHBOUR_EQ_2
+                    states.d = States.B01_CHECK_A_NEIGHBOUR_EQ_2_OR_3
                 } else {
                     states.d = States.B01_A_COUNTM1
                 }
 
                 // if (alu_buffer.q[1]){
                 //     if (alu_buffer.q[0]) {
-                //         states.d = States.B01_CHECK_A_NEIGHBOUR_EQ_2                    
+                //         states.d = States.B01_CHECK_A_NEIGHBOUR_EQ_2_OR_3                    
                 //     } else {
                 //         states.d = States.B01_A_COUNTM1                    
                 //     }
@@ -2194,7 +2194,7 @@ module fsm #(
                 // debugging
                 debug_dff.d = 143
             
-            States.B01_CHECK_A_NEIGHBOUR_EQ_2:
+            States.B01_CHECK_A_NEIGHBOUR_EQ_2_OR_3:
                 ra1 = A_NEIGHBOUR_ADDRESS
                 case(rd1[1:0]){
                     b10: states.d = States.SET_A
