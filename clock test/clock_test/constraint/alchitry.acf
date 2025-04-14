@@ -1,0 +1,56 @@
+STANDARD(LVCMOS33) {
+    pin clk CLOCK FREQUENCY(10MHz)
+
+    // pin rst_n RESET
+
+    pin led[0] LED0
+    pin led[1] LED1
+    pin led[2] LED2
+    pin led[3] LED3
+    pin led[4] LED4
+    pin led[5] LED5
+    pin led[6] LED6
+    pin led[7] LED7
+
+    pin usb_rx USB_RX
+    pin usb_tx USB_TX
+    
+    pin io_led[0] A21
+    pin io_led[1] A20
+    pin io_led[2] A18
+    pin io_led[3] A17
+    pin io_led[4] A15
+    pin io_led[5] A14
+    pin io_led[6] A12
+    pin io_led[7] A11
+
+    PULL(UP) {
+        // pin testpullup B30
+
+        // UP, DOWN, LEFT, RIGHT
+        pin butt_dirs[0] B23
+        pin butt_dirs[1] B20
+        pin butt_dirs[2] B17
+        pin butt_dirs[3] B14
+
+        pin butt_sel_desel[0] B11
+        pin butt_sel_desel[1] B8
+        
+        pin butt_reset B5
+        pin butt_next_play B2
+    }
+    
+    // seven segment pins
+    pin aseg[0] C24
+    pin aseg[1] C21
+    pin aseg[2] C18
+    pin aseg[3] C15
+    pin aseg[4] C12
+    pin aseg[5] C9
+    pin aseg[6] C23
+    pin aseg[7] C20
+    pin aseg[8] C17
+    pin aseg[9] C14
+    pin aseg[10] C11
+    pin aseg[11] C8
+}
