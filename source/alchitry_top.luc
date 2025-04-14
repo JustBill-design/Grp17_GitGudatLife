@@ -1,5 +1,5 @@
 module alchitry_top (
-    input clk,              // 100MHz clock
+    input clk,              // 10MHz clock
     // input rst_n,            // reset button (active low)
     output led[8],          // 8 user controllable LEDs
     output io_led[8],       // 8 debugging leds
@@ -404,6 +404,6 @@ module alchitry_top (
         led[7:0] = sm.debug_out
         bseg_driver.value = sr2.dout + 1
         aseg_driver.value = sr1.dout + 1
-        timerseg_driver.value = sr3.dout + 1
+        // timerseg_driver.value = sr3.dout + 1
     }
 }
