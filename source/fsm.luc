@@ -118,7 +118,7 @@ module fsm #(
         RESET_A_NEIGHBOUR, RESET_B_NEIGHBOUR, MOVE_PIXEL_ADDRESS, CHECK_AT_LAST_PIXEL, SWITCH_BRAM, CHECK_END_GAME, SET_PIXEL_TO_BEGINNING, 
         
         // Initialisation States
-        SET_BRAM_SELECTOR_TO_1, SET_PIXEL_ADDRESS_TO_0, ZERO_BRAM, ZERO_BRAM_2, CHECK_ADDRESS_AT_MAX, SET_TIMER, RESET_PIXEL_VALUE, RESET_PIXEL_ADDRESS, SET_SELECTOR_PIXEL_STATE 
+        SET_BRAM_SELECTOR_TO_1, SET_PIXEL_ADDRESS_TO_0, ZERO_BRAM, ZERO_BRAM_2, CHECK_ADDRESS_AT_MAX, SET_TIMER, RESET_PIXEL_VALUE, RESET_PIXEL_ADDRESS, RESET_A_COUNT,RESET_B_COUNT, SET_SELECTOR_PIXEL_STATE 
 
         //TODO Reset B count and A count after game ends
     }
@@ -300,10 +300,24 @@ module fsm #(
                 we = b1
                 wdsel = b0111
                 wa = TARGET_PIXEL_ADDRESS
-                states.d = States.SET_SELECTOR_PIXEL_STATE
+                states.d = States.RESET_A_COUNT
                 // debugging
                 debug_dff.d = 7
             
+            States.RESET_A_COUNT:
+                we = b1
+                wdsel = b0001
+                wa = A_COUNT
+                states.d = States.RESET_B_COUNT
+                debug_dff = 159
+
+            States.RESET_B_COUNT:
+                we = b1
+                wdsel = b0001
+                wa = B_COUNT
+                states.d = States.SET_SELECTOR_PIXEL_STATE
+                debug_dff = 160    
+
             States.SET_SELECTOR_PIXEL_STATE:
                 ra1 = TARGET_PIXEL_ADDRESS
                 bwe = b1
@@ -2036,15 +2050,17 @@ module fsm #(
             
         // Evaluation logic ---------------------------------------------------------------
             States.CHECK_NEIGHBOURS:
-                ra1 = TARGET_PIXEL_VALUE
-                case(rd1){
-                    b00:
-                        states.d = States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS
-                    b10:
-                        states.d = States.B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR
-                    b01:
-                       states.d = States.B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR
-                }
+                ra1 = A_NEIGHBOUR_ADDRESS
+                ra2 = B_NEIGHBOUR_ADDRESS
+                //ra1 = TARGET_PIXEL_VALUE
+                //case(rd1){
+                //    b00:
+                //        states.d = States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS
+                //    b10:
+                //       states.d = States.B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR
+                //    b01:
+                //       states.d = States.B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR
+                //}
                 debug_dff.d = 133
 
             // current pixel is b00

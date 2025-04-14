@@ -403,8 +403,8 @@ module alchitry_top (
 
         // debugging
         led[7:0] = sm.debug_out
-        //bseg_driver.value = sr2.dout + 1
-        //aseg_driver.value = sr1.dout + 1
+        bseg_driver.value = reg.bn
+        aseg_driver.value = reg.an
         // timerseg_driver.value = sr3.dout + 1
     }
 }
