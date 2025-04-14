@@ -39,17 +39,8 @@ module alchitry_top (
     
     sig rst
     sig fifo_rst
-    sig slowclk
 
     .clk(clk) {
-        edge_detector slowclk_edge(#RISE(1),#FALL(0))
-        .rst(rst) {
-        dff slowclk_dff
-        counter slowclk_counter(#SIZE($clog2(CLK_FACTOR)),#TOP(CLK_FACTOR))
-        }
-    }
-
-    .clk(slowclk) {
     
         reset_conditioner reset_cond        // whole board reset
         reset_conditioner fifo_reset_cond   // reset for shift registers
@@ -123,13 +114,6 @@ module alchitry_top (
     always {
     
         // slow clock
-        slowclk = slowclk_dff.q
-        if (slowclk_edge.out) {
-            slowclk_dff.d = slowclk_dff.q + 1
-        } else {
-            slowclk_dff.d = slowclk_dff.q
-        }
-        slowclk_edge.in = ~|slowclk_counter.value
     
         // debug
         buff1.d = buff1.q
@@ -425,8 +409,8 @@ module alchitry_top (
 
         // debugging
         led[7:0] = sm.debug_out
-        bseg_driver.value = sm.brsel
+        bseg_driver.value = reg.an
         aseg_driver.value = reg.pac
-        timerseg_driver.value = reg.rd1
+        timerseg_driver.value = reg.targetpixel
     }
 }

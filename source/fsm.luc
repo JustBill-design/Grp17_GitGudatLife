@@ -2107,18 +2107,29 @@ module fsm #(
 
             States.B00_CHECK_A_NEIGHBOUR_EQ_3:
                 ra1 = A_NEIGHBOUR_ADDRESS
-                case(rd1[1:0]){
+                /* case(rd1[1:0]){
                     b11: states.d = States.B00_A_COUNTP1
                     default: states.d = States.B00_CHECK_B_NEIGHBOUR_EQ_3
-                }
+                } */
+                /* if(rd1 == 3){
+                    states.d = States.B00_A_COUNTP1
+                } else {
+                    states.d = States.B00_CHECK_B_NEIGHBOUR_EQ_3
+                } */
                 // debugging
                 debug_dff.d = 135
         
             States.B00_CHECK_B_NEIGHBOUR_EQ_3:
                 ra1 = B_NEIGHBOUR_ADDRESS
-                case(rd1[1:0]){
+                /* case(rd1[1:0]){
                     b11: states.d = States.B00_B_COUNTP1
                     default: states.d = States.SET_00
+                } */
+
+                if(rd1 == 2){
+                    states.d = States.B00_B_COUNTP1
+                } else {
+                    states.d = States.SET_00
                 }
                 // debugging
                 debug_dff.d = 136
@@ -2305,9 +2316,10 @@ module fsm #(
                 if (~ddr){
                     alufn = XOR
                     bsel = b0001
+                    ra1 = BRAM_SWITCH
+
                     we = b1
                     wa = BRAM_SWITCH
-                    ra1 = BRAM_SWITCH
                     wdsel = b0000
 
                     states.d = States.CHECK_END_GAME
