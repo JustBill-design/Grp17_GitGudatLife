@@ -14,17 +14,17 @@ module multi_seven_seg #(
         output reg [11:0] out
     );
     localparam DIGIT_BITS = $clog2(DIGITS);
-    localparam _MP_SIZE_1705671237 = DIGIT_BITS;
-    localparam _MP_DIV_1705671237 = DIV;
-    localparam _MP_TOP_1705671237 = DIGITS - 1'h1;
-    localparam _MP_UP_1705671237 = 1'h1;
-    logic [(_MP_SIZE_1705671237)-1:0] M_ctr_value;
+    localparam _MP_SIZE_376731857 = DIGIT_BITS;
+    localparam _MP_DIV_376731857 = DIV;
+    localparam _MP_TOP_376731857 = DIGITS - 1'h1;
+    localparam _MP_UP_376731857 = 1'h1;
+    logic [(_MP_SIZE_376731857)-1:0] M_ctr_value;
     
     counter #(
-        .SIZE(_MP_SIZE_1705671237),
-        .DIV(_MP_DIV_1705671237),
-        .TOP(_MP_TOP_1705671237),
-        .UP(_MP_UP_1705671237)
+        .SIZE(_MP_SIZE_376731857),
+        .DIV(_MP_DIV_376731857),
+        .TOP(_MP_TOP_376731857),
+        .UP(_MP_UP_376731857)
     ) ctr (
         .clk(clk),
         .rst(rst),
@@ -32,14 +32,14 @@ module multi_seven_seg #(
     );
     
     
-    localparam _MP_DIGITS_1540907413 = 3'h4;
-    localparam _MP_LEADING_ZEROS_1540907413 = 1'h1;
+    localparam _MP_DIGITS_1588189086 = 3'h4;
+    localparam _MP_LEADING_ZEROS_1588189086 = 1'h1;
     logic [13:0] M_decimal_renderer_value;
     logic [3:0][3:0] M_decimal_renderer_digits;
     
     bin_to_dec #(
-        .DIGITS(_MP_DIGITS_1540907413),
-        .LEADING_ZEROS(_MP_LEADING_ZEROS_1540907413)
+        .DIGITS(_MP_DIGITS_1588189086),
+        .LEADING_ZEROS(_MP_LEADING_ZEROS_1588189086)
     ) decimal_renderer (
         .value(M_decimal_renderer_value),
         .digits(M_decimal_renderer_digits)

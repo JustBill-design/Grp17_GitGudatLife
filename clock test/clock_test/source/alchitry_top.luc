@@ -62,7 +62,7 @@ module alchitry_top (
 
         countdown.d = countdown.q
         if (timerclk.out) {
-            countdown.d = countdown.q - 1
+            countdown.d = countdown.q + 1
         }
         
         aseg_driver.value = countdown.q
