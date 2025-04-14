@@ -32,13 +32,24 @@ module alchitry_top (
 
 ) {
     const CLK = 10_000_000
+    const BASECLK = 100_000_000
+    const CLK_FACTOR = BASECLK / CLK / 2
 
     alu alum(#SIZE(13))
     
     sig rst
     sig fifo_rst
+    sig slowclk
 
     .clk(clk) {
+        edge_detector slowclk_edge(#RISE(1),#FALL(0))
+        .rst(rst) {
+        dff slowclk_dff
+        counter slowclk_counter(#SIZE($clog2(CLK_FACTOR)),#TOP(CLK_FACTOR))
+        }
+    }
+
+    .clk(slowclk) {
     
         reset_conditioner reset_cond        // whole board reset
         reset_conditioner fifo_reset_cond   // reset for shift registers
@@ -94,7 +105,7 @@ module alchitry_top (
             dff buff2[2]
             dff buff3[2]
             dff buff4[4]
-            dff gamecounter[26]
+            dff gamecounter[$clog2(CLK)]
 
             // dff pixeldata[2](#INIT(b00))
             // dff bramtest_8points[3]
@@ -110,6 +121,15 @@ module alchitry_top (
 
 
     always {
+    
+        // slow clock
+        slowclk = slowclk_dff.q
+        if (slowclk_edge.out) {
+            slowclk_dff.d = slowclk_dff.q + 1
+        } else {
+            slowclk_dff.d = slowclk_dff.q
+        }
+        slowclk_edge.in = ~|slowclk_counter.value
     
         // debug
         buff1.d = buff1.q
@@ -153,7 +173,7 @@ module alchitry_top (
         sm.ddr = display.reading
         
         // connect slow clocks
-        timerclk.in = gamecounter.q[22]
+        timerclk.in = gamecounter.q[$clog2(CLK)-1]
         gameclk.in = gamecounter.q[$clog2(CLK/4224*2)]
         med_inputclk.in = gamecounter.q[$clog2(CLK/5)]
         sm.timerclk = timerclk.out
