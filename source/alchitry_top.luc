@@ -410,7 +410,7 @@ module alchitry_top (
         // debugging
         led[7:0] = sm.debug_out
         bseg_driver.value = reg.an
-        aseg_driver.value = reg.pac
+        aseg_driver.value =  sr1.dout//reg.bn
         timerseg_driver.value = reg.targetpixel
     }
 }

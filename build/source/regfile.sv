@@ -37,7 +37,7 @@ module regfile #(
         bram_selector = D_registers_q[3'h7][1'h0];
         targetpixel = D_registers_q[3'h4];
         an = D_registers_q[1'h0];
-        bn = D_registers_q[1'h1];
+        bn = D_registers_q[3'h5];
         if (we) begin
             D_registers_d[wa] = wd;
         end

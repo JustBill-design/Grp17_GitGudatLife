@@ -34,7 +34,7 @@ module regfile #(
         bram_selector = registers.q[7][0]   // LSB
         targetpixel = registers.q[4]
         an = registers.q[0]
-        bn = registers.q[1]
+        bn = registers.q[5]
         // check if write_en and its not R31 
         if (we){
             registers.d[wa] = wd
