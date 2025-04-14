@@ -1,0 +1,40 @@
+module shift_register #(
+    WIDTH = 2 : WIDTH > 0,
+    ENTRIES = 4 : ENTRIES == $pow(2,$clog2(ENTRIES))
+) (
+    input clk,          // clock
+    input rst,          // reset
+    input din[WIDTH],   // write data
+    input wput,         // write enable
+    output dout[WIDTH], // read data
+    input rget          // read enable
+) {
+
+    const ADDR_SIZE = $clog2(ENTRIES)
+
+    // write clock domain
+    .clk(clk), .rst(rst) {
+        dff waddr[ADDR_SIZE]
+        dff raddr[ADDR_SIZE]
+        dff mem[ENTRIES][WIDTH]
+    }
+
+    always {
+
+        mem.d = mem.q
+        waddr.d = waddr.q
+        raddr.d = raddr.q
+        
+        dout = mem.q[raddr.q]
+        
+        if (wput) {
+            waddr.d = waddr.q + 1
+            mem.d[waddr.q] = din
+        }
+
+        if (rget) {
+            raddr.d = raddr.q + 1
+        }
+        
+    }
+}

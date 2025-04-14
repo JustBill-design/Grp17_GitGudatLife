@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Tue Apr 15 05:47:08 2025
+| Date             : Tue Apr 15 06:39:24 2025
 | Host             : PC running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.154        |
+| Total On-Chip Power (W)  | 0.148        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.082        |
+| Dynamic (W)              | 0.076        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 4.9          |
 | Max Ambient (C)          | 84.3         |
@@ -49,24 +49,23 @@ Table of Contents
 1.1 On-Chip Components
 ----------------------
 
-+--------------------------+-----------+----------+-----------+-----------------+
-| On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
-+--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |    <0.001 |        3 |       --- |             --- |
-| Slice Logic              |     0.012 |     2039 |       --- |             --- |
-|   LUT as Logic           |     0.011 |     1167 |     20800 |            5.61 |
-|   CARRY4                 |    <0.001 |       86 |      8150 |            1.06 |
-|   Register               |    <0.001 |      427 |     41600 |            1.03 |
-|   LUT as Distributed RAM |    <0.001 |        6 |      9600 |            0.06 |
-|   F7/F8 Muxes            |    <0.001 |        5 |     32600 |            0.02 |
-|   BUFG                   |    <0.001 |        1 |        32 |            3.13 |
-|   Others                 |     0.000 |       82 |       --- |             --- |
-| Signals                  |     0.013 |     1828 |       --- |             --- |
-| Block RAM                |    <0.001 |      1.5 |        50 |            3.00 |
-| I/O                      |     0.057 |       79 |       170 |           46.47 |
-| Static Power             |     0.072 |          |           |                 |
-| Total                    |     0.154 |          |           |                 |
-+--------------------------+-----------+----------+-----------+-----------------+
++----------------+-----------+----------+-----------+-----------------+
+| On-Chip        | Power (W) | Used     | Available | Utilization (%) |
++----------------+-----------+----------+-----------+-----------------+
+| Clocks         |    <0.001 |        3 |       --- |             --- |
+| Slice Logic    |     0.009 |     2020 |       --- |             --- |
+|   LUT as Logic |     0.009 |     1158 |     20800 |            5.57 |
+|   CARRY4       |    <0.001 |       86 |      8150 |            1.06 |
+|   Register     |    <0.001 |      437 |     41600 |            1.05 |
+|   F7/F8 Muxes  |    <0.001 |       13 |     32600 |            0.04 |
+|   BUFG         |    <0.001 |        1 |        32 |            3.13 |
+|   Others       |     0.000 |       71 |       --- |             --- |
+| Signals        |     0.009 |     1778 |       --- |             --- |
+| Block RAM      |    <0.001 |      1.5 |        50 |            3.00 |
+| I/O            |     0.057 |       79 |       170 |           46.47 |
+| Static Power   |     0.072 |          |           |                 |
+| Total          |     0.148 |          |           |                 |
++----------------+-----------+----------+-----------+-----------------+
 
 
 1.2 Power Supply Summary
@@ -75,7 +74,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.035 |       0.025 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.029 |       0.019 |      0.010 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.015 |       0.002 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.017 |       0.016 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -144,9 +143,9 @@ Table of Contents
 +--------------+-----------+
 | Name         | Power (W) |
 +--------------+-----------+
-| alchitry_top |     0.082 |
-|   L_reg      |     0.006 |
-|   sm         |     0.014 |
+| alchitry_top |     0.076 |
+|   L_reg      |     0.005 |
+|   sm         |     0.010 |
 +--------------+-----------+
 
 

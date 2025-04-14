@@ -111,9 +111,9 @@ module alchitry_top (
         }
         .rst(fifo_rst) {
             // shift registers
-            fifo sr1(#WIDTH(2),#ENTRIES(4))
-            fifo sr2(#WIDTH(2),#ENTRIES(4))
-            fifo sr3(#WIDTH(2),#ENTRIES(4))
+            shift_register sr1(#WIDTH(2),#ENTRIES(4))
+            shift_register sr2(#WIDTH(2),#ENTRIES(4))
+            shift_register sr3(#WIDTH(2),#ENTRIES(4))
         }
     }
 

@@ -100,6 +100,18 @@
                     "type": "DiskFile",
                     "path": "source/alu.luc"
                 }
+            },
+            {
+                "file": {
+                    "type": "Component",
+                    "path": "Memory/async_fifo.luc"
+                }
+            },
+            {
+                "file": {
+                    "type": "DiskFile",
+                    "path": "source/shift_register.luc"
+                }
             }
         ],
         "constraintFiles": [
