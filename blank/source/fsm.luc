@@ -1,0 +1,2307 @@
+module fsm #(
+) (
+    input clk,  // clock
+    input rst,  // reset
+
+    // buttons ----------------------------------------------
+    input next_start_button,
+    
+    // movement buttons, no edge detector
+    input move_up_button,
+    input move_down_button,
+    input move_left_button,
+    input move_right_button,
+    
+    // select and deselect buttons, with edge detector
+    input deselect_button,
+    input select_button,
+    
+    // seven segments ---------------------------------------
+    input pac[13],          // A cell count
+    input pbc[13],          // B cell count
+    input timer[13],        // game timer countdown
+
+    // slow clocks -------------------------------------------
+    input timerclk,         // once a second
+    input gameclk,          // roughly 10 times a second
+    input med_inputclk,     // tbc
+    
+    // external modules connections --------------------------
+    // alu
+    // input aluout_lsb,       // alu.out LSB
+    output alufn[6],        // alu function
+
+    // BRAM
+    output brsel[2],        // bram selector override
+    output bwe,             // bram write enable
+    output bwd[2],          // bram write data
+    input ddr,              // display driver read override
+    
+    // regfile
+    output ra1[3],          // read address 1
+    output ra2[3],          // read address 2
+    input rd1[13],          // read data
+    input rd2[13],          // read data
+    output wa[3],           // write address
+    output we,              // write enable
+    output asel,            // a selector
+    output bsel[4],         // b selector
+    output wdsel[4],        // write data selector
+
+    // shift registers ----------------------------------------
+    // reset for all shift registers
+    output srst,
+
+    // read enable
+    output sre1,
+    output sre2,
+    output sre3, 
+
+    // read data
+    input srd1[2],
+    input srd2[2],
+    input srd3[2],
+
+    // write enable
+    output swe1,
+    output swe2,
+    output swe3,
+
+    // debug ----------------------------------------------
+    output debug_out[8]
+
+) {
+    enum States {
+        A_INPUT_IDLE, A_SET_PIXEL_A, A_SET_PIXEL_0, A_COUNTP1, A_COUNTM1,
+           
+        A_UP_DIR_IDLE, A_UP_CLK, A_UP_COUNTP1, A_UP_SET_PIXEL_A, A_UP_COUNTM1, A_UP_SET_PIXEL_0, A_UP_CHECK_PIXEL, A_UP_RESET_PIXEL, A_UP_MOVE_CURSOR, A_UP_STORE_PIXEL, A_UP_CURSOR_COLOUR, 
+        A_DOWN_DIR_IDLE, A_DOWN_CLK, A_DOWN_COUNTP1, A_DOWN_SET_PIXEL_A, A_DOWN_COUNTM1, A_DOWN_SET_PIXEL_0, A_DOWN_CHECK_PIXEL, A_DOWN_RESET_PIXEL, A_DOWN_MOVE_CURSOR, A_DOWN_STORE_PIXEL, A_DOWN_CURSOR_COLOUR, 
+        A_LEFT_DIR_IDLE, A_LEFT_CLK, A_LEFT_COUNTP1, A_LEFT_SET_PIXEL_A, A_LEFT_COUNTM1, A_LEFT_SET_PIXEL_0, A_LEFT_CHECK_PIXEL, A_LEFT_RESET_PIXEL, A_LEFT_MOVE_CURSOR, A_LEFT_STORE_PIXEL, A_LEFT_CURSOR_COLOUR, 
+        A_RIGHT_DIR_IDLE, A_RIGHT_CLK, A_RIGHT_COUNTP1, A_RIGHT_SET_PIXEL_A, A_RIGHT_COUNTM1, A_RIGHT_SET_PIXEL_0, A_RIGHT_CHECK_PIXEL, A_RIGHT_RESET_PIXEL, A_RIGHT_MOVE_CURSOR, A_RIGHT_STORE_PIXEL, A_RIGHT_CURSOR_COLOUR, 
+        
+        B_INPUT_IDLE, B_SET_PIXEL_B, B_SET_PIXEL_0, B_COUNTP1, B_COUNTM1,
+        
+        B_UP_DIR_IDLE, B_UP_CLK, B_UP_COUNTP1, B_UP_SET_PIXEL_B, B_UP_COUNTM1, B_UP_SET_PIXEL_0, B_UP_CHECK_PIXEL, B_UP_RESET_PIXEL, B_UP_MOVE_CURSOR, B_UP_STORE_PIXEL, B_UP_CURSOR_COLOUR, 
+        B_DOWN_DIR_IDLE, B_DOWN_CLK, B_DOWN_COUNTP1, B_DOWN_SET_PIXEL_B, B_DOWN_COUNTM1, B_DOWN_SET_PIXEL_0, B_DOWN_CHECK_PIXEL, B_DOWN_RESET_PIXEL, B_DOWN_MOVE_CURSOR, B_DOWN_STORE_PIXEL, B_DOWN_CURSOR_COLOUR, 
+        B_LEFT_DIR_IDLE, B_LEFT_CLK, B_LEFT_COUNTP1, B_LEFT_SET_PIXEL_B, B_LEFT_COUNTM1, B_LEFT_SET_PIXEL_0, B_LEFT_CHECK_PIXEL, B_LEFT_RESET_PIXEL, B_LEFT_MOVE_CURSOR, B_LEFT_STORE_PIXEL, B_LEFT_CURSOR_COLOUR, 
+        B_RIGHT_DIR_IDLE, B_RIGHT_CLK, B_RIGHT_COUNTP1, B_RIGHT_SET_PIXEL_B, B_RIGHT_COUNTM1, B_RIGHT_SET_PIXEL_0, B_RIGHT_CHECK_PIXEL, B_RIGHT_RESET_PIXEL, B_RIGHT_MOVE_CURSOR, B_RIGHT_STORE_PIXEL, B_RIGHT_CURSOR_COLOUR,        
+        REMOVE_CURSOR,RESET_PIXEL_TO_0, GAME_IDLE, TIMER_M1, END_GAME_SWITCH_BRAM, END_GAME, 
+        
+        GAME_IDLE_READ_CURR_PIXEL_VALUE, 
+        
+        RESET_SR_POINTERS, SR_00_ALL_SR, SR_LOAD_TOP_MID, SR_LOAD_TOP_RIGHT, SR_LOAD_MID_MID, SR_LOAD_MID_RIGHT, SR_LOAD_BOT_MID, SR_LOAD_BOT_RIGHT, 
+        READ_BRAM, RB_LOAD_TOP_RIGHT, RB_LOAD_MID_RIGHT, RB_LOAD_BOT_RIGHT, 
+        READ_CURR_PIXEL_VALUE_00_ALL_SR, 
+        
+        READ_TOP_LEFT, TOP_LEFT_ADD_A_NEIGHBOUR, TOP_LEFT_ADD_B_NEIGHBOUR, 
+        READ_TOP_MID, TOP_MID_ADD_A_NEIGHBOUR, TOP_MID_ADD_B_NEIGHBOUR, 
+        READ_TOP_RIGHT, TOP_RIGHT_ADD_A_NEIGHBOUR, TOP_RIGHT_ADD_B_NEIGHBOUR, 
+        READ_MID_LEFT, MID_LEFT_ADD_A_NEIGHBOUR, MID_LEFT_ADD_B_NEIGHBOUR, 
+        READ_TARGET_PIXEL, 
+        READ_MID_RIGHT, MID_RIGHT_ADD_A_NEIGHBOUR, MID_RIGHT_ADD_B_NEIGHBOUR, 
+        READ_BOT_LEFT, BOT_LEFT_ADD_A_NEIGHBOUR, BOT_LEFT_ADD_B_NEIGHBOUR, 
+        READ_BOT_MID, BOT_MID_ADD_A_NEIGHBOUR, BOT_MID_ADD_B_NEIGHBOUR, 
+        READ_BOT_RIGHT, BOT_RIGHT_ADD_A_NEIGHBOUR, BOT_RIGHT_ADD_B_NEIGHBOUR, 
+        
+        SR_EMPTY_READ_1, SR_EMPTY_READ_2, 
+        
+        CHECK_NEIGHBOURS, 
+        // current pixel is 0
+        B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS, B00_CHECK_A_NEIGHBOUR_EQ_3, B00_CHECK_B_NEIGHBOUR_EQ_3, B00_A_COUNTP1, B00_B_COUNTP1, 
+        // current pixel is B
+        B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR, B10_CHECK_B_NEIGHBOUR_EQ_2, B10_CHECK_B_NEIGHBOUR_EQ_3, B10_B_COUNTM1, 
+        // current pixel is A, 
+        B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR, B01_CHECK_A_NEIGHBOUR_EQ_2, B01_CHECK_A_NEIGHBOUR_EQ_3, B01_A_COUNTM1, 
+        
+        SET_A, SET_B, SET_00, 
+        
+        RESET_A_NEIGHBOUR, RESET_B_NEIGHBOUR, MOVE_PIXEL_ADDRESS, CHECK_AT_LAST_PIXEL, SWITCH_BRAM, CHECK_END_GAME, SET_PIXEL_TO_BEGINNING, 
+        
+        // Initialisation States
+        SET_BRAM_SELECTOR_TO_1, SET_PIXEL_ADDRESS_TO_0, ZERO_BRAM, ZERO_BRAM_2, CHECK_ADDRESS_AT_MAX, SET_TIMER, RESET_PIXEL_VALUE, RESET_PIXEL_ADDRESS, SET_SELECTOR_PIXEL_STATE 
+    }
+    
+    .clk(clk) {
+
+        dff decrease_timer
+        dff game_tick
+
+        dff accel_selector[2]   // select clock for inputclk
+        dff accel_timer[4]      // timer for interval between acceleration
+        dff accel[4]            // bits selected for acceleration
+        dff accel_edge_buff     // buffer dff for edge
+        
+        // dff alu_buffer[2]
+        edge_detector accel_edge(#RISE(0),#FALL(1))
+
+        .rst(rst) {
+            dff states[$width(States)](#INIT(States.SET_BRAM_SELECTOR_TO_1))
+
+            // debug
+            dff debug_dff[8]
+        }
+    }
+
+    const ADD = b000000
+    const SUB = b000001
+    const CMPLT = b110101
+    const XOR = b010110
+
+    const A_NEIGHBOUR_ADDRESS = 0
+    const B_NEIGHBOUR_ADDRESS = 1
+    const A_COUNT = 2
+    const B_COUNT = 3
+
+    const TARGET_PIXEL_ADDRESS = 4
+    const TARGET_PIXEL_VALUE = 5
+    const TIMER = 6
+    const BRAM_SWITCH = 7 
+    
+
+    always {
+    
+        // debugging
+        debug_out = debug_dff.q
+        debug_dff.d = 1
+
+        // default connections, all 0 except brsel=b10 ----------------------
+        states.d = states.q
+
+        brsel = b10
+        bwe = 0
+        bwd = 0
+
+        ra1 = 0
+        ra2 = 0
+        wa = 0 
+        we = 0 
+
+        alufn = 0
+        asel = 0
+        bsel = 0
+        wdsel = 0
+
+        srst = 0
+
+        swe1 = 0
+        sre1 = 0
+
+        swe2 = 0
+        sre2 = 0
+
+        swe3 = 0
+        sre3 = 0
+
+        // alu_buffer.d = alu_buffer.q
+
+        // timer and game update triggers
+        decrease_timer.d = decrease_timer.q
+        if (timerclk) {
+            if (|timer) {
+                decrease_timer.d = 1
+            }
+        }
+        game_tick.d = game_tick.q
+        if (gameclk) {
+            game_tick.d = 1
+        }
+        
+        // input acceleration selector
+        case (accel_selector.q) {
+            b00: accel_edge.in = accel.q[3]     // default slow
+            b01: accel_edge.in = accel.q[2]     // medium
+            b10: accel_edge.in = accel.q[0]     // fast
+            default: accel_edge.in = accel.q[3]
+        }
+        case (accel_timer.q) {
+            b0001: accel_selector.d = b01
+            b0100: accel_selector.d = b10
+            default: accel_selector.d = accel_selector.q
+        }
+        if (med_inputclk) {
+            accel.d = accel.q + 1
+        } else {
+            accel.d = accel.q
+        }
+        accel_edge_buff.d = accel_edge.out
+        
+        case (states.q) {
+
+        // INITIALISE GAME STATE -----------------------------------------
+
+            States.SET_BRAM_SELECTOR_TO_1:
+                we = b1
+                wdsel = b0010
+                wa = BRAM_SWITCH
+                states.d = States.SET_PIXEL_ADDRESS_TO_0
+                // debugging
+                debug_dff.d = 1
+
+            States.SET_PIXEL_ADDRESS_TO_0:
+                we = b1
+                wdsel = b0001
+                wa = TARGET_PIXEL_ADDRESS
+                states.d = States.ZERO_BRAM
+                // debugging
+                debug_dff.d = 2
+
+            States.ZERO_BRAM:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = TARGET_PIXEL_ADDRESS
+                wdsel = b0000
+                wa = TARGET_PIXEL_ADDRESS
+                bwe = b1
+                bwd = b00
+                brsel = b00
+                states.d = States.ZERO_BRAM_2
+                // debugging
+                debug_dff.d = 3
+
+            States.ZERO_BRAM_2:
+                ra1 = TARGET_PIXEL_ADDRESS
+                bwe = b1
+                bwd = b00
+                brsel = b01
+                states.d = States.CHECK_ADDRESS_AT_MAX
+                // debugging
+                debug_dff.d = 157
+
+            States.CHECK_ADDRESS_AT_MAX:
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1) {
+                    4223: states.d = States.SET_TIMER
+                    default: states.d = States.ZERO_BRAM
+                }
+                // debugging
+                debug_dff.d = 4
+            
+            States.SET_TIMER:
+                we = b1
+                wdsel = b0110
+                wa = TIMER
+                states.d = States.RESET_PIXEL_VALUE
+                // debugging
+                debug_dff.d = 5
+            
+            States.RESET_PIXEL_VALUE:
+                we = b1
+                wdsel = b0001
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.RESET_PIXEL_ADDRESS
+                // debugging
+                debug_dff.d = 6
+            
+            States.RESET_PIXEL_ADDRESS:
+                we = b1
+                wdsel = b0111
+                wa = TARGET_PIXEL_ADDRESS
+                states.d = States.SET_SELECTOR_PIXEL_STATE
+                // debugging
+                debug_dff.d = 7
+            
+            States.SET_SELECTOR_PIXEL_STATE:
+                ra1 = TARGET_PIXEL_ADDRESS
+                bwe = b1
+                bwd = b11
+                brsel = b00
+                states.d = States.A_INPUT_IDLE
+                // debugging
+                debug_dff.d = 8
+
+        // A INPUT -------------------------------------------------------
+
+            States.A_INPUT_IDLE:
+                ra1 = TARGET_PIXEL_VALUE
+                if (move_up_button){
+                    accel.d = 0
+                    states.d = States.A_UP_DIR_IDLE
+                }
+                else if (move_down_button){
+                    accel.d = 0
+                    states.d = States.A_DOWN_DIR_IDLE
+                }
+                else if (move_left_button){
+                    accel.d = 0
+                    states.d = States.A_LEFT_DIR_IDLE
+                }
+                else if (move_right_button){
+                    accel.d = 0
+                    states.d = States.A_RIGHT_DIR_IDLE
+                }
+                else if (select_button){
+                    if (~|rd1[1:0]){
+                        states.d = States.A_COUNTP1
+                    }
+                }
+                else if (deselect_button){
+                    if (rd1[0]){
+                        states.d = States.A_COUNTM1
+                    }
+                }
+                else if (next_start_button){
+                    states.d = States.B_INPUT_IDLE
+                }
+                // debugging
+                debug_dff.d = 9
+
+            States.A_COUNTP1:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = A_COUNT
+                wdsel = b0000
+                wa = A_COUNT
+                states.d = States.A_SET_PIXEL_A
+                // debugging
+                debug_dff.d = 11
+
+            States.A_SET_PIXEL_A:
+                we = b1 
+                wdsel = b0010
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.A_INPUT_IDLE
+                // debugging
+                debug_dff.d = 80     
+            
+            States.A_COUNTM1:
+                alufn = SUB
+                bsel = b0001
+                we = b1
+                ra1 = A_COUNT
+                wdsel = b0000
+                wa = A_COUNT
+                states.d = States.A_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 13
+
+            States.A_SET_PIXEL_0:
+                we = b1
+                wdsel = b0001
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.A_INPUT_IDLE
+                // debugging
+                debug_dff.d = 81
+                               
+        // A INPUT UP DIRECTION ------------------------------------------------------
+
+            States.A_UP_DIR_IDLE:
+                ra1 = TARGET_PIXEL_VALUE
+                if (move_up_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.A_UP_COUNTP1
+                        } else {
+                            states.d = States.A_UP_CHECK_PIXEL
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[0]) {
+                            states.d = States.A_UP_COUNTM1
+                        } else {
+                            states.d = States.A_UP_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.A_UP_CHECK_PIXEL
+                    }
+                } else {
+                    states.d = States.A_INPUT_IDLE
+                }
+                // debugging
+                debug_dff.d = 10
+            
+            States.A_UP_CLK:
+                if (move_up_button) {
+                    if (accel_edge_buff.q) {
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
+                        }
+                        accel.d = 0
+                        states.d = States.A_UP_DIR_IDLE
+                    }
+                } else {
+                    accel_timer.d = 0
+                    accel_selector.d = 0
+                    states.d = States.A_UP_DIR_IDLE
+                }
+                // debugging
+                debug_dff.d = 255
+            
+            States.A_UP_COUNTP1:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = A_COUNT
+                wdsel = b0000
+                wa = A_COUNT
+                states.d = States.A_UP_SET_PIXEL_A
+                // debugging
+                debug_dff.d = 11
+            
+            States.A_UP_SET_PIXEL_A:
+                we = b1 
+                wdsel = b0010
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.A_UP_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 12
+            
+            States.A_UP_COUNTM1:
+                alufn = SUB
+                bsel = b0001
+                we = b1
+                ra1 = A_COUNT
+                wdsel = b0000
+                wa = A_COUNT
+                states.d = States.A_UP_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 13
+            
+            States.A_UP_SET_PIXEL_0:
+                we = b1
+                wdsel = b0001
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.A_UP_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 14
+
+            States.A_UP_CHECK_PIXEL:
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1[12:6]) {
+                    b0000001: states.d = States.A_UP_CLK
+                    default: states.d = States.A_UP_RESET_PIXEL
+                }
+                // debugging
+                debug_dff.d = 15
+
+            States.A_UP_RESET_PIXEL:
+                bsel = b0000
+                ra1 = TARGET_PIXEL_ADDRESS
+                ra2 = TARGET_PIXEL_VALUE
+                bwd = rd2
+                bwe = b1
+                brsel = b00
+                states.d = States.A_UP_MOVE_CURSOR
+                // debugging
+                debug_dff.d = 16
+            
+            States.A_UP_MOVE_CURSOR:
+                if (~ddr) {
+                    alufn = SUB
+                    bsel = b0100
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    wa = TARGET_PIXEL_ADDRESS
+                    brsel = b01
+                    states.d = States.A_UP_STORE_PIXEL
+                }
+                // debugging
+                debug_dff.d = 17
+            
+            States.A_UP_STORE_PIXEL:
+                we = b1
+                wdsel = b0100
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.A_UP_CURSOR_COLOUR
+                // debugging
+                debug_dff.d = 18
+            
+            States.A_UP_CURSOR_COLOUR:
+                ra1 = TARGET_PIXEL_ADDRESS
+                bwe = b1
+                bwd = b11
+                brsel = b00
+                states.d = States.A_UP_CLK
+                // debugging
+                debug_dff.d = 19
+            
+            
+        // A INPUT DOWN DIRECTION ------------------------------------------------------
+
+            States.A_DOWN_DIR_IDLE:
+                ra1 = TARGET_PIXEL_VALUE
+                if (move_down_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.A_DOWN_COUNTP1
+                        } else {
+                            states.d = States.A_DOWN_CHECK_PIXEL
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[0]) {
+                            states.d = States.A_DOWN_COUNTM1
+                        } else {
+                            states.d = States.A_DOWN_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.A_DOWN_CHECK_PIXEL
+                    }
+                } else {
+                    states.d = States.A_INPUT_IDLE
+                }
+                // debugging
+                debug_dff.d = 20
+            
+            States.A_DOWN_CLK:
+                if (move_down_button) {
+                    if (accel_edge_buff.q) {
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
+                        }
+                        accel.d = 0
+                        states.d = States.A_DOWN_DIR_IDLE
+                    }
+                } else {
+                    accel_timer.d = 0
+                    accel_selector.d = 0
+                    states.d = States.A_DOWN_DIR_IDLE
+                }
+                // debugging
+                debug_dff.d = 255
+
+            States.A_DOWN_COUNTP1:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = A_COUNT
+                wdsel = b0000
+                wa = A_COUNT
+                states.d = States.A_DOWN_SET_PIXEL_A
+                // debugging
+                debug_dff.d = 21
+            
+            States.A_DOWN_SET_PIXEL_A:
+                we = b1 
+                wdsel = b0010
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.A_DOWN_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 22
+            
+            States.A_DOWN_COUNTM1:
+                alufn = SUB
+                bsel = b0001
+                we = b1
+                ra1 = A_COUNT
+                wdsel = b0000
+                wa = A_COUNT
+                states.d = States.A_DOWN_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 23
+            
+            States.A_DOWN_SET_PIXEL_0:
+                we = b1
+                wdsel = b0001
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.A_DOWN_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 24
+            
+            States.A_DOWN_CHECK_PIXEL:
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1[12]) {
+                    b1: states.d = States.A_DOWN_CLK
+                    default: states.d = States.A_DOWN_RESET_PIXEL
+                }
+                // debugging
+                debug_dff.d = 25
+            
+            States.A_DOWN_RESET_PIXEL:
+                bsel = b0000
+                ra1 = TARGET_PIXEL_ADDRESS
+                ra2 = TARGET_PIXEL_VALUE
+                bwd = rd2
+                bwe = b1
+                brsel = b00
+                states.d = States.A_DOWN_MOVE_CURSOR
+                // debugging
+                debug_dff.d = 26
+            
+            States.A_DOWN_MOVE_CURSOR:
+                if (ddr) {
+                    states.d = States.A_DOWN_MOVE_CURSOR
+                }
+                else {
+                    alufn = ADD
+                    bsel = b0100
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    bwe = b1
+                    wa = TARGET_PIXEL_ADDRESS
+                    brsel = b01
+
+                    states.d = States.A_DOWN_STORE_PIXEL
+                }
+                // debugging
+                debug_dff.d = 27
+            
+            States.A_DOWN_STORE_PIXEL:
+                we = b1
+                wdsel = b0100
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.A_DOWN_CURSOR_COLOUR
+                // debugging
+                debug_dff.d = 28
+            
+            States.A_DOWN_CURSOR_COLOUR:
+                ra1 = TARGET_PIXEL_ADDRESS
+                bwe = b1
+                bwd = b11
+                brsel = b00
+                states.d = States.A_DOWN_CLK
+                // debugging
+                debug_dff.d = 29
+            
+        // A INPUT LEFT DIRECTION ------------------------------------------------------
+
+            States.A_LEFT_DIR_IDLE:
+                ra1 = TARGET_PIXEL_VALUE
+                if (move_left_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.A_LEFT_COUNTP1
+                        } else {
+                            states.d = States.A_LEFT_CHECK_PIXEL
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[0]) {
+                            states.d = States.A_LEFT_COUNTM1
+                        } else {
+                            states.d = States.A_LEFT_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.A_LEFT_CHECK_PIXEL
+                    }
+                } else {
+                    states.d = States.A_INPUT_IDLE
+                }
+                // debugging
+                debug_dff.d = 30
+
+            States.A_LEFT_CLK:
+                if (move_left_button) {
+                    if (accel_edge_buff.q) {
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
+                        }
+                        accel.d = 0
+                        states.d = States.A_LEFT_DIR_IDLE
+                    }
+                } else {
+                    accel_timer.d = 0
+                    accel_selector.d = 0
+                    states.d = States.A_LEFT_DIR_IDLE
+                }
+                // debugging
+                debug_dff.d = 255
+
+            States.A_LEFT_COUNTP1:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = A_COUNT
+                wdsel = b0000
+                wa = A_COUNT
+                states.d = States.A_LEFT_SET_PIXEL_A
+                // debugging
+                debug_dff.d = 31
+            
+            States.A_LEFT_SET_PIXEL_A:
+                we = b1 
+                wdsel = b0010
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.A_LEFT_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 32
+            
+            States.A_LEFT_COUNTM1:
+                alufn = SUB
+                bsel = b0001
+                we = b1
+                ra1 = A_COUNT
+                wdsel = b0000
+                wa = A_COUNT
+                states.d = States.A_LEFT_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 33
+            
+            States.A_LEFT_SET_PIXEL_0:
+                we = b1
+                wdsel = b0001
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.A_LEFT_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 34
+            
+            States.A_LEFT_CHECK_PIXEL:
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1[5:0]) {
+                    b000000: states.d = States.A_LEFT_CLK
+                    default: states.d = States.A_LEFT_RESET_PIXEL
+                }
+                // debugging
+                debug_dff.d = 35
+            
+            States.A_LEFT_RESET_PIXEL:
+                bsel = b0000
+                ra1 = TARGET_PIXEL_ADDRESS
+                ra2 = TARGET_PIXEL_VALUE
+                bwd = rd2
+                brsel = b00
+                bwe = b1
+                states.d = States.A_LEFT_MOVE_CURSOR
+                // debugging
+                debug_dff.d = 36
+            
+            States.A_LEFT_MOVE_CURSOR:
+                if (~ddr) {
+                    alufn = SUB
+                    bsel = b0001
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    wa = TARGET_PIXEL_ADDRESS
+                    brsel = b01
+                    bwe = b1
+
+                    states.d = States.A_LEFT_STORE_PIXEL
+                }
+                // debugging
+                debug_dff.d = 37
+            
+            States.A_LEFT_STORE_PIXEL:
+                we = b1
+                wdsel = b0100
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.A_LEFT_CURSOR_COLOUR
+                // debugging
+                debug_dff.d = 38
+            
+            States.A_LEFT_CURSOR_COLOUR:
+                ra1 = TARGET_PIXEL_ADDRESS
+                bwe = b1
+                bwd = b11
+                brsel = b00
+                states.d = States.A_LEFT_CLK
+                // debugging
+                debug_dff.d = 39
+
+        // A INPUT RIGHT DIRECTION ------------------------------------------------------
+
+            States.A_RIGHT_DIR_IDLE:
+                ra1 = TARGET_PIXEL_VALUE
+                if (move_right_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.A_RIGHT_COUNTP1
+                        } else {
+                            states.d = States.A_RIGHT_CHECK_PIXEL
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[0]) {
+                            states.d = States.A_RIGHT_COUNTM1
+                        } else {
+                            states.d = States.A_RIGHT_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.A_RIGHT_CHECK_PIXEL
+                    }
+                } else {
+                    states.d = States.A_INPUT_IDLE
+                }
+                
+                // debugging
+                debug_dff.d = 40
+
+            States.A_RIGHT_CLK:
+                if (move_right_button) {
+                    if (accel_edge_buff.q) {
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
+                        }
+                        accel.d = 0
+                        states.d = States.A_RIGHT_DIR_IDLE
+                    }
+                } else {
+                    accel_timer.d = 0
+                    accel_selector.d = 0
+                    states.d = States.A_RIGHT_DIR_IDLE
+                }
+
+            States.A_RIGHT_COUNTP1:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = A_COUNT
+                wdsel = b0000
+                wa = A_COUNT
+                states.d = States.A_RIGHT_SET_PIXEL_A
+                // debugging
+                debug_dff.d = 41
+            
+            States.A_RIGHT_SET_PIXEL_A:
+                we = b1 
+                wdsel = b0010
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.A_RIGHT_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 42
+            
+            States.A_RIGHT_COUNTM1:
+                alufn = SUB
+                bsel = b0001
+                we = b1
+                ra1 = A_COUNT
+                wdsel = b0000
+                wa = A_COUNT
+                states.d = States.A_RIGHT_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 43
+            
+            States.A_RIGHT_SET_PIXEL_0:
+                we = b1
+                wdsel = b0001
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.A_RIGHT_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 44
+            
+            States.A_RIGHT_CHECK_PIXEL:
+
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1[5:0]) {
+                    b111111: states.d = States.A_RIGHT_CLK
+                    default: states.d = States.A_RIGHT_RESET_PIXEL
+                }
+                // debugging
+                debug_dff.d = 45
+            
+            States.A_RIGHT_RESET_PIXEL:
+                bsel = b0000
+                ra1 = TARGET_PIXEL_ADDRESS
+                ra2 = TARGET_PIXEL_VALUE
+                bwd = rd2
+                brsel = b00
+                bwe = b1
+                states.d = States.A_RIGHT_MOVE_CURSOR
+                // debugging
+                debug_dff.d = 46
+            
+            States.A_RIGHT_MOVE_CURSOR:
+                if (~ddr) {
+                    alufn = ADD
+                    bsel = b0001
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    wa = TARGET_PIXEL_ADDRESS
+                    brsel = b01
+                    bwe = b1
+
+                    states.d = States.A_RIGHT_STORE_PIXEL
+                }
+                // debugging
+                debug_dff.d = 47
+            
+            States.A_RIGHT_STORE_PIXEL:
+                we = b1
+                wdsel = b0100
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.A_RIGHT_CURSOR_COLOUR
+                // debugging
+                debug_dff.d = 48
+            
+            States.A_RIGHT_CURSOR_COLOUR:
+                ra1 = TARGET_PIXEL_ADDRESS
+                bwe = b1
+                bwd = b11
+                brsel = b00
+                states.d = States.A_RIGHT_CLK
+                // debugging
+                debug_dff.d = 49
+            
+        // B INPUT ------------------------------------------------------------------
+
+            States.B_INPUT_IDLE:
+                ra1 = TARGET_PIXEL_VALUE
+                if (move_up_button){
+                    accel.d = 0
+                    states.d = States.B_UP_DIR_IDLE
+                }
+                else if (move_down_button){
+                    accel.d = 0
+                    states.d = States.B_DOWN_DIR_IDLE
+                }
+                else if (move_left_button){
+                    accel.d = 0
+                    states.d = States.B_LEFT_DIR_IDLE
+                }
+                else if (move_right_button){
+                    accel.d = 0
+                    states.d = States.B_RIGHT_DIR_IDLE
+                }
+                else if (select_button){
+                    if (~|rd1[1:0]){
+                        states.d = States.B_COUNTP1
+                    }
+                }
+                // else if (deselect_button){
+                //     if (rd1[1]){
+                //         states.d = States.B_SET_PIXEL_0
+                //     }
+                // }
+                else if (deselect_button){ // TODO: set back to next_start_button
+                    states.d = States.REMOVE_CURSOR
+                }
+                // debugging
+                debug_dff.d = 50
+
+            States.B_COUNTP1:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = B_COUNT
+                wdsel = b0000
+                wa = B_COUNT
+                states.d = States.B_SET_PIXEL_B
+                // debugging
+                debug_dff.d = 11
+
+            States.B_SET_PIXEL_B:
+                we = b1 
+                wdsel = b0011
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_INPUT_IDLE
+                // debugging
+                debug_dff.d = 80     
+            
+            States.B_COUNTM1:
+                alufn = SUB
+                bsel = b0001
+                we = b1
+                ra1 = B_COUNT
+                wdsel = b0000
+                wa = B_COUNT
+                states.d = States.B_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 13
+
+            States.B_SET_PIXEL_0:
+                we = b1
+                wdsel = b0001
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_INPUT_IDLE
+                // debugging
+                debug_dff.d = 81
+                
+        // B INPUT UP DIRECTION ------------------------------------------------------
+
+            States.B_UP_DIR_IDLE:
+                ra1 = TARGET_PIXEL_VALUE
+                if (move_up_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.B_UP_COUNTP1
+                        } else {
+                            states.d = States.B_UP_CHECK_PIXEL
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[1]) {
+                            states.d = States.B_UP_COUNTM1
+                        } else {
+                            states.d = States.B_UP_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.B_UP_CHECK_PIXEL
+                    }
+                } else {
+                    states.d = States.B_INPUT_IDLE
+                }
+                // debugging
+                debug_dff.d = 51
+
+            States.B_UP_CLK:
+                if (move_up_button) {
+                    if (accel_edge_buff.q) {
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
+                        }
+                        accel.d = 0
+                        states.d = States.B_UP_DIR_IDLE
+                    }
+                } else {
+                    accel_timer.d = 0
+                    accel_selector.d = 0
+                    states.d = States.B_UP_DIR_IDLE
+                }
+
+            States.B_UP_COUNTP1:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = B_COUNT
+                wdsel = b0000
+                wa = B_COUNT
+                states.d = States.B_UP_SET_PIXEL_B
+                // debugging
+                debug_dff.d = 52
+            
+            States.B_UP_SET_PIXEL_B:
+                we = b1 
+                wdsel = b0011
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_UP_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 53
+            
+            States.B_UP_COUNTM1:
+                alufn = SUB
+                bsel = b0001
+                we = b1
+                ra1 = B_COUNT
+                wdsel = b0000
+                wa = B_COUNT
+                states.d = States.B_UP_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 54
+             
+            States.B_UP_SET_PIXEL_0:
+                we = b1
+                wdsel = b0001
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_UP_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 55
+            
+            States.B_UP_CHECK_PIXEL:
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1[12:6]) {
+                    b0000001: states.d = States.B_UP_CLK
+                    default: states.d = States.B_UP_RESET_PIXEL
+                }
+                // debugging
+                debug_dff.d = 56
+            
+            States.B_UP_RESET_PIXEL:
+                bsel = b0000
+                ra1 = TARGET_PIXEL_ADDRESS
+                ra2 = TARGET_PIXEL_VALUE
+                bwd = rd2
+                bwe = b1
+                brsel = b00
+                states.d = States.B_UP_MOVE_CURSOR
+                // debugging
+                debug_dff.d = 57
+            
+            States.B_UP_MOVE_CURSOR:
+                if (~ddr) {
+                    alufn = SUB
+                    bsel = b0100
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    wa = TARGET_PIXEL_ADDRESS
+                    brsel = b01
+                    states.d = States.B_UP_STORE_PIXEL
+                }
+                // debugging
+                debug_dff.d = 58
+            
+            States.B_UP_STORE_PIXEL:
+                we = b1
+                wdsel = b0100
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_UP_CURSOR_COLOUR
+                // debugging
+                debug_dff.d = 59
+            
+            States.B_UP_CURSOR_COLOUR:
+                ra1 = TARGET_PIXEL_ADDRESS
+                bwe = b1
+                bwd = b11
+                brsel = b00
+                states.d = States.B_UP_CLK
+                // debugging
+                debug_dff.d = 60
+            
+        // B INPUT DOWN DIRECTION ------------------------------------------------------
+
+            States.B_DOWN_DIR_IDLE:
+                ra1 = TARGET_PIXEL_VALUE
+                if (move_down_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.B_DOWN_COUNTP1
+                        } else {
+                            states.d = States.B_DOWN_CHECK_PIXEL
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[1]) {
+                            states.d = States.B_DOWN_COUNTM1
+                        } else {
+                            states.d = States.B_DOWN_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.B_DOWN_CHECK_PIXEL
+                    }
+                } else {
+                    states.d = States.B_INPUT_IDLE
+                }
+                // debugging
+                debug_dff.d = 61
+
+            States.B_DOWN_CLK:
+                if (move_down_button) {
+                    if (accel_edge_buff.q) {
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
+                        }
+                        accel.d = 0
+                        states.d = States.B_DOWN_DIR_IDLE
+                    }
+                } else {
+                    accel_timer.d = 0
+                    accel_selector.d = 0
+                    states.d = States.B_DOWN_DIR_IDLE
+                }
+
+            States.B_DOWN_COUNTP1:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = B_COUNT
+                wdsel = b0000
+                wa = B_COUNT
+                states.d = States.B_DOWN_SET_PIXEL_B
+                // debugging
+                debug_dff.d = 62
+            
+            States.B_DOWN_SET_PIXEL_B:
+                we = b1 
+                wdsel = b0011
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_DOWN_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 63
+            
+            States.B_DOWN_COUNTM1:
+                alufn = SUB
+                bsel = b0001
+                we = b1
+                ra1 = B_COUNT
+                wdsel = b0000
+                wa = B_COUNT
+                states.d = States.B_DOWN_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 64
+            
+            States.B_DOWN_SET_PIXEL_0:
+                we = b1
+                wdsel = b0001
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_DOWN_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 65
+            
+            States.B_DOWN_CHECK_PIXEL:
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1[12]) {
+                    b1: states.d = States.B_DOWN_CLK
+                    default: states.d = States.B_DOWN_RESET_PIXEL
+                }
+                // debugging
+                debug_dff.d = 66
+            
+            States.B_DOWN_RESET_PIXEL:
+                bsel = b0000
+                ra1 = TARGET_PIXEL_ADDRESS
+                ra2 = TARGET_PIXEL_VALUE
+                bwd = rd2
+                brsel = b00
+                bwe = b1
+                states.d = States.B_DOWN_MOVE_CURSOR
+                // debugging
+                debug_dff.d = 67
+            
+            States.B_DOWN_MOVE_CURSOR:
+                if (~ddr) {
+                    alufn = b000000
+                    bsel = b0100
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    wa = TARGET_PIXEL_ADDRESS
+                    brsel = b01
+
+                    states.d = States.B_DOWN_STORE_PIXEL
+                }
+                // debugging
+                debug_dff.d = 68
+            
+            States.B_DOWN_STORE_PIXEL:
+                we = b1
+                wdsel = b0100
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_DOWN_CURSOR_COLOUR
+                // debugging
+                debug_dff.d = 69
+            
+            States.B_DOWN_CURSOR_COLOUR:
+                ra1 = TARGET_PIXEL_ADDRESS
+                bwe = b1
+                bwd = b11
+                brsel = b00
+                states.d = States.B_DOWN_CLK
+                // debugging
+                debug_dff.d = 70
+            
+        // B INPUT LEFT DIRECTION ------------------------------------------------------
+
+            States.B_LEFT_DIR_IDLE:
+                ra1 = TARGET_PIXEL_VALUE
+                if (move_left_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.B_LEFT_COUNTP1
+                        } else {
+                            states.d = States.B_LEFT_CHECK_PIXEL
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[1]) {
+                            states.d = States.B_LEFT_COUNTM1
+                        } else {
+                            states.d = States.B_LEFT_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.B_LEFT_CHECK_PIXEL
+                    }
+                } else {
+                    states.d = States.B_INPUT_IDLE
+                }
+                // debugging
+                debug_dff.d = 71
+
+            States.B_LEFT_CLK:
+                if (move_left_button) {
+                    if (accel_edge_buff.q) {
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
+                        }
+                        accel.d = 0
+                        states.d = States.B_LEFT_DIR_IDLE
+                    }
+                } else {
+                    accel_timer.d = 0
+                    accel_selector.d = 0
+                    states.d = States.B_LEFT_DIR_IDLE
+                }
+
+            States.B_LEFT_COUNTP1:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = B_COUNT
+                wdsel = b0000
+                wa = B_COUNT
+                states.d = States.B_LEFT_SET_PIXEL_B
+                // debugging
+                debug_dff.d = 72
+            
+            States.B_LEFT_SET_PIXEL_B:
+                we = b1 
+                wdsel = b0011
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_LEFT_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 73
+            
+            States.B_LEFT_COUNTM1:
+                alufn = SUB
+                bsel = b0001
+                we = b1
+                ra1 = B_COUNT
+                wdsel = b0000
+                wa = B_COUNT
+                states.d = States.B_LEFT_SET_PIXEL_0
+                // debugging
+                debug_dff.d = 74
+            
+            States.B_LEFT_SET_PIXEL_0:
+                we = b1
+                wdsel = b0001
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_LEFT_CHECK_PIXEL
+                // debugging
+                debug_dff.d = 75
+            
+            States.B_LEFT_CHECK_PIXEL:
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1[5:0]) {
+                    b000000: states.d = States.B_LEFT_CLK
+                    default: states.d = States.B_LEFT_RESET_PIXEL
+                }
+                // debugging
+                debug_dff.d = 76
+            
+            States.B_LEFT_RESET_PIXEL:
+                bsel = b0000
+                ra1 = TARGET_PIXEL_ADDRESS
+                ra2 = TARGET_PIXEL_VALUE
+                bwd = rd2
+                brsel = b00
+                bwe = b1
+                states.d = States.B_LEFT_MOVE_CURSOR
+                // debugging
+                debug_dff.d = 77
+            
+            States.B_LEFT_MOVE_CURSOR:
+                if (~ddr){
+                    alufn = SUB
+                    bsel = b0001
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    wa = TARGET_PIXEL_ADDRESS
+                    brsel = b01
+
+                    states.d = States.B_LEFT_STORE_PIXEL
+                }
+                // debugging
+                debug_dff.d = 78
+            
+            States.B_LEFT_STORE_PIXEL:
+                we = b1
+                wdsel = b0100
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_LEFT_CURSOR_COLOUR
+                debug_dff.d = 79
+            
+            States.B_LEFT_CURSOR_COLOUR:
+                ra1 = TARGET_PIXEL_ADDRESS
+                bwe = b1
+                bwd = b11
+                brsel = b00
+                states.d = States.B_LEFT_CLK
+                debug_dff.d = 80
+            
+        // B INPUT RIGHT DIRECTION ------------------------------------------------------
+
+            States.B_RIGHT_DIR_IDLE:
+                ra1 = TARGET_PIXEL_VALUE
+                if (move_right_button){
+                    if (select_button){
+                        if (~|rd1[1:0]) {
+                            states.d = States.B_RIGHT_COUNTP1
+                        } else {
+                            states.d = States.B_RIGHT_CHECK_PIXEL
+                        }
+                    } else if (deselect_button) {
+                        if (rd1[1]) {
+                            states.d = States.B_RIGHT_COUNTM1
+                        } else {
+                            states.d = States.B_RIGHT_CHECK_PIXEL
+                        }
+                    } else {
+                        states.d = States.B_RIGHT_CHECK_PIXEL
+                    }
+                } else {
+                    states.d = States.B_INPUT_IDLE
+                }
+                debug_dff.d = 80
+                
+
+            States.B_RIGHT_CLK:
+                if (move_right_button) {
+                    if (accel_edge_buff.q) {
+                        case (accel_timer.q) {
+                            b1111: accel_timer.d = accel_timer.q
+                            default: accel_timer.d = accel_timer.q + 1
+                        }
+                        accel.d = 0
+                        states.d = States.B_RIGHT_DIR_IDLE
+                    }
+                } else {
+                    accel_timer.d = 0
+                    accel_selector.d = 0
+                    states.d = States.B_RIGHT_DIR_IDLE
+                }
+                debug_dff.d = 81
+
+            States.B_RIGHT_COUNTP1:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = B_COUNT
+                wdsel = b0000
+                wa = B_COUNT
+                states.d = States.B_RIGHT_SET_PIXEL_B
+                debug_dff.d = 82
+            
+            States.B_RIGHT_SET_PIXEL_B:
+                we = b1 
+                wdsel = b0011
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_RIGHT_CHECK_PIXEL
+                debug_dff.d = 83
+
+            States.B_RIGHT_COUNTM1:
+                alufn = SUB
+                bsel = b0001
+                we = b1
+                ra1 = B_COUNT
+                wdsel = b0000
+                wa = B_COUNT
+                states.d = States.B_RIGHT_SET_PIXEL_0
+                debug_dff.d = 84
+            
+            States.B_RIGHT_SET_PIXEL_0:
+                we = b1
+                wdsel = b0001
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_RIGHT_CHECK_PIXEL
+                debug_dff.d = 85
+            
+            States.B_RIGHT_CHECK_PIXEL:
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1[5:0]) {
+                    b111111: states.d = States.B_RIGHT_CLK
+                    default: states.d = States.B_RIGHT_RESET_PIXEL
+                }
+                debug_dff.d = 86
+            
+            States.B_RIGHT_RESET_PIXEL:
+                bsel = b0000
+                ra1 = TARGET_PIXEL_ADDRESS
+                ra2 = TARGET_PIXEL_VALUE
+                bwd = rd2
+                brsel = b00
+                bwe = b1
+                states.d = States.B_RIGHT_MOVE_CURSOR
+                // debugging
+                debug_dff.d = 87
+            
+            States.B_RIGHT_MOVE_CURSOR:
+                if (~ddr){
+                    alufn = b000000
+                    bsel = b0001
+                    we = b1
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    wdsel = b0000
+                    wa = TARGET_PIXEL_ADDRESS
+                    brsel = b01
+                    bwe = b1
+
+                    states.d = States.B_RIGHT_STORE_PIXEL
+                }
+                // debugging
+                debug_dff.d = 88
+            
+            States.B_RIGHT_STORE_PIXEL:
+                we = b1
+                wdsel = b0100
+                wa = TARGET_PIXEL_VALUE
+                states.d = States.B_RIGHT_CURSOR_COLOUR
+                debug_dff.d = 89
+            
+            States.B_RIGHT_CURSOR_COLOUR:
+                ra1 = TARGET_PIXEL_ADDRESS
+                bwe = b1
+                bwd = b11
+                brsel = b00
+                states.d = States.B_RIGHT_CLK
+                debug_dff.d = 90
+
+        // GAME LOGIC ------------------------------------------------------------------
+
+            States.REMOVE_CURSOR:
+                bsel = b0000
+                ra1 = TARGET_PIXEL_ADDRESS
+                ra2 = TARGET_PIXEL_VALUE
+                bwd = rd2
+                brsel = b00
+                bwe = b1
+                states.d = States.RESET_PIXEL_TO_0
+                // debugging
+                debug_dff.d = 155
+
+            States.RESET_PIXEL_TO_0:
+                we = b1
+                wdsel = b1001
+                wa = TARGET_PIXEL_ADDRESS
+                states.d = States.GAME_IDLE
+                // debugging
+                debug_dff.d = 156
+
+            // Game Idle Stage
+            States.GAME_IDLE:
+                if (decrease_timer.q) {
+                    decrease_timer.d = 0
+                    states.d = States.TIMER_M1
+                } else if (game_tick.q) {
+                    game_tick.d = 0
+                    states.d = States.GAME_IDLE_READ_CURR_PIXEL_VALUE
+                }
+                debug_dff.d = 91
+            
+            States.TIMER_M1:
+                alufn = SUB
+                bsel = b0001
+                we = b1
+                wdsel = b0000
+                ra1 = TIMER
+                wa = TIMER
+                states.d = States.GAME_IDLE
+                debug_dff.d = 155
+                
+            States.END_GAME_SWITCH_BRAM:
+                if (~ddr){
+                    alufn = XOR
+                    bsel = b0001
+                    we = b1
+                    wa = BRAM_SWITCH
+                    ra1 = BRAM_SWITCH
+                    wdsel = b0000
+                    states.d = States.END_GAME
+                }
+    
+            States.END_GAME:
+                if (next_start_button) {
+                    states.d = States.SET_BRAM_SELECTOR_TO_1
+                }
+                debug_dff.d = 92
+                
+            States.GAME_IDLE_READ_CURR_PIXEL_VALUE: //TODO Some logic error here idk what, maybe looping issue or target pixel value not reset properly
+                case (rd1[5:0]) {
+                    b111111: states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR      // last column
+                    b000000: states.d = States.RESET_SR_POINTERS                    // first column
+                    default: states.d = States.READ_BRAM                            // middle columns
+                }
+                debug_dff.d = 93
+
+            // First Column Loading
+            States.RESET_SR_POINTERS:
+                if (~ddr) {
+                    // x - x to read from 0 address in bram, to pass b00 to SRs
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    ra2 = TARGET_PIXEL_ADDRESS
+                    alufn = SUB
+                    srst = 1
+                    states.d = States.SR_00_ALL_SR
+                }
+                debug_dff.d = 94
+
+            States.SR_00_ALL_SR:
+                if (~ddr) {
+                    alufn = SUB
+                    bsel = b0100
+                    ra1 = TARGET_PIXEL_ADDRESS
+
+                    // zeroing SRs
+                    swe1 = b1
+                    swe2 = b1
+                    swe3 = b1
+
+                    states.d = States.SR_LOAD_TOP_MID
+                }
+                debug_dff.d = 95
+            
+            States.SR_LOAD_TOP_MID:
+                if (~ddr){
+                    alufn = SUB
+                    bsel = b0101
+                    ra1 = TARGET_PIXEL_ADDRESS
+
+                    swe1 = b1
+
+                    states.d = States.SR_LOAD_TOP_RIGHT
+                }
+                debug_dff.d = 96
+
+            States.SR_LOAD_TOP_RIGHT:
+                if (~ddr){
+                    alufn = b011010
+                    ra1 = TARGET_PIXEL_ADDRESS
+
+                    swe1 = b1
+
+                    states.d = States.SR_LOAD_MID_MID
+                }
+                debug_dff.d = 158
+
+            States.SR_LOAD_MID_MID:
+                if (~ddr){
+                    alufn = ADD
+                    bsel = b0001
+                    ra1 = TARGET_PIXEL_ADDRESS
+
+                    swe2 = b1
+
+                    states.d = States.SR_LOAD_MID_RIGHT
+                }
+                debug_dff.d = 97
+
+            States.SR_LOAD_MID_RIGHT:
+                if (~ddr){
+                    alufn = ADD
+                    bsel = b0100
+                    ra1 = TARGET_PIXEL_ADDRESS
+
+                    swe2 = b1
+
+                    states.d = States.SR_LOAD_BOT_MID
+                }
+                debug_dff.d = 98
+
+            States.SR_LOAD_BOT_MID:
+                if (~ddr){
+                    alufn = ADD
+                    bsel = b0101
+                    ra1 = TARGET_PIXEL_ADDRESS
+
+                    swe3 = b1
+
+                    states.d = States.SR_LOAD_BOT_RIGHT
+                }
+                debug_dff.d = 99
+
+            States.SR_LOAD_BOT_RIGHT:
+                swe3 = b1
+                sre3 = b0
+                states.d = States.READ_TOP_LEFT
+                debug_dff.d = 100
+
+        // Middle Columns Loading ----------------------------------------------------------
+            States.READ_BRAM:
+                if (~ddr){
+                    alufn = SUB
+                    bsel = b0101
+                    ra1 = TARGET_PIXEL_ADDRESS
+
+                    states.d = States.RB_LOAD_TOP_RIGHT
+                }
+                debug_dff.d = 101
+
+            States.RB_LOAD_TOP_RIGHT:
+                if (~ddr){
+                    alufn = ADD
+                    bsel = b0001
+                    ra1 = TARGET_PIXEL_ADDRESS
+
+                    swe1 = b1
+
+                    states.d = States.RB_LOAD_MID_RIGHT
+                }
+                debug_dff.d = 102
+
+            States.RB_LOAD_MID_RIGHT:
+                if (~ddr){
+                    alufn = ADD
+                    bsel = b0101
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    bwe = b0
+
+                    swe2 = b1
+
+                    states.d = States.RB_LOAD_BOT_RIGHT
+                }
+                debug_dff.d = 103
+
+            States.RB_LOAD_BOT_RIGHT:
+                if (~ddr){
+
+                    swe3 = b1
+
+                    states.d = States.READ_TOP_LEFT
+                }
+                debug_dff.d = 104
+            
+        // Last Column Loading ------------------------------------------------------------
+            States.READ_CURR_PIXEL_VALUE_00_ALL_SR:
+                swe1 = b1
+                swe2 = b1
+                swe3 = b1
+
+                states.d = States.READ_TOP_LEFT
+                debug_dff.d = 105
+
+        // Counting Neighbours -----------------------------------------------------------
+            States.READ_TOP_LEFT:
+                sre1 = b1
+                case(srd1){
+                    b01:
+                        states.d = States.TOP_LEFT_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.TOP_LEFT_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.READ_TOP_MID
+                }
+                debug_dff.d = 106
+            
+            States.TOP_LEFT_ADD_A_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = A_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = A_NEIGHBOUR_ADDRESS
+                states.d = States.READ_TOP_MID
+                debug_dff.d = 107
+            
+            States.TOP_LEFT_ADD_B_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = B_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = B_NEIGHBOUR_ADDRESS
+                states.d = States.READ_TOP_MID
+                debug_dff.d = 108
+            
+            
+            // Reading top mid pixel for neighbours
+            States.READ_TOP_MID:
+                sre1 = b1
+                case(srd1[1:0]){
+                    b01:
+                        states.d = States.TOP_MID_ADD_A_NEIGHBOUR
+                        sre1 = b1
+                    b10:
+                        states.d = States.TOP_MID_ADD_B_NEIGHBOUR
+                        sre1 = b1
+                    b00:
+                        states.d = States.READ_TOP_RIGHT
+                        sre1 = b1
+                }
+                debug_dff.d = 109
+            
+            States.TOP_MID_ADD_A_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = A_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = A_NEIGHBOUR_ADDRESS
+                states.d = States.READ_TOP_RIGHT
+                
+                // debug
+                debug_dff.d = 110
+            
+            States.TOP_MID_ADD_B_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = B_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = B_NEIGHBOUR_ADDRESS
+                states.d = States.READ_TOP_RIGHT
+                
+                // debug
+                debug_dff.d = 111
+            
+            // Reading top right pixel for neighbours
+            States.READ_TOP_RIGHT:
+                sre1 = b1
+                case(srd1){
+                    b01:
+                        states.d = States.TOP_RIGHT_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.TOP_RIGHT_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.READ_MID_LEFT
+                }
+
+                // debug
+                debug_dff.d = 112
+            
+            States.TOP_RIGHT_ADD_A_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = A_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = A_NEIGHBOUR_ADDRESS
+                states.d = States.READ_MID_LEFT
+                debug_dff.d = 113
+            
+            States.TOP_RIGHT_ADD_B_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = B_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = B_NEIGHBOUR_ADDRESS
+                states.d = States.READ_MID_LEFT
+                debug_dff.d = 114
+        
+            // Reading mid left pixel for neighbours
+            States.READ_MID_LEFT:
+                sre2 = b1
+                case(srd2){
+                    b01:
+                        states.d = States.MID_LEFT_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.MID_LEFT_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.READ_TARGET_PIXEL
+                }
+                debug_dff.d = 115
+            
+            States.MID_LEFT_ADD_A_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = A_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = A_NEIGHBOUR_ADDRESS
+                states.d = States.READ_TARGET_PIXEL
+                debug_dff.d = 116
+            
+            States.MID_LEFT_ADD_B_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = B_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = B_NEIGHBOUR_ADDRESS
+                states.d = States.READ_TARGET_PIXEL
+                debug_dff.d = 117
+            
+            // Reading target pixel for neighbours
+            States.READ_TARGET_PIXEL:
+                we = b1
+                wdsel = b101
+                wa = TARGET_PIXEL_VALUE
+                sre2 = b1
+                states.d = States.READ_MID_RIGHT
+                debug_dff.d = 118
+
+            // Reading mid right pixel for neighbours
+            States.READ_MID_RIGHT:
+                sre2 = b1
+                case(srd2){
+                    b01:
+                        states.d = States.MID_RIGHT_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.MID_RIGHT_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.READ_BOT_LEFT
+                }
+                debug_dff.d = 119
+            
+            States.MID_RIGHT_ADD_A_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = A_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = A_NEIGHBOUR_ADDRESS
+                states.d = States.READ_BOT_LEFT
+                debug_dff.d = 120
+            
+            States.MID_RIGHT_ADD_B_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = B_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = B_NEIGHBOUR_ADDRESS
+                states.d = States.READ_BOT_LEFT
+                debug_dff.d = 121
+            
+            // Reading bot left pixel for neighbours
+            States.READ_BOT_LEFT:
+                sre3 = b1
+                case(srd3){
+                    b01:
+                        states.d = States.BOT_LEFT_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.BOT_LEFT_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.READ_BOT_MID
+                }
+                debug_dff.d = 122
+            
+            States.BOT_LEFT_ADD_A_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = A_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = A_NEIGHBOUR_ADDRESS
+                states.d = States.READ_BOT_MID
+                debug_dff.d = 123
+            
+            States.BOT_LEFT_ADD_B_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = B_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = B_NEIGHBOUR_ADDRESS
+                states.d = States.READ_BOT_MID
+                debug_dff.d = 124
+            
+            // Reading bot mid pixel for neighbours
+            States.READ_BOT_MID:
+                sre3 = b1
+                case(srd3){
+                    b01:
+                        states.d = States.BOT_MID_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.BOT_MID_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.READ_BOT_RIGHT
+                }
+                debug_dff.d = 125
+            
+            States.BOT_MID_ADD_A_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = A_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = A_NEIGHBOUR_ADDRESS
+                states.d = States.READ_BOT_RIGHT
+                debug_dff.d = 126
+            
+            States.BOT_MID_ADD_B_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = B_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = B_NEIGHBOUR_ADDRESS
+                states.d = States.READ_BOT_RIGHT
+                debug_dff.d = 127
+            
+            // Reading bot right pixel for neighbours
+            States.READ_BOT_RIGHT:
+                sre3 = b1
+                case(srd3){
+                    b01:
+                        states.d = States.BOT_RIGHT_ADD_A_NEIGHBOUR
+                    b10:
+                        states.d = States.BOT_RIGHT_ADD_B_NEIGHBOUR
+                    b00:
+                        states.d = States.SR_EMPTY_READ_1
+                }
+                debug_dff.d = 128
+            
+            States.BOT_RIGHT_ADD_A_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = A_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = A_NEIGHBOUR_ADDRESS
+                states.d = States.SR_EMPTY_READ_1
+                debug_dff.d = 129
+            
+            States.BOT_RIGHT_ADD_B_NEIGHBOUR:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = B_NEIGHBOUR_ADDRESS
+                wdsel = b0000
+                wa = B_NEIGHBOUR_ADDRESS
+                states.d = States.SR_EMPTY_READ_1
+                debug_dff.d = 130
+
+            States.SR_EMPTY_READ_1:
+                sre1 = b1
+                sre2 = b1
+                sre3 = b1
+                states.d = States.SR_EMPTY_READ_2
+                debug_dff.d = 131
+            
+            States.SR_EMPTY_READ_2:
+                sre1 = b1
+                sre2 = b1
+                sre3 = b1
+                states.d = States.CHECK_NEIGHBOURS
+                debug_dff.d = 132
+            
+            // Game logic ---------------------------------------------------------------
+            States.CHECK_NEIGHBOURS:
+                ra1 = TARGET_PIXEL_VALUE
+                case(rd1){
+                    b00:
+                        states.d = States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS
+                    b10:
+                        states.d = States.B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR
+                    b01:
+                       states.d = States.B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR
+                }
+                debug_dff.d = 133
+
+            //current -pixel is game state
+            States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS:
+                // alufn = SUB
+                ra1 = A_NEIGHBOUR_ADDRESS
+                ra2 = B_NEIGHBOUR_ADDRESS
+                // case(aluout) {
+                //     13x{b0}: states.d = States.SET_00
+                //     default: states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
+                // }
+                case (c{rd1[3:0],rd2[3:0]}) {
+                    b00000000: states.d = States.SET_00
+                    b00010001: states.d = States.SET_00
+                    b00100010: states.d = States.SET_00
+                    b00110011: states.d = States.SET_00
+                    b01000100: states.d = States.SET_00
+                    b01010101: states.d = States.SET_00
+                    b01100110: states.d = States.SET_00
+                    b01110111: states.d = States.SET_00
+                    b10001000: states.d = States.SET_00
+                    default: states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
+                }
+
+                // case ()
+                // if (alu_buffer.q[1]){
+                //     if (alu_buffer.q[0]) {
+                //         states.d = States.SET_00                    
+                //     } else {
+                //         states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
+                //     }
+                //     alu_buffer.d = b00
+                // } else {
+                //     alu_buffer.d = c{b1,aluout_lsb}
+                // }
+                // debugging
+                debug_dff.d = 134
+
+            States.B00_CHECK_A_NEIGHBOUR_EQ_3:
+                ra1 = A_NEIGHBOUR_ADDRESS
+                case(rd1[1:0]){
+                    b11: states.d = States.B00_A_COUNTP1
+                    default: states.d = States.B00_CHECK_B_NEIGHBOUR_EQ_3
+                }
+                // debugging
+                debug_dff.d = 135
+        
+            States.B00_CHECK_B_NEIGHBOUR_EQ_3:
+                ra1 = B_NEIGHBOUR_ADDRESS
+                case(rd1[1:0]){
+                    b11: states.d = States.B00_B_COUNTP1
+                    default: states.d = States.SET_00
+                }
+                // debugging
+                debug_dff.d = 136
+
+            States.B00_B_COUNTP1:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = B_COUNT
+                wdsel = b0000
+                wa = B_COUNT
+                states.d = States.SET_B
+                debug_dff.d = 137
+
+            States.B00_A_COUNTP1:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = A_COUNT
+                wdsel = b0000
+                wa = A_COUNT
+                states.d = States.SET_A
+                debug_dff.d = 138
+
+            // current pixel is b10
+            States.B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR:
+                // alufn = SUB
+                ra1 = A_NEIGHBOUR_ADDRESS
+                ra2 = B_NEIGHBOUR_ADDRESS
+
+                if (rd1[3:0]<rd2[3:0]) {
+                    states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_2
+                } else {
+                    states.d = States.B10_B_COUNTM1
+                }
+                // if (alu_buffer.q[1]){
+                //     if (alu_buffer.q[0]) {
+                //         states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_2                    
+                //     } else {
+                //         states.d = States.B10_B_COUNTM1
+                //     }
+                //     alu_buffer.d = b00
+                // } else {
+                //     alufn = CMPLT
+                //     bsel = b0000
+                //     ra1 = A_NEIGHBOUR_ADDRESS
+                //     ra2 = B_NEIGHBOUR_ADDRESS
+                //     alu_buffer.d = c{b1,aluout_lsb}
+                // }
+                // debugging
+                debug_dff.d = 139
+
+            States.B10_CHECK_B_NEIGHBOUR_EQ_2:
+                ra1 = B_NEIGHBOUR_ADDRESS
+                case(rd1[1:0]){
+                    b10: states.d = States.SET_B
+                    b11: states.d = States.SET_B
+                    default: states.d = States.B10_B_COUNTM1
+                }
+                // debugging
+                debug_dff.d = 140
+
+            States.B10_B_COUNTM1:
+                alufn = SUB
+                bsel = b0001
+                we = b1
+                ra1 = B_COUNT
+                wdsel = b0000
+                wa = B_COUNT
+                states.d = States.SET_00
+                debug_dff.d = 142
+
+            // current pixel is b01
+            States.B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR:
+                // alufn = SUB
+                ra1 = A_NEIGHBOUR_ADDRESS
+                ra2 = B_NEIGHBOUR_ADDRESS
+
+                if (rd2[3:0]<rd1[3:0]) {
+                    states.d = States.B01_CHECK_A_NEIGHBOUR_EQ_2
+                } else {
+                    states.d = States.B01_A_COUNTM1
+                }
+
+                // if (alu_buffer.q[1]){
+                //     if (alu_buffer.q[0]) {
+                //         states.d = States.B01_CHECK_A_NEIGHBOUR_EQ_2                    
+                //     } else {
+                //         states.d = States.B01_A_COUNTM1                    
+                //     }
+                //     alu_buffer.d = b00
+                // } else {
+                //     alufn = CMPLT
+                //     bsel = b0000
+                //     ra1 = B_NEIGHBOUR_ADDRESS
+                //     ra2 = A_NEIGHBOUR_ADDRESS
+                //     alu_buffer.d = c{b1,aluout_lsb}
+                // }
+                // debugging
+                debug_dff.d = 143
+            
+            States.B01_CHECK_A_NEIGHBOUR_EQ_2:
+                ra1 = A_NEIGHBOUR_ADDRESS
+                case(rd1[1:0]){
+                    b10: states.d = States.SET_A
+                    b11: states.d = States.SET_A
+                    default: states.d = States.B01_A_COUNTM1
+                }
+                // debugging
+                debug_dff.d = 144
+
+            States.B01_A_COUNTM1:
+                alufn = SUB
+                bsel = b0001
+                we = b1
+                ra1 = A_COUNT
+                wdsel = b0000
+                wa = A_COUNT
+                states.d = States.SET_00
+                debug_dff.d = 145
+            // Setting pixel as A B or 00
+
+            States.SET_A: // yeyetaut1
+                ra1 = TARGET_PIXEL_ADDRESS
+                bwe = b1
+                bwd = b01
+
+                states.d = States.RESET_A_NEIGHBOUR
+                debug_dff.d = 146
+            
+            States.SET_B:
+                ra1 = TARGET_PIXEL_ADDRESS
+                bwe = b1
+                bwd = b10
+                states.d = States.RESET_A_NEIGHBOUR
+                debug_dff.d = 147
+            
+            States.SET_00:
+                ra1 = TARGET_PIXEL_ADDRESS
+                bwe = b1
+                bwd = b00
+                states.d = States.RESET_A_NEIGHBOUR
+                debug_dff.d = 148
+
+        // End Game Cycle ----------------------------------------------------------------
+
+            States.RESET_A_NEIGHBOUR:
+                we = b1
+                wa = A_NEIGHBOUR_ADDRESS
+                wdsel = b0001
+                states.d = States.RESET_B_NEIGHBOUR
+                debug_dff.d = 149
+            
+            States.RESET_B_NEIGHBOUR:
+                we = b1
+                wa = B_NEIGHBOUR_ADDRESS
+                wdsel = b0001
+                states.d = States.MOVE_PIXEL_ADDRESS
+                debug_dff.d = 150
+            
+            States.MOVE_PIXEL_ADDRESS:
+                alufn = ADD
+                bsel = b0001
+                we = b1
+                ra1 = TARGET_PIXEL_ADDRESS
+                wdsel = b0000
+                wa = TARGET_PIXEL_ADDRESS
+                states.d = States.CHECK_AT_LAST_PIXEL
+                debug_dff.d = 151
+            
+            States.CHECK_AT_LAST_PIXEL:
+                ra1 = TARGET_PIXEL_ADDRESS
+                case (rd1) {
+                    b1000000111111: states.d = States.SWITCH_BRAM
+                    default: states.d = States.GAME_IDLE
+                }
+                // debugging
+                debug_dff.d = 152
+
+            States.SWITCH_BRAM:
+                if (~ddr){
+                    alufn = XOR
+                    bsel = b0001
+                    we = b1
+                    wa = BRAM_SWITCH
+                    ra1 = BRAM_SWITCH
+                    wdsel = b0000
+
+                    states.d = States.CHECK_END_GAME
+                }
+                debug_dff.d = 153
+            
+            States.CHECK_END_GAME:
+                if (~|timer) {
+                    states.d = States.END_GAME_SWITCH_BRAM
+                } else if (~|pac) {
+                    states.d = States.END_GAME_SWITCH_BRAM
+                } else if (~|pbc) {
+                    states.d = States.END_GAME_SWITCH_BRAM
+                } else {
+                    states.d = States.SET_PIXEL_TO_BEGINNING
+                }
+            
+            States.SET_PIXEL_TO_BEGINNING:
+                we = b1
+                wa = TARGET_PIXEL_ADDRESS
+                wdsel = b1001
+                states.d = States.GAME_IDLE
+                debug_dff.d = 154
+        }   
+    }
+}

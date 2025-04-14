@@ -1,0 +1,409 @@
+module alchitry_top (
+    input clk,              // 10MHz clock
+    // input rst_n,            // reset button (active low)
+    output led[8],          // 8 user controllable LEDs
+    output io_led[8],       // 8 debugging leds
+    input usb_rx,           // USB->Serial input
+    output usb_tx,          // USB->Serial output
+
+    // buttons
+    input butt_dirs[4],     // direction buttons
+    input butt_sel_desel[2],// select and deselect buttons
+    input butt_reset,       // reset button, to override reset button
+    input butt_next_play,   // next and play button, action based on FSM state
+    // ^ to pass through edge detector
+    
+    // matrix connections
+    output mataddr[5],      // ABCDE addresses
+    output mattop[3],       // top led data
+    output matbot[3],       // bot led data
+    output matclk,          // clock
+    output matoe,           // OE
+    output matlat,          // latch
+    output matgnd[2],       // ground
+
+    // seven segment leds
+    output aseg[12],      // counter for player A
+    output bseg[12],      // counter for player B
+    output timerseg[12]   // game timer
+
+    // testing
+    // input testpullup        // default high?
+
+) {
+    const CLK = 100_000_000
+
+    alu alum(#SIZE(13))
+    
+    sig rst
+    sig fifo_rst
+
+    .clk(clk) {
+    
+        reset_conditioner reset_cond        // whole board reset
+        reset_conditioner fifo_reset_cond   // reset for shift registers
+
+        // button conditioners
+        button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}),#MIN_DELAY(4x{{200}}),#NUM_SYNC(4x{{30}}))
+        button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}),#MIN_DELAY(2x{{200}}),#NUM_SYNC(2x{{30}}))
+        button_conditioner cond_butt_next_play(#CLK_FREQ(CLK),#MIN_DELAY(200),#NUM_SYNC(30))
+        // button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}))
+        // button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}))
+        // button_conditioner cond_butt_next_play(#CLK_FREQ(CLK))
+
+        // button_conditioner butt_cond(#CLK_FREQ(CLK))            // CAN REMOVE WITH BUTTON TESTER
+        
+        // edge detector for next/play button
+        edge_detector edge_next_play(#RISE(1),#FALL(0))
+        
+        // edge detecors for internal clocks
+        edge_detector timerclk(#RISE(1),#FALL(0))       // ticks once per second
+        edge_detector gameclk(#RISE(1),#FALL(0))        // ticks roughly 10 times per second
+        edge_detector med_inputclk(#RISE(1),#FALL(0))   // ticks roughly 5 times per second
+        
+        // debug
+        edge_detector edge_up(#RISE(1),#FALL(0))
+
+        // dual bram module
+        bram brams
+            
+        .rst(rst) {
+        
+            // display driver
+            display_driver display(#CLK_FREQ(CLK))
+            
+            // counter resets every second
+            counter gamecounter(#SIZE($clog2(CLK)),#TOP(CLK),#DIV(0))
+            
+            // FSM
+            fsm sm
+            
+            // custom 13-bit regfile
+            regfile reg(#WIDTH(13))
+            
+            // seven segment drivers
+            multi_seven_seg aseg_driver
+            multi_seven_seg bseg_driver
+            multi_seven_seg timerseg_driver
+            
+            // bram testing counter
+            // counter bramtest(#SIZE(13),#TOP(4223))
+            
+            // debug
+            dff buff1[2]
+            dff buff2[2]
+            dff buff3[2]
+            dff buff4[4]
+
+            // dff pixeldata[2](#INIT(b00))
+            // dff bramtest_8points[3]
+
+        }
+        .rst(fifo_rst) {
+            // shift registers
+            fifo sr1(#WIDTH(2),#ENTRIES(4))
+            fifo sr2(#WIDTH(2),#ENTRIES(4))
+            fifo sr3(#WIDTH(2),#ENTRIES(4))
+        }
+    }
+
+
+    always {
+    
+        // debug
+        buff1.d = buff1.q
+        buff2.d = buff2.q
+        buff3.d = buff3.q
+        buff4.d = buff4.q
+        edge_up.in = cond_butt_dirs.out[0]
+        if (edge_up.out) {
+            buff4.d = buff4.q + 1
+        }
+        
+        io_led[3:0] = cond_butt_dirs.out[3:0]
+        io_led[5:4] = cond_butt_sel_desel.out[1:0]
+        io_led[6] = cond_butt_next_play.out
+        io_led[7] = reset_cond.out
+        io_led[3:0] = buff4.q
+        
+        // whole board reset
+        reset_cond.in = ~butt_reset
+        rst = reset_cond.out
+        // default board led and usb connection
+        led = 8h00
+        usb_tx = usb_rx
+        
+        // button processing
+        cond_butt_dirs.in[3:0] = ~butt_dirs[3:0]
+        cond_butt_sel_desel.in[1:0] = ~butt_sel_desel[1:0]
+        cond_butt_next_play.in = ~butt_next_play
+        edge_next_play.in = cond_butt_next_play.out
+
+        // matrix and display driver connections
+        mataddr = display.address
+        mattop = display.toppixel
+        matbot = display.botpixel
+        matclk = display.sclk_out
+        matoe = display.blank
+        matlat = display.latch
+        matgnd = 0
+
+        sm.ddr = display.reading
+        
+        // connect slow clocks
+        timerclk.in = gamecounter.value[$clog2(CLK)-1]
+        gameclk.in = gamecounter.value[$clog2(CLK/4224*2)]
+        med_inputclk.in = gamecounter.value[$clog2(CLK/5)]
+        sm.timerclk = timerclk.out
+        sm.gameclk = gameclk.out
+        sm.med_inputclk = med_inputclk.out
+
+        // buttons connections
+        sm.next_start_button = edge_next_play.out
+        sm.move_up_button = cond_butt_dirs.out[0]
+        sm.move_down_button = cond_butt_dirs.out[1]
+        sm.move_left_button = cond_butt_dirs.out[2]
+        sm.move_right_button = cond_butt_dirs.out[3]
+        sm.select_button = cond_butt_sel_desel.out[0]
+        sm.deselect_button = cond_butt_sel_desel.out[1]
+
+        // seven segment // ~ if not cathode/anode
+        aseg_driver.value = reg.pac
+        bseg_driver.value = reg.pbc
+        timerseg_driver.value = reg.timer
+        aseg = ~aseg_driver.out
+        bseg = ~bseg_driver.out
+        timerseg = ~timerseg_driver.out
+        
+        // FSM and regfile connections
+        reg.ra1 = sm.ra1
+        reg.ra2 = sm.ra2
+        reg.wa = sm.wa
+        reg.we = sm.we
+        sm.rd1 = reg.rd1
+        sm.rd2 = reg.rd2
+        sm.pac = reg.pac
+        sm.pbc = reg.pbc
+        sm.timer = reg.timer
+        
+        // alu
+        // sm.aluout = alum.out
+        // sm.aluout_lsb = alum.out[0]
+        alum.alufn = sm.alufn
+        
+        // a selector
+        case(sm.asel) {
+            0: alum.a = reg.rd1
+            default: alum.a = reg.rd1
+        }
+        
+        // b selector
+        case(sm.bsel) {
+            1: alum.b = 1
+            2: alum.b = 2
+            3: alum.b = 3
+            4: alum.b = 64
+            5: alum.b = 63
+            6: alum.b = 128
+            7: alum.b = 255
+            8: alum.b = 4223
+            9: alum.b = 4160
+            10:alum.b = 4096
+            default: alum.b = reg.rd2
+        }
+
+        // wd selector
+        case(sm.wdsel) {
+            1: reg.wd = 0
+            2: reg.wd = 1
+            3: reg.wd = 2
+            4: reg.wd = brams.brd
+            5: reg.wd = sr1.dout
+            6: reg.wd = 60
+            7: reg.wd = 2144
+            8: reg.wd = 11
+            9: reg.wd = 64
+            default: reg.wd = alum.out
+        }
+
+        // shift register connections
+        // reset conditioner
+        fifo_reset_cond.in = sm.srst
+        // reset
+        fifo_rst = fifo_reset_cond.out | reset_cond.out
+        // write enable
+        sr1.wput = sm.swe1
+        sr2.wput = sm.swe2
+        sr3.wput = sm.swe3
+        // write data
+        sr1.din = brams.brd
+        sr2.din = brams.brd
+        sr3.din = brams.brd
+        // read enable
+        sr1.rget = sm.sre1
+        sr2.rget = sm.sre2
+        sr3.rget = sm.sre3
+        // read data
+        sm.srd1 = sr1.dout
+        sm.srd2 = sr2.dout
+        sm.srd3 = sr3.dout
+
+        // BRAM and display driver connections
+        display.data = brams.brd
+        brams.bra_override = display.addr
+        brams.ro = display.reading
+        
+        // BRAM and FSM connections
+        brams.brsel = sm.brsel
+        brams.bra = alum.out
+        brams.bwa = reg.rd1
+        brams.bwe = sm.bwe
+        brams.bwd = sm.bwd
+        
+        // BRAM and regfile connections
+        brams.bram_selector = reg.bram_selector
+        
+        
+
+
+
+        // // test raw pixel idx values
+        // if (display.reading && display.address == 1) {
+        //     buff1.d = b01
+        // } else if (display.reading && display.address == 31) {
+        //     buff1.d = b10            
+        // } else {
+        //     buff1.d = b11
+        // }
+        // display.data = buff1.q
+
+
+
+        // // test display clock full white
+        // display.data = buff1.q
+        // buff1.d = b11
+        
+
+        // // test dispaly driver clock
+        // if (display.reading) {
+        //     buff1.d = c{display.addr[0],butt_cond.out}
+        // }
+        // display.data = buff1.q
+
+
+        // // test for bram read and write at specific addresses
+        // if (~display.reading && gamecounter.value[15]) {
+        //     brams.bwa = 127
+        //     brams.bwd = c{b1,butt_cond.out}
+        //     bramtest_8points.d = bramtest_8points.q + 1
+        //     brams.brsel = 0
+        //     brams.bwe = 1
+        // } else {
+        //     brams.brsel = 1
+        //     brams.bwe = 0
+        // }
+
+
+        // // test for bram read and write at specific addresses
+        // if (~display.reading && gamecounter.value[15]) {
+        //     case (bramtest_8points.q) {
+        //         0: brams.bwa = 64 // first led, first row
+        //         1: brams.bwa = 96 // middle led, first row
+        //         2: brams.bwa = 191 // last led, second row
+        //         3: brams.bwa = 2112 // first led, middle row
+        //         4: brams.bwa = 2144 // middle led, middle row
+        //         5: brams.bwa = 2175 // last led, middle row
+        //         6: brams.bwa = 4032 // first led, second last row
+        //         7: brams.bwa = 4159 // last led, last row
+        //     }
+        //     brams.bwd = c{b1,butt_cond.out}
+        //     bramtest_8points.d = bramtest_8points.q + 1
+        //     brams.brsel = 0
+        //     brams.bwe = 1
+        //     if (display.raw_pixel_idx == display.addr-2112) {
+        //         buff1.d = b11
+        //     } else {
+        //         buff1.d = b00
+        //     }
+        // } else {
+        //     brams.brsel = 1
+        //     brams.bwe = 0
+        // }
+        // led[5] = buff1.q[0]
+
+
+        // // test display.addr range more
+        // pixeldata.d = b00
+        // if (display.addr == 127) {            // top left corner blue
+        //     pixeldata.d = b10
+        // }
+        // if (display.addr == 4095) {   // bottom right corner red
+        //     pixeldata.d = b01
+        // }
+        // if (display.addr == 32) {    // second row, left side
+        //     pixeldata.d = b11
+        // }
+        // display.data = pixeldata.q
+
+
+        // // test for bram read
+        // if (~display.reading && gamecounter.value[15]) {
+        //     brams.bwa = bramtest.value
+        //     brams.bwd = c{butt_cond.out,b1}
+        //     // gamecounter.value[$width(gamecounter.value)-1-:2]
+        //     brams.brsel = 0
+        //     brams.bwe = 1
+        // } else {
+        //     brams.brsel = 1
+        //     brams.bwe = 0
+        // }
+
+ 
+        // // test for display.addr range
+        // if (display.addr>=64 && display.addr<4160) {
+        //     if (butt_cond.out) {
+        //         pixeldata.d = b10
+        //     } else {
+        //         pixeldata.d = b11
+        //     }
+        // } else {
+        //     if (butt_cond.out) {
+        //         pixeldata.d = b11
+        //     } else {
+        //         pixeldata.d = b01
+        //     }
+        // }
+        // display.data = pixeldata.q
+        
+        
+        // // default display blue-white stripes (working)
+        // if (display.reading && display.addr[6]) {
+        //     pixeldata.d = b10
+        // } else if (display.reading) {
+        //     pixeldata.d = b11
+        // }
+        // display.data = pixeldata.q
+        
+
+        // // display testing (working)
+        // pixeldata.d = pixeldata.q
+        // if (butt_cond.out) {
+        //     pixeldata.d = b11
+        // } else {
+        //     pixeldata.d = b01
+        // }
+        // display.data = pixeldata.q
+
+
+        // button tester
+        // butt_cond.in = testpullup
+        // led[0] = butt_cond.out
+        // aseg_driver.value = $width(gamecounter.value)
+
+        // debugging
+        led[7:0] = sm.debug_out
+        bseg_driver.value = sr2.dout + 1
+        aseg_driver.value = sr1.dout + 1
+        // timerseg_driver.value = sr3.dout + 1
+    }
+}

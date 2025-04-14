@@ -1,0 +1,66 @@
+module multi_seven_seg #(
+    DIGITS = 4 : DIGITS > 0,
+    DIV = 16 : DIV >= 0
+)(
+    input clk,                // clock
+    input rst,                // reset
+
+    input value[$clog2($pow(10, DIGITS))],//bin_to_dec
+
+    //input values[DIGITS][4],  // values to show
+    output out[12]
+) {
+    
+    // number of bits required to store DIGITS-1
+    const DIGIT_BITS = $clog2(DIGITS)
+    //sig test[2]
+    
+    .clk(clk), .rst(rst) {
+        counter ctr (#DIV(DIV), #SIZE(DIGIT_BITS), #TOP(DIGITS-1)) 
+    }
+    
+    //seven_seg seg_dec                        // segment decoder
+    //decoder digit_dec (#WIDTH(DIGIT_BITS)) // digit decoder
+    bin_to_dec decimal_renderer(#DIGITS(4), #LEADING_ZEROS(1))
+    
+    always {
+        out = b000000000000
+        decimal_renderer.value = value
+        
+        case(decimal_renderer.digits[ctr.value]){
+            4h0: out = 12b111111101011
+            4h1: out = 12b100111101000
+            4h2: out = 12b110111110011
+            4h3: out = 12b110111111010
+            4h4: out = 12b101111111000
+            4h5: out = 12b111110111010
+            4h6: out = 12b111110111011
+            4h7: out = 12b110111101000
+            4h8: out = 12b111111111011
+            4h9: out = 12b111111111010
+            default: out = 12b100110100000
+        }
+        //test = ctr.value
+        //case(test){
+            //b00: out[5] = b1
+            //b01: out[7] = b1
+            //b10: out[8] = b1
+            //b11: out[11] = b1
+        //}
+
+        if (ctr.value == b00){
+            out[5] = b0
+        }
+        else if (ctr.value == b01){
+            out[7] = b0
+        }
+
+        else if(ctr.value == b10){
+            out[8] = b0
+        }
+
+        else if(ctr.value == b11){
+            out[11] = b0
+        }
+    }
+}

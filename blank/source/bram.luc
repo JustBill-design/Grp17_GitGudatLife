@@ -1,0 +1,63 @@
+module bram #(
+    WIDTH = 2 : WIDTH > 0,  // bit width
+    ENTRIES = 4224: ENTRIES > 0  // number of entries
+) (
+    input clk,  // clock
+    input bram_selector,                // selector from regfile
+    input brsel[2],                     // selector override
+    input bra[$clog2(ENTRIES)],         // read address
+    input bwa[$clog2(ENTRIES)],         // write address
+    input bra_override[$clog2(ENTRIES)],// override read address
+    input ro,                           // read override signal
+    input bwe,                          // write enable
+    input bwd[WIDTH],                   // write data
+    output brd[WIDTH]                   // read data
+) {
+
+    .clk(clk){
+        simple_ram bram1(#WIDTH(WIDTH),#ENTRIES(ENTRIES))
+        simple_ram bram2(#WIDTH(WIDTH),#ENTRIES(ENTRIES))
+    }
+    
+    sig bram_switch
+    sig override_address[$clog2(ENTRIES)]
+
+    always {
+    
+        //  default connections
+        bram_switch = bram_selector
+        
+        // bram switching mux
+        case(brsel) {
+            b00: bram_switch = b0
+            b01: bram_switch = b1
+            b10: bram_switch = bram_selector
+        }
+        
+        // write override mux
+        if (ro) {
+            override_address = bra_override
+        } else {
+            override_address = bra
+        }
+        
+        // routing
+        if (bram_switch) {
+            bram1.address = override_address
+            bram1.write_enable = 0
+            bram1.write_data = bwd
+            bram2.address = bwa
+            bram2.write_enable = bwe
+            bram2.write_data = bwd
+            brd = bram1.read_data
+        } else {
+            bram1.address = bwa
+            bram1.write_enable = bwe
+            bram1.write_data = bwd
+            bram2.address = override_address
+            bram2.write_enable = 0
+            bram2.write_data = bwd
+            brd = bram2.read_data
+        }
+    }
+}
