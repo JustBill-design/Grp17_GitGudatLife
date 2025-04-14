@@ -33,7 +33,7 @@ module alchitry_top (
 ) {
     const CLK = 10_000_000
     const BASECLK = 100_000_000
-    const CLK_FACTOR = BASECLK / CLK
+    const CLK_FACTOR = BASECLK / CLK / 2
 
     alu alum(#SIZE(13))
     
