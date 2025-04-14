@@ -146,7 +146,6 @@ module fsm #(
 
     const ADD = b000000
     const SUB = b000001
-    const CMPLT = b110101
     const XOR = b010110
     const PASSTHROUGH = b011010
 

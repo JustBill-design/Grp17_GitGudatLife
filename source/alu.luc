@@ -182,12 +182,12 @@ module alu #(
             //     out_sig = a >> b[4:0]
             // 6h23: // SRA 
             //     out_sig = a >>> b[4:0]
-            6h33: // CMPEQ 
-                out_sig = a[3:0] == b[3:0] 
-            6h35: // CMPLT 
-                out_sig = a[3:0] < b[3:0] 
-            6h37: // CMPLE
-                out_sig = a[3:0] <= b[3:0]
+            // 6h33: // CMPEQ 
+            //     out_sig = a[3:0] == b[3:0] 
+            // 6h35: // CMPLT 
+            //     out_sig = a[3:0] < b[3:0] 
+            // 6h37: // CMPLE
+            //     out_sig = a[3:0] <= b[3:0]
             
             
             default:
