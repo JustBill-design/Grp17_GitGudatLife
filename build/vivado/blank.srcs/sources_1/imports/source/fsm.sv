@@ -221,21 +221,23 @@ module fsm (
     localparam E_States_SET_TIMER = 8'hac;
     localparam E_States_RESET_PIXEL_VALUE = 8'had;
     localparam E_States_RESET_PIXEL_ADDRESS = 8'hae;
-    localparam E_States_SET_SELECTOR_PIXEL_STATE = 8'haf;
+    localparam E_States_RESET_A_COUNT = 8'haf;
+    localparam E_States_RESET_B_COUNT = 8'hb0;
+    localparam E_States_SET_SELECTOR_PIXEL_STATE = 8'hb1;
     logic D_decrease_timer_d, D_decrease_timer_q = 0;
     logic D_game_tick_d, D_game_tick_q = 0;
     logic [1:0] D_accel_selector_d, D_accel_selector_q = 0;
     logic [3:0] D_accel_timer_d, D_accel_timer_q = 0;
     logic [3:0] D_accel_d, D_accel_q = 0;
     logic D_accel_edge_buff_d, D_accel_edge_buff_q = 0;
-    localparam _MP_RISE_795777538 = 1'h0;
-    localparam _MP_FALL_795777538 = 1'h1;
+    localparam _MP_RISE_1832198332 = 1'h0;
+    localparam _MP_FALL_1832198332 = 1'h1;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_795777538),
-        .FALL(_MP_FALL_795777538)
+        .RISE(_MP_RISE_1832198332),
+        .FALL(_MP_FALL_1832198332)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -403,6 +405,20 @@ module fsm (
                 D_debug_dff_d = 3'h7;
             end
             8'haf: begin
+                we = 1'h1;
+                wdsel = 4'h1;
+                wa = 2'h2;
+                D_states_d = 8'hb0;
+                D_debug_dff_d = 8'h9f;
+            end
+            8'hb0: begin
+                we = 1'h1;
+                wdsel = 4'h1;
+                wa = 2'h3;
+                D_states_d = 8'hb1;
+                D_debug_dff_d = 8'ha0;
+            end
+            8'hb1: begin
                 ra1 = 3'h4;
                 bwe = 1'h1;
                 bwd = 2'h3;
@@ -2129,39 +2145,11 @@ module fsm (
             8'h92: begin
                 ra1 = 1'h0;
                 ra2 = 1'h1;
-                
-                case ({rd1[2'h3:1'h0], rd2[2'h3:1'h0]})
-                    8'h0: begin
-                        D_states_d = 8'h9f;
-                    end
-                    8'h11: begin
-                        D_states_d = 8'h9f;
-                    end
-                    8'h22: begin
-                        D_states_d = 8'h9f;
-                    end
-                    8'h33: begin
-                        D_states_d = 8'h9f;
-                    end
-                    8'h44: begin
-                        D_states_d = 8'h9f;
-                    end
-                    8'h55: begin
-                        D_states_d = 8'h9f;
-                    end
-                    8'h66: begin
-                        D_states_d = 8'h9f;
-                    end
-                    8'h77: begin
-                        D_states_d = 8'h9f;
-                    end
-                    8'h88: begin
-                        D_states_d = 8'h9f;
-                    end
-                    default: begin
-                        D_states_d = 8'h93;
-                    end
-                endcase
+                if (rd1 == rd2) begin
+                    D_states_d = 8'h9f;
+                end else begin
+                    D_states_d = 8'h93;
+                end
                 D_debug_dff_d = 8'h86;
             end
             8'h93: begin

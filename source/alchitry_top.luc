@@ -94,7 +94,7 @@ module alchitry_top (
             dff buff2[2]
             dff buff3[2]
             dff buff4[4]
-            dff gamecounter[23]
+            dff gamecounter[26]
 
             // dff pixeldata[2](#INIT(b00))
             // dff bramtest_8points[3]
@@ -405,8 +405,8 @@ module alchitry_top (
 
         // debugging
         led[7:0] = sm.debug_out
-        bseg_driver.value = reg.bn
-        aseg_driver.value = reg.an
-        // timerseg_driver.value = sr3.dout + 1
+        bseg_driver.value = sm.brsel
+        aseg_driver.value = reg.pac
+        timerseg_driver.value = reg.rd1
     }
 }

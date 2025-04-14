@@ -1,8 +1,8 @@
-Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-| Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Tue Apr 15 01:03:54 2025
-| Host         : PC running 64-bit major release  (build 9200)
+| Tool Version : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date         : Tue Apr 15 03:40:46 2025
+| Host         : LAPTOP-6R0BMEKF running 64-bit major release  (build 9200)
 | Command      : report_methodology -file alchitry_top_methodology_drc_routed.rpt -pb alchitry_top_methodology_drc_routed.pb -rpx alchitry_top_methodology_drc_routed.rpx
 | Design       : alchitry_top
 | Device       : xc7a35tftg256-1
@@ -22,15 +22,14 @@ Table of Contents
             Netlist: netlist
           Floorplan: design_1
       Design limits: <entire design considered>
-             Max checks: <unlimited>
-             Checks found: 78
-+-----------+----------+--------------------------------------------+--------+
-| Rule      | Severity | Description                                | Checks |
-+-----------+----------+--------------------------------------------+--------+
-| LUTAR-1   | Warning  | LUT drives async reset alert               | 1      |
-| SYNTH-6   | Warning  | Timing of a RAM block might be sub-optimal | 3      |
-| TIMING-18 | Warning  | Missing input or output delay              | 74     |
-+-----------+----------+--------------------------------------------+--------+
+             Max violations: <unlimited>
+             Violations found: 75
++-----------+----------+-------------------------------+------------+
+| Rule      | Severity | Description                   | Violations |
++-----------+----------+-------------------------------+------------+
+| LUTAR-1   | Warning  | LUT drives async reset alert  | 1          |
+| TIMING-18 | Warning  | Missing input or output delay | 74         |
++-----------+----------+-------------------------------+------------+
 
 2. REPORT DETAILS
 -----------------
@@ -38,21 +37,6 @@ LUTAR-1#1 Warning
 LUT drives async reset alert  
 LUT cell sm/D_stage_q[3]_i_1, with 2 or more inputs, drives asynchronous preset/clear pin(s) fifo_reset_cond/D_stage_q_reg[0]/PRE, fifo_reset_cond/D_stage_q_reg[1]/PRE,
 fifo_reset_cond/D_stage_q_reg[2]/PRE, fifo_reset_cond/D_stage_q_reg[3]/PRE. The LUT may glitch and trigger an unexpected reset, even if it is a properly timed path.
-Related violations: <none>
-
-SYNTH-6#1 Warning
-Timing of a RAM block might be sub-optimal  
-The timing for the instance brams/bram1/ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
-Related violations: <none>
-
-SYNTH-6#2 Warning
-Timing of a RAM block might be sub-optimal  
-The timing for the instance brams/bram2/ram_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
-Related violations: <none>
-
-SYNTH-6#3 Warning
-Timing of a RAM block might be sub-optimal  
-The timing for the instance sm/D_debug_dff_q_reg, implemented as a RAM block, might be sub-optimal as no output register was merged into the block.
 Related violations: <none>
 
 TIMING-18#1 Warning

@@ -12,8 +12,8 @@ module regfile #(
     input wa[$clog2(ENTRIES)],      // write address
     input we,                       // write enable
     input wd[WIDTH],                // write data
-    output pac[WIDTH],              // player B cell count
-    output pbc[WIDTH],              // player A cell count
+    output pac[WIDTH],              // player A cell count
+    output pbc[WIDTH],              // player B cell count
     output timer[WIDTH],            // timer countdown, seconds
     output bram_selector,            // bram selector
     output an[13],

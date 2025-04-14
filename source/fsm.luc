@@ -2049,17 +2049,15 @@ module fsm #(
             
         // Evaluation logic ---------------------------------------------------------------
             States.CHECK_NEIGHBOURS:
-                ra1 = A_NEIGHBOUR_ADDRESS
-                ra2 = B_NEIGHBOUR_ADDRESS
-                //ra1 = TARGET_PIXEL_VALUE
-                //case(rd1){
-                //    b00:
-                //        states.d = States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS
-                //    b10:
-                //       states.d = States.B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR
-                //    b01:
-                //       states.d = States.B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR
-                //}
+                ra1 = TARGET_PIXEL_VALUE
+                case(rd1){
+                    b00:
+                    states.d = States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS
+                    b10:
+                       states.d = States.B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR
+                    b01:
+                       states.d = States.B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR
+                }
                 debug_dff.d = 133
 
             // current pixel is b00
@@ -2067,22 +2065,31 @@ module fsm #(
                 // alufn = SUB
                 ra1 = A_NEIGHBOUR_ADDRESS
                 ra2 = B_NEIGHBOUR_ADDRESS
+
+                if(rd1 == rd2){
+                    states.d = States.SET_00
+                }
+                else{
+                    states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
+                }
                 // case(aluout) {
                 //     13x{b0}: states.d = States.SET_00
                 //     default: states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
                 // }
-                case (c{rd1[3:0],rd2[3:0]}) {
-                    b00000000: states.d = States.SET_00
-                    b00010001: states.d = States.SET_00
-                    b00100010: states.d = States.SET_00
-                    b00110011: states.d = States.SET_00
-                    b01000100: states.d = States.SET_00
-                    b01010101: states.d = States.SET_00
-                    b01100110: states.d = States.SET_00
-                    b01110111: states.d = States.SET_00
-                    b10001000: states.d = States.SET_00
-                    default: states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
-                }
+
+                
+                //case (c{rd1[3:0],rd2[3:0]}) {
+                //    b00000000: states.d = States.SET_00
+                //    b00010001: states.d = States.SET_00
+                //    b00100010: states.d = States.SET_00
+                //    b00110011: states.d = States.SET_00
+                //    b01000100: states.d = States.SET_00
+                //    b01010101: states.d = States.SET_00
+                //   b01100110: states.d = States.SET_00
+                //    b01110111: states.d = States.SET_00
+                //    b10001000: states.d = States.SET_00
+                //    default: states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
+                //}
 
                 // case ()
                 // if (alu_buffer.q[1]){
