@@ -209,6 +209,7 @@ module alchitry_top (
             8: alum.b = 4223
             9: alum.b = 4160
             10:alum.b = 4096
+            11:alum.b = 65
             default: alum.b = reg.rd2
         }
 
