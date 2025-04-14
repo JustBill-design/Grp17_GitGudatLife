@@ -308,14 +308,14 @@ module fsm #(
                 wdsel = b0001
                 wa = A_COUNT
                 states.d = States.RESET_B_COUNT
-                debug_dff = 159
+                debug_dff.d = 159
 
             States.RESET_B_COUNT:
                 we = b1
                 wdsel = b0001
                 wa = B_COUNT
                 states.d = States.SET_SELECTOR_PIXEL_STATE
-                debug_dff = 160    
+                debug_dff.d = 160    
 
             States.SET_SELECTOR_PIXEL_STATE:
                 ra1 = TARGET_PIXEL_ADDRESS

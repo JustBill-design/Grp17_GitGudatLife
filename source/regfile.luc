@@ -16,8 +16,8 @@ module regfile #(
     output pbc[WIDTH],              // player A cell count
     output timer[WIDTH],            // timer countdown, seconds
     output bram_selector,            // bram selector
-    // output an[13],
-    // output bn[13],
+    output an[13],
+    output bn[13],
     output targetpixel[13]
 ) {
 
@@ -33,8 +33,8 @@ module regfile #(
         timer = registers.q[6]
         bram_selector = registers.q[7][0]   // LSB
         targetpixel = registers.q[4]
-        // an = registers.q[0]
-        // bn = registers.q[1]
+        an = registers.q[0]
+        bn = registers.q[1]
         // check if write_en and its not R31 
         if (we){
             registers.d[wa] = wd
