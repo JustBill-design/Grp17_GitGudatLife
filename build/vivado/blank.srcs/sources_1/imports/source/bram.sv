@@ -19,16 +19,16 @@ module bram #(
         input wire [(WIDTH)-1:0] bwd,
         output reg [(WIDTH)-1:0] brd
     );
-    localparam _MP_WIDTH_345427807 = WIDTH;
-    localparam _MP_ENTRIES_345427807 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_345427807)-1) - (0) + 1))-1:0] M_bram1_address;
-    logic [(((_MP_WIDTH_345427807-1) - (0) + 1))-1:0] M_bram1_read_data;
-    logic [(((_MP_WIDTH_345427807-1) - (0) + 1))-1:0] M_bram1_write_data;
+    localparam _MP_WIDTH_1754195204 = WIDTH;
+    localparam _MP_ENTRIES_1754195204 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_1754195204)-1) - (0) + 1))-1:0] M_bram1_address;
+    logic [(((_MP_WIDTH_1754195204-1) - (0) + 1))-1:0] M_bram1_read_data;
+    logic [(((_MP_WIDTH_1754195204-1) - (0) + 1))-1:0] M_bram1_write_data;
     logic M_bram1_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_345427807),
-        .ENTRIES(_MP_ENTRIES_345427807)
+        .WIDTH(_MP_WIDTH_1754195204),
+        .ENTRIES(_MP_ENTRIES_1754195204)
     ) bram1 (
         .clk(clk),
         .address(M_bram1_address),
@@ -38,16 +38,16 @@ module bram #(
     );
     
     
-    localparam _MP_WIDTH_1875792255 = WIDTH;
-    localparam _MP_ENTRIES_1875792255 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_1875792255)-1) - (0) + 1))-1:0] M_bram2_address;
-    logic [(((_MP_WIDTH_1875792255-1) - (0) + 1))-1:0] M_bram2_read_data;
-    logic [(((_MP_WIDTH_1875792255-1) - (0) + 1))-1:0] M_bram2_write_data;
+    localparam _MP_WIDTH_635687558 = WIDTH;
+    localparam _MP_ENTRIES_635687558 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_635687558)-1) - (0) + 1))-1:0] M_bram2_address;
+    logic [(((_MP_WIDTH_635687558-1) - (0) + 1))-1:0] M_bram2_read_data;
+    logic [(((_MP_WIDTH_635687558-1) - (0) + 1))-1:0] M_bram2_write_data;
     logic M_bram2_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_1875792255),
-        .ENTRIES(_MP_ENTRIES_1875792255)
+        .WIDTH(_MP_WIDTH_635687558),
+        .ENTRIES(_MP_ENTRIES_635687558)
     ) bram2 (
         .clk(clk),
         .address(M_bram2_address),
