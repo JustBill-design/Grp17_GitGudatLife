@@ -2052,7 +2052,7 @@ module fsm #(
                 ra1 = TARGET_PIXEL_VALUE
                 case(rd1){
                     b00:
-                    states.d = States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS
+                        states.d = States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS
                     b10:
                        states.d = States.B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR
                     b01:
