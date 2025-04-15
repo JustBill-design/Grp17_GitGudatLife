@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Wed Apr 16 03:26:18 2025
+| Date             : Wed Apr 16 03:34:37 2025
 | Host             : PC running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
@@ -53,16 +53,16 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.001 |        6 |       --- |             --- |
-| Slice Logic    |     0.001 |     2178 |       --- |             --- |
-|   LUT as Logic |    <0.001 |     1296 |     20800 |            6.23 |
-|   CARRY4       |    <0.001 |       79 |      8150 |            0.97 |
-|   Register     |    <0.001 |      416 |     41600 |            1.00 |
-|   F7/F8 Muxes  |    <0.001 |       13 |     32600 |            0.04 |
-|   Others       |     0.000 |       74 |       --- |             --- |
-| Signals        |     0.001 |     1920 |       --- |             --- |
+| Slice Logic    |     0.001 |     2150 |       --- |             --- |
+|   LUT as Logic |    <0.001 |     1267 |     20800 |            6.09 |
+|   CARRY4       |    <0.001 |       81 |      8150 |            0.99 |
+|   Register     |    <0.001 |      417 |     41600 |            1.00 |
+|   F7/F8 Muxes  |    <0.001 |       16 |     32600 |            0.05 |
+|   Others       |     0.000 |       76 |       --- |             --- |
+| Signals        |     0.001 |     1882 |       --- |             --- |
 | Block RAM      |    <0.001 |        1 |        50 |            2.00 |
 | MMCM           |     0.106 |        1 |         5 |           20.00 |
-| I/O            |     0.035 |       79 |       170 |           46.47 |
+| I/O            |     0.036 |       79 |       170 |           46.47 |
 | Static Power   |     0.072 |          |           |                 |
 | Total          |     0.218 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
