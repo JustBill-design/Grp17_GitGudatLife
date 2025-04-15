@@ -210,22 +210,17 @@ module alchitry_top (
         
         // b selector
         case(sm.bsel) {
+            0: alum.b = reg.rd2
             1: alum.b = 1
-            2: alum.b = 2
-            3: alum.b = 3
-            4: alum.b = 64
-            5: alum.b = 63
-            6: alum.b = 128
-            7: alum.b = 255
-            8: alum.b = 4223
-            9: alum.b = 4160
-            10:alum.b = 4096
+            2: alum.b = 63
+            3: alum.b = 64
             11:alum.b = 65
             default: alum.b = reg.rd2
         }
 
         // wd selector
         case(sm.wdsel) {
+            0: reg.wd = alum.out
             1: reg.wd = 0
             2: reg.wd = 1
             3: reg.wd = 2
@@ -233,7 +228,6 @@ module alchitry_top (
             5: reg.wd = sr2.dout
             6: reg.wd = 60
             7: reg.wd = 2144
-            8: reg.wd = 11
             9: reg.wd = 64
             default: reg.wd = alum.out
         }
