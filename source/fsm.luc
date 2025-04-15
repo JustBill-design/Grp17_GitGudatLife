@@ -1925,13 +1925,13 @@ module fsm #(
                 we = b1
                 wdsel = b101
                 wa = TARGET_PIXEL_VALUE
-                //sre2 = b1
+                sre2 = b1
                 states.d = States.READ_MID_RIGHT
                 debug_dff.d = 118
 
             // Reading mid right pixel for neighbours
             States.READ_MID_RIGHT:
-                /* sre2 = b1
+                sre2 = b1
                 case(srd2){
                     b01:
                         states.d = States.MID_RIGHT_ADD_A_NEIGHBOUR
@@ -1939,7 +1939,7 @@ module fsm #(
                         states.d = States.MID_RIGHT_ADD_B_NEIGHBOUR
                     b00:
                         states.d = States.READ_BOT_LEFT
-                } */
+                }
                 debug_dff.d = 119
             
             States.MID_RIGHT_ADD_A_NEIGHBOUR:

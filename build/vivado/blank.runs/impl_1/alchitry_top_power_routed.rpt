@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Tue Apr 15 12:23:48 2025
+| Date             : Tue Apr 15 12:28:19 2025
 | Host             : PC running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.150        |
+| Total On-Chip Power (W)  | 0.148        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.078        |
+| Dynamic (W)              | 0.076        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 4.9          |
 | Max Ambient (C)          | 84.3         |
@@ -53,17 +53,17 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.004 |        3 |       --- |             --- |
-| Slice Logic    |     0.009 |     2021 |       --- |             --- |
-|   LUT as Logic |     0.008 |     1196 |     20800 |            5.75 |
+| Slice Logic    |     0.008 |     2054 |       --- |             --- |
+|   LUT as Logic |     0.007 |     1252 |     20800 |            6.02 |
 |   CARRY4       |    <0.001 |       86 |      8150 |            1.06 |
-|   Register     |    <0.001 |      442 |     41600 |            1.06 |
-|   F7/F8 Muxes  |    <0.001 |        6 |     32600 |            0.02 |
+|   Register     |    <0.001 |      440 |     41600 |            1.06 |
+|   F7/F8 Muxes  |    <0.001 |        2 |     32600 |           <0.01 |
 |   Others       |     0.000 |       74 |       --- |             --- |
-| Signals        |     0.012 |     1819 |       --- |             --- |
+| Signals        |     0.011 |     1857 |       --- |             --- |
 | Block RAM      |     0.003 |      1.5 |        50 |            3.00 |
-| I/O            |     0.051 |       79 |       170 |           46.47 |
+| I/O            |     0.050 |       79 |       170 |           46.47 |
 | Static Power   |     0.072 |          |           |                 |
-| Total          |     0.150 |          |           |                 |
+| Total          |     0.148 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -73,7 +73,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.037 |       0.027 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.035 |       0.026 |      0.010 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.014 |       0.002 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.015 |       0.014 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -142,12 +142,12 @@ Table of Contents
 +--------------+-----------+
 | Name         | Power (W) |
 +--------------+-----------+
-| alchitry_top |     0.078 |
-|   L_reg      |     0.006 |
+| alchitry_top |     0.076 |
+|   L_reg      |     0.005 |
 |   brams      |     0.002 |
 |     bram1    |     0.001 |
 |     bram2    |     0.001 |
-|   sm         |     0.014 |
+|   sm         |     0.013 |
 +--------------+-----------+
 
 
