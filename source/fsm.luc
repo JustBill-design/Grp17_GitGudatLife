@@ -221,7 +221,7 @@ module fsm #(
             b0100: accel_selector.d = b10
             default: accel_selector.d = accel_selector.q
         }
-        if (med_inputclk) {
+        if (gameclk) {
             accel.d = accel.q + 1
         } else {
             accel.d = accel.q
