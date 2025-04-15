@@ -116,9 +116,11 @@ OPTRACE "set parameters" START { }
   set_property parent.project_path C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.xpr [current_project]
   set_property ip_output_repo C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.cache/ip [current_project]
   set_property ip_cache_permissions {read write} [current_project]
+  set_property XPM_LIBRARIES XPM_CDC [current_project]
 OPTRACE "set parameters" END { }
 OPTRACE "add files" START { }
   add_files -quiet C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/synth_1/alchitry_top.dcp
+  read_ip -quiet C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/ip/clk_10/clk_10.xci
 OPTRACE "read constraints: implementation" START { }
   read_xdc C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/alchitry.xdc
   read_xdc C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/constraint/au_props.xdc
@@ -285,6 +287,7 @@ set rc [catch {
   create_msg_db write_bitstream.pb
 OPTRACE "read constraints: write_bitstream" START { }
 OPTRACE "read constraints: write_bitstream" END { }
+  set_property XPM_LIBRARIES XPM_CDC [current_project]
   catch { write_mem_info -force -no_partial_mmi alchitry_top.mmi }
 OPTRACE "write_bitstream setup" END { }
 OPTRACE "write_bitstream" START { }

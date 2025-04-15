@@ -104,6 +104,21 @@
                 }
             }
         ],
-        "ipCores": []
+        "ipCores": [
+            {
+                "name": "clk_10",
+                "stub": {
+                    "file": {
+                        "type": "DiskFile",
+                        "path": "cores/clk_10/clk_10_stub.v"
+                    }
+                },
+                "files": [
+                    {
+                        "path": "cores/clk_10/clk_10.xci"
+                    }
+                ]
+            }
+        ]
     }
 }
