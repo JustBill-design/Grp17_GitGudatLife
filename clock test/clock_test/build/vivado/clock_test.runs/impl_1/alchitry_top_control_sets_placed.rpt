@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Tue Apr 15 00:19:10 2025
+| Date         : Tue Apr 15 17:03:56 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file alchitry_top_control_sets_placed.rpt
 | Design       : alchitry_top
@@ -27,7 +27,7 @@ Table of Contents
 |    Minimum number of control sets                        |     6 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    29 |
+| Unused register locations in slices containing registers |    25 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -60,7 +60,7 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | No           | No                    | No                     |               1 |            1 |
 | No           | No                    | Yes                    |               4 |            2 |
-| No           | Yes                   | No                     |              56 |           15 |
+| No           | Yes                   | No                     |              60 |           16 |
 | Yes          | No                    | No                     |               0 |            0 |
 | Yes          | No                    | Yes                    |               0 |            0 |
 | Yes          | Yes                   | No                     |              14 |            4 |
@@ -78,7 +78,7 @@ Table of Contents
 |  clk_IBUF_BUFG | gamecounter/M_timerclk_out | reset_cond/Q[0]                           |                4 |             14 |         3.50 |
 |  clk_IBUF_BUFG |                            | aseg_driver/ctr/D_ctr_q[0]_i_1_n_0        |                5 |             18 |         3.60 |
 |  clk_IBUF_BUFG |                            | timerseg_driver/ctr/D_ctr_q[0]_i_1__0_n_0 |                5 |             18 |         3.60 |
-|  clk_IBUF_BUFG |                            | gamecounter/D_ctr_q[0]_i_1__1_n_0         |                5 |             20 |         4.00 |
+|  clk_IBUF_BUFG |                            | gamecounter/D_ctr_q[0]_i_1__1_n_0         |                6 |             24 |         4.00 |
 +----------------+----------------------------+-------------------------------------------+------------------+----------------+--------------+
 
 

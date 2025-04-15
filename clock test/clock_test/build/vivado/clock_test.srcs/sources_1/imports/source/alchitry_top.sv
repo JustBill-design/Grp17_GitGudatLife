@@ -6,25 +6,22 @@
 
 module alchitry_top (
         input wire clk,
+        input wire rst_n,
         output reg [7:0] led,
         output reg [7:0] io_led,
         input wire usb_rx,
         output reg usb_tx,
-        input wire [3:0] butt_dirs,
-        input wire [1:0] butt_sel_desel,
-        input wire butt_reset,
-        input wire butt_next_play,
         output reg [11:0] aseg,
         output reg [11:0] timerseg
     );
-    localparam CLK = 17'h186a0;
+    localparam CLK = 24'h989680;
     logic rst;
-    localparam _MP_STAGES_2146642412 = 3'h4;
+    localparam _MP_STAGES_277206861 = 3'h4;
     logic M_reset_cond_in;
     logic M_reset_cond_out;
     
     reset_conditioner #(
-        .STAGES(_MP_STAGES_2146642412)
+        .STAGES(_MP_STAGES_277206861)
     ) reset_cond (
         .clk(clk),
         .in(M_reset_cond_in),
@@ -32,14 +29,14 @@ module alchitry_top (
     );
     
     
-    localparam _MP_RISE_916159838 = 1'h1;
-    localparam _MP_FALL_916159838 = 1'h0;
+    localparam _MP_RISE_2097049120 = 1'h1;
+    localparam _MP_FALL_2097049120 = 1'h0;
     logic M_timerclk_in;
     logic M_timerclk_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_916159838),
-        .FALL(_MP_FALL_916159838)
+        .RISE(_MP_RISE_2097049120),
+        .FALL(_MP_FALL_2097049120)
     ) timerclk (
         .clk(clk),
         .in(M_timerclk_in),
@@ -47,17 +44,17 @@ module alchitry_top (
     );
     
     
-    localparam _MP_SIZE_1760283919 = 5'h14;
-    localparam _MP_DIV_1760283919 = 1'h0;
-    localparam _MP_TOP_1760283919 = 21'hf4240;
-    localparam _MP_UP_1760283919 = 1'h1;
-    logic [19:0] M_gamecounter_value;
+    localparam _MP_SIZE_1689144045 = 5'h18;
+    localparam _MP_DIV_1689144045 = 1'h0;
+    localparam _MP_TOP_1689144045 = 24'h989680;
+    localparam _MP_UP_1689144045 = 1'h1;
+    logic [23:0] M_gamecounter_value;
     
     counter #(
-        .SIZE(_MP_SIZE_1760283919),
-        .DIV(_MP_DIV_1760283919),
-        .TOP(_MP_TOP_1760283919),
-        .UP(_MP_UP_1760283919)
+        .SIZE(_MP_SIZE_1689144045),
+        .DIV(_MP_DIV_1689144045),
+        .TOP(_MP_TOP_1689144045),
+        .UP(_MP_UP_1689144045)
     ) gamecounter (
         .clk(clk),
         .rst(rst),
@@ -65,14 +62,14 @@ module alchitry_top (
     );
     
     
-    localparam _MP_DIGITS_1322926247 = 3'h4;
-    localparam _MP_DIV_1322926247 = 5'h10;
+    localparam _MP_DIGITS_62098796 = 3'h4;
+    localparam _MP_DIV_62098796 = 5'h10;
     logic [13:0] M_aseg_driver_value;
     logic [11:0] M_aseg_driver_out;
     
     multi_seven_seg #(
-        .DIGITS(_MP_DIGITS_1322926247),
-        .DIV(_MP_DIV_1322926247)
+        .DIGITS(_MP_DIGITS_62098796),
+        .DIV(_MP_DIV_62098796)
     ) aseg_driver (
         .clk(clk),
         .rst(rst),
@@ -81,14 +78,14 @@ module alchitry_top (
     );
     
     
-    localparam _MP_DIGITS_1256298211 = 3'h4;
-    localparam _MP_DIV_1256298211 = 5'h10;
+    localparam _MP_DIGITS_1851263532 = 3'h4;
+    localparam _MP_DIV_1851263532 = 5'h10;
     logic [13:0] M_timerseg_driver_value;
     logic [11:0] M_timerseg_driver_out;
     
     multi_seven_seg #(
-        .DIGITS(_MP_DIGITS_1256298211),
-        .DIV(_MP_DIV_1256298211)
+        .DIGITS(_MP_DIGITS_1851263532),
+        .DIV(_MP_DIV_1851263532)
     ) timerseg_driver (
         .clk(clk),
         .rst(rst),
@@ -101,12 +98,12 @@ module alchitry_top (
     always @* begin
         D_countdown_d = D_countdown_q;
         
-        M_reset_cond_in = ~butt_reset;
+        M_reset_cond_in = ~rst_n;
         rst = M_reset_cond_out;
         usb_tx = usb_rx;
         led = 8'h0;
         io_led = 1'h0;
-        M_timerclk_in = M_gamecounter_value[6'h13];
+        M_timerclk_in = M_gamecounter_value[6'h17];
         D_countdown_d = D_countdown_q;
         if (M_timerclk_out) begin
             D_countdown_d = D_countdown_q + 1'h1;

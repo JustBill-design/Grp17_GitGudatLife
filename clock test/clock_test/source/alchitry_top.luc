@@ -1,40 +1,27 @@
 module alchitry_top (
     input clk,              // 10MHz clock
-    // input rst_n,            // reset button (active low)
+    input rst_n,            // reset button (active low)
     output led[8],          // 8 user controllable LEDs
     output io_led[8],       // 8 debugging leds
     input usb_rx,           // USB->Serial input
     output usb_tx,          // USB->Serial output
-
-    // buttons
-    input butt_dirs[4],     // direction buttons
-    input butt_sel_desel[2],// select and deselect buttons
-    input butt_reset,       // reset button, to override reset button
-    input butt_next_play,   // next and play button, action based on FSM state
-    // ^ to pass through edge detector
 
     // seven segment leds
     output aseg[12],      // counter for player A
     output timerseg[12]
 
 ) {
-    const CLK = 100_000
+    const CLK = 10_000_000
     
     sig rst
     .clk(clk) {
         reset_conditioner reset_cond        // whole board reset
         
-        
-        
-        // button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}))
-        // button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}))
-        // button_conditioner cond_butt_next_play(#CLK_FREQ(CLK))
-
         edge_detector timerclk(#RISE(1),#FALL(0))       // ticks once per second
 
         .rst(rst) {
             // counter resets every second
-            counter gamecounter(#SIZE($clog2(CLK*10)),#TOP(CLK*10))
+            counter gamecounter(#SIZE($clog2(CLK)),#TOP(CLK))
             
             // seven segment drivers
             multi_seven_seg aseg_driver
@@ -47,16 +34,14 @@ module alchitry_top (
     
     always {
         // whole board reset
-        reset_cond.in = ~butt_reset
+        reset_cond.in = ~rst_n
         rst = reset_cond.out
         usb_tx = usb_rx
         led = 8h00
         io_led = 0
         
-        
-        
         // connect slow clocks
-        timerclk.in = gamecounter.value[$clog2(CLK*10)-1]
+        timerclk.in = gamecounter.value[$clog2(CLK)-1]
 
         countdown.d = countdown.q
         if (timerclk.out) {

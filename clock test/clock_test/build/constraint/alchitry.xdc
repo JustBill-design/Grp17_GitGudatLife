@@ -1,8 +1,11 @@
 set_property PACKAGE_PIN N14 [get_ports {clk}]
 set_property IOSTANDARD LVCMOS33 [get_ports {clk}]
-# clk => 100000Hz
-create_clock -period 10000.0 -name clk_0 -waveform {0.000 5000.0} [get_ports clk]
+# clk => 10000000Hz
+create_clock -period 100.0 -name clk_0 -waveform {0.000 50.0} [get_ports clk]
 set_clock_groups -asynchronous -group [get_clocks -include_generated_clocks clk_0]
+
+set_property PACKAGE_PIN P6 [get_ports {rst_n}]
+set_property IOSTANDARD LVCMOS33 [get_ports {rst_n}]
 
 set_property PACKAGE_PIN K13 [get_ports {led[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {led[0]}]
@@ -57,38 +60,6 @@ set_property IOSTANDARD LVCMOS33 [get_ports {io_led[6]}]
 
 set_property PACKAGE_PIN L2 [get_ports {io_led[7]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {io_led[7]}]
-
-set_property PACKAGE_PIN A7 [get_ports {butt_dirs[0]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {butt_dirs[0]}]
-set_property PULLUP true [get_ports {butt_dirs[0]}]
-
-set_property PACKAGE_PIN B5 [get_ports {butt_dirs[1]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {butt_dirs[1]}]
-set_property PULLUP true [get_ports {butt_dirs[1]}]
-
-set_property PACKAGE_PIN A4 [get_ports {butt_dirs[2]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {butt_dirs[2]}]
-set_property PULLUP true [get_ports {butt_dirs[2]}]
-
-set_property PACKAGE_PIN A3 [get_ports {butt_dirs[3]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {butt_dirs[3]}]
-set_property PULLUP true [get_ports {butt_dirs[3]}]
-
-set_property PACKAGE_PIN F3 [get_ports {butt_sel_desel[0]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {butt_sel_desel[0]}]
-set_property PULLUP true [get_ports {butt_sel_desel[0]}]
-
-set_property PACKAGE_PIN E1 [get_ports {butt_sel_desel[1]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {butt_sel_desel[1]}]
-set_property PULLUP true [get_ports {butt_sel_desel[1]}]
-
-set_property PACKAGE_PIN A2 [get_ports {butt_reset}]
-set_property IOSTANDARD LVCMOS33 [get_ports {butt_reset}]
-set_property PULLUP true [get_ports {butt_reset}]
-
-set_property PACKAGE_PIN D1 [get_ports {butt_next_play}]
-set_property IOSTANDARD LVCMOS33 [get_ports {butt_next_play}]
-set_property PULLUP true [get_ports {butt_next_play}]
 
 set_property PACKAGE_PIN P5 [get_ports {aseg[0]}]
 set_property IOSTANDARD LVCMOS33 [get_ports {aseg[0]}]
