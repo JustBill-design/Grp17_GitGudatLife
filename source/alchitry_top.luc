@@ -32,7 +32,7 @@ module alchitry_top (
 
 ) {
     const BASECLK = 100_000_000
-    const SLOWCLK_DIV = 3
+    const SLOWCLK_DIV = 2
     const CLK = BASECLK / $pow(2,SLOWCLK_DIV)
     // const CLK = 100_000_000
 
@@ -83,7 +83,7 @@ module alchitry_top (
             display_driver display(#CLK_FREQ(CLK))
             
             // counter resets every second
-            counter gamecounter(#SIZE($clog2(CLK)),#TOP(CLK))
+            // counter gamecounter(#SIZE($clog2(CLK)),#TOP(CLK))
             
             // FSM
             fsm sm
@@ -104,7 +104,7 @@ module alchitry_top (
             dff buff2[2]
             dff buff3[2]
             dff buff4[4]
-            // dff gamecounter[$clog2(CLK)]
+            dff gamecounter[$clog2(CLK)]
 
             // dff pixeldata[2](#INIT(b00))
             // dff bramtest_8points[3]
@@ -134,7 +134,7 @@ module alchitry_top (
         if (edge_up.out) {
             buff4.d = buff4.q + 1
         }
-        // gamecounter.d = gamecounter.q + 1
+        gamecounter.d = gamecounter.q + 1
         
         io_led[3:0] = cond_butt_dirs.out[3:0]
         io_led[5:4] = cond_butt_sel_desel.out[1:0]
@@ -167,9 +167,9 @@ module alchitry_top (
         sm.ddr = display.reading
         
         // connect slow clocks
-        timerclk.in = gamecounter.value[$clog2(CLK)-1]
-        gameclk.in = gamecounter.value[$clog2(CLK/4224*2)]
-        med_inputclk.in = gamecounter.value[$clog2(CLK/5)]
+        timerclk.in = gamecounter.q[$clog2(CLK)-1]
+        gameclk.in = gamecounter.q[$clog2(CLK/4224*2)]
+        med_inputclk.in = gamecounter.q[$clog2(CLK/5)]
         sm.timerclk = timerclk.out
         sm.gameclk = gameclk.out
         sm.med_inputclk = med_inputclk.out
