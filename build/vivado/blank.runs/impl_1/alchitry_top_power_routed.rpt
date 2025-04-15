@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Tue Apr 15 11:41:29 2025
+| Date             : Tue Apr 15 12:05:48 2025
 | Host             : PC running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.151        |
+| Total On-Chip Power (W)  | 0.150        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.079        |
+| Dynamic (W)              | 0.078        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 4.9          |
 | Max Ambient (C)          | 84.3         |
@@ -49,22 +49,23 @@ Table of Contents
 1.1 On-Chip Components
 ----------------------
 
-+----------------+-----------+----------+-----------+-----------------+
-| On-Chip        | Power (W) | Used     | Available | Utilization (%) |
-+----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.004 |        3 |       --- |             --- |
-| Slice Logic    |     0.009 |     2028 |       --- |             --- |
-|   LUT as Logic |     0.008 |     1187 |     20800 |            5.71 |
-|   CARRY4       |    <0.001 |       86 |      8150 |            1.06 |
-|   Register     |    <0.001 |      446 |     41600 |            1.07 |
-|   F7/F8 Muxes  |    <0.001 |        6 |     32600 |            0.02 |
-|   Others       |     0.000 |       76 |       --- |             --- |
-| Signals        |     0.012 |     1820 |       --- |             --- |
-| Block RAM      |     0.003 |      1.5 |        50 |            3.00 |
-| I/O            |     0.051 |       79 |       170 |           46.47 |
-| Static Power   |     0.072 |          |           |                 |
-| Total          |     0.151 |          |           |                 |
-+----------------+-----------+----------+-----------+-----------------+
++-------------------------+-----------+----------+-----------+-----------------+
+| On-Chip                 | Power (W) | Used     | Available | Utilization (%) |
++-------------------------+-----------+----------+-----------+-----------------+
+| Clocks                  |     0.004 |        3 |       --- |             --- |
+| Slice Logic             |     0.009 |     2143 |       --- |             --- |
+|   LUT as Logic          |     0.009 |     1286 |     20800 |            6.18 |
+|   CARRY4                |    <0.001 |       86 |      8150 |            1.06 |
+|   Register              |    <0.001 |      451 |     41600 |            1.08 |
+|   F7/F8 Muxes           |    <0.001 |        8 |     32600 |            0.02 |
+|   Others                |     0.000 |       76 |       --- |             --- |
+|   LUT as Shift Register |     0.000 |        1 |      9600 |            0.01 |
+| Signals                 |     0.013 |     1923 |       --- |             --- |
+| Block RAM               |     0.003 |      1.5 |        50 |            3.00 |
+| I/O                     |     0.049 |       79 |       170 |           46.47 |
+| Static Power            |     0.072 |          |           |                 |
+| Total                   |     0.150 |          |           |                 |
++-------------------------+-----------+----------+-----------+-----------------+
 
 
 1.2 Power Supply Summary
@@ -142,12 +143,12 @@ Table of Contents
 +--------------+-----------+
 | Name         | Power (W) |
 +--------------+-----------+
-| alchitry_top |     0.079 |
+| alchitry_top |     0.078 |
 |   L_reg      |     0.006 |
 |   brams      |     0.002 |
 |     bram1    |     0.001 |
 |     bram2    |     0.001 |
-|   sm         |     0.014 |
+|   sm         |     0.015 |
 +--------------+-----------+
 
 
