@@ -85,7 +85,7 @@ module fsm #(
         B_DOWN_DIR_IDLE, B_DOWN_CLK, B_DOWN_COUNTP1, B_DOWN_SET_PIXEL_B, B_DOWN_COUNTM1, B_DOWN_SET_PIXEL_0, B_DOWN_CHECK_PIXEL, B_DOWN_RESET_PIXEL, B_DOWN_MOVE_CURSOR, B_DOWN_STORE_PIXEL, B_DOWN_CURSOR_COLOUR, 
         B_LEFT_DIR_IDLE, B_LEFT_CLK, B_LEFT_COUNTP1, B_LEFT_SET_PIXEL_B, B_LEFT_COUNTM1, B_LEFT_SET_PIXEL_0, B_LEFT_CHECK_PIXEL, B_LEFT_RESET_PIXEL, B_LEFT_MOVE_CURSOR, B_LEFT_STORE_PIXEL, B_LEFT_CURSOR_COLOUR, 
         B_RIGHT_DIR_IDLE, B_RIGHT_CLK, B_RIGHT_COUNTP1, B_RIGHT_SET_PIXEL_B, B_RIGHT_COUNTM1, B_RIGHT_SET_PIXEL_0, B_RIGHT_CHECK_PIXEL, B_RIGHT_RESET_PIXEL, B_RIGHT_MOVE_CURSOR, B_RIGHT_STORE_PIXEL, B_RIGHT_CURSOR_COLOUR,        
-        REMOVE_CURSOR,RESET_PIXEL_TO_0, GAME_IDLE, TIMER_M1, END_GAME_SWITCH_BRAM, END_GAME, 
+        REMOVE_CURSOR,RESET_PIXEL_TO_0, GAME_IDLE, TIMER_M1, END_GAME, 
         
         GAME_IDLE_READ_CURR_PIXEL_VALUE, 
         
@@ -1580,17 +1580,6 @@ module fsm #(
                 states.d = States.GAME_IDLE
                 debug_dff.d = 155
                 
-            States.END_GAME_SWITCH_BRAM:
-                if (~ddr){
-                    alufn = XOR
-                    bsel = b0001
-                    we = b1
-                    wa = BRAM_SWITCH
-                    ra1 = BRAM_SWITCH
-                    wdsel = b0000
-                    states.d = States.END_GAME
-                }
-    
             States.END_GAME:
                 if (next_start_button) {
                     states.d = States.SET_BRAM_SELECTOR_TO_1
@@ -1813,7 +1802,6 @@ module fsm #(
                 wa = B_NEIGHBOUR_ADDRESS
                 states.d = States.READ_TOP_MID
                 debug_dff.d = 108
-            
             
             // Reading top mid pixel for neighbours
             States.READ_TOP_MID:
@@ -2356,11 +2344,11 @@ module fsm #(
             
             States.CHECK_END_GAME:
                 if (~|timer) {
-                    states.d = States.END_GAME_SWITCH_BRAM
+                    states.d = States.END_GAME
                 } else if (~|pac) {
-                    states.d = States.END_GAME_SWITCH_BRAM
+                    states.d = States.END_GAME
                 } else if (~|pbc) {
-                    states.d = States.END_GAME_SWITCH_BRAM
+                    states.d = States.END_GAME
                 } else {
                     states.d = States.SET_PIXEL_TO_BEGINNING
                 }
