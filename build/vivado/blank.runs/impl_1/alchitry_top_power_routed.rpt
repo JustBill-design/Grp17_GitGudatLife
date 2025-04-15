@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Tue Apr 15 10:39:41 2025
+| Date             : Tue Apr 15 10:53:59 2025
 | Host             : PC running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.152        |
+| Total On-Chip Power (W)  | 0.153        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.080        |
+| Dynamic (W)              | 0.081        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 4.9          |
 | Max Ambient (C)          | 84.3         |
@@ -53,16 +53,16 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.004 |        3 |       --- |             --- |
-| Slice Logic    |     0.008 |     2277 |       --- |             --- |
-|   LUT as Logic |     0.007 |     1414 |     20800 |            6.80 |
-|   CARRY4       |    <0.001 |       97 |      8150 |            1.19 |
-|   Register     |    <0.001 |      446 |     41600 |            1.07 |
+| Slice Logic    |     0.007 |     2279 |       --- |             --- |
+|   LUT as Logic |     0.007 |     1423 |     20800 |            6.84 |
+|   CARRY4       |    <0.001 |       96 |      8150 |            1.18 |
+|   Register     |    <0.001 |      444 |     41600 |            1.07 |
 |   Others       |     0.000 |       77 |       --- |             --- |
-| Signals        |     0.010 |     2051 |       --- |             --- |
+| Signals        |     0.010 |     2056 |       --- |             --- |
 | Block RAM      |     0.003 |      1.5 |        50 |            3.00 |
 | I/O            |     0.056 |       79 |       170 |           46.47 |
 | Static Power   |     0.072 |          |           |                 |
-| Total          |     0.152 |          |           |                 |
+| Total          |     0.153 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -141,7 +141,7 @@ Table of Contents
 +--------------+-----------+
 | Name         | Power (W) |
 +--------------+-----------+
-| alchitry_top |     0.080 |
+| alchitry_top |     0.081 |
 |   L_reg      |     0.005 |
 |   brams      |     0.002 |
 |     bram1    |     0.001 |
