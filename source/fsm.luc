@@ -91,7 +91,7 @@ module fsm #(
         
         RESET_SR_POINTERS, SR_00_ALL_SR, SR_LOAD_TOP_MID, SR_LOAD_TOP_RIGHT, SR_LOAD_MID_MID, SR_LOAD_MID_RIGHT, SR_LOAD_BOT_MID, SR_LOAD_BOT_RIGHT, 
         READ_BRAM, RB_LOAD_TOP_RIGHT, RB_LOAD_MID_RIGHT, RB_LOAD_BOT_RIGHT, 
-        READ_CURR_PIXEL_VALUE_00_ALL_SR, 
+        PASS_00_TO_SR, READ_CURR_PIXEL_VALUE_00_ALL_SR, 
         
         READ_TOP_LEFT, TOP_LEFT_ADD_A_NEIGHBOUR, TOP_LEFT_ADD_B_NEIGHBOUR, 
         READ_TOP_MID, TOP_MID_ADD_A_NEIGHBOUR, TOP_MID_ADD_B_NEIGHBOUR, 
@@ -138,6 +138,7 @@ module fsm #(
 
         .rst(rst) {
             dff states[$width(States)](#INIT(States.SET_BRAM_SELECTOR_TO_1))
+            dff bram_read
 
             // debug
             dff debug_dff[8]
@@ -1598,7 +1599,7 @@ module fsm #(
                 
             States.GAME_IDLE_READ_CURR_PIXEL_VALUE: //TODO Some logic error here idk what, maybe looping issue or target pixel value not reset properly
                 case (rd1[5:0]) {
-                    b111111: states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR      // last column
+                    b111111: states.d = States.PASS_00_TO_SR                        // last column
                     b000000: states.d = States.RESET_SR_POINTERS                    // first column
                     default: states.d = States.READ_BRAM                            // middle columns
                 }
@@ -1612,87 +1613,107 @@ module fsm #(
                     ra2 = TARGET_PIXEL_ADDRESS
                     alufn = SUB
                     srst = 1
+
+                    bram_read.d = 1
                     states.d = States.SR_00_ALL_SR
                 }
                 debug_dff.d = 94
 
             States.SR_00_ALL_SR:
+                if (bram_read.q) {
+                    // zeroing SRs
+                    swe1 = b1
+                    swe2 = b1
+                    swe3 = b1
+                    bram_read.d = 0
+                }
                 if (~ddr) {
                     alufn = SUB
                     bsel = b0100
                     ra1 = TARGET_PIXEL_ADDRESS
 
-                    // zeroing SRs
-                    swe1 = b1
-                    swe2 = b1
-                    swe3 = b1
-
+                    bram_read.d = 1
                     states.d = States.SR_LOAD_TOP_MID
                 }
                 debug_dff.d = 95
             
             States.SR_LOAD_TOP_MID:
+                if (bram_read.q) {
+                    swe1 = b1
+                    bram_read.d = 0
+                }
                 if (~ddr){
                     alufn = SUB
                     bsel = b0101
                     ra1 = TARGET_PIXEL_ADDRESS
 
-                    swe1 = b1
-
+                    bram_read.d = 1
                     states.d = States.SR_LOAD_TOP_RIGHT
                 }
                 debug_dff.d = 96
 
             States.SR_LOAD_TOP_RIGHT:
+                if (bram_read.q) {
+                    swe1 = b1
+                    bram_read.d = 0                    
+                }
                 if (~ddr){
                     alufn = PASSTHROUGH
                     ra1 = TARGET_PIXEL_ADDRESS
 
-                    swe1 = b1
-
+                    bram_read.d = 1
                     states.d = States.SR_LOAD_MID_MID
                 }
                 debug_dff.d = 158
 
             States.SR_LOAD_MID_MID:
+                if (bram_read.q) {
+                    swe2 = b1
+                    bram_read.d = 0                    
+                }
                 if (~ddr){
                     alufn = ADD
                     bsel = b0001
                     ra1 = TARGET_PIXEL_ADDRESS
 
-                    swe2 = b1
-
+                    bram_read.d = 1
                     states.d = States.SR_LOAD_MID_RIGHT
                 }
                 debug_dff.d = 97
 
             States.SR_LOAD_MID_RIGHT:
+                if (bram_read.q) {
+                    swe2 = b1
+                    bram_read.d = 0                    
+                }
                 if (~ddr){
                     alufn = ADD
                     bsel = b0100
                     ra1 = TARGET_PIXEL_ADDRESS
 
-                    swe2 = b1
-
+                    bram_read.d = 1
                     states.d = States.SR_LOAD_BOT_MID
                 }
                 debug_dff.d = 98
 
             States.SR_LOAD_BOT_MID:
+                if (bram_read.q) {
+                    swe3 = b1
+                    bram_read.d = 0                    
+                }
                 if (~ddr){
                     alufn = ADD
                     bsel = b1011
                     ra1 = TARGET_PIXEL_ADDRESS
 
-                    swe3 = b1
-
+                    bram_read.d = 1
                     states.d = States.SR_LOAD_BOT_RIGHT
                 }
                 debug_dff.d = 99
 
             States.SR_LOAD_BOT_RIGHT:
                 swe3 = b1
-                sre3 = b0
+                bram_read.d = 0
                 states.d = States.READ_TOP_LEFT
                 debug_dff.d = 100
 
@@ -1703,45 +1724,55 @@ module fsm #(
                     bsel = b0101
                     ra1 = TARGET_PIXEL_ADDRESS
 
+                    bram_read.d = 1
                     states.d = States.RB_LOAD_TOP_RIGHT
                 }
                 debug_dff.d = 101
 
             States.RB_LOAD_TOP_RIGHT:
+                if (bram_read.q) {
+                    swe1 = b1
+                    bram_read.d = 0                    
+                }
                 if (~ddr){
                     alufn = ADD
                     bsel = b0001
                     ra1 = TARGET_PIXEL_ADDRESS
 
-                    swe1 = b1
-
+                    bram_read.d = 1
                     states.d = States.RB_LOAD_MID_RIGHT
                 }
                 debug_dff.d = 102
 
             States.RB_LOAD_MID_RIGHT:
+                if (bram_read.q) {
+                    swe2 = b1
+                    bram_read.d = 0                    
+                }
                 if (~ddr){
                     alufn = ADD
                     bsel = b1101
                     ra1 = TARGET_PIXEL_ADDRESS
-                    bwe = b0
 
-                    swe2 = b1
-
+                    bram_read.d = 1
                     states.d = States.RB_LOAD_BOT_RIGHT
                 }
                 debug_dff.d = 103
 
             States.RB_LOAD_BOT_RIGHT:
-                if (~ddr){
-
-                    swe3 = b1
-
-                    states.d = States.READ_TOP_LEFT
-                }
+                swe3 = b1
+                bram_read.d = 0
+                states.d = States.READ_TOP_LEFT
                 debug_dff.d = 104
             
         // Last Column Loading ------------------------------------------------------------
+            States.PASS_00_TO_SR:
+                ra1 = TARGET_PIXEL_ADDRESS
+                ra2 = TARGET_PIXEL_ADDRESS
+                alufn = SUB
+                
+                states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
+
             States.READ_CURR_PIXEL_VALUE_00_ALL_SR:
                 swe1 = b1
                 swe2 = b1
