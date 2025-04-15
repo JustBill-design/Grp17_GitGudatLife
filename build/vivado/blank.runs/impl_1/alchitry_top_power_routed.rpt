@@ -1,8 +1,8 @@
-Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2023 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
-| Tool Version     : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date             : Tue Apr 15 10:03:46 2025
-| Host             : PC running 64-bit major release  (build 9200)
+| Tool Version     : Vivado v.2023.2 (win64) Build 4029153 Fri Oct 13 20:14:34 MDT 2023
+| Date             : Tue Apr 15 10:44:55 2025
+| Host             : LAPTOP-6R0BMEKF running 64-bit major release  (build 9200)
 | Command          : report_power -file alchitry_top_power_routed.rpt -pb alchitry_top_power_summary_routed.pb -rpx alchitry_top_power_routed.rpx
 | Design           : alchitry_top
 | Device           : xc7a35tftg256-1
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.155        |
+| Total On-Chip Power (W)  | 0.159        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.083        |
+| Dynamic (W)              | 0.087        |
 | Device Static (W)        | 0.072        |
 | Effective TJA (C/W)      | 4.9          |
 | Max Ambient (C)          | 84.2         |
@@ -53,16 +53,17 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.004 |        3 |       --- |             --- |
-| Slice Logic    |     0.008 |     2288 |       --- |             --- |
-|   LUT as Logic |     0.007 |     1421 |     20800 |            6.83 |
+| Slice Logic    |     0.009 |     2242 |       --- |             --- |
+|   LUT as Logic |     0.009 |     1337 |     20800 |            6.43 |
 |   CARRY4       |    <0.001 |       97 |      8150 |            1.19 |
 |   Register     |    <0.001 |      450 |     41600 |            1.08 |
+|   F7/F8 Muxes  |    <0.001 |        6 |     32600 |            0.02 |
 |   Others       |     0.000 |       77 |       --- |             --- |
-| Signals        |     0.011 |     2059 |       --- |             --- |
+| Signals        |     0.012 |     2003 |       --- |             --- |
 | Block RAM      |     0.003 |      1.5 |        50 |            3.00 |
 | I/O            |     0.058 |       79 |       170 |           46.47 |
 | Static Power   |     0.072 |          |           |                 |
-| Total          |     0.155 |          |           |                 |
+| Total          |     0.159 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -72,7 +73,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.035 |       0.025 |      0.010 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.038 |       0.028 |      0.010 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.015 |       0.002 |      0.013 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.017 |       0.016 |      0.001 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -141,12 +142,12 @@ Table of Contents
 +--------------+-----------+
 | Name         | Power (W) |
 +--------------+-----------+
-| alchitry_top |     0.083 |
-|   L_reg      |     0.005 |
+| alchitry_top |     0.087 |
+|   L_reg      |     0.007 |
 |   brams      |     0.002 |
 |     bram1    |     0.001 |
 |     bram2    |     0.001 |
-|   sm         |     0.012 |
+|   sm         |     0.013 |
 +--------------+-----------+
 
 
