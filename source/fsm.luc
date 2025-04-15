@@ -2064,7 +2064,7 @@ module fsm #(
                 //     states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
                 // }
                 case(aluout) {
-                    13x{b0}: states.d = States.SET_00
+                    13b0: states.d = States.SET_00
                     default: states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
                 }
                 // debugging

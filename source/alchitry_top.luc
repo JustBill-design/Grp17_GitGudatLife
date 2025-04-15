@@ -164,7 +164,7 @@ module alchitry_top (
         // connect slow clocks
         timerclk.in = timercounter.value[$clog2(CLK)-1]
         gameclk.in = gamecounter.value[$width(gamecounter.value)-1]
-        med_inputclk.in = timercounter.value[$clog2(CLK)-4]
+        med_inputclk.in = timercounter.value[$clog2(CLK)-6]
         sm.timerclk = timerclk.out
         sm.gameclk = gameclk.out
         sm.med_inputclk = med_inputclk.out
