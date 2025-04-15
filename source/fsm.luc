@@ -28,7 +28,7 @@ module fsm #(
     
     // external modules connections --------------------------
     // alu
-    // input aluout_lsb,       // alu.out LSB
+    input aluout[13],       // alu.out
     output alufn[6],        // alu function
 
     // BRAM
@@ -147,6 +147,8 @@ module fsm #(
 
     const ADD = b000000
     const SUB = b000001
+    const CMPEQ = b110011
+    const CMPLT = b110101
     const XOR = b010110
     const PASSTHROUGH = b011010
 
@@ -2051,75 +2053,48 @@ module fsm #(
 
             // current pixel is b00
             States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS:
-                // alufn = SUB
+                alufn = CMPEQ
                 ra1 = A_NEIGHBOUR_ADDRESS
                 ra2 = B_NEIGHBOUR_ADDRESS
 
-                if(rd1 == rd2){
-                    states.d = States.SET_00
-                }
-                else{
-                    states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
-                }
-                // case(aluout) {
-                //     13x{b0}: states.d = States.SET_00
-                //     default: states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
+                // if(rd1 == rd2){
+                //     states.d = States.SET_00
                 // }
-
-                
-                //case (c{rd1[3:0],rd2[3:0]}) {
-                //    b00000000: states.d = States.SET_00
-                //    b00010001: states.d = States.SET_00
-                //    b00100010: states.d = States.SET_00
-                //    b00110011: states.d = States.SET_00
-                //    b01000100: states.d = States.SET_00
-                //    b01010101: states.d = States.SET_00
-                //   b01100110: states.d = States.SET_00
-                //    b01110111: states.d = States.SET_00
-                //    b10001000: states.d = States.SET_00
-                //    default: states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
-                //}
-
-                // case ()
-                // if (alu_buffer.q[1]){
-                //     if (alu_buffer.q[0]) {
-                //         states.d = States.SET_00                    
-                //     } else {
-                //         states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
-                //     }
-                //     alu_buffer.d = b00
-                // } else {
-                //     alu_buffer.d = c{b1,aluout_lsb}
+                // else{
+                //     states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
                 // }
+                case(aluout) {
+                    13x{b0}: states.d = States.SET_00
+                    default: states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
+                }
                 // debugging
                 debug_dff.d = 134
 
             States.B00_CHECK_A_NEIGHBOUR_EQ_3:
                 ra1 = A_NEIGHBOUR_ADDRESS
-                /* case(rd1[1:0]){
-                    b11: states.d = States.B00_A_COUNTP1
+                case (rd1) {
+                    3: states.d = States.B00_A_COUNTP1
                     default: states.d = States.B00_CHECK_B_NEIGHBOUR_EQ_3
-                } */
-                if(rd1 == 3){
-                    states.d = States.B00_A_COUNTP1
-                } else {
-                    states.d = States.B00_CHECK_B_NEIGHBOUR_EQ_3
                 }
+                // if(rd1 == 3){
+                //     states.d = States.B00_A_COUNTP1
+                // } else {
+                //     states.d = States.B00_CHECK_B_NEIGHBOUR_EQ_3
+                // }
                 // debugging
                 debug_dff.d = 135
         
             States.B00_CHECK_B_NEIGHBOUR_EQ_3:
                 ra1 = B_NEIGHBOUR_ADDRESS
-                /* case(rd1[1:0]){
-                    b11: states.d = States.B00_B_COUNTP1
+                case (rd1) {
+                    3: states.d = States.B00_B_COUNTP1
                     default: states.d = States.SET_00
-                } */
-
-                if(rd1 == 3){
-                    states.d = States.B00_B_COUNTP1
-                } else {
-                    states.d = States.SET_00
                 }
+                // if(rd1 == 3){
+                //     states.d = States.B00_B_COUNTP1
+                // } else {
+                //     states.d = States.SET_00
+                // }
                 // debugging
                 debug_dff.d = 136
 
@@ -2145,29 +2120,15 @@ module fsm #(
 
             // current pixel is b10
             States.B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR:
-                // alufn = SUB
+                alufn = CMPLT
                 ra1 = A_NEIGHBOUR_ADDRESS
                 ra2 = B_NEIGHBOUR_ADDRESS
 
-                if (rd1[3:0]<rd2[3:0]) {
+                if (aluout[0]) {
                     states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_2_OR_3
                 } else {
                     states.d = States.B10_B_COUNTM1
                 }
-                // if (alu_buffer.q[1]){
-                //     if (alu_buffer.q[0]) {
-                //         states.d = States.B10_CHECK_B_NEIGHBOUR_EQ_2_OR_3                    
-                //     } else {
-                //         states.d = States.B10_B_COUNTM1
-                //     }
-                //     alu_buffer.d = b00
-                // } else {
-                //     alufn = CMPLT
-                //     bsel = b0000
-                //     ra1 = A_NEIGHBOUR_ADDRESS
-                //     ra2 = B_NEIGHBOUR_ADDRESS
-                //     alu_buffer.d = c{b1,aluout_lsb}
-                // }
                 // debugging
                 debug_dff.d = 139
 
@@ -2193,30 +2154,15 @@ module fsm #(
 
             // current pixel is b01
             States.B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR:
-                // alufn = SUB
-                ra1 = A_NEIGHBOUR_ADDRESS
-                ra2 = B_NEIGHBOUR_ADDRESS
+                alufn = CMPLT
+                ra1 = B_NEIGHBOUR_ADDRESS
+                ra2 = A_NEIGHBOUR_ADDRESS
 
-                if (rd2[3:0]<rd1[3:0]) {
+                if (aluout[0]) {
                     states.d = States.B01_CHECK_A_NEIGHBOUR_EQ_2_OR_3
                 } else {
                     states.d = States.B01_A_COUNTM1
                 }
-
-                // if (alu_buffer.q[1]){
-                //     if (alu_buffer.q[0]) {
-                //         states.d = States.B01_CHECK_A_NEIGHBOUR_EQ_2_OR_3                    
-                //     } else {
-                //         states.d = States.B01_A_COUNTM1                    
-                //     }
-                //     alu_buffer.d = b00
-                // } else {
-                //     alufn = CMPLT
-                //     bsel = b0000
-                //     ra1 = B_NEIGHBOUR_ADDRESS
-                //     ra2 = A_NEIGHBOUR_ADDRESS
-                //     alu_buffer.d = c{b1,aluout_lsb}
-                // }
                 // debugging
                 debug_dff.d = 143
             
@@ -2251,18 +2197,20 @@ module fsm #(
                 debug_dff.d = 146
             
             States.SET_B:
-
                 ra1 = TARGET_PIXEL_ADDRESS
+
                 bwe = b1
                 bwd = b10
+
                 states.d = States.RESET_A_NEIGHBOUR
                 debug_dff.d = 147
             
             States.SET_00:
-
                 ra1 = TARGET_PIXEL_ADDRESS
+
                 bwe = b1
                 bwd = b00
+
                 states.d = States.RESET_A_NEIGHBOUR
                 debug_dff.d = 148
 

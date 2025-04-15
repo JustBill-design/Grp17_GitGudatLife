@@ -21,7 +21,7 @@ module display_driver #(
         output reg sclk_out,
         output reg [(ADDRESS_SIZE)-1:0] address
     );
-    localparam DIV = $clog2(CLK_FREQ) - 5'h11;
+    localparam DIV = $clog2(CLK_FREQ) - 5'h14;
     logic [2:0] pixeldata;
     logic [1:0] D_state_d, D_state_q = 0;
     logic [(DIV)-1:0] D_sclk_counter_d, D_sclk_counter_q = 0;

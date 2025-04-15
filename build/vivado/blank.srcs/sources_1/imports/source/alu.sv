@@ -40,6 +40,12 @@ module alu #(
             6'h1a: begin
                 out_sig = a;
             end
+            6'h33: begin
+                out_sig = a[2'h3:1'h0] == b[2'h3:1'h0];
+            end
+            6'h35: begin
+                out_sig = a[2'h3:1'h0] < b[2'h3:1'h0];
+            end
             default: begin
                 out_sig = 1'h0;
             end
