@@ -226,18 +226,18 @@ module fsm (
     localparam E_States_SET_SELECTOR_PIXEL_STATE = 8'hb1;
     logic D_decrease_timer_d, D_decrease_timer_q = 0;
     logic D_game_tick_d, D_game_tick_q = 0;
-    logic [1:0] D_accel_selector_d, D_accel_selector_q = 0;
-    logic [3:0] D_accel_timer_d, D_accel_timer_q = 0;
-    logic [3:0] D_accel_d, D_accel_q = 0;
-    logic D_accel_edge_buff_d, D_accel_edge_buff_q = 0;
-    localparam _MP_RISE_1566202319 = 1'h0;
-    localparam _MP_FALL_1566202319 = 1'h1;
+    logic [1:0] D_accel_selector_d, D_accel_selector_q = 2'h0;
+    logic [3:0] D_accel_timer_d, D_accel_timer_q = 4'h0;
+    logic [3:0] D_accel_d, D_accel_q = 4'h0;
+    logic D_accel_edge_buff_d, D_accel_edge_buff_q = 1'h0;
+    localparam _MP_RISE_1884779967 = 1'h0;
+    localparam _MP_FALL_1884779967 = 1'h1;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_1566202319),
-        .FALL(_MP_FALL_1566202319)
+        .RISE(_MP_RISE_1884779967),
+        .FALL(_MP_FALL_1884779967)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),

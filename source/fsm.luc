@@ -128,10 +128,10 @@ module fsm #(
         dff decrease_timer
         dff game_tick
 
-        dff accel_selector[2]   // select clock for inputclk
-        dff accel_timer[4]      // timer for interval between acceleration
-        dff accel[4]            // bits selected for acceleration
-        dff accel_edge_buff     // buffer dff for edge
+        dff accel_selector[2](#INIT(b00))   // select clock for inputclk
+        dff accel_timer[4](#INIT(b0000))      // timer for interval between acceleration
+        dff accel[4](#INIT(b0000))            // bits selected for acceleration
+        dff accel_edge_buff(#INIT(b0))     // buffer dff for edge
         
         // dff alu_buffer[2]
         edge_detector accel_edge(#RISE(0),#FALL(1))
