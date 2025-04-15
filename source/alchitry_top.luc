@@ -89,7 +89,7 @@ module alchitry_top (
             
             // counters
             counter timercounter(#SIZE($clog2(CLK)),#TOP(CLK))                  // 1 tick per second
-            counter gamecounter(#SIZE($clog2(CLK/4224/4)),#TOP(CLK/4224/4))     // 4 generations per second
+            counter gamecounter(#SIZE($clog2(CLK/4224/4)),#TOP(CLK/4224/6))     // 4 generations per second
             
             // FSM
             fsm sm
@@ -164,7 +164,7 @@ module alchitry_top (
         // connect slow clocks
         timerclk.in = timercounter.value[$clog2(CLK)-1]
         gameclk.in = gamecounter.value[$width(gamecounter.value)-1]
-        med_inputclk.in = timercounter.value[$clog2(CLK)-6]
+        med_inputclk.in = timercounter.value[$clog2(CLK)-7]
         sm.timerclk = timerclk.out
         sm.gameclk = gameclk.out
         sm.med_inputclk = med_inputclk.out

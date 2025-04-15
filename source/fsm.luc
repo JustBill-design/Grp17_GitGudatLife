@@ -1718,11 +1718,12 @@ module fsm #(
             
         // Last Column Loading ------------------------------------------------------------
             States.PASS_00_TO_SR:
-                ra1 = TARGET_PIXEL_ADDRESS
-                ra2 = TARGET_PIXEL_ADDRESS
-                alufn = SUB
-                
-                states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
+                if (~ddr) {
+                    ra1 = TARGET_PIXEL_ADDRESS
+                    ra2 = TARGET_PIXEL_ADDRESS
+                    alufn = SUB
+                    states.d = States.READ_CURR_PIXEL_VALUE_00_ALL_SR
+                }
 
             States.READ_CURR_PIXEL_VALUE_00_ALL_SR:
                 swe1 = b1
