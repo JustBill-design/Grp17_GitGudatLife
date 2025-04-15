@@ -1741,7 +1741,7 @@ module fsm #(
                 }
                 if (~ddr){
                     alufn = ADD
-                    bsel = b1101
+                    bsel = b1011
                     ra1 = TARGET_PIXEL_ADDRESS
 
                     bram_read.d = 1
@@ -2063,15 +2063,13 @@ module fsm #(
         // Evaluation logic ---------------------------------------------------------------
             States.CHECK_NEIGHBOURS:
                 ra1 = TARGET_PIXEL_VALUE
-                if (next_start_button){
-                    case(rd1){
-                        b00:
+                case(rd1){
+                    b00:
                         states.d = States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS
-                        b10:
+                    b10:
                         states.d = States.B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR // cur is B pixel
-                        b01:
+                    b01:
                         states.d = States.B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR   // cur is A pixel
-                    }
                 }
                 debug_dff.d = 133
 
