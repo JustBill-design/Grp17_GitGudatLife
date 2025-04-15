@@ -1774,7 +1774,7 @@ module fsm #(
         // Counting Neighbours -----------------------------------------------------------
             States.READ_TOP_LEFT:
                 sre1 = b1
-                case(srd1){
+                case (srd1) {
                     b01: states.d = States.TOP_LEFT_ADD_A_NEIGHBOUR
                     b10: states.d = States.TOP_LEFT_ADD_B_NEIGHBOUR
                     b00: states.d = States.READ_TOP_MID
@@ -1804,13 +1804,10 @@ module fsm #(
             // Reading top mid pixel for neighbours
             States.READ_TOP_MID:
                 sre1 = b1
-                case(srd1[1:0]){
-                    b01:
-                        states.d = States.TOP_MID_ADD_A_NEIGHBOUR
-                    b10:
-                        states.d = States.TOP_MID_ADD_B_NEIGHBOUR
-                    b00:
-                        states.d = States.READ_TOP_RIGHT
+                case (srd1) {
+                    b01: states.d = States.TOP_MID_ADD_A_NEIGHBOUR
+                    b10: states.d = States.TOP_MID_ADD_B_NEIGHBOUR
+                    b00: states.d = States.READ_TOP_RIGHT
                 }
                 debug_dff.d = 109
             
@@ -1841,13 +1838,10 @@ module fsm #(
             // Reading top right pixel for neighbours
             States.READ_TOP_RIGHT:
                 sre1 = b1
-                case(srd1){
-                    b01:
-                        states.d = States.TOP_RIGHT_ADD_A_NEIGHBOUR
-                    b10:
-                        states.d = States.TOP_RIGHT_ADD_B_NEIGHBOUR
-                    b00:
-                        states.d = States.READ_MID_LEFT
+                case (srd1) {
+                    b01: states.d = States.TOP_RIGHT_ADD_A_NEIGHBOUR
+                    b10: states.d = States.TOP_RIGHT_ADD_B_NEIGHBOUR
+                    b00: states.d = States.READ_MID_LEFT
                 }
                 // debug
                 debug_dff.d = 112
@@ -1875,13 +1869,10 @@ module fsm #(
             // Reading mid left pixel for neighbours
             States.READ_MID_LEFT:
                 sre2 = b1
-                case(srd2){
-                    b01:
-                        states.d = States.MID_LEFT_ADD_A_NEIGHBOUR
-                    b10:
-                        states.d = States.MID_LEFT_ADD_B_NEIGHBOUR
-                    b00:
-                        states.d = States.READ_TARGET_PIXEL
+                case (srd2) {
+                    b01: states.d = States.MID_LEFT_ADD_A_NEIGHBOUR
+                    b10: states.d = States.MID_LEFT_ADD_B_NEIGHBOUR
+                    b00: states.d = States.READ_TARGET_PIXEL
                 }
                 debug_dff.d = 115
             
@@ -1917,13 +1908,10 @@ module fsm #(
             // Reading mid right pixel for neighbours
             States.READ_MID_RIGHT:
                 sre2 = b1
-                case(srd2){
-                    b01:
-                        states.d = States.MID_RIGHT_ADD_A_NEIGHBOUR
-                    b10:
-                        states.d = States.MID_RIGHT_ADD_B_NEIGHBOUR
-                    b00:
-                        states.d = States.READ_BOT_LEFT
+                case (srd2) {
+                    b01: states.d = States.MID_RIGHT_ADD_A_NEIGHBOUR
+                    b10: states.d = States.MID_RIGHT_ADD_B_NEIGHBOUR
+                    b00: states.d = States.READ_BOT_LEFT
                 }
                 debug_dff.d = 119
             
@@ -1950,13 +1938,10 @@ module fsm #(
             // Reading bot left pixel for neighbours
             States.READ_BOT_LEFT:
                 sre3 = b1
-                case(srd3){
-                    b01:
-                        states.d = States.BOT_LEFT_ADD_A_NEIGHBOUR
-                    b10:
-                        states.d = States.BOT_LEFT_ADD_B_NEIGHBOUR
-                    b00:
-                        states.d = States.READ_BOT_MID
+                case (srd3) {
+                    b01: states.d = States.BOT_LEFT_ADD_A_NEIGHBOUR
+                    b10: states.d = States.BOT_LEFT_ADD_B_NEIGHBOUR
+                    b00: states.d = States.READ_BOT_MID
                 }
                 debug_dff.d = 122
             
@@ -1983,13 +1968,10 @@ module fsm #(
             // Reading bot mid pixel for neighbours
             States.READ_BOT_MID:
                 sre3 = b1
-                case(srd3){
-                    b01:
-                        states.d = States.BOT_MID_ADD_A_NEIGHBOUR
-                    b10:
-                        states.d = States.BOT_MID_ADD_B_NEIGHBOUR
-                    b00:
-                        states.d = States.READ_BOT_RIGHT
+                case (srd3) {
+                    b01: states.d = States.BOT_MID_ADD_A_NEIGHBOUR
+                    b10: states.d = States.BOT_MID_ADD_B_NEIGHBOUR
+                    b00: states.d = States.READ_BOT_RIGHT
                 }
                 debug_dff.d = 125
             
@@ -2017,12 +1999,9 @@ module fsm #(
             States.READ_BOT_RIGHT:
                 sre3 = b1
                 case(srd3){
-                    b01:
-                        states.d = States.BOT_RIGHT_ADD_A_NEIGHBOUR
-                    b10:
-                        states.d = States.BOT_RIGHT_ADD_B_NEIGHBOUR
-                    b00:
-                        states.d = States.SR_EMPTY_READ_1
+                    b01: states.d = States.BOT_RIGHT_ADD_A_NEIGHBOUR
+                    b10: states.d = States.BOT_RIGHT_ADD_B_NEIGHBOUR
+                    b00: states.d = States.SR_EMPTY_READ_1
                 }
                 debug_dff.d = 128
             
@@ -2064,12 +2043,9 @@ module fsm #(
             States.CHECK_NEIGHBOURS:
                 ra1 = TARGET_PIXEL_VALUE
                 case(rd1){
-                    b00:
-                        states.d = States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS
-                    b10:
-                        states.d = States.B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR // cur is B pixel
-                    b01:
-                        states.d = States.B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR   // cur is A pixel
+                    b00: states.d = States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS
+                    b10: states.d = States.B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR // cur is B pixel
+                    b01: states.d = States.B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR   // cur is A pixel
                 }
                 debug_dff.d = 133
 
