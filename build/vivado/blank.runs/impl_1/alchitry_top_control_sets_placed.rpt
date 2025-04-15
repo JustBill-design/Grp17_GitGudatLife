@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Wed Apr 16 05:29:41 2025
+| Date         : Wed Apr 16 05:35:17 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file alchitry_top_control_sets_placed.rpt
 | Design       : alchitry_top
@@ -27,7 +27,7 @@ Table of Contents
 |    Minimum number of control sets                        |    35 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |   135 |
+| Unused register locations in slices containing registers |   136 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -43,8 +43,8 @@ Table of Contents
 | >= 0 to < 4        |     6 |
 | >= 4 to < 6        |     3 |
 | >= 6 to < 8        |     1 |
-| >= 8 to < 10       |     1 |
-| >= 10 to < 12      |     2 |
+| >= 8 to < 10       |     2 |
+| >= 10 to < 12      |     1 |
 | >= 12 to < 14      |    10 |
 | >= 14 to < 16      |     7 |
 | >= 16              |     5 |
@@ -59,11 +59,11 @@ Table of Contents
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | No           | No                    | No                     |              52 |           20 |
-| No           | No                    | Yes                    |               5 |            2 |
-| No           | Yes                   | No                     |             118 |           40 |
+| No           | No                    | Yes                    |               5 |            1 |
+| No           | Yes                   | No                     |             117 |           37 |
 | Yes          | No                    | No                     |               6 |            3 |
 | Yes          | No                    | Yes                    |               0 |            0 |
-| Yes          | Yes                   | No                     |             236 |           98 |
+| Yes          | Yes                   | No                     |             236 |           83 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
@@ -73,35 +73,35 @@ Table of Contents
 +----------------------------+-----------------------------------------------------------------------+------------------------------------------------------------------------+------------------+----------------+--------------+
 |        Clock Signal        |                             Enable Signal                             |                            Set/Reset Signal                            | Slice Load Count | Bel Load Count | Bels / Slice |
 +----------------------------+-----------------------------------------------------------------------+------------------------------------------------------------------------+------------------+----------------+--------------+
-|  slowclk_gen/inst/clk_out1 | sm/D_accel_d                                                          |                                                                        |                1 |              1 |         1.00 |
+|  slowclk_gen/inst/clk_out1 | display/D_sclk_d4_out                                                 | reset_cond/D_stage_q_reg[3]_0                                          |                1 |              1 |         1.00 |
 |  slowclk_gen/inst/clk_out1 | display/D_state_q0                                                    |                                                                        |                1 |              1 |         1.00 |
-|  slowclk_gen/inst/clk_out1 | display/D_sclk_d4_out                                                 | reset_cond/D_sclk_q                                                    |                1 |              1 |         1.00 |
+|  slowclk_gen/inst/clk_out1 | sm/D_accel_d                                                          |                                                                        |                1 |              1 |         1.00 |
+|  slowclk_gen/inst/clk_out1 | display/D_rgb_data_0_d                                                | reset_cond/Q[0]                                                        |                3 |              3 |         1.00 |
+|  slowclk_gen/inst/clk_out1 | display/D_rgb_data_1_d                                                | reset_cond/Q[0]                                                        |                2 |              3 |         1.50 |
 |  slowclk_gen/inst/clk_out1 | sm/D_accel_d                                                          | sm/D_accel_q[3]_i_1_n_0                                                |                1 |              3 |         3.00 |
-|  slowclk_gen/inst/clk_out1 | display/D_rgb_data_0_d                                                | reset_cond/Q[0]                                                        |                2 |              3 |         1.50 |
-|  slowclk_gen/inst/clk_out1 | display/D_rgb_data_1_q[2]_i_1_n_0                                     | reset_cond/Q[0]                                                        |                1 |              3 |         3.00 |
-|  slowclk_gen/inst/clk_out1 | forLoop_idx_0_2097383338[0].cond_butt_dirs/E[0]                       | reset_cond/Q[0]                                                        |                1 |              4 |         4.00 |
+|  slowclk_gen/inst/clk_out1 | forLoop_idx_0_1611395108[0].cond_butt_dirs/E[0]                       | reset_cond/Q[0]                                                        |                1 |              4 |         4.00 |
 |  slowclk_gen/inst/clk_out1 | sm/D_accel_timer_d                                                    |                                                                        |                1 |              4 |         4.00 |
-|  slowclk_gen/inst/clk_out1 |                                                                       | reset_cond/M_reset_cond_in                                             |                2 |              5 |         2.50 |
-|  slowclk_gen/inst/clk_out1 |                                                                       | reset_cond/Q[0]                                                        |                4 |              6 |         1.50 |
-|  slowclk_gen/inst/clk_out1 | sm/D_states_q[7]_i_1_n_0                                              | reset_cond/Q[0]                                                        |                7 |              9 |         1.29 |
-|  slowclk_gen/inst/clk_out1 |                                                                       | gamecounter/D_ctr_q[9]_i_1_n_0                                         |                3 |             10 |         3.33 |
+|  slowclk_gen/inst/clk_out1 |                                                                       | reset_cond/M_reset_cond_in                                             |                1 |              5 |         5.00 |
+|  slowclk_gen/inst/clk_out1 |                                                                       | reset_cond/Q[0]                                                        |                3 |              6 |         2.00 |
+|  slowclk_gen/inst/clk_out1 |                                                                       | gamecounter/D_ctr_q[8]_i_1_n_0                                         |                3 |              9 |         3.00 |
+|  slowclk_gen/inst/clk_out1 | sm/D_states_q[7]_i_1_n_0                                              | reset_cond/Q[0]                                                        |                8 |              9 |         1.12 |
 |  slowclk_gen/inst/clk_out1 | display/D_pixel_idx_q[10]_i_1_n_0                                     | reset_cond/Q[0]                                                        |                4 |             11 |         2.75 |
-|  slowclk_gen/inst/clk_out1 |                                                                       | display/D_bram_addr_q[12]_i_1_n_0                                      |                7 |             12 |         1.71 |
+|  slowclk_gen/inst/clk_out1 |                                                                       | display/D_bram_addr_q[12]_i_1_n_0                                      |                5 |             12 |         2.40 |
 |  slowclk_gen/inst/clk_out1 |                                                                       | sm/fifo_rst                                                            |                5 |             12 |         2.40 |
-|  slowclk_gen/inst/clk_out1 | L_reg/D_registers_d_reg_n_0_[2]                                       | reset_cond/Q[0]                                                        |                8 |             13 |         1.62 |
+|  slowclk_gen/inst/clk_out1 | sm/D_registers_d_reg[7]_i_1_0[0]                                      | reset_cond/Q[0]                                                        |                5 |             13 |         2.60 |
 |  slowclk_gen/inst/clk_out1 | L_reg/D_registers_d                                                   | reset_cond/Q[0]                                                        |                6 |             13 |         2.17 |
-|  slowclk_gen/inst/clk_out1 | sm/E[0]                                                               | reset_cond/Q[0]                                                        |                4 |             13 |         3.25 |
-|  slowclk_gen/inst/clk_out1 | L_reg/D_registers_d_reg[2]__0_n_0                                     | reset_cond/Q[0]                                                        |                9 |             13 |         1.44 |
-|  slowclk_gen/inst/clk_out1 | L_reg/D_registers_d_reg[7]__0_n_0                                     | reset_cond/Q[0]                                                        |                7 |             13 |         1.86 |
-|  slowclk_gen/inst/clk_out1 | sm/D_registers_d_reg[7]_i_1_0[0]                                      | reset_cond/Q[0]                                                        |                7 |             13 |         1.86 |
-|  slowclk_gen/inst/clk_out1 | sm/D_registers_d_reg[7]_i_1_1[0]                                      | reset_cond/Q[0]                                                        |                7 |             13 |         1.86 |
-|  slowclk_gen/inst/clk_out1 | sm/D_registers_d_reg[7]_i_2_0[0]                                      | reset_cond/Q[0]                                                        |                5 |             13 |         2.60 |
-|  slowclk_gen/inst/clk_out1 | forLoop_idx_0_2097383338[0].cond_butt_dirs/D_ctr_q[0]_i_2__2_n_0      | forLoop_idx_0_2097383338[0].cond_butt_dirs/sync/D_pipe_q_reg[1]_0      |                4 |             14 |         3.50 |
-|  slowclk_gen/inst/clk_out1 | forLoop_idx_0_1484310582[1].cond_butt_sel_desel/D_ctr_q[0]_i_2__0_n_0 | forLoop_idx_0_1484310582[1].cond_butt_sel_desel/sync/D_pipe_q_reg[1]_0 |                4 |             14 |         3.50 |
-|  slowclk_gen/inst/clk_out1 | forLoop_idx_0_1484310582[0].cond_butt_sel_desel/D_ctr_q[0]_i_2__1_n_0 | forLoop_idx_0_1484310582[0].cond_butt_sel_desel/sync/D_pipe_q_reg[1]_0 |                4 |             14 |         3.50 |
-|  slowclk_gen/inst/clk_out1 | forLoop_idx_0_2097383338[1].cond_butt_dirs/D_ctr_q[0]_i_2__3_n_0      | forLoop_idx_0_2097383338[1].cond_butt_dirs/sync/D_pipe_q_reg[1]_0      |                4 |             14 |         3.50 |
-|  slowclk_gen/inst/clk_out1 | forLoop_idx_0_2097383338[2].cond_butt_dirs/D_ctr_q[0]_i_2__4_n_0      | forLoop_idx_0_2097383338[2].cond_butt_dirs/sync/D_pipe_q_reg[1]_0      |                4 |             14 |         3.50 |
-|  slowclk_gen/inst/clk_out1 | forLoop_idx_0_2097383338[3].cond_butt_dirs/D_ctr_q[0]_i_2__5_n_0      | forLoop_idx_0_2097383338[3].cond_butt_dirs/sync/D_pipe_q_reg[1]_0      |                4 |             14 |         3.50 |
+|  slowclk_gen/inst/clk_out1 | L_reg/D_registers_d_reg[2]__0_n_0                                     | reset_cond/Q[0]                                                        |                4 |             13 |         3.25 |
+|  slowclk_gen/inst/clk_out1 | L_reg/D_registers_d_reg[7]__0_n_0                                     | reset_cond/Q[0]                                                        |                3 |             13 |         4.33 |
+|  slowclk_gen/inst/clk_out1 | L_reg/D_registers_d_reg_n_0_[2]                                       | reset_cond/Q[0]                                                        |                4 |             13 |         3.25 |
+|  slowclk_gen/inst/clk_out1 | sm/D_registers_d_reg[7]_i_2_0[0]                                      | reset_cond/Q[0]                                                        |                4 |             13 |         3.25 |
+|  slowclk_gen/inst/clk_out1 | sm/E[0]                                                               | reset_cond/Q[0]                                                        |                5 |             13 |         2.60 |
+|  slowclk_gen/inst/clk_out1 | sm/D_registers_d_reg[7]_i_1_1[0]                                      | reset_cond/Q[0]                                                        |                4 |             13 |         3.25 |
+|  slowclk_gen/inst/clk_out1 | forLoop_idx_0_1611395108[0].cond_butt_dirs/D_ctr_q[0]_i_2__2_n_0      | forLoop_idx_0_1611395108[0].cond_butt_dirs/sync/D_pipe_q_reg[1]_0      |                4 |             14 |         3.50 |
+|  slowclk_gen/inst/clk_out1 | forLoop_idx_0_1611395108[1].cond_butt_dirs/D_ctr_q[0]_i_2__3_n_0      | forLoop_idx_0_1611395108[1].cond_butt_dirs/sync/D_pipe_q_reg[1]_0      |                4 |             14 |         3.50 |
+|  slowclk_gen/inst/clk_out1 | forLoop_idx_0_1611395108[2].cond_butt_dirs/D_ctr_q[0]_i_2__4_n_0      | forLoop_idx_0_1611395108[2].cond_butt_dirs/sync/D_pipe_q_reg[1]_0      |                4 |             14 |         3.50 |
+|  slowclk_gen/inst/clk_out1 | forLoop_idx_0_1611395108[3].cond_butt_dirs/D_ctr_q[0]_i_2__5_n_0      | forLoop_idx_0_1611395108[3].cond_butt_dirs/sync/D_pipe_q_reg[1]_0      |                4 |             14 |         3.50 |
+|  slowclk_gen/inst/clk_out1 | forLoop_idx_0_1997246938[0].cond_butt_sel_desel/D_ctr_q[0]_i_2__1_n_0 | forLoop_idx_0_1997246938[0].cond_butt_sel_desel/sync/D_pipe_q_reg[1]_0 |                4 |             14 |         3.50 |
+|  slowclk_gen/inst/clk_out1 | forLoop_idx_0_1997246938[1].cond_butt_sel_desel/D_ctr_q[0]_i_2__0_n_0 | forLoop_idx_0_1997246938[1].cond_butt_sel_desel/sync/D_pipe_q_reg[1]_0 |                4 |             14 |         3.50 |
 |  slowclk_gen/inst/clk_out1 | cond_butt_next_play/sel                                               | cond_butt_next_play/sync/clear__0                                      |                4 |             14 |         3.50 |
 |  clk_IBUF_BUFG             |                                                                       | timerseg_driver/ctr/D_ctr_q[0]_i_1__9_n_0                              |                5 |             18 |         3.60 |
 |  clk_IBUF_BUFG             |                                                                       | bseg_driver/ctr/D_ctr_q[0]_i_1__8_n_0                                  |                5 |             18 |         3.60 |

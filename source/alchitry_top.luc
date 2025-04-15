@@ -89,7 +89,7 @@ module alchitry_top (
             
             // counters
             counter timercounter(#SIZE($clog2(CLK)),#TOP(CLK))                  // 1 tick per second
-            counter gamecounter(#SIZE($clog2(CLK/4224/4)),#TOP(CLK/4224/6))     // 4 generations per second
+            counter gamecounter(#SIZE($clog2(CLK/4224/6)),#TOP(CLK/4224/6))     // 4 generations per second
             
             // FSM
             fsm sm
