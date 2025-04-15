@@ -3,8 +3,8 @@
 # SW Build 5239630 on Fri Nov 08 22:35:27 MST 2024
 # IP Build 5239520 on Sun Nov 10 16:12:51 MST 2024
 # SharedData Build 5239561 on Fri Nov 08 14:39:27 MST 2024
-# Start of session at: Wed Apr 16 05:34:17 2025
-# Process ID         : 38124
+# Start of session at: Wed Apr 16 05:48:35 2025
+# Process ID         : 41824
 # Current directory  : C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/synth_1
 # Command line       : vivado.exe -log alchitry_top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source alchitry_top.tcl
 # Log file           : C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/synth_1/alchitry_top.vds
@@ -19,7 +19,7 @@
 # Host memory        : 66125 MB
 # Swap memory        : 4160 MB
 # Total Virtual      : 70286 MB
-# Available Virtual  : 38123 MB
+# Available Virtual  : 38115 MB
 #-----------------------------------------------------------
 source alchitry_top.tcl -notrace
 Command: synth_design -top alchitry_top -part xc7a35tftg256-1
@@ -29,9 +29,9 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a35t
 INFO: [Device 21-403] Loading part xc7a35tftg256-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 38280
+INFO: [Synth 8-7075] Helper process launched with PID 38164
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 997.727 ; gain = 466.426
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:03 . Memory (MB): peak = 999.383 ; gain = 468.004
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'alchitry_top' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:7]
 INFO: [Synth 8-6157] synthesizing module 'button_conditioner' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/button_conditioner.sv:7]
@@ -113,8 +113,8 @@ INFO: [Synth 8-6157] synthesizing module 'divider' [C:/Users/yourmum/Downloads/f
 INFO: [Synth 8-6155] done synthesizing module 'divider' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/divider.sv:7]
 INFO: [Synth 8-226] default block is never used [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv:137]
 INFO: [Synth 8-6155] done synthesizing module 'alu' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alu.sv:7]
-INFO: [Synth 8-6157] synthesizing module 'clk_10' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/synth_1/.Xil/Vivado-38124-PC/realtime/clk_10_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'clk_10' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/synth_1/.Xil/Vivado-38124-PC/realtime/clk_10_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'clk_10' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/synth_1/.Xil/Vivado-41824-PC/realtime/clk_10_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'clk_10' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/synth_1/.Xil/Vivado-41824-PC/realtime/clk_10_stub.v:6]
 INFO: [Synth 8-6157] synthesizing module 'multi_seven_seg' [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/multi_seven_seg.sv:7]
 	Parameter DIGITS bound to: 3'b100 
 	Parameter DIV bound to: 5'b10000 
@@ -188,9 +188,6 @@ INFO: [Synth 8-6157] synthesizing module 'shift_register' [C:/Users/yourmum/Down
 	Parameter ENTRIES bound to: 3'b100 
 INFO: [Synth 8-6155] done synthesizing module 'shift_register' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/shift_register.sv:7]
 INFO: [Synth 8-6155] done synthesizing module 'alchitry_top' (0#1) [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:7]
-WARNING: [Synth 8-6014] Unused sequential element D_buff1_q_reg was removed.  [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:708]
-WARNING: [Synth 8-6014] Unused sequential element D_buff2_q_reg was removed.  [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:709]
-WARNING: [Synth 8-6014] Unused sequential element D_buff3_q_reg was removed.  [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.srcs/sources_1/imports/source/alchitry_top.sv:710]
 WARNING: [Synth 8-3917] design alchitry_top has port led[7] driven by constant 0
 WARNING: [Synth 8-3917] design alchitry_top has port led[6] driven by constant 0
 WARNING: [Synth 8-3917] design alchitry_top has port led[5] driven by constant 0
@@ -241,18 +238,18 @@ WARNING: [Synth 8-7129] Port alufn_signal[3] in module adder is either unconnect
 WARNING: [Synth 8-7129] Port alufn_signal[2] in module adder is either unconnected or has no load
 WARNING: [Synth 8-7129] Port alufn_signal[1] in module adder is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1159.277 ; gain = 627.977
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1159.766 ; gain = 628.387
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 1159.277 ; gain = 627.977
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1159.766 ; gain = 628.387
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:05 ; elapsed = 00:00:04 . Memory (MB): peak = 1159.277 ; gain = 627.977
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:04 . Memory (MB): peak = 1159.766 ; gain = 628.387
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.029 . Memory (MB): peak = 1159.277 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.029 . Memory (MB): peak = 1159.766 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -273,20 +270,20 @@ Parsing XDC File [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/bl
 Finished Parsing XDC File [C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1248.156 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.002 . Memory (MB): peak = 1254.922 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.009 . Memory (MB): peak = 1248.156 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.010 . Memory (MB): peak = 1254.922 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1248.156 ; gain = 716.855
+Finished Constraint Validation : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1254.922 ; gain = 723.543
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a35tftg256-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1248.156 ; gain = 716.855
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1254.922 ; gain = 723.543
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
@@ -295,11 +292,11 @@ Applied set_property IO_BUFFER_TYPE = NONE for clk. (constraint file  c:/Users/y
 Applied set_property CLOCK_BUFFER_TYPE = NONE for clk. (constraint file  c:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.gen/sources_1/ip/clk_10/clk_10/clk_10_in_context.xdc, line 4).
 Applied set_property KEEP_HIERARCHY = SOFT for slowclk_gen. (constraint file  auto generated constraint).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1248.156 ; gain = 716.855
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1254.922 ; gain = 723.543
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-802] inferred FSM for state register 'D_states_q_reg' in module 'fsm'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 1248.156 ; gain = 716.855
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 1254.922 ; gain = 723.543
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -312,7 +309,7 @@ Detailed RTL Component Info :
 	   2 Input   11 Bit       Adders := 1     
 	   2 Input    9 Bit       Adders := 1     
 	   2 Input    5 Bit       Adders := 1     
-	   2 Input    4 Bit       Adders := 4     
+	   2 Input    4 Bit       Adders := 3     
 	   2 Input    2 Bit       Adders := 6     
 +---XORs : 
 	   2 Input     32 Bit         XORs := 1     
@@ -323,10 +320,10 @@ Detailed RTL Component Info :
 	               11 Bit    Registers := 1     
 	                9 Bit    Registers := 1     
 	                8 Bit    Registers := 1     
-	                4 Bit    Registers := 5     
+	                4 Bit    Registers := 4     
 	                3 Bit    Registers := 2     
 	                2 Bit    Registers := 30    
-	                1 Bit    Registers := 12    
+	                1 Bit    Registers := 11    
 +---RAMs : 
 	               8K Bit	(4224 X 2 bit)          RAMs := 2     
 +---Muxes : 
@@ -414,7 +411,7 @@ WARNING: [Synth 8-7129] Port rd2[4] in module fsm is either unconnected or has n
 WARNING: [Synth 8-7129] Port rd2[3] in module fsm is either unconnected or has no load
 WARNING: [Synth 8-7129] Port rd2[2] in module fsm is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1436.285 ; gain = 904.984
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1449.668 ; gain = 918.289
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -444,13 +441,13 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1436.285 ; gain = 904.984
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:26 ; elapsed = 00:00:27 . Memory (MB): peak = 1449.668 ; gain = 918.289
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 1474.652 ; gain = 943.352
+Finished Timing Optimization : Time (s): cpu = 00:00:29 ; elapsed = 00:00:29 . Memory (MB): peak = 1477.785 ; gain = 946.406
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -473,7 +470,7 @@ Start Technology Mapping
 INFO: [Synth 8-7052] The timing for the instance brams/bram1/ram_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance brams/bram2/ram_reg (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:29 ; elapsed = 00:00:30 . Memory (MB): peak = 1519.598 ; gain = 988.297
+Finished Technology Mapping : Time (s): cpu = 00:00:29 ; elapsed = 00:00:30 . Memory (MB): peak = 1509.719 ; gain = 978.340
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -491,37 +488,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 1613.508 ; gain = 1082.207
+Finished IO Insertion : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 1602.797 ; gain = 1071.418
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 1613.508 ; gain = 1082.207
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 1602.797 ; gain = 1071.418
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 1613.508 ; gain = 1082.207
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 1602.797 ; gain = 1071.418
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 1613.508 ; gain = 1082.207
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 1602.797 ; gain = 1071.418
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 1615.520 ; gain = 1084.219
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:32 ; elapsed = 00:00:32 . Memory (MB): peak = 1604.777 ; gain = 1073.398
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 1615.520 ; gain = 1084.219
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:32 ; elapsed = 00:00:32 . Memory (MB): peak = 1604.777 ; gain = 1073.398
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -540,44 +537,44 @@ Report Cell Usage:
 +------+---------+------+
 |1     |clk      |     1|
 |2     |CARRY4   |   317|
-|3     |LUT1     |    63|
-|4     |LUT2     |   725|
-|5     |LUT3     |   591|
-|6     |LUT4     |   229|
-|7     |LUT5     |   264|
-|8     |LUT6     |   841|
+|3     |LUT1     |    62|
+|4     |LUT2     |   722|
+|5     |LUT3     |   584|
+|6     |LUT4     |   226|
+|7     |LUT5     |   260|
+|8     |LUT6     |   849|
 |9     |MUXF7    |     1|
 |10    |RAMB18E1 |     2|
 |11    |FDPE     |     4|
-|12    |FDRE     |   405|
+|12    |FDRE     |   400|
 |13    |FDSE     |     6|
 |14    |IBUF     |     9|
 |15    |OBUF     |    69|
 +------+---------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:31 ; elapsed = 00:00:32 . Memory (MB): peak = 1615.520 ; gain = 1084.219
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:32 ; elapsed = 00:00:32 . Memory (MB): peak = 1604.777 ; gain = 1073.398
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 34 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:26 ; elapsed = 00:00:31 . Memory (MB): peak = 1615.520 ; gain = 995.340
-Synthesis Optimization Complete : Time (s): cpu = 00:00:32 ; elapsed = 00:00:32 . Memory (MB): peak = 1615.520 ; gain = 1084.219
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:26 ; elapsed = 00:00:31 . Memory (MB): peak = 1604.777 ; gain = 978.242
+Synthesis Optimization Complete : Time (s): cpu = 00:00:32 ; elapsed = 00:00:32 . Memory (MB): peak = 1604.777 ; gain = 1073.398
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.014 . Memory (MB): peak = 1624.688 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.014 . Memory (MB): peak = 1613.922 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 320 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-140] Inserted 1 IBUFs to IO ports without IO buffers.
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1628.359 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.001 . Memory (MB): peak = 1620.555 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Synth Design complete | Checksum: b5f12545
+Synth Design complete | Checksum: 8c034350
 INFO: [Common 17-83] Releasing license: Synthesis
-119 Infos, 86 Warnings, 1 Critical Warnings and 0 Errors encountered.
+119 Infos, 83 Warnings, 1 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:33 ; elapsed = 00:00:36 . Memory (MB): peak = 1628.359 ; gain = 1289.270
+synth_design: Time (s): cpu = 00:00:33 ; elapsed = 00:00:36 . Memory (MB): peak = 1620.555 ; gain = 1282.176
 INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1628.359 ; gain = 0.000
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 1620.555 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'C:/Users/yourmum/Downloads/fpga-pain/fpga-pain/build/vivado/blank.runs/synth_1/alchitry_top.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Wed Apr 16 05:34:54 2025...
+INFO: [Common 17-206] Exiting Vivado at Wed Apr 16 05:49:13 2025...

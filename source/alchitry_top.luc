@@ -66,8 +66,6 @@ module alchitry_top (
         button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}))
         button_conditioner cond_butt_next_play(#CLK_FREQ(CLK))
 
-        // button_conditioner butt_cond(#CLK_FREQ(CLK))            // CAN REMOVE WITH BUTTON TESTER
-        
         // edge detector for next/play button
         edge_detector edge_next_play(#RISE(1),#FALL(0))
         
@@ -76,9 +74,6 @@ module alchitry_top (
         edge_detector gameclk(#RISE(1),#FALL(0))        // ticks roughly 10 times per second
         edge_detector med_inputclk(#RISE(1),#FALL(0))   // ticks roughly 5 times per second
         
-        // debug
-        edge_detector edge_up(#RISE(1),#FALL(0))
-
         // dual bram module
         bram brams
             
@@ -96,20 +91,8 @@ module alchitry_top (
             
             // custom 13-bit regfile
             regfile reg(#WIDTH(13))
-            
-            // bram testing counter
-            // counter bramtest(#SIZE(13),#TOP(4223))
-            
-            // debug
-            dff buff1[2]
-            dff buff2[2]
-            dff buff3[2]
-            dff buff4[4]
-
-            // dff pixeldata[2](#INIT(b00))
-            // dff bramtest_8points[3]
-
         }
+
         .rst(fifo_rst) {
             // shift registers
             shift_register sr1(#WIDTH(2),#ENTRIES(4))
@@ -120,26 +103,16 @@ module alchitry_top (
 
 
     always {
-    
-        // debug
-        buff1.d = buff1.q
-        buff2.d = buff2.q
-        buff3.d = buff3.q
-        buff4.d = buff4.q
-        edge_up.in = cond_butt_dirs.out[0]
-        if (edge_up.out) {
-            buff4.d = buff4.q + 1
-        }
         
         io_led[3:0] = cond_butt_dirs.out[3:0]
         io_led[5:4] = cond_butt_sel_desel.out[1:0]
         io_led[6] = cond_butt_next_play.out
         io_led[7] = reset_cond.out
-        io_led[3:0] = buff4.q
         
         // whole board reset
         reset_cond.in = ~butt_reset
         rst = reset_cond.out
+
         // default board led and usb connection
         led = 8h00
         usb_tx = usb_rx
@@ -267,146 +240,5 @@ module alchitry_top (
         
         // BRAM and regfile connections
         brams.bram_selector = reg.bram_selector
-        
-        
-
-        // // test raw pixel idx values
-        // if (display.reading && display.address == 1) {
-        //     buff1.d = b01
-        // } else if (display.reading && display.address == 31) {
-        //     buff1.d = b10            
-        // } else {
-        //     buff1.d = b11
-        // }
-        // display.data = buff1.q
-
-
-
-        // // test display clock full white
-        // display.data = buff1.q
-        // buff1.d = b11
-        
-
-        // // test dispaly driver clock
-        // if (display.reading) {
-        //     buff1.d = c{display.addr[0],butt_cond.out}
-        // }
-        // display.data = buff1.q
-
-
-        // // test for bram read and write at specific addresses
-        // if (~display.reading && gamecounter.value[15]) {
-        //     brams.bwa = 127
-        //     brams.bwd = c{b1,butt_cond.out}
-        //     bramtest_8points.d = bramtest_8points.q + 1
-        //     brams.brsel = 0
-        //     brams.bwe = 1
-        // } else {
-        //     brams.brsel = 1
-        //     brams.bwe = 0
-        // }
-
-
-        // // test for bram read and write at specific addresses
-        // if (~display.reading && gamecounter.value[15]) {
-        //     case (bramtest_8points.q) {
-        //         0: brams.bwa = 64 // first led, first row
-        //         1: brams.bwa = 96 // middle led, first row
-        //         2: brams.bwa = 191 // last led, second row
-        //         3: brams.bwa = 2112 // first led, middle row
-        //         4: brams.bwa = 2144 // middle led, middle row
-        //         5: brams.bwa = 2175 // last led, middle row
-        //         6: brams.bwa = 4032 // first led, second last row
-        //         7: brams.bwa = 4159 // last led, last row
-        //     }
-        //     brams.bwd = c{b1,butt_cond.out}
-        //     bramtest_8points.d = bramtest_8points.q + 1
-        //     brams.brsel = 0
-        //     brams.bwe = 1
-        //     if (display.raw_pixel_idx == display.addr-2112) {
-        //         buff1.d = b11
-        //     } else {
-        //         buff1.d = b00
-        //     }
-        // } else {
-        //     brams.brsel = 1
-        //     brams.bwe = 0
-        // }
-        // led[5] = buff1.q[0]
-
-
-        // // test display.addr range more
-        // pixeldata.d = b00
-        // if (display.addr == 127) {            // top left corner blue
-        //     pixeldata.d = b10
-        // }
-        // if (display.addr == 4095) {   // bottom right corner red
-        //     pixeldata.d = b01
-        // }
-        // if (display.addr == 32) {    // second row, left side
-        //     pixeldata.d = b11
-        // }
-        // display.data = pixeldata.q
-
-
-        // // test for bram read
-        // if (~display.reading && gamecounter.value[15]) {
-        //     brams.bwa = bramtest.value
-        //     brams.bwd = c{butt_cond.out,b1}
-        //     // gamecounter.value[$width(gamecounter.value)-1-:2]
-        //     brams.brsel = 0
-        //     brams.bwe = 1
-        // } else {
-        //     brams.brsel = 1
-        //     brams.bwe = 0
-        // }
-
- 
-        // // test for display.addr range
-        // if (display.addr>=64 && display.addr<4160) {
-        //     if (butt_cond.out) {
-        //         pixeldata.d = b10
-        //     } else {
-        //         pixeldata.d = b11
-        //     }
-        // } else {
-        //     if (butt_cond.out) {
-        //         pixeldata.d = b11
-        //     } else {
-        //         pixeldata.d = b01
-        //     }
-        // }
-        // display.data = pixeldata.q
-        
-        
-        // // default display blue-white stripes (working)
-        // if (display.reading && display.addr[6]) {
-        //     pixeldata.d = b10
-        // } else if (display.reading) {
-        //     pixeldata.d = b11
-        // }
-        // display.data = pixeldata.q
-        
-
-        // // display testing (working)
-        // pixeldata.d = pixeldata.q
-        // if (butt_cond.out) {
-        //     pixeldata.d = b11
-        // } else {
-        //     pixeldata.d = b01
-        // }
-        // display.data = pixeldata.q
-
-
-        // button tester
-        // butt_cond.in = testpullup
-        // led[0] = butt_cond.out
-        // aseg_driver.value = $width(gamecounter.value)
-
-        // debugging
-        // led[1:0] = sm.debug_out[1:0]
-        // bseg_driver.value = reg.bn
-        // aseg_driver.value =  reg.an
-        // timerseg_driver.value = reg.targetpixel
     }
 }

@@ -28,9 +28,6 @@ module display_driver #(
     output blank, // also known as OE
     output sclk_out,
     output address[ADDRESS_SIZE] // row address current write to LED matrix
-    
-    // debug IO
-    // output raw_pixel_idx[ADDRESS_SIZE+$clog2(MATRIX_WIDTH)] // raw output of pixel_idx
 ) {
     
     const DIV = $clog2(CLK_FREQ) - 20
@@ -138,6 +135,7 @@ module display_driver #(
         }
         
         
+        // set second read signal
         else if (sclk_counter.q == 2 && state.q == b01) {
             
             // BRAM address for second pixel, accounting for top row buffer
@@ -149,7 +147,7 @@ module display_driver #(
         }
         
 
-        // read from BRAM, send second read signal, and set ddr to low
+        // read from BRAM
         else if (sclk_counter.q == 3 && state.q == b01) {
 
             // load data into first pixel cache
