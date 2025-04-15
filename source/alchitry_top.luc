@@ -214,7 +214,7 @@ module alchitry_top (
             1: alum.b = 1
             2: alum.b = 63
             3: alum.b = 64
-            11:alum.b = 65
+            4: alum.b = 65
             default: alum.b = reg.rd2
         }
 
@@ -228,7 +228,7 @@ module alchitry_top (
             5: reg.wd = sr2.dout
             6: reg.wd = 60
             7: reg.wd = 2144
-            9: reg.wd = 64
+            8: reg.wd = 64
             default: reg.wd = alum.out
         }
 
