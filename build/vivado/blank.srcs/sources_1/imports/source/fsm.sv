@@ -231,14 +231,14 @@ module fsm (
     logic [3:0] D_accel_timer_d, D_accel_timer_q = 4'h0;
     logic [3:0] D_accel_d, D_accel_q = 4'h0;
     logic D_accel_edge_buff_d, D_accel_edge_buff_q = 1'h0;
-    localparam _MP_RISE_1889854131 = 1'h0;
-    localparam _MP_FALL_1889854131 = 1'h1;
+    localparam _MP_RISE_113910148 = 1'h0;
+    localparam _MP_FALL_113910148 = 1'h1;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_1889854131),
-        .FALL(_MP_FALL_1889854131)
+        .RISE(_MP_RISE_113910148),
+        .FALL(_MP_FALL_113910148)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -2180,12 +2180,12 @@ module fsm (
                 ra1 = 1'h0;
                 ra2 = 1'h1;
                 
-                case (aluout)
-                    13'h0: begin
-                        D_states_d = 8'h9f;
-                    end
-                    default: begin
+                case (aluout[1'h0])
+                    1'h0: begin
                         D_states_d = 8'h93;
+                    end
+                    1'h1: begin
+                        D_states_d = 8'h9f;
                     end
                 endcase
                 D_debug_dff_d = 8'h86;

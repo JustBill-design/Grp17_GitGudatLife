@@ -116,7 +116,7 @@ module alu #(
         }
         case (alufn) {
             
-            b110011: temp_out = a == b
+            // b110011: temp_out = a == b
             // b110011: temp_out = compare.cmp
 
             // b110101: temp_out = a < b
