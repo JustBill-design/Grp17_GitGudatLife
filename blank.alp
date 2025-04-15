@@ -154,6 +154,18 @@
                     "type": "DiskFile",
                     "path": "source/x_bit_right_shifter.luc"
                 }
+            },
+            {
+                "file": {
+                    "type": "DiskFile",
+                    "path": "source/divider.luc"
+                }
+            },
+            {
+                "file": {
+                    "type": "DiskFile",
+                    "path": "source/multiplier.luc"
+                }
             }
         ],
         "constraintFiles": [
