@@ -2053,20 +2053,20 @@ module fsm #(
 
             // current pixel is b00
             States.B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS:
-                // alufn = CMPEQ
+                alufn = CMPEQ
                 ra1 = A_NEIGHBOUR_ADDRESS
                 ra2 = B_NEIGHBOUR_ADDRESS
 
-                if (rd1 == rd2) {
-                    states.d = States.SET_00
-                }
-                else{
-                    states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
-                }
-                // case(aluout) {
-                //     13b0: states.d = States.SET_00
-                //     default: states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
+                // if (rd1 == rd2) {
+                //     states.d = States.SET_00
                 // }
+                // else{
+                //     states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
+                // }
+                case (aluout) {
+                    13b0: states.d = States.SET_00
+                    default: states.d = States.B00_CHECK_A_NEIGHBOUR_EQ_3
+                }
                 // debugging
                 debug_dff.d = 134
 

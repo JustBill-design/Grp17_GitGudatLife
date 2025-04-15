@@ -47,36 +47,36 @@ module alu #(
         n = 0
         illop = 0
 
-        case(alufn) {
-            // b000000: temp_out = a+b
-            b000000: temp_out = adder.out
+        // case(alufn) {
+        //     // b000000: temp_out = a+b
+        //     b000000: temp_out = adder.out
 
-            // b000001: temp_out = a-b
-            b000001: temp_out = adder.out
+        //     // b000001: temp_out = a-b
+        //     b000001: temp_out = adder.out
 
-            // b000010: temp_out = a*b
-            // b000010: temp_out = multiplier.mul
+        //     // b000010: temp_out = a*b
+        //     // b000010: temp_out = multiplier.mul
 
-            // b000011: temp_out = a/b
-            // b000011: temp_out = divider.d
+        //     // b000011: temp_out = a/b
+        //     // b000011: temp_out = divider.d
 
-            // b011000: temp_out = a & b
-            b011000: temp_out = boolean.bool
+        //     // b011000: temp_out = a & b
+        //     b011000: temp_out = boolean.bool
 
-            // b011110: temp_out = a|b
-            b011110: temp_out = boolean.bool
+        //     // b011110: temp_out = a|b
+        //     b011110: temp_out = boolean.bool
 
-            b110011: temp_out = a == b
-            // b110011: temp_out = compare.cmp
+        //     b110011: temp_out = a == b
+        //     // b110011: temp_out = compare.cmp
 
-            b110101: temp_out = a < b
-            // b110101: temp_out = compare.cmp
+        //     b110101: temp_out = a < b
+        //     // b110101: temp_out = compare.cmp
 
-            b110111: temp_out = a <= b
-            // b110111: temp_out = compare.cmp
+        //     b110111: temp_out = a <= b
+        //     // b110111: temp_out = compare.cmp
 
-            default: temp_out = 0
-        }
+        //     default: temp_out = 0
+        // }
 
         case (alufn[5:4]) {
             b00:
@@ -114,19 +114,19 @@ module alu #(
                 temp_out = 0
                 illop = 1
         }
-        // case (alufn) {
-        //     
-        //     b110011: temp_out = a == b
-        //     // b110011: temp_out = compare.cmp
+        case (alufn) {
+            
+            b110011: temp_out = a == b
+            // b110011: temp_out = compare.cmp
 
-        //     b110101: temp_out = a < b
-        //     // b110101: temp_out = compare.cmp
+            // b110101: temp_out = a < b
+            // b110101: temp_out = compare.cmp
 
-        //     b110111: temp_out = a <= b
-        //     // b110111: temp_out = compare.cmp
-        //     
-        //     b010110: temp_out = a ^ b
-        // }
+            // b110111: temp_out = a <= b
+            // b110111: temp_out = compare.cmp
+            
+            // b010110: temp_out = a ^ b
+        }
 
         // z flag also triggers for boolean outputs, 1 for true
         z = ~|temp_out

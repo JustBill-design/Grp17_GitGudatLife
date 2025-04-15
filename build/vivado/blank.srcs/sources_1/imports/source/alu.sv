@@ -16,17 +16,17 @@ module alu #(
         output reg n,
         output reg illop
     );
-    localparam _MP_SIZE_313571695 = SIZE;
-    logic [(_MP_SIZE_313571695)-1:0] M_adder_a;
-    logic [(_MP_SIZE_313571695)-1:0] M_adder_b;
+    localparam _MP_SIZE_382136013 = SIZE;
+    logic [(_MP_SIZE_382136013)-1:0] M_adder_a;
+    logic [(_MP_SIZE_382136013)-1:0] M_adder_b;
     logic [5:0] M_adder_alufn_signal;
-    logic [(_MP_SIZE_313571695)-1:0] M_adder_out;
+    logic [(_MP_SIZE_382136013)-1:0] M_adder_out;
     logic M_adder_z;
     logic M_adder_v;
     logic M_adder_n;
     
     adder #(
-        .SIZE(_MP_SIZE_313571695)
+        .SIZE(_MP_SIZE_382136013)
     ) adder (
         .a(M_adder_a),
         .b(M_adder_b),
@@ -55,7 +55,7 @@ module alu #(
     );
     
     
-    localparam _MP_SIZE_9767424 = 6'h20;
+    localparam _MP_SIZE_1299118803 = 6'h20;
     logic [31:0] M_boolean_a;
     logic [31:0] M_boolean_b;
     logic [5:0] M_boolean_alufn;
@@ -63,7 +63,7 @@ module alu #(
     logic M_boolean_illop;
     
     boolean #(
-        .SIZE(_MP_SIZE_9767424)
+        .SIZE(_MP_SIZE_1299118803)
     ) boolean (
         .a(M_boolean_a),
         .b(M_boolean_b),
@@ -108,33 +108,6 @@ module alu #(
         n = 1'h0;
         illop = 1'h0;
         
-        case (alufn)
-            6'h0: begin
-                temp_out = M_adder_out;
-            end
-            6'h1: begin
-                temp_out = M_adder_out;
-            end
-            6'h18: begin
-                temp_out = M_boolean_bool;
-            end
-            6'h1e: begin
-                temp_out = M_boolean_bool;
-            end
-            6'h33: begin
-                temp_out = a == b;
-            end
-            6'h35: begin
-                temp_out = a < b;
-            end
-            6'h37: begin
-                temp_out = a <= b;
-            end
-            default: begin
-                temp_out = 1'h0;
-            end
-        endcase
-        
         case (alufn[3'h5:3'h4])
             2'h0: begin
                 
@@ -169,6 +142,12 @@ module alu #(
             default: begin
                 temp_out = 1'h0;
                 illop = 1'h1;
+            end
+        endcase
+        
+        case (alufn)
+            6'h33: begin
+                temp_out = a == b;
             end
         endcase
         z = ~(|temp_out);
