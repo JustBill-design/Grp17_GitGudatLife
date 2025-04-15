@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Tue Apr 15 23:36:31 2025
+| Date         : Tue Apr 15 23:48:02 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb
 | Design       : alchitry_top
@@ -94,7 +94,7 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +-----------------------------+------+-------+------------+-----------+-------+
 |          Site Type          | Used | Fixed | Prohibited | Available | Util% |
 +-----------------------------+------+-------+------------+-----------+-------+
-| Bonded IOB                  |   78 |     0 |          0 |       170 | 45.88 |
+| Bonded IOB                  |   79 |     0 |          0 |       170 | 46.47 |
 | Bonded IPADs                |    0 |     0 |          0 |         2 |  0.00 |
 | PHY_CONTROL                 |    0 |     0 |          0 |         5 |  0.00 |
 | PHASER_REF                  |    0 |     0 |          0 |         5 |  0.00 |
@@ -159,7 +159,7 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 | CARRY4   |   89 |          CarryLogic |
 | OBUF     |   69 |                  IO |
 | LUT1     |   53 |                 LUT |
-| IBUF     |    9 |                  IO |
+| IBUF     |   10 |                  IO |
 | MUXF7    |    5 |               MuxFx |
 | FDSE     |    5 |        Flop & Latch |
 | FDPE     |    4 |        Flop & Latch |

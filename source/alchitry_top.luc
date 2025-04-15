@@ -46,6 +46,13 @@ module alchitry_top (
         slowclk_gen.clk_in1 = clk
         slowclk = slowclk_gen.clk_out1
     }
+    
+    .clk(clk), .rst(rst) {
+            // seven segment drivers
+            multi_seven_seg aseg_driver
+            multi_seven_seg bseg_driver
+            multi_seven_seg timerseg_driver
+    }
 
     .clk(slowclk) {
     
@@ -88,11 +95,6 @@ module alchitry_top (
             
             // custom 13-bit regfile
             regfile reg(#WIDTH(13))
-            
-            // seven segment drivers
-            multi_seven_seg aseg_driver
-            multi_seven_seg bseg_driver
-            multi_seven_seg timerseg_driver
             
             // bram testing counter
             // counter bramtest(#SIZE(13),#TOP(4223))
@@ -160,7 +162,7 @@ module alchitry_top (
         
         // connect slow clocks
         timerclk.in = gamecounter.value[$clog2(CLK)-1]
-        gameclk.in = gamecounter.value[$clog2(CLK/4224*4)-1]
+        gameclk.in = gamecounter.value[$clog2(CLK/4224/4)-1]
         med_inputclk.in = gamecounter.value[$clog2(CLK/5)]
         sm.timerclk = timerclk.out
         sm.gameclk = gameclk.out
