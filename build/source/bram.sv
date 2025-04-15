@@ -19,16 +19,16 @@ module bram #(
         input wire [(WIDTH)-1:0] bwd,
         output reg [(WIDTH)-1:0] brd
     );
-    localparam _MP_WIDTH_1045385952 = WIDTH;
-    localparam _MP_ENTRIES_1045385952 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_1045385952)-1) - (0) + 1))-1:0] M_bram1_address;
-    logic [(((_MP_WIDTH_1045385952-1) - (0) + 1))-1:0] M_bram1_read_data;
-    logic [(((_MP_WIDTH_1045385952-1) - (0) + 1))-1:0] M_bram1_write_data;
+    localparam _MP_WIDTH_1842119171 = WIDTH;
+    localparam _MP_ENTRIES_1842119171 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_1842119171)-1) - (0) + 1))-1:0] M_bram1_address;
+    logic [(((_MP_WIDTH_1842119171-1) - (0) + 1))-1:0] M_bram1_read_data;
+    logic [(((_MP_WIDTH_1842119171-1) - (0) + 1))-1:0] M_bram1_write_data;
     logic M_bram1_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_1045385952),
-        .ENTRIES(_MP_ENTRIES_1045385952)
+        .WIDTH(_MP_WIDTH_1842119171),
+        .ENTRIES(_MP_ENTRIES_1842119171)
     ) bram1 (
         .clk(clk),
         .address(M_bram1_address),
@@ -38,16 +38,16 @@ module bram #(
     );
     
     
-    localparam _MP_WIDTH_1386526019 = WIDTH;
-    localparam _MP_ENTRIES_1386526019 = ENTRIES;
-    logic [((($clog2(_MP_ENTRIES_1386526019)-1) - (0) + 1))-1:0] M_bram2_address;
-    logic [(((_MP_WIDTH_1386526019-1) - (0) + 1))-1:0] M_bram2_read_data;
-    logic [(((_MP_WIDTH_1386526019-1) - (0) + 1))-1:0] M_bram2_write_data;
+    localparam _MP_WIDTH_1237062824 = WIDTH;
+    localparam _MP_ENTRIES_1237062824 = ENTRIES;
+    logic [((($clog2(_MP_ENTRIES_1237062824)-1) - (0) + 1))-1:0] M_bram2_address;
+    logic [(((_MP_WIDTH_1237062824-1) - (0) + 1))-1:0] M_bram2_read_data;
+    logic [(((_MP_WIDTH_1237062824-1) - (0) + 1))-1:0] M_bram2_write_data;
     logic M_bram2_write_enable;
     
     simple_ram #(
-        .WIDTH(_MP_WIDTH_1386526019),
-        .ENTRIES(_MP_ENTRIES_1386526019)
+        .WIDTH(_MP_WIDTH_1237062824),
+        .ENTRIES(_MP_ENTRIES_1237062824)
     ) bram2 (
         .clk(clk),
         .address(M_bram2_address),

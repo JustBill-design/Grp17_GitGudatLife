@@ -33,7 +33,7 @@ module display_driver #(
     // output raw_pixel_idx[ADDRESS_SIZE+$clog2(MATRIX_WIDTH)] // raw output of pixel_idx
 ) {
     
-    const DIV = $clog2(CLK_FREQ) - 17
+    const DIV = $clog2(CLK_FREQ) - 20
     sig pixeldata[3]
     
     .clk(clk){

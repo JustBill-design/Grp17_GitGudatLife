@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2024.2 (win64) Build 5239630 Fri Nov 08 22:35:27 MST 2024
-| Date         : Tue Apr 15 23:23:39 2025
+| Date         : Tue Apr 15 23:36:31 2025
 | Host         : PC running 64-bit major release  (build 9200)
 | Command      : report_utilization -file alchitry_top_utilization_synth.rpt -pb alchitry_top_utilization_synth.pb
 | Design       : alchitry_top
@@ -34,10 +34,10 @@ Table of Contents
 | Slice LUTs*             | 1341 |     0 |          0 |     20800 |  6.45 |
 |   LUT as Logic          | 1341 |     0 |          0 |     20800 |  6.45 |
 |   LUT as Memory         |    0 |     0 |          0 |      9600 |  0.00 |
-| Slice Registers         |  408 |     0 |          0 |     41600 |  0.98 |
-|   Register as Flip Flop |  408 |     0 |          0 |     41600 |  0.98 |
+| Slice Registers         |  405 |     0 |          0 |     41600 |  0.97 |
+|   Register as Flip Flop |  405 |     0 |          0 |     41600 |  0.97 |
 |   Register as Latch     |    0 |     0 |          0 |     41600 |  0.00 |
-| F7 Muxes                |    6 |     0 |          0 |     16300 |  0.04 |
+| F7 Muxes                |    5 |     0 |          0 |     16300 |  0.03 |
 | F8 Muxes                |    0 |     0 |          0 |      8150 |  0.00 |
 +-------------------------+------+-------+------------+-----------+-------+
 * Warning! The Final LUT count, after physical optimizations and full implementation, is typically lower. Run opt_design after synthesis, if not already completed, for a more realistic count.
@@ -60,7 +60,7 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 | 4     |          Yes |           - |          Set |
 | 0     |          Yes |           - |        Reset |
 | 5     |          Yes |         Set |            - |
-| 399   |          Yes |       Reset |            - |
+| 396   |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
 
 
@@ -150,17 +150,17 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT6     |  748 |                 LUT |
-| FDRE     |  399 |        Flop & Latch |
+| LUT6     |  756 |                 LUT |
+| FDRE     |  396 |        Flop & Latch |
 | LUT5     |  232 |                 LUT |
-| LUT4     |  212 |                 LUT |
-| LUT3     |  191 |                 LUT |
-| LUT2     |  167 |                 LUT |
+| LUT4     |  195 |                 LUT |
+| LUT3     |  194 |                 LUT |
+| LUT2     |  170 |                 LUT |
 | CARRY4   |   89 |          CarryLogic |
 | OBUF     |   69 |                  IO |
-| LUT1     |   57 |                 LUT |
+| LUT1     |   53 |                 LUT |
 | IBUF     |    9 |                  IO |
-| MUXF7    |    6 |               MuxFx |
+| MUXF7    |    5 |               MuxFx |
 | FDSE     |    5 |        Flop & Latch |
 | FDPE     |    4 |        Flop & Latch |
 | RAMB18E1 |    2 |        Block Memory |
