@@ -1612,7 +1612,7 @@ module fsm #(
                     ra1 = TARGET_PIXEL_ADDRESS
                     ra2 = TARGET_PIXEL_ADDRESS
                     alufn = SUB
-                    // srst = 1
+                    srst = 1
 
                     bram_read.d = 1
                     states.d = States.SR_00_ALL_SR
