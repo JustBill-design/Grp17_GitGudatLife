@@ -50,12 +50,6 @@
             {
                 "file": {
                     "type": "Component",
-                    "path": "Memory/fifo.luc"
-                }
-            },
-            {
-                "file": {
-                    "type": "Component",
                     "path": "Memory/simple_ram.v"
                 }
             },

@@ -31,10 +31,10 @@ module alchitry_top (
     // input testpullup        // default high?
 
 ) {
-    // const BASECLK = 100_000_000
-    // const SLOWCLK_DIV = 3
-    // const CLK = BASECLK / $pow(2,SLOWCLK_DIV)
-    const CLK = 100_000_000
+    const BASECLK = 100_000_000
+    const SLOWCLK_DIV = 3
+    const CLK = BASECLK / $pow(2,SLOWCLK_DIV)
+    // const CLK = 100_000_000
 
     alu alum(#SIZE(13))
     
