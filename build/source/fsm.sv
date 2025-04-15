@@ -230,14 +230,14 @@ module fsm (
     logic [3:0] D_accel_timer_d, D_accel_timer_q = 0;
     logic [3:0] D_accel_d, D_accel_q = 0;
     logic D_accel_edge_buff_d, D_accel_edge_buff_q = 0;
-    localparam _MP_RISE_549202832 = 1'h0;
-    localparam _MP_FALL_549202832 = 1'h1;
+    localparam _MP_RISE_1314100811 = 1'h0;
+    localparam _MP_FALL_1314100811 = 1'h1;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_549202832),
-        .FALL(_MP_FALL_549202832)
+        .RISE(_MP_RISE_1314100811),
+        .FALL(_MP_FALL_1314100811)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
@@ -1833,12 +1833,10 @@ module fsm (
                 D_debug_dff_d = 7'h68;
             end
             8'h74: begin
-                if (~ddr) begin
-                    ra1 = 3'h4;
-                    ra2 = 3'h4;
-                    alufn = 6'h1;
-                    D_states_d = 8'h75;
-                end
+                ra1 = 3'h4;
+                ra2 = 3'h4;
+                alufn = 6'h1;
+                D_states_d = 8'h75;
             end
             8'h75: begin
                 swe1 = 1'h1;
@@ -1862,10 +1860,6 @@ module fsm (
                     end
                 endcase
                 D_debug_dff_d = 7'h6a;
-                if (~next_start_button) begin
-                    D_states_d = 8'h76;
-                    D_debug_dff_d = srd1;
-                end
             end
             8'h77: begin
                 alufn = 6'h0;
@@ -1890,7 +1884,7 @@ module fsm (
             8'h79: begin
                 sre1 = 1'h1;
                 
-                case (srd1)
+                case (srd1[1'h1:1'h0])
                     2'h1: begin
                         D_states_d = 8'h7a;
                     end
@@ -1902,10 +1896,6 @@ module fsm (
                     end
                 endcase
                 D_debug_dff_d = 7'h6d;
-                if (~next_start_button) begin
-                    D_states_d = 8'h79;
-                    D_debug_dff_d = srd1;
-                end
             end
             8'h7a: begin
                 alufn = 6'h0;
@@ -1942,10 +1932,6 @@ module fsm (
                     end
                 endcase
                 D_debug_dff_d = 7'h70;
-                if (~next_start_button) begin
-                    D_states_d = 8'h7c;
-                    D_debug_dff_d = srd1;
-                end
             end
             8'h7d: begin
                 alufn = 6'h0;
@@ -1982,11 +1968,6 @@ module fsm (
                     end
                 endcase
                 D_debug_dff_d = 7'h73;
-                D_debug_dff_d = 7'h70;
-                if (~next_start_button) begin
-                    D_states_d = 8'h7f;
-                    D_debug_dff_d = srd2;
-                end
             end
             8'h80: begin
                 alufn = 6'h0;
@@ -2015,10 +1996,6 @@ module fsm (
                 sre2 = 1'h1;
                 D_states_d = 8'h83;
                 D_debug_dff_d = 7'h76;
-                if (~next_start_button) begin
-                    D_states_d = 8'h82;
-                    D_debug_dff_d = srd2;
-                end
             end
             8'h83: begin
                 sre2 = 1'h1;
@@ -2035,10 +2012,6 @@ module fsm (
                     end
                 endcase
                 D_debug_dff_d = 7'h77;
-                if (~next_start_button) begin
-                    D_states_d = 8'h83;
-                    D_debug_dff_d = srd2;
-                end
             end
             8'h84: begin
                 alufn = 6'h0;
@@ -2075,10 +2048,6 @@ module fsm (
                     end
                 endcase
                 D_debug_dff_d = 7'h7a;
-                if (~next_start_button) begin
-                    D_states_d = 8'h86;
-                    D_debug_dff_d = srd3;
-                end
             end
             8'h87: begin
                 alufn = 6'h0;
@@ -2115,10 +2084,6 @@ module fsm (
                     end
                 endcase
                 D_debug_dff_d = 7'h7d;
-                if (~next_start_button) begin
-                    D_states_d = 8'h89;
-                    D_debug_dff_d = srd3;
-                end
             end
             8'h8a: begin
                 alufn = 6'h0;
@@ -2155,10 +2120,6 @@ module fsm (
                     end
                 endcase
                 D_debug_dff_d = 8'h80;
-                if (~next_start_button) begin
-                    D_states_d = 8'h8c;
-                    D_debug_dff_d = srd3;
-                end
             end
             8'h8d: begin
                 alufn = 6'h0;
@@ -2196,18 +2157,20 @@ module fsm (
             end
             8'h91: begin
                 ra1 = 3'h5;
-                
-                case (rd1)
-                    2'h0: begin
-                        D_states_d = 8'h92;
-                    end
-                    2'h2: begin
-                        D_states_d = 8'h97;
-                    end
-                    2'h1: begin
-                        D_states_d = 8'h9a;
-                    end
-                endcase
+                if (next_start_button) begin
+                    
+                    case (rd1)
+                        2'h0: begin
+                            D_states_d = 8'h92;
+                        end
+                        2'h2: begin
+                            D_states_d = 8'h97;
+                        end
+                        2'h1: begin
+                            D_states_d = 8'h9a;
+                        end
+                    endcase
+                end
                 D_debug_dff_d = 8'h85;
             end
             8'h92: begin

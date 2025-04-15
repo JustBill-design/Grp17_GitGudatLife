@@ -51,6 +51,7 @@ module alchitry_top (
     .clk(clk) {
     
         reset_conditioner reset_cond        // whole board reset
+        reset_conditioner fifo_reset_cond   // reset for shift registers
 
         // button conditioners
         // button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}),#MIN_DELAY(4x{{200}}),#NUM_SYNC(4x{{30}}))
@@ -244,8 +245,9 @@ module alchitry_top (
 
         // shift register connections
         // reset conditioner
+        fifo_reset_cond.in = sm.srst
         // reset
-        fifo_rst = sm.srst | reset_cond.out
+        fifo_rst = fifo_reset_cond.out | reset_cond.out
         // write enable
         sr1.wput = sm.swe1
         sr2.wput = sm.swe2
@@ -417,9 +419,9 @@ module alchitry_top (
 
         // debugging
         led[7:0] = sm.debug_out
+
         bseg_driver.value = reg.bn
-        aseg_driver.value =  reg.an
+        aseg_driver.value = reg.an
         timerseg_driver.value = reg.targetpixel
-        led[1:0] = reg.targetpixelvalue
     }
 }
