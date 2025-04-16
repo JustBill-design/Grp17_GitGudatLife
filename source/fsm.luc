@@ -951,7 +951,7 @@ module fsm #(
                 }
                 else if (deselect_button){
                     if (rd1[1]){
-                        states.d = States.B_SET_PIXEL_0
+                        states.d = States.B_COUNTM1
                     }
                 }
                 else if (next_start_button){
